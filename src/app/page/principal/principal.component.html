@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="card-right">
-        <div class="plus">+</div>
+        <div class="plus"   data-bs-toggle="modal" href="#exampleModalToggle" role="button" (click)="modalIngreso()">+</div>
       </div>
     </div>
     <div class="card-fp card-egresos  p-4">
@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="card-right">
-          <div class="plus">
+          <div class="plus"  data-bs-toggle="modal" href="#exampleModalToggle" role="button">
             +
           </div>
         </div>
@@ -61,4 +61,40 @@
 
 </div>
 
-<app-modal></app-modal>
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content contenido__modal">
+      <div class="modal-header">
+        <div class="modal-title">
+          {{ tituloModal }}
+        </div>
+        <div class="monto">
+          9000
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" >Continuar</button>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Hide this modal and show the first with the button below.
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
+      </div>
+    </div>
+  </div>
+</div>
+

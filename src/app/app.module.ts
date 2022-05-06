@@ -16,8 +16,8 @@ import { MetasComponent } from './page/metas/metas.component';
 import { InformesComponent } from './page/informes/informes.component';
 import { ErrorComponent } from './page/error/error.component';
 import { RegistroComponent } from './page/registro/registro.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalComponent } from './components/modal/modal.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -42,7 +42,7 @@ import { ModalComponent } from './components/modal/modal.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

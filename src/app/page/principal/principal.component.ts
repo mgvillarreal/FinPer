@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -13,6 +12,7 @@ export class PrincipalComponent implements OnInit {
   ingreso: number = 9000
   egreso: number = 3500
   balance: number
+  tituloModal?: string
 
 
   constructor() {
@@ -20,6 +20,10 @@ export class PrincipalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  modalIngreso(){
+    this.tituloModal = 'Ingresos'
   }
 
 }
