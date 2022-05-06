@@ -197,6 +197,7 @@ iframe {
     left: 0;
     pointer-events: none;
     color: #999999;
+    text-align: left;
 }
   
 .focus-input100::before {
@@ -223,7 +224,7 @@ iframe {
 .focus-input100::after {
     font-family:'Source Sans Pro', sans-serif;
     font-size: 15px;
-    color: white; /*#999999;*/
+    color:#999999;
     line-height: 1.2;
   
     content: attr(data-placeholder);

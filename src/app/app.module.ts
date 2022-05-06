@@ -18,6 +18,7 @@ import { ErrorComponent } from './page/error/error.component';
 import { RegistroComponent } from './page/registro/registro.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
+import { CategoriaComponent } from './page/categoria/categoria.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { FormsModule } from '@angular/forms';
     ErrorComponent,
     RegistroComponent,
     ModalComponent,
+    CategoriaComponent,
 
   ],
   imports: [
