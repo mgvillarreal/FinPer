@@ -3,4 +3,10 @@
   background-color:#184e8e;
   font-family:'Poppins', sans-serif !important;
   height: 50px;
+  color: white;
+  font-size: 13px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }

@@ -3,7 +3,7 @@
     <div class="container head-menu">
       <img src="./assets/img/icons/logo-fp.png" alt="" /><a
         class="navbar-brand"
-        href="#"
+        routerLink="inicio"
         >Finanzas <br />
         Personales</a
       ><button
@@ -11,25 +11,25 @@
         data-toggle="collapse"
         data-target="#navcol-1"
       >
-        <span class="sr-only">Toggle navigation</span
+        <span class="sr-only"></span
         ><span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav">
           <li class="nav-item" role="presentation">
-            <a class="nav-link active" href="#">¿Como funciona?</a>
+            <a class="nav-link active" routerLink="comofunciona">¿Como funciona?</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link active" href="#">FAQ's</a>
+            <a class="nav-link active" routerLink="faqs">FAQ's</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link active" href="#">Soporte</a>
+            <a class="nav-link active" routerLink="soporte">Soporte</a>
           </li>
         </ul>
 
-        <div><span class="navbar-text"> <a href="#" class="login">Log In</a></span
-        ><a class="btn btn-light action-button" role="button" href="#"
-          >Sign Up</a
+        <div><span class="navbar-text"> <a routerLink="ingreso" class="login">Ingreso</a></span
+        ><a class="btn btn-light action-button" role="button" routerLink="registro"
+          >Registro</a
         >
       </div>
       </div>

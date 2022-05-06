@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="dash-sup flex">
+    <div class="dash-sup__left">
+      <div class="dash-sup__title">
+        <span class="title">Mis cuentas</span>
+
+        <select name="" id="">
+          <option value="1">Enero</option>
+          <option value="2">Febrero</option>
+          <option value="3">Marco</option>
+          <option value="4" selected>Abril</option>
+          <option value="5">Mayo</option>
+          <option value="6">Junio</option>
+          <option value="7">Julio</option>
+          <option value="8">Agosto</option>
+          <option value="9">Setiembre</option>
+          <option value="10">Octubre</option>
+          <option value="11">Noviembre</option>
+          <option value="12">Diciemnbre</option>
+        </select>
+      </div>
+      <div class="dash-sup__balance">
+        <div class="balance-title">Balance</div>
+        <div class="balance-cantidad">$ {{ balance }} </div>
+      </div>
+    </div>
+    <div class="dash-sup__right ">
+
+    </div>
+  </div>
+  <div class="ingreso-egreso flex justify-content-between">
+    <div class="card-fp card-ingresos p-4 ">
+      <div class="card-left">
+        <div class="card-sup">
+          <div class="card-title"><i class="fa-solid fa-square-dollar"></i>
+            <i class="fa-solid fa-circle-dollar"></i>Ingresos
+          </div>
+          <div class="card-balance">$ {{ ingreso }}</div>
+        </div>
+      </div>
+      <div class="card-right">
+        <div class="plus">+</div>
+      </div>
+    </div>
+    <div class="card-fp card-egresos  p-4">
+        <div class="card-left">
+          <div class="card-sup">
+            <div class="card-title"><i class="fa-solid fa-square-dollar"></i>
+              <i class="fa-solid fa-circle-dollar"></i>Egresos
+            </div>
+            <div class="card-balance">$ {{ egreso }}</div>
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="plus">
+            +
+          </div>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+<app-modal></app-modal>
