@@ -1,6 +1,14 @@
 .flex{
   display: flex
 }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
 
 .card-fp{
   width: 400px;
@@ -86,14 +94,15 @@
 .contenido__modal{
   text-align: center !important;
 
+
   .modal-header{
     min-height: 100px;
     width: 100%;
-    background-color: red;
     align-items: inherit;
     padding: 5px;
     flex: 1;
     flex-wrap: wrap;
+    justify-content: right;
 
     .modal-title{
       width: 100%;
@@ -101,6 +110,60 @@
       font-size: 20px;
       padding: 5px;
       margin: 0;
+    }
+
+    .monto{
+      color: white;
+      font-size: 40px;
+
+      .monto-input{
+        background-color: #4285f4;
+        border-style: none;
+        width: 100%;
+        text-align: right;
+        color:white;
+
+        &:focus{
+          outline: none;
+        }
+
+        &::placeholder{
+          color: white;
+        }
+      }
+    }
+  }
+
+  .color-ingreso{
+    background-color: #4285f4;
+
+    .calculadora .calculadora-numero{
+      border: 3px #4285f4 solid;
+    }
+  }
+  .color-egreso{
+    background-color: #f2615e;
+  }
+
+  .calculadora{
+
+    margin: 0 auto;
+
+    .calculadora-btn{
+      min-height: 85px;
+      min-width: 85px;
+      padding: 30px;
+      margin: 10px;
+      font-size: 25px;
+      border: 3px #4b4b4b solid;
+      border-radius: 50%;
+
+      &:hover{
+        cursor: pointer;
+        background-color: #6d97db;
+
+        transition: background-color .4s;
+      }
     }
   }
 }
