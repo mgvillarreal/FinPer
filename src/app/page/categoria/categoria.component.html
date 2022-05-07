@@ -1,1 +1,531 @@
 <p>categoria works!</p>
+<h1>Categorias</h1>
+<h2 data-bs-toggle="modal" href="#altaCategoriaModal" role="button">Alta</h2>
+<h2 data-bs-toggle="modal" href="#bajaCategoriaModal" role="button">Baja</h2>
+<h2 data-bs-toggle="modal" href="#modificaCategoriaModal" role="button">
+  Modificaci&oacute;n
+</h2>
+<h2 data-bs-toggle="modal" href="#unificaCategoriaModal" role="button">
+  Unificaci&oacute;n
+</h2>
+
+<!--alta modal-->
+<div
+  class="modal fade"
+  id="altaCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="altaCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="altaCategoriaModal">
+          Registro de Categorias
+        </h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Hide this modal and show the first with the button below.
+        <label>ingrese nueva categoria</label>
+        <input class="input100" type="text" name="categoria" />
+        <br />
+        <label>Tipo categoria</label>
+        <select name="select">
+          <option selected disabled>Elija una opcion</option>
+          <option value="value1">Gastos</option>
+          <option value="value2">Ingreso</option>
+          <option value="value3">Diversion</option>
+        </select>
+        <br />
+        <label>emoji</label>
+        <select name="select">
+          <option selected disabled>Elija un emoji</option>
+          <option value="value1">emoji1</option>
+          <option value="value2">emoji2</option>
+          <option value="value3">emoji3</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-primary"
+          data-bs-target="#msgAltaCategoriaModal"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+          
+        >
+          Ingresar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--baja modal-->
+<div
+  class="modal fade"
+  id="bajaCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="bajaCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="bajaCategoriaModal">Baja de Categorias</h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Hide this modal and show the first with the button below.
+        <h4>Lista categorias</h4>
+        <br />
+        <textarea
+          id="listaCategoria"
+          name="listaCategoria"
+          rows="4"
+          cols="50"
+        ></textarea>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-primary"
+          data-bs-target="#msgBajaCategoriaModal"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Back to first
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--modifica modal-->
+<!--PANTALLA CON LISTA-->
+<div
+  class="modal fade"
+  id="modificaCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="modificaCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modificaCategoriaModal">
+          Modificaci&oacute;n de Categorias
+        </h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Hide this modal and show the first with the button below.
+        <h4>Lista categorias</h4>
+        <br />
+        <textarea
+          id="listaCategoria"
+          name="listaCategoria"
+          rows="4"
+          cols="50"
+        ></textarea>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-primary"
+          data-bs-target="#modificaDatosCategoriaModal"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Modificar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODIFICACION INGRESA DATOS, igual al alta se puede revisar-->
+<div
+  class="modal fade"
+  id="modificaDatosCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="modificaDatosCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modificaDatosCategoriaModal">
+          Modificaci&oacute;n de Categorias
+        </h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Hide this modal and show the first with the button below.
+        <label>Modifica categoria</label>
+        <input class="input100" type="text" name="categoria" />
+        <br />
+        <label>Tipo categoria</label>
+        <select name="select">
+          <option selected disabled>Elija una opcion</option>
+          <option value="value1">Gastos</option>
+          <option value="value2">Ingreso</option>
+          <option value="value3">Diversion</option>
+        </select>
+        <br />
+        <label>emoji</label>
+        <select name="select">
+          <option selected disabled>Elija un emoji</option>
+          <option value="value1">emoji1</option>
+          <option value="value2">emoji2</option>
+          <option value="value3">emoji3</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-primary"
+          data-bs-target="#msgModificaCategoriaModal"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Aceptar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--unifica modal-->
+<div
+  class="modal fade"
+  id="unificaCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="unificaCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="unificaCategoriaModal">
+          Unificaci&oacute;n de Categorias
+        </h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Hide this modal and show the first with the button below.
+        <h4>Lista categorias</h4>
+        <br />
+        <textarea
+          id="listaCategoria"
+          name="listaCategoria"
+          rows="4"
+          cols="50"
+        ></textarea>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-primary"
+          data-bs-target="#unificaDatosCategoriaModal"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Unificar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--UNIFICACION INGRESA DATOS-->
+<div
+  class="modal fade"
+  id="unificaDatosCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="unificaDatosCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="unificaDatosCategoriaModal">
+          Unificaci&oacute;n de Categorias
+        </h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Hide this modal and show the first with the button below.
+        <label>Seleccione nombre de la categoria unificada</label>
+        <input class="input100" type="text" name="categoria" />
+        <br />
+        <label>Categoria 1</label>
+        <br>
+        <label>Categoria 2</label>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-primary"
+          data-bs-target="#msgUnificaCategoriaModal"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Aceptar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MENSAJES-->
+<!--Mensaje de alta registrada-->
+<div
+  class="modal fade"
+  id="msgAltaCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="msgAltaCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="background-color:rgb(123, 238, 123)">
+        Se ha registrado una nueva categoria
+        
+         </div>
+      <div class="modal-footer">
+        <!--button
+          class="btn btn-primary"
+          data-bs-target="#exampleModalToggle"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Back to first
+        </button-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Mensaje de baja registrada-->
+<div
+  class="modal fade"
+  id="msgBajaCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="msgBajaCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="background-color:rgb(123, 238, 123)">
+        La categoria fue eliminada con exito
+        
+         </div>
+      <div class="modal-footer">
+        <!--button
+          class="btn btn-primary"
+          data-bs-target="#exampleModalToggle"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Back to first
+        </button-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Mensaje de baja NO registrada-->
+<div
+  class="modal fade"
+  id="msgNoBajaCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="msgNoBajaCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="background-color:rgb(253, 56, 7)">
+        No se puede eliminar categorias con movimientos
+        
+         </div>
+      <div class="modal-footer">
+        <!--button
+          class="btn btn-primary"
+          data-bs-target="#exampleModalToggle"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Back to first
+        </button-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Mensaje de modificacion registrada-->
+<div
+  class="modal fade"
+  id="msgModificaCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="msgModificaCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="background-color:rgb(123, 238, 123)">
+        La categoria fue modificada con exito
+        
+         </div>
+      <div class="modal-footer">
+        <!--button
+          class="btn btn-primary"
+          data-bs-target="#exampleModalToggle"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Back to first
+        </button-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Mensaje de uniificacion registrada-->
+<div
+  class="modal fade"
+  id="msgUnificaCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="msgUnificaCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="background-color:rgb(123, 238, 123)">
+        La categoria fue unificada con exito
+        
+         </div>
+      <div class="modal-footer">
+        <!--button
+          class="btn btn-primary"
+          data-bs-target="#exampleModalToggle"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Back to first
+        </button-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Mensaje de unificacion NO registrada-->
+<div
+  class="modal fade"
+  id="msgNoUnificaCategoriaModal"
+  aria-hidden="true"
+  aria-labelledby="msgNoUnificaCategoriaModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="background-color:rgb(253, 56, 7)">
+        No se puede unificar categorias de distinto tipo
+        
+         </div>
+      <div class="modal-footer">
+        <!--button
+          class="btn btn-primary"
+          data-bs-target="#exampleModalToggle"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Back to first
+        </button-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
