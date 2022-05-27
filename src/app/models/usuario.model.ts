@@ -1,16 +1,17 @@
 export class Usuario {
     nombre?:string;
     mail?:string;
+    contrasena?:string;
     fnacimiento?:Date;
     residencia?:number;
-    contrasena?:string;
+    modoIngreso?:number;
+    profesion?:number;
     fcreacion?:Date;
-    estado?:boolean;
-    grupo?:number;
-    contador?:number;
+    estado?:number;
     fultintento?:Date;
 
-    constructor(){   
+    constructor(){  
+
     }
 
   

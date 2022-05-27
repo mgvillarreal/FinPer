@@ -1,52 +1,122 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form text-center">
+            <div class="login100-form validate-form text-center">
                 <a>
                     <img src="./assets/img/icons/logo-fp-negro.png" class="imagen-logo" alt="" />
                 </a>
 
-                <span class="login100-form-title p-b-26">
-                    Registro
-                </span>
-
-                <div class="wrap-input100 validate-input" data-validate = "Email inválido">
-                    <input class="input100" type="text" name="email">
-                    <span class="focus-input100" data-placeholder="Email"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input" data-validate="Ingrese contraseña">
-                    <span class="btn-show-pass">
-                        <i class="zmdi zmdi-eye"></i>
+                <div *ngIf="parteFormulario==0">
+                    <span class="login100-form-title p-b-26">
+                        Registro
                     </span>
-                    <input class="input100" type="password" name="pass">
-                    <span class="focus-input100" data-placeholder="Contraseña"></span>
-                </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Ingrese confirmación contraseña">
-                    <span class="btn-show-pass">
-                        <i class="zmdi zmdi-eye"></i>
-                    </span>
-                    <input class="input100" type="password" name="passconfirm">
-                    <span class="focus-input100" data-placeholder="Confirme contraseña"></span>
-                </div>
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" name="email" placeholder="Email" [(ngModel)]="usuario.mail">
+                    </div>
+    
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="password" name="pwd" placeholder="Contraseña" [(ngModel)]="usuario.contrasena">
+                    </div>
+    
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="password" name="pwdconfirm" placeholder="Confirme contraseña" [(ngModel)]="pwdConfirm">
+                    </div>
 
-                <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                        <button class="login100-form-btn" (click)="validarContrasenas()">
-                            Registrar
-                        </button>
+                    <div class="mt-4 mb-1 d-flex justify-content-center">
+                        <p class="texto-rojo" *ngIf="msjValidacion!=''">{{msjValidacion}}</p>
+                    </div>
+    
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" (click)="validarContrasenas()"> Continuar </button>
+                        </div>
+                    </div>
+    
+                    <div class="mt-5">
+                        <p class="txt1">
+                            Ya tengo una cuenta.
+                            <a class="txt2" routerLink="/ingreso"> Ingresar</a>
+                        </p>
                     </div>
                 </div>
 
-                <div class="mt-5">
-                    <p class="txt1">
-                        Ya tengo una cuenta.
-                        <a class="txt2" href="#"> Ingresar</a>
-                    </p>
+                <div *ngIf="parteFormulario==1">
+                    <span class="login100-form-title p-b-26">
+                        Más sobre ti
+                    </span>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" name="nombre" placeholder="Nombre" [(ngModel)]="usuario.nombre">
+                    </div>
+    
+                    <div class="wrap-input100 validate-input" >
+                        <input class="input100" type="date" name="fnacimiento" placeholder="Fecha de nacimiento" [(ngModel)]="usuario.fnacimiento">
+                    </div>
+    
+                    <div class="wrap-input100 " >
+                        <select class="input100"  name="residencia" [(ngModel)]="usuario.residencia">
+                            <option value=" " selected>Lugar de Residencia</option>
+                            <option value="1">Argentina</option>
+                            <option value="2">Venezuela</option>
+                            <option value="3">Brasil</option>
+                            <option value="4">Colombia</option>
+                        </select>
+                    </div>
+
+                    <div class="mt-4 mb-1 d-flex justify-content-center">
+                        <p class="texto-rojo" *ngIf="msjValidacion!=''">{{msjValidacion}}</p>
+                    </div>
+    
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" (click)="validarParteDos()">
+                                Continuar
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </form>
+
+                <div *ngIf="parteFormulario==2">
+                    <span class="login100-form-title p-b-26">
+                        Más sobre ti
+                    </span>
+
+                    <div class="wrap-input100 validate-input" >
+                        <select class="input100 form-control"  name="modoIngresos" [(ngModel)]="usuario.modoIngreso">
+                            <option value="1">Trabajo a tiempo copmpleto</option>
+                            <option value="2">Profesional independiente</option>
+                            <option value="3">Emprendendor</option>
+                            <option value="4">Jubilado</option>
+                        </select>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" >
+                        <select class="input100 form-control"  name="profesion" [(ngModel)]="usuario.profesion">
+                            <option value="1">Administración</option>
+                            <option value="2">Ingeniería</option>
+                            <option value="3">Marketing</option>
+                            <option value="4">Sistemas</option>
+                        </select>
+                    </div>        
+
+                    <div class="mt-4 mb-1 d-flex justify-content-center">
+                        <p class="texto-rojo" *ngIf="msjValidacion!=''">{{msjValidacion}}</p>
+                    </div>
+    
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" (click)="validarParteTres()">
+                                Registrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

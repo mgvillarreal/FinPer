@@ -9,34 +9,58 @@ import { Usuario } from 'src/app/models/usuario.model';
 })
 export class RegistroComponent implements OnInit {
 
-  miUsuario = new Usuario;
-  mail?:String;
-  pwd?:String;
+  usuario = new Usuario;
   pwdConfirm?:String;
-  resultado!:number;
+  parteFormulario:number = 0;
+  msjValidacion:string = '';
 
   constructor(private router: Router) { }
 
   validarContrasenas(): void {
-    if(this.miUsuario.nombre !== '' && this.miUsuario.mail !== '' && this.miUsuario.pwd !== '' && this.pwdConfirm !== '')
+    if(this.usuario.mail !== undefined && this.usuario.contrasena !== undefined && this.pwdConfirm !== undefined)
     {
-      if(this.miUsuario.pwd == this.pwdConfirm)
-      {
-        this.miUsuario.registrar();
-        this.router.navigate(['login']);
-      }
-      else
-      {
-        this.resultado = 1;
-        console.info('Las contraseñas no coinciden.');
-      }
+       if(this.usuario.contrasena === this.pwdConfirm)
+       {
+         this.parteFormulario = 1;
+         this.msjValidacion = '';
+       }
+       else
+       {
+          this.msjValidacion = 'Las contraseñas no coinciden.';
+       }
+     }
+     else
+     {
+      this.msjValidacion = 'Todos los campos son requeridos';
+     }
+  }
+
+  validarParteDos(): void{
+    if(this.usuario.nombre !== undefined && this.usuario.fnacimiento !== undefined && this.usuario.residencia !== undefined)
+    {
+      this.parteFormulario = 2;
+      this.msjValidacion = '';
     }
     else
     {
-      this.resultado = 2;
-      console.info('Todos los campos son requeridos');
+      this.msjValidacion = 'Todos los campos son requeridos';
     }
-   
+  }
+
+  validarParteTres(): void{
+    if(this.usuario.modoIngreso !== undefined && this.usuario.profesion !== undefined)
+    {
+      this.registrar();
+    }
+    else
+    {
+      this.msjValidacion = 'Todos los campos son requeridos';
+    }
+  }
+
+  registrar(): void{
+    this.router.navigate(['ingreso']); //SE DEBE MOSTRAR EL MENSAJE QUE ENVIA PARA VALIDAR
+    console.info('Usuario registrado');
   }
 
   ngOnInit(): void {
