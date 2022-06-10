@@ -39,7 +39,7 @@ h1,h2,h3,h4,h5,h6 {
 }
   
 p {
-    font-family:'Source Sans Pro', sans-serif;
+    font-family:'Poppins', sans-serif;
     font-size: 14px;
     line-height: 1.7;
     color: #666666;
@@ -51,39 +51,10 @@ ul, li {
     list-style-type: none;
 }
   
-input {
+input, select {
     outline: none;
     border: none;
 }
-  
-textarea {
-    outline: none;
-    border: none;
-}
-  
-textarea:focus, input:focus {
-    border-color: transparent !important;
-}
-  
-input:focus::-webkit-input-placeholder { color:transparent; }
-input:focus:-moz-placeholder { color:transparent; }
-input:focus::-moz-placeholder { color:transparent; }
-input:focus:-ms-input-placeholder { color:transparent; }
-  
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; }
-textarea:focus::-moz-placeholder { color:transparent; }
-textarea:focus:-ms-input-placeholder { color:transparent; }
-  
-input::-webkit-input-placeholder { color: #adadad;}
-input:-moz-placeholder { color: #adadad;}
-input::-moz-placeholder { color: #adadad;}
-input:-ms-input-placeholder { color: #adadad;}
-  
-textarea::-webkit-input-placeholder { color: #adadad;}
-textarea:-moz-placeholder { color: #adadad;}
-textarea::-moz-placeholder { color: #adadad;}
-textarea:-ms-input-placeholder { color: #adadad;}
   
 button {
     outline: none !important;
@@ -101,14 +72,14 @@ iframe {
   
 /*[ Utility ]*/
 .txt1 {
-    font-family:'Source Sans Pro', sans-serif;
+    font-family:'Poppins', sans-serif;
     font-size: 13px;
     color: #666666;
     line-height: 1.5;
 }
   
 .txt2 {
-    font-family:'Source Sans Pro', sans-serif;
+    font-family:'Poppins', sans-serif;
     font-size: 13px;
     color: #333333;
     line-height: 1.5;
@@ -140,7 +111,7 @@ iframe {
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    padding: 77px 55px 33px 55px;
+    padding: 55px 55px 33px 55px;
   
     box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
@@ -156,7 +127,7 @@ iframe {
   
 .login100-form-title {
     display: block;
-    font-family:'Source Sans Pro', sans-serif;
+    font-family:'Poppins', sans-serif;
     font-size: 30px;
     color: #333333;
     line-height: 1.2;
@@ -172,20 +143,20 @@ iframe {
     width: 100%;
     position: relative;
     border-bottom: 2px solid #adadad;
-    margin-bottom: 37px;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
   
 .input100 {
-    font-family:'Source Sans Pro', sans-serif;
+    font-family:'Poppins', sans-serif;
     font-size: 15px;
-    color: #555555;
+    color: #666666;
     line-height: 1.2;
   
     display: block;
     width: 100%;
     height: 45px;
     background: transparent;
-    padding: 0 5px;
 }
   
 .focus-input100 {
@@ -222,7 +193,7 @@ iframe {
 }
   
 .focus-input100::after {
-    font-family:'Source Sans Pro', sans-serif;
+    font-family:'Poppins', sans-serif;
     font-size: 15px;
     color:#999999;
     line-height: 1.2;
@@ -337,9 +308,9 @@ iframe {
 }
   
 .login100-form-btn {
-    font-family:'Source Sans Pro', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 15px;
-    color: #fff;
+    color: white;
     line-height: 1.2;
     text-transform: uppercase;
   
@@ -365,67 +336,6 @@ iframe {
     .wrap-login100 {
       padding: 77px 15px 33px 15px;
     }
-}
-
-/*[ Alert validate ]*/
-  
-.validate-input {
-    position: relative;
-}
-  
-.alert-validate::before {
-    content: attr(data-validate);
-    position: absolute;
-    max-width: 70%;
-    background-color: #fff;
-    border: 1px solid #c80000;
-    border-radius: 2px;
-    padding: 4px 25px 4px 10px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    right: 0px;
-    pointer-events: none;
-  
-    font-family:'Source Sans Pro', sans-serif;
-    color: #c80000;
-    font-size: 13px;
-    line-height: 1.4;
-    text-align: left;
-  
-    visibility: hidden;
-    opacity: 0;
-  
-    -webkit-transition: opacity 0.4s;
-    -o-transition: opacity 0.4s;
-    -moz-transition: opacity 0.4s;
-    transition: opacity 0.4s;
-}
-  
-.alert-validate::after {
-    content: "\f06a";
-    font-family:'Source Sans Pro', sans-serif;
-    font-size: 16px;
-    color: #c80000;
-  
-    display: block;
-    position: absolute;
-    background-color: #fff;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    right: 5px;
-}
-  
-.alert-validate:hover:before {
-    visibility: visible;
-    opacity: 1;
 }
   
 @media (max-width: 992px) {
@@ -454,4 +364,27 @@ iframe {
 
 .imagen-logo{
     width: 100px;
+}
+
+.boton-mas {
+    text-align: center;
+    display: inline-block;
+    background: #f1eeee;
+    padding: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-radius: 70%;
+    margin-left: 4px;
+    cursor: pointer;
+    color: #666666;
+    border-color: #f1eeee;
+    font-size:x-large;
+}
+
+.texto-validacion{
+    font-family:'Poppins', sans-serif;
+    color: red;
+    font-weight: 300;
+    font-size: small;
+    text-align: center !important;
 }

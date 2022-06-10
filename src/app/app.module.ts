@@ -17,8 +17,9 @@ import { InformesComponent } from './page/informes/informes.component';
 import { ErrorComponent } from './page/error/error.component';
 import { RegistroComponent } from './page/registro/registro.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoriaComponent } from './page/categoria/categoria.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -44,7 +45,9 @@ import { CategoriaComponent } from './page/categoria/categoria.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

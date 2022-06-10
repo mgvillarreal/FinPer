@@ -3,9 +3,9 @@ export class Usuario {
     mail?:string;
     contrasena?:string;
     fnacimiento?:Date;
-    residencia?:number;
-    modoIngreso?:number;
-    profesion?:number;
+    residencia:number = 0;
+    modoIngreso:number = 0;
+    profesion?:number = 0;
     fcreacion?:Date;
     estado?:number;
     fultintento?:Date;

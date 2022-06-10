@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from '@angular/router';
+import { ModalComponent } from './components/modal/modal.component';
 import { CategoriaComponent } from './page/categoria/categoria.component';
 import { ComofuncionaComponent } from './page/comofunciona/comofunciona.component';
 import { ErrorComponent } from './page/error/error.component';
@@ -24,11 +26,12 @@ const routes: Routes = [
   { path: 'metas', component: MetasComponent},
   { path: 'soporte', component: SoporteComponent},
   { path: 'categoria', component: CategoriaComponent},
+  { path: 'modal', component: ModalComponent},
   { path: '**', component: ErrorComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), ReactiveFormsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

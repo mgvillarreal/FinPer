@@ -1,122 +1,158 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <div class="login100-form validate-form text-center">
-                <a>
-                    <img src="./assets/img/icons/logo-fp-negro.png" class="imagen-logo" alt="" />
-                </a>
+            <form [formGroup]="forma" class="login100-form" (ngSubmit)="registrar()">
+                <div class="login100-form validate-form text-center">
+                    <a> <img src="./assets/img/icons/logo-fp-negro.png" class="imagen-logo" alt="" /> </a>
 
-                <div *ngIf="parteFormulario==0">
-                    <span class="login100-form-title p-b-26">
-                        Registro
-                    </span>
+                    <div *ngIf="parteFormulario==0">
+                        <span class="login100-form-title"> Registro </span>
 
-                    <div class="wrap-input100 validate-input">
-                        <input class="input100" type="text" name="email" placeholder="Email" [(ngModel)]="usuario.mail">
-                    </div>
-    
-                    <div class="wrap-input100 validate-input">
-                        <input class="input100" type="password" name="pwd" placeholder="Contraseña" [(ngModel)]="usuario.contrasena">
-                    </div>
-    
-                    <div class="wrap-input100 validate-input">
-                        <input class="input100" type="password" name="pwdconfirm" placeholder="Confirme contraseña" [(ngModel)]="pwdConfirm">
+                        <div class="wrap-input100">
+                            <input class="input100" type="email" name="email" placeholder="Email" formControlName="email">
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['email'].errors?.['required'] && forma.controls['email'].touched">
+                            El email es requerido.
+                        </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['email'].errors?.['email']">
+                            Email inválido.
+                        </small>
+
+                        <div class="wrap-input100">
+                            <input class="input100" type="password" name="pwd" placeholder="Contraseña" formControlName="contrasena">
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['contrasena'].errors?.['required'] && forma.controls['contrasena'].touched">
+                            La contraseña es requerida.
+                        </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['contrasena'].errors?.['minLength']">
+                            La contraseña debe tener al menos 6 caracteres.
+                        </small>
+
+                        <div class="wrap-input100">
+                            <input class="input100" type="password" name="pwdconfirm" placeholder="Confirme contraseña" formControlName="pwdConfirm">
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['pwdConfirm'].errors?.['required'] && forma.controls['pwdConfirm'].touched">
+                            La confirmación de contraseña es requerida.
+                        </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.errors?.['contrasenasIguales']">
+                            Las contraseñas no coinciden.
+                        </small>
+
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn" (click)="pasarParteUno()">
+                                    Continuar
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <p class="txt1">
+                                Ya tengo una cuenta.
+                                <a class="txt2" routerLink="/ingreso"> Ingresar</a>
+                            </p>
+                        </div>
+
                     </div>
 
-                    <div class="mt-4 mb-1 d-flex justify-content-center">
-                        <p class="texto-rojo" *ngIf="msjValidacion!=''">{{msjValidacion}}</p>
-                    </div>
+                    <div *ngIf="parteFormulario==1">
+                        <span class="login100-form-title p-b-26"> Más sobre ti </span>
     
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn" (click)="validarContrasenas()"> Continuar </button>
+                        <div class="wrap-input100">
+                            <input class="input100" type="text" name="nombre" placeholder="Nombre" formControlName="nombre">
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['nombre'].errors?.['required'] && forma.controls['nombre'].touched">
+                            El nombre es requerido.
+                        </small>
+        
+                        <div class="wrap-input100" >
+                            <label for="fnacimiento"></label>
+                            <input class="input100" type="text" name="fnacimiento" placeholder="Fecha de Nacimiento" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="fnacimiento">
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['fnacimiento'].errors?.['required'] && forma.controls['fnacimiento'].touched">
+                            La fecha de nacimiento es requerida.
+                        </small>
+                        <br>
+                        <div class="wrap-input100" >
+                            <select class="input100" name="residencia" formControlName="residencia">
+                                <option value="0" selected hidden>Lugar de Residencia</option>
+                                <option value="1">Argentina</option>
+                                <option value="2">Venezuela</option>
+                                <option value="3">Brasil</option>
+                                <option value="4">Colombia</option>
+                            </select>
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['residencia'].errors?.['required'] && forma.controls['residencia'].touched">
+                            La residencia es requerida.
+                        </small>
+        
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn" (click)="pasarParteDos()">
+                                    Continuar
+                                </button>
+                            </div>
                         </div>
                     </div>
-    
-                    <div class="mt-5">
-                        <p class="txt1">
-                            Ya tengo una cuenta.
-                            <a class="txt2" routerLink="/ingreso"> Ingresar</a>
-                        </p>
-                    </div>
-                </div>
 
-                <div *ngIf="parteFormulario==1">
-                    <span class="login100-form-title p-b-26">
-                        Más sobre ti
-                    </span>
-
-                    <div class="wrap-input100 validate-input">
-                        <input class="input100" type="text" name="nombre" placeholder="Nombre" [(ngModel)]="usuario.nombre">
-                    </div>
+                    <div *ngIf="parteFormulario==2">
+                        <span class="login100-form-title p-b-26"> Más sobre ti </span>
     
-                    <div class="wrap-input100 validate-input" >
-                        <input class="input100" type="date" name="fnacimiento" placeholder="Fecha de nacimiento" [(ngModel)]="usuario.fnacimiento">
-                    </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="wrap-input100">
+                                <select class="input100"  name="modoIngresos" formControlName="modoIngreso">
+                                    <option value="0" selected hidden>Modos de Ingreso</option>
+                                    <option value="1">Trabajo a tiempo completo</option>
+                                    <option value="2">Profesional independiente</option>
+                                    <option value="3">Emprendedor</option>
+                                    <option value="4">Jubilado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['modoIngreso'].errors?.['required'] && forma.controls['modoIngreso'].touched">
+                            Debe seleccionar un modo de ingreso.
+                        </small>
     
-                    <div class="wrap-input100 " >
-                        <select class="input100"  name="residencia" [(ngModel)]="usuario.residencia">
-                            <option value=" " selected>Lugar de Residencia</option>
-                            <option value="1">Argentina</option>
-                            <option value="2">Venezuela</option>
-                            <option value="3">Brasil</option>
-                            <option value="4">Colombia</option>
-                        </select>
-                    </div>
-
-                    <div class="mt-4 mb-1 d-flex justify-content-center">
-                        <p class="texto-rojo" *ngIf="msjValidacion!=''">{{msjValidacion}}</p>
-                    </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="wrap-input100" >
+                                <select class="input100"  name="profesion" formControlName="profesion">
+                                    <option value=" " selected hidden>Profesión</option>
+                                    <option value="1">Administración</option>
+                                    <option value="2">Ingeniería</option>
+                                    <option value="3">Marketing</option>
+                                    <option value="4">Sistemas</option>
+                                </select>
+                            </div>
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['profesion'].errors?.['required'] && forma.controls['profesion'].touched">
+                            Debe seleccionar una profesion.
+                        </small>
     
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn" (click)="validarParteDos()">
-                                Continuar
-                            </button>
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn">
+                                    Registrar
+                                </button>
+                            </div>
                         </div>
                     </div>
+
                 </div>
-
-                <div *ngIf="parteFormulario==2">
-                    <span class="login100-form-title p-b-26">
-                        Más sobre ti
-                    </span>
-
-                    <div class="wrap-input100 validate-input" >
-                        <select class="input100 form-control"  name="modoIngresos" [(ngModel)]="usuario.modoIngreso">
-                            <option value="1">Trabajo a tiempo copmpleto</option>
-                            <option value="2">Profesional independiente</option>
-                            <option value="3">Emprendendor</option>
-                            <option value="4">Jubilado</option>
-                        </select>
-                    </div>
-
-                    <div class="wrap-input100 validate-input" >
-                        <select class="input100 form-control"  name="profesion" [(ngModel)]="usuario.profesion">
-                            <option value="1">Administración</option>
-                            <option value="2">Ingeniería</option>
-                            <option value="3">Marketing</option>
-                            <option value="4">Sistemas</option>
-                        </select>
-                    </div>        
-
-                    <div class="mt-4 mb-1 d-flex justify-content-center">
-                        <p class="texto-rojo" *ngIf="msjValidacion!=''">{{msjValidacion}}</p>
-                    </div>
-    
-                    <div class="container-login100-form-btn">
-                        <div class="wrap-login100-form-btn">
-                            <div class="login100-form-bgbtn"></div>
-                            <button class="login100-form-btn" (click)="validarParteTres()">
-                                Registrar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            </form>
         </div>
     </div>
 </div>
