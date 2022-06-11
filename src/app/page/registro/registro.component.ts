@@ -13,7 +13,7 @@ export class RegistroComponent implements OnInit {
 
   public forma: FormGroup;   
   usuario = new Usuario;
-  parteFormulario:number = 0;
+  parteFormulario:number = 2;
 
   constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService) { }
 
@@ -34,9 +34,8 @@ export class RegistroComponent implements OnInit {
     this.usuario.modoIngreso = this.forma.value['modoIngreso'];
     this.usuario.profesion = this.forma.value['profesion'];
     //this.router.navigate(['ingreso']); //SE DEBE MOSTRAR EL MENSAJE QUE ENVIA PARA VALIDAR
-    console.info('Usuario registrado');
     console.log('Datos de Usuario: ', this.usuario);
-    this.registraUsuario();
+    //this.registraUsuario();
   }
 
   registraUsuario(){
@@ -53,7 +52,8 @@ export class RegistroComponent implements OnInit {
       'nombre': ['', [Validators.required]],
       'fnacimiento': ['', [Validators.required]],
       'residencia': ['', [Validators.required]],
-      'modoIngreso': ['', [Validators.required]],
+      'modoIngreso': ['Modo de Ingreso', [Validators.required]],
+
       'profesion': ['', [Validators.required]],
     }, { validators: this.contrasenasIgualesValidator });
   }
@@ -64,6 +64,5 @@ export class RegistroComponent implements OnInit {
   
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
   };
-  
 
 }
