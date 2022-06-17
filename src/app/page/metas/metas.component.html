@@ -1,1 +1,84 @@
-<p>metas works!</p>
+<div>
+
+    <div class="titulo text-center mt-5 mb-5">Metas de Ahorro</div>
+
+    <div class="mt-4 text-center">
+        <select name="estado" id="estado">
+            <option value="1" selected>Pendientes</option>
+            <option value="2">Alcanzadas</option>
+        </select>
+    </div>
+
+    <div class="grid-metas mt-5 mb-5 text-center">
+        <div class="encabezado">
+            <div> Meta </div>
+            <div> Monto </div>
+            <div> Ahorrado </div>
+            <div> Fecha Límite </div>
+        </div>
+        <div class="contenido">
+            <div>Bicicleta</div>
+            <div>$ 45.000,00</div>
+            <div>$ 15.000,00</div>
+            <div>22-oct-2022</div>
+        </div>
+        <div class="contenido">
+            <div>Viaje</div>
+            <div>USD 2.000,00</div>
+            <div>USD 800,00</div>
+            <div>15-dic-2022</div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <!-- <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" href="#nuevaMeta">Agregar nueva meta</button> -->
+        <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" (click)="alerta()">Agregar nueva meta</button> 
+    </div>
+    
+</div>
+
+<div class="modal fade" id="nuevaMeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header ftco-degree-bg modal-encabezado">
+                <div>
+                    <button type="button" class="close d-flex align-items-center justify-content-center btn-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="ion-ios-close"> </span>
+                    </button>
+                </div>
+                <div class="text-center modal-encabezado-titulo">
+                    <span> Nueva Meta </span><br>
+                    <span> [espacio para monto] </span>
+                </div>
+            </div>
+            
+            <div class="modal-contenedor">
+                <form>
+                    <div class="modal-input">
+                        <div class="modal-celda1 my-2">
+                            <select name="moneda" id="moneda">
+                                <option value="1" selected>ARS</option>
+                                <option value="2">USD</option>
+                            </select>
+                        </div>
+                        <div class="modal-celda2 my-2">
+                            <input type="number" id="monto" placeholder="Monto de la meta">
+                        </div>
+                    </div>
+                    <div class="modal-celda3 my-2 modal-input-w">
+                        <input type="text" id="detalle" placeholder="Detalle de la meta">
+                    </div>
+                    <div class="modal-celda4 my-2 modal-input-w">
+                        <input type="text" id="detalle" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}">
+                    </div>
+                    
+    
+                    <div class="mt-4">
+                        <button class="btn btn-modal mb-4">Listo</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>

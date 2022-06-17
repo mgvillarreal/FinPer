@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MensajesService } from 'src/app/components/services/mensajes.service';
 
 @Component({
   selector: 'app-metas',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MetasComponent implements OnInit {
 
-  constructor() { }
+  constructor(private mensajesService: MensajesService) { }
+
+  alerta(){
+    this.mensajesService.alerta("Titulo", "Mensaje").subscribe((answer) => {});
+  }
 
   ngOnInit(): void {
   }

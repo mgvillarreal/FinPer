@@ -20,6 +20,13 @@ import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoriaComponent } from './page/categoria/categoria.component';
 import { HttpClientModule } from '@angular/common/http';
+//Modulos necesarios para mostrar modales desde la dependencia de ng-xbootstrap
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { ModalModule } from 'ngx-bootstrap/modal';
+//Modales dinamicos
+import { ModalNoticeComponent } from './components/modal/modal-notice/modal-notice.component';
+//Servicios de modal
+import { MensajesService } from './components/services/mensajes.service';
 
 
 @NgModule({
@@ -39,6 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
     RegistroComponent,
     ModalComponent,
     CategoriaComponent,
+    ModalNoticeComponent,
 
   ],
   imports: [
@@ -47,9 +55,17 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot(),
+    AlertModule.forRoot()
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    MensajesService,
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ModalNoticeComponent,
+    
+  ]
 })
 export class AppModule { }

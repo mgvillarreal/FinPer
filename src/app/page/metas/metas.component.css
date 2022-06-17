@@ -1,0 +1,135 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.titulo{
+    color: #9B2CEC;
+    font-size: 300%;
+    font-weight: 650;
+}
+
+.grid-metas {
+    justify-content: space-between;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.encabezado{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: #b87be4;
+    color: white;
+    font-size: 160%;
+    font-weight: 500;
+    line-height: 2.5;
+}
+
+.contenido{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: #e8e2ec;
+    color: black;
+    font-size: 120%;
+    font-weight: 400;
+    line-height: 2.5;
+}
+
+.btn-agregar{
+    border-color:#9B2CEC;
+    color: #9B2CEC;
+    font-size: 15px;
+    text-transform: uppercase;
+    border-radius: 25px
+}
+
+.btn-agregar:hover{
+    background-color:#9B2CEC;
+    color: white;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.modal-encabezado{
+    background-color:#b96af2;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(2, 130px auto);
+}
+
+.modal-encabezado-titulo{
+    font-size: large;
+    font-weight: 160%;
+}
+
+.modal-contenedor{
+    padding: 2rem 3rem 2rem 3rem;
+    margin: 2px;
+}
+
+input, select{
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    /* display:block; */
+    display: inline;
+    width:300px;
+    border:none;
+    border-bottom:1px solid #757575;
+}
+
+.btn-close{
+    background-color: transparent;
+    color: white;
+    float: left;
+}
+
+.btn-modal{
+    background-color:#b96af2;
+    color: white;
+    font-size: 17px;
+    border-radius: 25px
+}
+
+.btn-modal:hover{
+    background-color:#9B2CEC;
+}
+
+.grid-campos{
+    display: grid;
+    grid-template-columns: (2, 1fr);
+}
+
+.modal-input{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 10px;
+    grid-auto-rows: minmax(15px, auto);
+}
+
+.modal-celda1{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.modal-celda2{
+    grid-column: 2;
+    grid-row: 1;
+    line-height: 1;
+}
+
+.modal-celda3{
+    grid-column: 1/2;
+    grid-row: 2;
+}
+
+.modal-celda4{
+    grid-column: 1/2;
+    grid-row: 3;
+}
+
+.modal-celda1 select{
+    max-width: 70px;
+}
+
+.modal-input-w input{
+    width: 100%;
+}
