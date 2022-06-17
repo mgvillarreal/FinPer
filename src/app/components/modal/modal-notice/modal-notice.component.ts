@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { MensajesService } from '../../services/mensajes.service';
+import { ModalService } from '../../../services/modal.service';
 
 @Component({
   selector: 'app-modal-notice',
@@ -12,11 +12,7 @@ export class ModalNoticeComponent implements OnInit {
   titulo:string;
   mensaje:string;
 
-  constructor(public bsModalRef: BsModalRef, public mensajeService: MensajesService) { }
-
-  alerta(){
-    this.mensajeService.alerta("Titulo", "Mensaje").subscribe((answer) => {});
-  }
+  constructor(public bsModalRef: BsModalRef, public modalService: ModalService) { }
 
   ngOnInit(): void {
   }

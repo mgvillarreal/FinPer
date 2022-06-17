@@ -26,7 +26,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 //Modales dinamicos
 import { ModalNoticeComponent } from './components/modal/modal-notice/modal-notice.component';
 //Servicios de modal
-import { MensajesService } from './components/services/mensajes.service';
+import { ModalService } from './services/modal.service';
 
 
 @NgModule({
@@ -60,7 +60,7 @@ import { MensajesService } from './components/services/mensajes.service';
     AlertModule.forRoot()
   ],
   providers: [
-    MensajesService,
+    ModalService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

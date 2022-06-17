@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { ModalNoticeComponent } from '../modal/modal-notice/modal-notice.component';
+import { ModalNoticeComponent } from '../components/modal/modal-notice/modal-notice.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MensajesService {
+export class ModalService {
   bsModalRef: BsModalRef;
 
   constructor(private bsModalService: BsModalService) { }

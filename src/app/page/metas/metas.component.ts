@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MensajesService } from 'src/app/components/services/mensajes.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-metas',
@@ -8,10 +8,10 @@ import { MensajesService } from 'src/app/components/services/mensajes.service';
 })
 export class MetasComponent implements OnInit {
 
-  constructor(private mensajesService: MensajesService) { }
+  constructor(private modalService: ModalService) { }
 
   alerta(){
-    this.mensajesService.alerta("Titulo", "Mensaje").subscribe((answer) => {});
+     this.modalService.alerta("Titulo", "Mensaje").subscribe((answer) => {});
   }
 
   ngOnInit(): void {
