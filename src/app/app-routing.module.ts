@@ -13,6 +13,7 @@ import { MetasComponent } from './page/metas/metas.component';
 import { PrincipalComponent } from './page/principal/principal.component';
 import { RegistroComponent } from './page/registro/registro.component';
 import { SoporteComponent } from './page/soporte/soporte.component';
+import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'soporte', component: SoporteComponent},
   { path: 'categoria', component: CategoriaComponent},
   { path: 'modal', component: ModalComponent},
+  { path: 'valida-usuario', component: ValidaUsuarioComponent},
   { path: '**', component: ErrorComponent},
 ];
 

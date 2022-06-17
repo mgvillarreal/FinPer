@@ -20,13 +20,11 @@ import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoriaComponent } from './page/categoria/categoria.component';
 import { HttpClientModule } from '@angular/common/http';
-//Modulos necesarios para mostrar modales desde la dependencia de ng-xbootstrap
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ModalModule } from 'ngx-bootstrap/modal';
-//Modales dinamicos
 import { ModalNoticeComponent } from './components/modal/modal-notice/modal-notice.component';
-//Servicios de modal
 import { ModalService } from './services/modal.service';
+import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.component';
 
 
 @NgModule({
@@ -47,7 +45,7 @@ import { ModalService } from './services/modal.service';
     ModalComponent,
     CategoriaComponent,
     ModalNoticeComponent,
-
+    ValidaUsuarioComponent
   ],
   imports: [
     BrowserModule,

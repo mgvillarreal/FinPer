@@ -1,0 +1,36 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form [formGroup]="forma" class="login100-form validate-form text-center" (ngSubmit)="validar()">
+                <a>
+                    <img src="./assets/img/icons/logo-fp-negro.png" class="imagen-logo " alt="logo" />
+                </a>
+                <span class="login100-form-title p-b-26">
+                    Autenticación
+                </span>
+
+                <span>
+                    <p>Por favor, ingrese el Token de seguridad que fue enviado a su correo electrónico</p>
+                </span>
+
+                <div class="wrap-input100 validate-input" >
+                    <input class="input100" type="text" name="token" placeholder="Token de seguridad" formControlName="token">
+                </div>
+                <small  class="texto-validacion text-center" 
+                *ngIf="forma.controls['token'].errors?.['required'] && forma.controls['token'].touched">
+                    El Token de seguridad es requerido.
+                </small>
+
+                <div class="container-login100-form-btn mt-4">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button class="login100-form-btn" [disabled]="forma.invalid">
+                            Validar
+                        </button>
+                    </div>
+                </div>
+               
+            </form>
+        </div>
+    </div>
+</div>
