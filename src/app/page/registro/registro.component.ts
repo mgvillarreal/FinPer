@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario.model';
+import { ModalService } from 'src/app/services/modal.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class RegistroComponent implements OnInit {
   usuario = new Usuario;
   parteFormulario:number = 2;
 
-  constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService) { }
+  constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService, private modalService: ModalService) { }
 
   pasarParteUno(): void {
     this.usuario.mail = this.forma.value['email'];
@@ -36,12 +37,17 @@ export class RegistroComponent implements OnInit {
     //this.router.navigate(['ingreso']); //SE DEBE MOSTRAR EL MENSAJE QUE ENVIA PARA VALIDAR
     console.log('Datos de Usuario: ', this.usuario);
     //this.registraUsuario();
+    this.mostrarMensaje();
   }
 
   registraUsuario(){
     this.usuariosService.registraUsuario(this.usuario).subscribe(resp => {
                                                                           console.log(resp);
                                                                          })
+  }
+
+  mostrarMensaje():void{
+    this.modalService.alerta("Icono de mensaje", "Hemos enviado un mail a tu correo electrónico para validar tu perfil").subscribe((answer) => {});
   }
 
   ngOnInit(): void {

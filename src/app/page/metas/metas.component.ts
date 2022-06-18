@@ -10,7 +10,7 @@ export class MetasComponent implements OnInit {
 
   constructor(private modalService: ModalService) { }
 
-  alerta(){
+  mostrarMensaje(){
      this.modalService.alerta("Titulo", "Mensaje").subscribe((answer) => {});
   }
 
