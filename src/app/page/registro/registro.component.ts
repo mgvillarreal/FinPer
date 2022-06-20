@@ -13,7 +13,7 @@ export class RegistroComponent implements OnInit {
 
   public forma: FormGroup;   
   usuario = new Usuario;
-  parteFormulario:number = 2;
+  parteFormulario:number = 0;
 
   constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService) { }
 
@@ -40,8 +40,8 @@ export class RegistroComponent implements OnInit {
 
   registraUsuario(){
     this.usuariosService.registraUsuario(this.usuario).subscribe(resp => {
-                                                                          console.log(resp);
-                                                                         })
+      console.log(resp);
+    })
   }
 
   ngOnInit(): void {

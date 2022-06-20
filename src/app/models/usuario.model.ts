@@ -4,8 +4,8 @@ export class Usuario {
     contrasena?:string;
     fnacimiento?:Date;
     residencia:number;
-    modoIngreso:number;
-    profesion?:number;
+    modoIngreso:[];
+    profesion?:[];
     fcreacion?:Date;
     estado?:number;
     fultintento?:Date;
