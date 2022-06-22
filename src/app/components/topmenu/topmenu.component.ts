@@ -13,7 +13,8 @@ export class TopmenuComponent implements OnInit {
   menu:string = "cerrado";
   usuario: Usuario = new Usuario
 
-  constructor(public auth: AuthService, public usuarioService: UsuariosService) { }
+  constructor(public auth: AuthService,
+    public usuarioService: UsuariosService) { }
 
   cambiaEstadoMenu(): void{
     if(this.menu === 'abierto')
@@ -32,7 +33,7 @@ export class TopmenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.auth.auth()){
+    if(localStorage.getItem('TOKEN')){
       this.usuario.nombre = localStorage.getItem('name')
     }
   }

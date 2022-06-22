@@ -10,6 +10,7 @@ export class MovimientosService {
   movimiento: Movimiento = new Movimiento
 
   url = 'https://hostinjor.com/finperapi/api/movimientos/'
+  urlv1 = 'https://hostinjor.com/apifinper/v1/usuarios/'
 
   constructor(
     public http: HttpClient
@@ -20,8 +21,8 @@ export class MovimientosService {
     return this.http.post<any>(this.url, id);
   }
 
-  traeUnMovimiento(id: number){
-    return this.http.post<Movimiento>(this.url, id);
+  traeMovimientosParam(id: number){
+    return this.http.post<any>(this.urlv1, id);
   }
 }
 

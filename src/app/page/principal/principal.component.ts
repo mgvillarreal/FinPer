@@ -17,14 +17,8 @@ export class PrincipalComponent implements OnInit {
   monto: Number = 0
   montoString?: string
 
-  ingresos: any[] =  [
-    { monto: 3000, fecha: '20-04-2022' },
-    { monto: 1500, fecha: '15-04-2022' }
-  ]
-  egresos: any[] =  [
-    { monto: 1000, fecha: '17-04-2022' },
-    { monto: 2000, fecha: '16-04-2022' }
-  ]
+  ingresos: any[] = []
+  egresos: any[] = []
 
   constructor() {
   }

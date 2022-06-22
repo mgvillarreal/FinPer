@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UsuarioI } from '../interfaces/usuario';
 import { JwtResponseI } from '../interfaces/jwt-response';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class AuthService {
   authSubject = new BehaviorSubject(false)
   private token: string
 
-  constructor(private httpCliente: HttpClient) { }
+  constructor(
+    private httpCliente: HttpClient,
+    private route: Router
+    ) { }
 
   register(user: UsuarioI): Observable<any> {
     return this.httpCliente.post<any>(this.auth_url, user)
@@ -44,6 +48,10 @@ export class AuthService {
   logout(): void{
     this.token = ''
     localStorage.removeItem("TOKEN")
+    localStorage.removeItem("id")
+    localStorage.removeItem("name")
+    localStorage.removeItem("mail")
+    this.route.navigate([''])
   }
 
   public auth()
