@@ -15,25 +15,27 @@ export class AuthService {
 
   constructor(private httpCliente: HttpClient) { }
 
-  register(user: UsuarioI): Observable<JwtResponseI> {
-    return this.httpCliente.post<JwtResponseI>(this.auth_url, user)
+  register(user: UsuarioI): Observable<any> {
+    return this.httpCliente.post<any>(this.auth_url, user)
     .pipe(tap(
       (res: JwtResponseI) => {
         if(res){
           // guardar token
-          this.guardaToken(res.token)
+          // this.guardaToken(res.token)
+          this.guardaUsuario(res)
         }
       })
     )
   }
-      
-  login(user: UsuarioI): Observable<JwtResponseI> {
-    return this.httpCliente.post<JwtResponseI>(this.auth_url + 'login', user)
+
+  login(user: UsuarioI): Observable<any> {
+    return this.httpCliente.post<any>(this.auth_url + 'login', user)
     .pipe(tap(
       (res: JwtResponseI) => {
         if(res){
           // guardar token
-          this.guardaToken(res.token)
+          this.guardaToken(res['token'])
+          this.guardaUsuario(res)
         }
       })
     )
@@ -57,6 +59,12 @@ export class AuthService {
   private guardaToken(token: string): void{
     localStorage.setItem("TOKEN", token)
     this.token = token
+  }
+
+  private guardaUsuario(data: JwtResponseI): void{
+    localStorage.setItem("id", String(data['id']))
+    localStorage.setItem("name", data['name'])
+    localStorage.setItem("mail", data['mail'])
   }
 
   public getToken(): void{

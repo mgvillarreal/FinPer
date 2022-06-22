@@ -27,10 +27,11 @@ export class PrincipalComponent implements OnInit {
   ]
 
   constructor() {
-    this.actualizaBalances()
   }
 
   ngOnInit(): void {
+    // Parámetros del usuario (id)
+    this.actualizaBalances()
   }
 
   modalIngreso(){

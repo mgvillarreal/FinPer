@@ -24,7 +24,7 @@ export class TopmenuComponent implements OnInit {
     {
       this.menu = 'abierto';
     }
-    
+
   }
 
   logout(){
@@ -32,10 +32,9 @@ export class TopmenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usuarioService.datosUsuario().subscribe(res => {
-      this.usuario = res
-      console.log(this.usuario)
-    })
+    if(this.auth.auth()){
+      this.usuario.nombre = localStorage.getItem('name')
+    }
   }
 
 }

@@ -16,12 +16,12 @@ export class MovimientosService {
   ) { }
 
 
-  traeMovimientos(){
-    return this.http.get<any>(this.url);
+  traeMovimientos(id: number){
+    return this.http.post<any>(this.url, id);
   }
 
-  traeUnMovimiento(id: string){
-    return this.http.get<Movimiento>(id);
+  traeUnMovimiento(id: number){
+    return this.http.post<Movimiento>(this.url, id);
   }
 }
 
