@@ -84,11 +84,8 @@
                         <br>
                         <div class="wrap-input100" >
                             <select class="input100" name="residencia" formControlName="residencia">
-                                <option value=" " selected>Lugar de Residencia</option>
-                                <option value="1">Argentina</option>
-                                <option value="2">Venezuela</option>
-                                <option value="3">Brasil</option>
-                                <option value="4">Colombia</option>
+                                <option value="" [disabled]="1">Lugar de Residencia</option>
+                                <option value="{{pais.res_id}}" *ngFor="let pais of paises" [disabled]="pais.res_id != 13">{{pais.res_descripcion}}</option>
                             </select>
                         </div>
                         <small  class="texto-validacion text-center" 
@@ -112,11 +109,8 @@
                         <div class="d-flex justify-content-center">
                             <div class="wrap-input100">
                                 <select class="input100"  name="modoIngresos" formControlName="modoIngreso">
-                                    <option value="0" selected hidden>Modos de Ingreso</option>
-                                    <option value="1">Trabajo a tiempo completo</option>
-                                    <option value="2">Profesional independiente</option>
-                                    <option value="3">Emprendedor</option>
-                                    <option value="4">Jubilado</option>
+                                    <option value="" selected [disabled]="1">Modos de Ingreso</option>
+                                    <option value="{{ingreso.ming_id}}" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option>
                                 </select>
                             </div>
                         </div>
@@ -129,11 +123,8 @@
                         <div class="d-flex justify-content-center">
                             <div class="wrap-input100" >
                                 <select class="input100"  name="profesion" formControlName="profesion">
-                                    <option value=" " selected hidden>Profesión</option>
-                                    <option value="1">Administración</option>
-                                    <option value="2">Ingeniería</option>
-                                    <option value="3">Marketing</option>
-                                    <option value="4">Sistemas</option>
+                                    <option value="" selected [disabled]="1">Seleccione una profesión</option>
+                                    <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option>
                                 </select>
                             </div>
                         </div>

@@ -10,14 +10,14 @@
                 </span>
 
                 <div class="wrap-input100 validate-input" >
-                    <input class="input100" type="email" name="email" placeholder="Email" formControlName="email">
+                    <input class="input100" type="email" name="email" placeholder="Email" formControlName="mail">
                 </div>
                 <small  class="texto-validacion text-center" 
-                *ngIf="forma.controls['email'].errors?.['required'] && forma.controls['email'].touched">
+                *ngIf="forma.controls['mail'].errors?.['required'] && forma.controls['mail'].touched">
                     El email es requerido.
                 </small>
                 <small  class="texto-validacion text-center" 
-                *ngIf="forma.controls['email'].errors?.['email']">
+                *ngIf="forma.controls['mail'].errors?.['mail']">
                     Email inválido.
                 </small>
 

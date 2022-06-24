@@ -1,20 +1,50 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, tap } from 'rxjs';
+import { IngresoI } from '../interfaces/ingreso';
+import { JwtResponseI } from '../interfaces/jwt-response';
+import { PaisI } from '../interfaces/pais';
+import { ProfesionI } from '../interfaces/profesion';
+import { UsuarioI } from '../interfaces/usuario';
 import { Usuario } from '../models/usuario.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
 
-  url = 'https://hostinjor.com/finperapi/api/usuarios/';
+  usuario: Usuario
+  url = 'https://hostinjor.com/apifinper/v1/usuarios/';
 
   constructor(
-    public http: HttpClient
+    public http: HttpClient,
+    public auth: AuthService
   ) {}
 
-  registraUsuario(usuario: Usuario){
-    return this.http.post(this.url, JSON.stringify(usuario));
+  datosUsuario(){
+    console.log(this.auth.auth())
+
+    let data: any = {
+      "token": this.auth.auth()
+    }
+    
+    
+   return this.http.post<Usuario>(this.url + 'id/token', data)
   }
+
+  traePaises(): Observable<PaisI[]> {
+    return this.http.get<PaisI[]>(this.url + 'paises')
+  }
+
+  traeProfesiones(): Observable<ProfesionI[]> {
+    return this.http.get<ProfesionI[]>(this.url + 'profesiones')
+  }
+
+  traeIngresos(): Observable<IngresoI[]> {
+    return this.http.get<IngresoI[]>(this.url + 'modosingresos')
+  }
+
+
 
 }

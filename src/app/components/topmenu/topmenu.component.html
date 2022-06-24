@@ -25,11 +25,18 @@
           </li>
         </ul>
 
-        <div>
-          <span class="navbar-text">
+        <div class="nav-item" *ngIf="!auth.auth()">
+          <span class="navbar-text ">
             <a routerLink="ingreso" class="login">Ingreso</a>
           </span>
           <a class="btn btn-light action-button" role="button" routerLink="registro">Registro</a>
+        </div>
+        
+        <div class="nav-item" *ngIf="auth.auth()">
+          <span class="navbar-text ">
+            <a routerLink="ingreso" class="login">{{usuario.nombre}}</a>
+          </span>
+          <a class="btn btn-light action-button" role="button" (click)="logout()">Logout</a>
         </div>
 
       </div>

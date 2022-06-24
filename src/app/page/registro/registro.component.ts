@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IngresoI } from 'src/app/interfaces/ingreso';
+import { PaisI } from 'src/app/interfaces/pais';
+import { ProfesionI } from 'src/app/interfaces/profesion';
 import { Usuario } from 'src/app/models/usuario.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -14,6 +17,9 @@ export class RegistroComponent implements OnInit {
 
   public forma: FormGroup;   
   usuario = new Usuario;
+  paises: PaisI[] = []
+  profesiones: ProfesionI[] = []
+  ingresos: IngresoI[] = []
   parteFormulario:number = 0;
 
   constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService, private modalService: ModalService) { }
@@ -41,9 +47,9 @@ export class RegistroComponent implements OnInit {
   }
 
   registraUsuario(){
-    this.usuariosService.registraUsuario(this.usuario).subscribe(resp => {
-                                                                          console.log(resp);
-                                                                         })
+    // this.usuariosService.registraUsuario(this.usuario).subscribe(resp => {
+    //   console.log(resp);
+    // })
   }
 
   mostrarMensaje():void{
@@ -57,11 +63,13 @@ export class RegistroComponent implements OnInit {
       'pwdConfirm': ['', Validators.required],
       'nombre': ['', [Validators.required]],
       'fnacimiento': ['', [Validators.required]],
-      'residencia': ['', [Validators.required]],
-      'modoIngreso': ['Modo de Ingreso', [Validators.required]],
-
+      'residencia': [13, [Validators.required]],
+      'modoIngreso': ['', [Validators.required]],
       'profesion': ['', [Validators.required]],
     }, { validators: this.contrasenasIgualesValidator });
+    this.muestraPaises()
+    this.muestraProfesiones()
+    this.muestraIngresos()
   }
 
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -70,5 +78,23 @@ export class RegistroComponent implements OnInit {
   
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
   };
+
+  muestraPaises(){
+    this.usuariosService.traePaises().subscribe(res => {
+      this.paises = res
+    })
+  }
+
+  muestraProfesiones(){
+    this.usuariosService.traeProfesiones().subscribe(res => {
+      this.profesiones = res
+    })
+  }
+
+  muestraIngresos(){
+    this.usuariosService.traeIngresos().subscribe(res => {
+     this.ingresos = res
+    })
+  }
 
 }

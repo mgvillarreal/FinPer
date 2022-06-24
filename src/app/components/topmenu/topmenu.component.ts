@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/models/usuario.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-topmenu',
@@ -8,8 +11,9 @@ import { Component, OnInit } from '@angular/core';
 export class TopmenuComponent implements OnInit {
 
   menu:string = "cerrado";
+  usuario: Usuario = new Usuario
 
-  constructor() { }
+  constructor(public auth: AuthService, public usuarioService: UsuariosService) { }
 
   cambiaEstadoMenu(): void{
     if(this.menu === 'abierto')
@@ -20,10 +24,17 @@ export class TopmenuComponent implements OnInit {
     {
       this.menu = 'abierto';
     }
-    
+
+  }
+
+  logout(){
+    this.auth.logout();
   }
 
   ngOnInit(): void {
+    if(this.auth.auth()){
+      this.usuario.nombre = localStorage.getItem('name')
+    }
   }
 
 }
