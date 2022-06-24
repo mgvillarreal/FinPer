@@ -14,7 +14,7 @@ export class RegistroComponent implements OnInit {
 
   public forma: FormGroup;   
   usuario = new Usuario;
-  parteFormulario:number = 2;
+  parteFormulario:number = 0;
 
   constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService, private modalService: ModalService) { }
 
