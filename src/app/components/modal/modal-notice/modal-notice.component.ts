@@ -9,8 +9,9 @@ import { ModalService } from '../../../services/modal.service';
 })
 export class ModalNoticeComponent implements OnInit {
 
-  titulo:string;
+  icono:string;
   mensaje:string;
+  boton:string;
 
   constructor(public bsModalRef: BsModalRef, public modalService: ModalService) { }
 

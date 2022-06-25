@@ -1,57 +1,44 @@
-body {
-    background-color: #5165ff;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center
+@import 'material-icons/iconfont/material-icons.css';
+
+*{
+    font-family: 'Poppins', sans-serif;
 }
 
-.modal-body {
-    background-color: #fff;
-    border-color: #fff;
-
+.btn-close {
+    background-color: transparent;
+    color: white;
+    float: left;
 }
 
-
-.close {
-    color: #000;
-    cursor: pointer;
-}
-
-.close:hover {
+.btn-close:hover {
     color: #000;
 }
 
-
-.theme-color{
-
-    color: #004cb9;
-}
-hr.new1 {
-    border-top: 2px dashed #fff;
-    margin: 0.4rem 0;
-}
-
-
-.btn-primary {
-    color: #fff;
-    background-color: #004cb9;
-    border-color: #004cb9;
-    padding: 12px;
-    padding-right: 30px;
-    padding-left: 30px;
-    border-radius: 1px;
-    font-size: 17px;
+.btn-modal {
+    border-color:#9B2CEC;
+    color: #9B2CEC;
+    font-size: 15px;
+    text-transform: uppercase;
+    border-radius: 25px;
+    background-color: transparent;
+    padding: 5px;
 }
 
+.btn-modal:hover {
+    background-color:#9B2CEC;
+    color: white;
+    font-size: 15px;
+    text-transform: uppercase;
+}
 
-.btn-primary:hover {
-    color: #fff;
-    background-color: #004cb9;
-    border-color: #004cb9;
-    padding: 12px;
-    padding-right: 30px;
-    padding-left: 30px;
-    border-radius: 1px;
-    font-size: 17px;
+.material-icons{
+    font-size: 80px;
+}
+
+.modal-header{
+    border-bottom: transparent;
+}
+
+.texto-modal{
+    font-size: medium;
 }

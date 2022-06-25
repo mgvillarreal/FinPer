@@ -218,7 +218,25 @@
 @media (max-width:768px) {
   .nav-item{
     width: 170px;
+    text-align: center;
     margin: 3px auto;
+  }
+
+  .baja-registro{
+    display: grid;
+    grid-template-columns: (1, 1fr);
+    row-gap: 10px;
+
+    .login{
+      color: white !important;
+      margin-right: 0 !important;
+    }
+
+    .action-button{
+      border: none;
+      color: white;
+      font-size: 14px !important;
+    }
   }
 }
 

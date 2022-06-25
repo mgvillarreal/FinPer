@@ -11,10 +11,11 @@ export class ModalService {
 
   constructor(private bsModalService: BsModalService) { }
 
-  alerta(titulo:string, mensaje:string): Observable<string>{
+  alerta(icono:string, mensaje:string, boton: string): Observable<string>{
     const initialState = {
-      titulo,
-      mensaje
+      icono,
+      mensaje,
+      boton
     }
     this.bsModalRef = this.bsModalService.show(ModalNoticeComponent, {initialState});
 

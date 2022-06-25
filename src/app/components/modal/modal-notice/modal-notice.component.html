@@ -1,12 +1,23 @@
 <div class="modal-header">
-    <h4 class="modal-title pull-left" >{{titulo}}</h4>
-    <button type="button" class="close pull-right" aria-label="Clore" (click)="bsModalRef.hide()">
-        <span aria-hidden="true">&times;</span>
+    <button type="button" class="btn-close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true"></span>
     </button>
 </div>
 
-<div class="modal-body">
-    <p>{{mensaje}}</p>
+<div>
+    <div class="text-center">
+        <span class="material-icons">{{icono}}</span>
+    </div>
+</div>
+
+<div class="modal-body text-center">
+    <p class="texto-modal">{{mensaje}}</p>
+</div>
+
+<div class="text-center mb-4">
+    <button type="button" class="btn-modal">
+        {{boton}}
+    </button>
 </div>
 
 <!-- <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

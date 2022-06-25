@@ -53,7 +53,7 @@ export class RegistroComponent implements OnInit {
   }
 
   mostrarMensaje():void{
-    this.modalService.alerta("Icono de mensaje", "Hemos enviado un mail a tu correo electrónico para validar tu perfil").subscribe((answer) => {});
+    this.modalService.alerta("email", "Hemos enviado un mail a tu correo electrónico para validar tu perfil", "Aceptar").subscribe((answer) => {});
   }
 
   ngOnInit(): void {

@@ -11,7 +11,7 @@ export class MetasComponent implements OnInit {
   constructor(private modalService: ModalService) { }
 
   mostrarMensaje(){
-     this.modalService.alerta("Titulo", "Mensaje").subscribe((answer) => {});
+     this.modalService.alerta("Titulo", "Mensaje", "Boton").subscribe((answer) => {});
   }
 
   ngOnInit(): void {
