@@ -1,5 +1,23 @@
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
+.titulo{
+  color: #4161e2;
+  font-size: 290%;
+  font-weight: 650;
+}
+
+a{
+  text-decoration: none !important;
+  color: #ee4dd3;
+  font-weight: 550;
+  font-size: large;
+}
+
 .flex{
-  display: flex
+  display: flex;
+  justify-content: space-between;
 }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -55,11 +73,16 @@ input[type=number] { -moz-appearance:textfield; }
     margin: 40px 25px;
 
     .balance-title{
-      font-size: 15px;
+      font-size: 30px;
+      color: #4161e2;
+      font-weight: 600;
+      margin-bottom: 6px;
     }
 
     .balance-cantidad{
       font-size: 25px;
+      color: #4161e2;
+      font-weight: 550;
     }
   }
 

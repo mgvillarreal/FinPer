@@ -1,8 +1,9 @@
 <div class="container">
+  
   <div class="dash-sup flex">
     <div class="dash-sup__left">
-      <div class="dash-sup__title">
-        <span class="title">Mis cuentas</span>
+      <div class="dash-sup__title mt-2">
+        <span class="titulo">Mis Cuentas</span>
 
         <select name="" id="">
           <option value="1">Enero</option>
@@ -19,14 +20,19 @@
           <option value="12">Diciembre</option>
         </select>
       </div>
+
       <div class="dash-sup__balance">
         <div class="balance-title">Balance</div>
         <div class="balance-cantidad">$ {{ balance }} </div>
       </div>
     </div>
-    <div class="dash-sup__right ">
 
+    <div class="dash-sup__right ">
+      <div>
+        <a class="f-right" routerLink="/ultimosmovimientos" >Mis Últimos Movimientos</a>
+      </div>
     </div>
+
   </div>
 
 

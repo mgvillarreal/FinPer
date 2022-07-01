@@ -25,6 +25,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalNoticeComponent } from './components/modal/modal-notice/modal-notice.component';
 import { ModalService } from './services/modal.service';
 import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.component';
+import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-movimientos.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.com
     ModalComponent,
     CategoriaComponent,
     ModalNoticeComponent,
-    ValidaUsuarioComponent
+    ValidaUsuarioComponent,
+    UltimosMovimientosComponent
   ],
   imports: [
     BrowserModule,
