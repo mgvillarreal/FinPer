@@ -11,6 +11,7 @@ export class ModalNoticeComponent implements OnInit {
 
   titulo:string;
   mensaje:string;
+  tipo: 'ingreso'
 
   constructor(public bsModalRef: BsModalRef, public modalService: ModalService) { }
 

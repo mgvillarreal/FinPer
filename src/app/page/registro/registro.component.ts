@@ -15,12 +15,12 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class RegistroComponent implements OnInit {
 
-  public forma: FormGroup;   
+  public forma: FormGroup;
   usuario = new Usuario;
   paises: PaisI[] = []
   profesiones: ProfesionI[] = []
   ingresos: IngresoI[] = []
-  parteFormulario:number = 0;
+  parteFormulario:number = 2;
 
   constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService, private modalService: ModalService) { }
 
@@ -75,7 +75,7 @@ export class RegistroComponent implements OnInit {
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const pwd = control.get('contrasena');
     const pwdConfirm = control.get('pwdConfirm');
-  
+
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
   };
 

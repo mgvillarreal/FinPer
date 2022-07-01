@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Movimiento } from '../models/movimiento.model';
 
 @Injectable({
@@ -7,25 +8,30 @@ import { Movimiento } from '../models/movimiento.model';
 })
 export class MovimientosService {
 
-  movimiento: Movimiento = new Movimiento
+  // movimiento: Movimiento = new Movimiento
 
   url = 'https://hostinjor.com/finperapi/api/movimientos/'
-  urlv1 = 'https://hostinjor.com/apifinper/v1/usuarios/'
+  urlv1 = 'https://hostinjor.com/apifinper/v2/movimientos/'
 
   constructor(
     public http: HttpClient
   ) { }
 
 
-  traeMovimientos(id: number){
-    return this.http.post<any>(this.url, id);
+  traeMovimientos(){
+    // console.log(this.http.get<any>(this.url))
+    return this.http.get<any>(this.url);
   }
 
-  traeMovimientosParam(id: number){
-    return this.http.post<any>(this.urlv1, id);
+  guardaMovimiento(movimiento: Movimiento){
+    return this.http.post(this.url, JSON.stringify(movimiento))
+  }
+
+  traeUnMovimiento(id: string){
+    return this.http.get<Movimiento>(id);
+  }
+
+  traeMovimientos2(id: string){
+    return this.http.get<any>(this.urlv1 + id)
   }
 }
-
-
-
-
