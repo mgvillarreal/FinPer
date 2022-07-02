@@ -78,18 +78,18 @@ export class PrincipalComponent implements OnInit {
     this.movimientoService.traeMovimientos2(localStorage.getItem('id'))
     .subscribe(respuesta => {
       this.dataMovimientos  = respuesta
-      console.log(this.dataMovimientos)
       for(let dat of this.dataMovimientos)
       {
-        if(dat[0].mov_idtipo==1){
+        console.log(dat)
+        if(dat.tmov_descripcion=='Ingreso'){
           console.log("Entre aca")
-          this.fecha = dat[0].mov_fcreacion
-          this.ingreso += Number(dat[0].mov_monto)
-          this.balance += Number(dat[0].mov_monto)
+          this.fecha = dat.mov_fcreacion
+          this.ingreso += Number(dat.mov_monto)
+          this.balance += Number(dat.mov_monto)
         }else{
           console.log("Tambien entre aca (o no)")
-          this.balance -= Number(dat[0].mov_monto)
-          this.egreso += Number(dat[0].mov_monto)
+          this.balance -= Number(dat.mov_monto)
+          this.egreso += Number(dat.mov_monto)
         }
       }
       console.info(this.ingreso)
