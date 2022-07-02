@@ -17,14 +17,12 @@ export class RegistroComponent implements OnInit {
 
   public forma: FormGroup;
   usuario = new Usuario;
-<<<<<<< HEAD
   paises: PaisI[] = []
   profesiones: ProfesionI[] = []
   ingresos: IngresoI[] = []
   parteFormulario:number = 2;
-=======
-  parteFormulario:number = 0;
->>>>>>> desarrollo-registro
+
+  prueba: []
 
   constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService, private modalService: ModalService) { }
 
@@ -51,7 +49,6 @@ export class RegistroComponent implements OnInit {
   }
 
   registraUsuario(){
-<<<<<<< HEAD
     // this.usuariosService.registraUsuario(this.usuario).subscribe(resp => {
     //   console.log(resp);
     // })
@@ -59,11 +56,6 @@ export class RegistroComponent implements OnInit {
 
   mostrarMensaje():void{
     this.modalService.alerta("Icono de mensaje", "Hemos enviado un mail a tu correo electrónico para validar tu perfil").subscribe((answer) => {});
-=======
-    this.usuariosService.registraUsuario(this.usuario).subscribe(resp => {
-      console.log(resp);
-    })
->>>>>>> desarrollo-registro
   }
 
   ngOnInit(): void {

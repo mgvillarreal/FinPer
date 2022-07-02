@@ -1,3 +1,3 @@
-<app-topmenu></app-topmenu>
-<div class="min-h"><router-outlet></router-outlet></div>
-<app-footer></app-footer>
+<app-topmenu [menuDesplegado]="menuDesplegado" (eventoDesplegar)="despliegaMenu()"></app-topmenu>
+<div class="min-h" (click)="cerrarMenu()"><router-outlet></router-outlet></div>
+<app-footer (click)="cerrarMenu()"></app-footer>

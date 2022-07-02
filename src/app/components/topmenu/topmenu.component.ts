@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -11,7 +11,10 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class TopmenuComponent implements OnInit {
 
   menu:string = "cerrado";
+  // menuDesplegado = false
   usuario: Usuario = new Usuario
+  @Input() menuDesplegado
+  @Output() eventoDesplegar: EventEmitter<any> = new EventEmitter()
 
   constructor(public auth: AuthService,
     public usuarioService: UsuariosService) { }
@@ -30,6 +33,19 @@ export class TopmenuComponent implements OnInit {
 
   logout(){
     this.auth.logout();
+  }
+
+  despliegaMenu(){
+    if(this.menuDesplegado)
+    {
+      this.eventoDesplegar.emit(false)
+    }else{
+      this.eventoDesplegar.emit(true)
+    }
+  }
+
+  cierraMenu(){
+    this.eventoDesplegar.emit(false)
   }
 
   ngOnInit(): void {

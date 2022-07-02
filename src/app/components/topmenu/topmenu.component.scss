@@ -234,4 +234,94 @@
   opacity:0.2;
 }
 
+.navbar-user{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.foto-perfil{
+  padding: 5px;
+  max-width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img{
+    border-radius: 50%;
+    width: 100%;
+  }
+
+}
+
+.menu-user{
+  position: absolute;
+  top:100%;
+  padding:0;
+  background-color: #ee4dd3;
+  width: 140px;
+  z-index: 1000000;
+
+  ul{
+    list-style: none;
+    padding: 0;
+    text-align: center;
+
+    li{
+
+      padding: 10px 5px;
+
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.226);
+        cursor: pointer;
+      }
+    }
+
+    .border-top{
+      // padding-bottom: 0;
+      border-top: 1px solid lightgray ;
+    }
+    margin-bottom: 0 !important;
+  }
+}
+
+.expand{
+  padding: 2px 2px 2px 3px;
+  border-radius: 50%;
+
+  &:hover{
+    background-color: rgba(255, 255, 255, 0.541);
+    color: black;
+    cursor: pointer;
+  }
+}
+
+/* menu desplegable */
+
+#menu ul ul {
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#eee;
+  padding:0;
+ }
+
+ /* items del menu desplegable */
+
+ #menu ul ul li {
+  float:none;
+  width:150px
+ }
+
+ /* enlaces de los items del menu desplegable */
+
+ #menu ul ul a {
+  line-height:120%;
+  padding:10px 15px;
+ }
+
+ /* items del menu desplegable al pasar el ratón */
+
+ #menu ul li:hover > ul {
+  display:block;
+ }
