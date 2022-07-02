@@ -25,17 +25,6 @@ export class MovimientosService {
 
   guardaMovimiento(movimiento: Movimiento){
     return this.http.post(this.url, JSON.stringify(movimiento))
-<<<<<<< HEAD
-=======
-  }
-
-  traeUnMovimiento(id: string){
-    return this.http.get<Movimiento>(id);
-  }
-
-  traeMovimientos2(id: string){
-    return this.http.get<any>(this.urlv1 + id)
->>>>>>> desarrollo-movimientos
   }
 
   traeUnMovimiento(id: string){
@@ -45,5 +34,5 @@ export class MovimientosService {
   traeMovimientos2(id: string){
     return this.http.get<any>(this.urlv1 + id)
   }
-  
+
 }
