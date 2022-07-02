@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'FinPer';
+
+  menuDesplegado = false
+
+  despliegaMenu(){
+    if(this.menuDesplegado)
+    {
+      this.menuDesplegado = false
+    }else{
+      this.menuDesplegado = true
+    }
+  }
+
+  cerrarMenu(){
+    this.menuDesplegado = false;
+  }
 }

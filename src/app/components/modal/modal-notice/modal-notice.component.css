@@ -35,6 +35,7 @@
     font-size: 80px;
 }
 
+<<<<<<< HEAD
 .modal-header{
     border-bottom: transparent;
 }
@@ -42,3 +43,19 @@
 .texto-modal{
     font-size: medium;
 }
+=======
+.btn-primary:hover {
+    color: #fff;
+    background-color: #004cb9;
+    border-color: #004cb9;
+    padding: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 1px;
+    font-size: 17px;
+}
+
+.modalingreso{
+  background-color: green;
+}
+>>>>>>> desarrollo-movimientos

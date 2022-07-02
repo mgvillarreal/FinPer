@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from '@angular/router';
 import { ModalComponent } from './components/modal/modal.component';
+import { AutGuard } from './guards/aut.guard';
 import { CategoriaComponent } from './page/categoria/categoria.component';
 import { ComofuncionaComponent } from './page/comofunciona/comofunciona.component';
 import { ErrorComponent } from './page/error/error.component';
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'inicio', component: InicioComponent},
   { path: 'ingreso', component: IngresoComponent},
   { path: 'registro', component: RegistroComponent},
-  { path: 'miscuentas', component: PrincipalComponent},
+  { path: 'miscuentas', component: PrincipalComponent, canActivate: [AutGuard]},
   { path: 'comofunciona', component: ComofuncionaComponent},
   { path: 'faqs', component: FaqsComponent},
   { path: 'informes', component: InformesComponent},

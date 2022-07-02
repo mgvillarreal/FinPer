@@ -31,12 +31,26 @@
           </span>
           <a class="btn btn-light action-button" role="button" routerLink="registro">Registro</a>
         </div>
-        
+
         <div class="nav-item" *ngIf="auth.auth()">
-          <span class="navbar-text ">
+          <span class="navbar-user ">
+            <div class="foto-perfil"><img src="https://avatars.githubusercontent.com/u/82246188?v=4" alt=""></div>
             <a routerLink="ingreso" class="login">{{usuario.nombre}}</a>
+            <span class="material-icons expand" (click)="despliegaMenu()">
+              expand_more
+              </span>
+            <!-- <a class="btn btn-light action-button" role="button" (click)="logout()">Logout</a> -->
           </span>
-          <a class="btn btn-light action-button" role="button" (click)="logout()">Logout</a>
+        </div>
+
+        <div class="menu-user" *ngIf="menuDesplegado && auth.auth()">
+          <ul>
+            <li (click)="cierraMenu()">Mis datos</li>
+            <li (click)="cierraMenu()" routerLink="/miscuentas">Mis cuentas</li>
+            <li (click)="cierraMenu()" routerLink="/metas">Mis metas</li>
+            <li (click)="cierraMenu()">Mis grupos</li>
+            <li (click)="cierraMenu()" class="border-top" (click)="logout()">Cerrar sesion</li>
+          </ul>
         </div>
 
       </div>

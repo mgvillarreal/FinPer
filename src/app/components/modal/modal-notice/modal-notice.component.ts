@@ -11,7 +11,11 @@ export class ModalNoticeComponent implements OnInit {
 
   icono:string;
   mensaje:string;
+<<<<<<< HEAD
   boton:string;
+=======
+  tipo: 'ingreso'
+>>>>>>> desarrollo-movimientos
 
   constructor(public bsModalRef: BsModalRef, public modalService: ModalService) { }
 

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +28,9 @@ import { ModalNoticeComponent } from './components/modal/modal-notice/modal-noti
 import { ModalService } from './services/modal.service';
 import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.component';
 import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-movimientos.component';
+import localeEsAr from '@angular/common/locales/es-AR';
 
+registerLocaleData(localeEsAr, 'es-Ar');
 
 @NgModule({
   declarations: [
@@ -65,7 +69,7 @@ import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-
   bootstrap: [AppComponent],
   entryComponents: [
     ModalNoticeComponent,
-    
+
   ]
 })
 export class AppModule { }
