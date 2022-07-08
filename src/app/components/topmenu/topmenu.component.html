@@ -32,10 +32,10 @@
           <a class="btn btn-light action-button" role="button" routerLink="registro">Registro</a>
         </div>
 
-        <div class="nav-item" *ngIf="auth.auth()">
+        <div class="nav-item " *ngIf="auth.auth()">
           <span class="navbar-user ">
-            <div class="foto-perfil"><img src="https://avatars.githubusercontent.com/u/82246188?v=4" alt=""></div>
-            <a routerLink="ingreso" class="login">{{usuario.nombre}}</a>
+            <!-- <div class="foto-perfil"><img src="https://avatars.githubusercontent.com/u/82246188?v=4" alt=""></div> -->
+            <a class="login action-button">{{usuario.nombre}}</a>
             <span class="material-icons expand" (click)="despliegaMenu()">
               expand_more
               </span>
