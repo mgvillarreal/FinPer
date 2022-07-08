@@ -16,6 +16,7 @@ export class ModalComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  
   ngOnInit(): void {
   }
 

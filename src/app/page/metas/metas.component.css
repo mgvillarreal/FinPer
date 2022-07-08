@@ -69,11 +69,20 @@
 input, select{
     font-size:18px;
     padding:10px 10px 10px 5px;
-    /* display:block; */
     display: inline;
     width:300px;
     border:none;
     border-bottom:1px solid #757575;
+}
+
+.select-estados{
+    font-size: 15px;
+    padding: 5px 5px 5px 5px;
+    display: inline;
+    width: 140px;
+    border: none;
+    border-bottom: 1px solid #757575;
+    background: transparent;
 }
 
 .btn-close{
