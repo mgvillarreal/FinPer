@@ -1,0 +1,81 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.nombre-usuario{
+    margin: 40px auto;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.card{
+    width: 80%;
+    max-width: 800px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px 55px 20px 20px;
+  
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-perfil{
+    margin: 10px auto;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.titulo-campos{
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.grid-campos{
+    margin-top: 15px;
+    margin-left: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;
+}
+
+.btn-datos{
+    border-color:#9B2CEC;
+    color: #9B2CEC;
+    font-size: 15px;
+    text-transform: uppercase;
+    border-radius: 25px;
+    margin-top: 15px;
+    margin-left: 670px;
+}
+
+.btn-datos:hover{
+    background-color:#9B2CEC;
+    color: white;
+}
+
+.grid-botones{
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.btn-preferencias{
+    border-color:#9B2CEC;
+    color: #9B2CEC;
+    font-size: 15px;
+    text-transform: uppercase;
+    border-radius: 25px;
+}
+
+.btn-preferencias:hover{
+    background-color:#9B2CEC;
+    color: white;
+}
+
+span{
+    font-size: medium;
+}
