@@ -279,6 +279,7 @@
   width: 140px;
   z-index: 1000000;
 
+
   ul{
     list-style: none;
     padding: 0;
@@ -305,6 +306,7 @@
 .expand{
   padding: 2px 2px 2px 3px;
   border-radius: 50%;
+  transition: all .1s;
 
   &:hover{
     background-color: rgba(255, 255, 255, 0.541);

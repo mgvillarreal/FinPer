@@ -73,6 +73,6 @@ registerLocaleData(localeEsAr, 'es-Ar');
     ModalNoticeComponent,
 
   ]
-  
+
 })
 export class AppModule { }

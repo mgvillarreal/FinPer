@@ -44,7 +44,7 @@ export class RegistroComponent implements OnInit {
     this.usuario.profesion = this.forma.value['profesion'];
     //this.router.navigate(['ingreso']); //SE DEBE MOSTRAR EL MENSAJE QUE ENVIA PARA VALIDAR
     console.log('Datos de Usuario: ', this.usuario);
-    //this.registraUsuario();
+    this.registraUsuario();
     this.mostrarMensaje();
   }
 

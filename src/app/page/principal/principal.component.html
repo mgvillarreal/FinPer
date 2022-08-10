@@ -4,9 +4,9 @@
     <div class="dash-sup__left">
       <div class="dash-sup__title mt-2">
         <span class="titulo">Mis Cuentas</span>
-        
-        
-        <select name="" id="">
+
+
+        <select class="select-finper-default select-s" name="" id="">
           <option value="1">Enero</option>
           <option value="2">Febrero</option>
           <option value="3">Marzo</option>
@@ -21,7 +21,7 @@
           <option value="12">Diciembre</option>
         </select>
 
-        <select name="" id="">
+        <select class="select-finper-default select-xs" name="" id="">
           <option value="2022" selected>2022</option>
           <option value="2023">2023</option>
           <option value="2024">2024</option>
@@ -73,7 +73,6 @@
         </div>
       </div>
   </div>
-
 </div>
 
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
@@ -100,48 +99,67 @@
           <div class="calculadora-btn calculadora-numero" (click)="agregaNumero(7)">7</div>
           <div class="calculadora-btn calculadora-numero" (click)="agregaNumero(8)">8</div>
           <div class="calculadora-btn calculadora-numero" (click)="agregaNumero(9)">9</div>
-          <div class="calculadora-btn calculadora-signo">%</div>
         </div>
         <div class="flex">
           <div class="calculadora-btn calculadora-numero" (click)="agregaNumero(4)">4</div>
           <div class="calculadora-btn calculadora-numero" (click)="agregaNumero(5)">5</div>
           <div class="calculadora-btn calculadora-numero" (click)="agregaNumero(6)">6</div>
-          <div class="calculadora-btn calculadora-signo" >x</div>
         </div>
         <div class="flex">
           <div class="calculadora-btn calculadora-numero" (click)="agregaNumero(1)">1</div>
           <div class="calculadora-btn calculadora-numero" (click)="agregaNumero(2)">2</div>
           <div class="calculadora-btn calculadora-numero" (click)="agregaNumero(3)">3</div>
-          <div class="calculadora-btn calculadora-signo">-</div>
         </div>
         <div class="flex">
-          <div class="calculadora-btn calculadora-numero" (click)="agregaNumero(0)">0</div>
-          <div class="calculadora-btn calculadora-numero">.</div>
-          <div class="calculadora-btn calculadora-signo">=</div>
-          <div class="calculadora-btn calculadora-signo">+</div>
+          <div class="calculadora-cero calculadora-cero" (click)="agregaNumero(0)">0</div>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" (click)="nuevoIngreso(tituloModal)">Continuar</button>
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Continuar</button>
       </div>
 
 
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header" >
-        <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-content contenido__modal">
+      <div class="modal-header"
+      [ngClass]="
+      {
+        'color-ingreso': tituloModal == 'Ingresos',
+        'color-egreso': tituloModal == 'Egresos'
+      }
+      ">
+        <div class="modal-title">
+          {{ tituloModal }}
+        </div>
+        <div class="monto">
+          <input class="monto-input" type="number" name="" id="" min="0" placeholder="0" [(ngModel)]="monto">
+        </div>
+
       </div>
-      <div class="modal-body">
-        Hide this modal and show the first with the button below.
+
+      <div class="form-group">
+        <select class="select-finper-default select-m my-2" name="" id="">
+          <option value="">Categoría</option>
+          <option value="1">Almacén</option>
+          <option value="2">Otros</option>
+        </select>
+      </div>
+      <div class="form group">
+        <input type="text" class="select-finper-default select-m my-2" placeholder="Detalle de ingreso">
+      </div>
+      <div class="form group">
+        <input type="date" class="select-finper-default select-m my-2" placeholder="Fecha" value="{{fecha | date: 'dd/MM/y'}}">
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" (click)="nuevoIngreso(tituloModal)">Continuar</button>
       </div>
+
+
     </div>
   </div>
 </div>

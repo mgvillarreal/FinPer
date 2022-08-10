@@ -1,9 +1,11 @@
+@use "../../../assets/scss/variables" as var;
+
 *{
     font-family: 'Poppins', sans-serif;
 }
 
 .titulo{
-    color: #9B2CEC;
+    color: var.$violeta;
     font-size: 300%;
     font-weight: 650;
 }
@@ -66,23 +68,13 @@
     margin: 2px;
 }
 
-input, select{
+input{
     font-size:18px;
     padding:10px 10px 10px 5px;
     display: inline;
     width:300px;
     border:none;
     border-bottom:1px solid #757575;
-}
-
-.select-estados{
-    font-size: 15px;
-    padding: 5px 5px 5px 5px;
-    display: inline;
-    width: 140px;
-    border: none;
-    border-bottom: 1px solid #757575;
-    background: transparent;
 }
 
 .btn-close{
@@ -141,12 +133,4 @@ input, select{
 
 .modal-input-w input{
     width: 100%;
-}
-
-@media (min-width: 480px) and (max-width: 768px) {
-    .modal-celda2{
-        margin-left: 5px;
-        padding-right: 0;
-        
-    }
 }

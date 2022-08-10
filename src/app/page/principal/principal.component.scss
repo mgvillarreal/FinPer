@@ -3,6 +3,8 @@
 }
 
 .titulo{
+  display: flex;
+  align-items: center;
   color: #4161e2;
   font-size: 290%;
   font-weight: 650;
@@ -176,10 +178,28 @@ input[type=number] { -moz-appearance:textfield; }
       min-height: 85px;
       min-width: 85px;
       padding: 30px;
-      margin: 10px;
+      margin: 2px;
       font-size: 25px;
       border: 3px #4b4b4b solid;
-      border-radius: 50%;
+      border-radius: 10%;
+
+      &:hover{
+        cursor: pointer;
+        background-color: #6d97db;
+
+        transition: background-color .4s;
+      }
+    }
+
+    .calculadora-cero{
+      min-height: 85px;
+      min-width: 85px;
+      width: 100%;
+      padding: 30px;
+      margin: 2px;
+      font-size: 25px;
+      border: 3px #4b4b4b solid;
+      border-radius: 10px;
 
       &:hover{
         cursor: pointer;

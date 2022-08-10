@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovimientoI } from 'src/app/interfaces/movimiento';
 import { Movimiento } from 'src/app/models/movimiento.model';
 import { MovimientosService } from 'src/app/services/movimientos.service';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -31,6 +32,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fecha = new Date()
   }
 
   modalIngreso(){

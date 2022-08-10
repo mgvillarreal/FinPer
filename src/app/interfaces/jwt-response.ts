@@ -5,5 +5,4 @@ export interface JwtResponseI {
         email: string,
         token: string
     }
-    // token: string
 }
