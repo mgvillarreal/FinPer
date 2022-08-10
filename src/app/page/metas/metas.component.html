@@ -3,7 +3,7 @@
     <div class="titulo text-center mt-5 mb-5">Metas de Ahorro</div>
 
     <div class="mt-4 text-center">
-        <select class="select-estados" name="estado" id="estado">
+        <select class="select-finper-default select-s" name="estado" id="estado">
             <option value="1" selected>Pendientes</option>
             <option value="2">Alcanzadas</option>
         </select>
@@ -32,9 +32,10 @@
 
     <div class="text-center mt-5">
         <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" href="#nuevaMeta">Agregar nueva meta</button>
+        <button type="button" class="btn btn-outline-primary btn-agregar" (click)="llamaModal()">Agregar nueva meta Testing</button>
         <!-- <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" (click)="mostrarMensaje()">Agregar nueva meta</button>  -->
     </div>
-    
+
 </div>
 
 <div class="modal fade" id="nuevaMeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -51,7 +52,7 @@
                     <span> [espacio para monto] </span>
                 </div>
             </div>
-            
+
             <div class="modal-contenedor">
                 <form>
                     <div class="modal-input">
@@ -71,14 +72,14 @@
                     <div class="modal-celda4 my-2 modal-input-w">
                         <input type="text" id="detalle" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}">
                     </div>
-                    
-    
+
+
                     <div class="mt-4">
                         <button class="btn btn-modal mb-4">Listo</button>
                     </div>
                 </form>
             </div>
-            
+
         </div>
     </div>
 </div>

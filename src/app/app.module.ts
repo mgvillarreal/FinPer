@@ -51,7 +51,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
     CategoriaComponent,
     ModalNoticeComponent,
     ValidaUsuarioComponent,
-    UltimosMovimientosComponent
+    UltimosMovimientosComponent,
   ],
   imports: [
     BrowserModule,
