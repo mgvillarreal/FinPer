@@ -8,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class DatosComponent implements OnInit {
 
   nombre = localStorage.getItem('name');
-  
+  residencia:string;
+  profesion:string;
+  // fnacimiento ;
+  email:string;
+
   constructor() { }
 
   ngOnInit(): void {
