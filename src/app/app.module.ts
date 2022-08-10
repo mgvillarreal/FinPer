@@ -29,6 +29,7 @@ import { ModalService } from './services/modal.service';
 import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.component';
 import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-movimientos.component';
 import localeEsAr from '@angular/common/locales/es-AR';
+import { DatosComponent } from './page/datos/datos.component';
 
 registerLocaleData(localeEsAr, 'es-Ar');
 
@@ -52,6 +53,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
     ModalNoticeComponent,
     ValidaUsuarioComponent,
     UltimosMovimientosComponent,
+    DatosComponent
   ],
   imports: [
     BrowserModule,
@@ -71,5 +73,6 @@ registerLocaleData(localeEsAr, 'es-Ar');
     ModalNoticeComponent,
 
   ]
+
 })
 export class AppModule { }
