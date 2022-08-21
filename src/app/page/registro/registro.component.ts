@@ -8,6 +8,9 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -17,14 +20,14 @@ export class RegistroComponent implements OnInit {
 
   public forma: FormGroup;
   usuario = new Usuario;
-  paises: PaisI[] = []
-  profesiones: ProfesionI[] = []
-  ingresos: IngresoI[] = []
+  paises: PaisI[] = [];
+  profesiones: ProfesionI[] = [];
+  ingresos: IngresoI[] = [];
   parteFormulario:number = 0;
+  formulario: FormGroup;
+  arrayIngresos:string[] = [];
 
-  prueba: []
-
-  constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService, private modalService: ModalService) { }
+  constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService) { } //private modalService: ModalService
 
   pasarParteUno(): void {
     this.usuario.mail = this.forma.value['email'];
@@ -40,12 +43,12 @@ export class RegistroComponent implements OnInit {
   }
 
   registrar(): void{
-    this.usuario.modoIngreso = this.forma.value['modoIngreso'];
     this.usuario.profesion = this.forma.value['profesion'];
+    this.tomaModosIngreso();
     //this.router.navigate(['ingreso']); //SE DEBE MOSTRAR EL MENSAJE QUE ENVIA PARA VALIDAR
     console.log('Datos de Usuario: ', this.usuario);
-    this.registraUsuario();
-    this.mostrarMensaje();
+    //this.registraUsuario();
+    //this.mostrarMensaje();
   }
 
   registraUsuario(){
@@ -54,8 +57,20 @@ export class RegistroComponent implements OnInit {
     // })
   }
 
-  mostrarMensaje():void{
-    this.modalService.alerta("email", "Hemos enviado un mail a tu correo electrónico para validar tu perfil", "Aceptar").subscribe((answer) => {});
+  // mostrarMensaje():void{
+  //   this.modalService.alerta("email", "Hemos enviado un mail a tu correo electrónico para validar tu perfil", "Aceptar").subscribe((answer) => {});
+  // }
+
+  tomaModosIngreso():void{
+    let checks = document.querySelectorAll('#modoingreso');
+   
+    checks.forEach((e)=>{ 
+      if((e as HTMLInputElement).checked){
+        this.arrayIngresos.push((e as HTMLInputElement).value);
+      }
+    });
+
+    
   }
 
   ngOnInit(): void {
@@ -66,12 +81,14 @@ export class RegistroComponent implements OnInit {
       'nombre': ['', [Validators.required]],
       'fnacimiento': ['', [Validators.required]],
       'residencia': [13, [Validators.required]],
-      'modoIngreso': ['', [Validators.required]],
+      'modoing': ['', [Validators.required]],
       'profesion': ['', [Validators.required]],
     }, { validators: this.contrasenasIgualesValidator });
     this.muestraPaises()
     this.muestraProfesiones()
     this.muestraIngresos()
+
+
   }
 
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -98,5 +115,7 @@ export class RegistroComponent implements OnInit {
      this.ingresos = res
     })
   }
+
+
 
 }
