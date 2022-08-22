@@ -9,7 +9,7 @@
         </select>
     </div>
 
-    <div class="grid-metas mt-5 mb-5 text-center">
+    <!-- <div class="grid-metas mt-5 mb-5 text-center">
         <div class="encabezado">
             <div> Meta </div>
             <div> Monto </div>
@@ -28,11 +28,31 @@
             <div>USD 800,00</div>
             <div>15-dic-2022</div>
         </div>
-    </div>
+    </div> -->
+
+    <ul class="responsive-table text-center mt-3">
+        <li class="table-header">
+          <div class="col col-1">Meta</div>
+          <div class="col col-2">Monto</div>
+          <div class="col col-3">Ahorrado</div>
+          <div class="col col-4">Fecha Límite</div>
+        </li>
+        <li class="table-row">
+          <div class="col col-1" data-label="Meta">Bicicleta</div>
+          <div class="col col-2" data-label="Monto">ARS 45.000,00</div>
+          <div class="col col-3" data-label="Ahorrado">ARS 15.000,00</div>
+          <div class="col col-4" data-label="Fecha Límite">22-oct-2022</div>
+        </li>
+        <li class="table-row">
+          <div class="col col-1" data-label="Meta">Viaje</div>
+          <div class="col col-2" data-label="Monto">USD 2.000,00</div>
+          <div class="col col-3" data-label="Ahorrado">USD 800,00</div>
+          <div class="col col-4" data-label="Fecha Límite">15-dic-2022</div>
+        </li>
+      </ul>
 
     <div class="text-center mt-5">
         <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" href="#nuevaMeta">Agregar nueva meta</button>
-        <button type="button" class="btn btn-outline-primary btn-agregar" (click)="llamaModal()">Agregar nueva meta Testing</button>
         <!-- <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" (click)="mostrarMensaje()">Agregar nueva meta</button>  -->
     </div>
 
