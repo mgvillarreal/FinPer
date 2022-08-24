@@ -27,7 +27,7 @@
     margin: 10px auto;
     font-size: 28px;
     font-weight: 600;
-    color: #9358DB;
+    color: #419f3e;
 }
 
 .titulo-campos{
@@ -44,8 +44,8 @@
 }
 
 .btn-datos{
-    border-color:#9B2CEC;
-    color: #9B2CEC;
+    border-color:#419f3e;
+    color: #419f3e;
     font-size: 15px;
     text-transform: uppercase;
     border-radius: 25px;
@@ -54,7 +54,7 @@
 }
 
 .btn-datos:hover{
-    background-color:#9B2CEC;
+    background-color:#419f3e;
     color: white;
 }
 
@@ -65,15 +65,15 @@
 }
 
 .btn-preferencias{
-    border-color:#9B2CEC;
-    color: #9B2CEC;
+    border-color:#419f3e;
+    color: #419f3e;
     font-size: 15px;
     text-transform: uppercase;
     border-radius: 25px;
 }
 
 .btn-preferencias:hover{
-    background-color:#9B2CEC;
+    background-color:#419f3e;
     color: white;
 }
 

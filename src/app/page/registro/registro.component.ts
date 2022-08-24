@@ -10,6 +10,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -23,11 +24,11 @@ export class RegistroComponent implements OnInit {
   paises: PaisI[] = [];
   profesiones: ProfesionI[] = [];
   ingresos: IngresoI[] = [];
-  parteFormulario:number = 0;
+  parteFormulario:number = 2;
   formulario: FormGroup;
-  arrayIngresos:string[] = [];
+  arrayIngresos:any[] = [];
 
-  constructor(private router: Router, private fb: FormBuilder, private usuariosService: UsuariosService) { } //private modalService: ModalService
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private usuarioService: UsuariosService) { } //private modalService: ModalService
 
   pasarParteUno(): void {
     this.usuario.mail = this.forma.value['email'];
@@ -52,7 +53,7 @@ export class RegistroComponent implements OnInit {
   }
 
   registraUsuario(){
-    // this.usuariosService.registraUsuario(this.usuario).subscribe(resp => {
+    // this.authService.registraUsuario(this.usuario).subscribe(resp => {
     //   console.log(resp);
     // })
   }
@@ -69,8 +70,7 @@ export class RegistroComponent implements OnInit {
         this.arrayIngresos.push((e as HTMLInputElement).value);
       }
     });
-
-    
+    this.usuario.modoIngreso = (this.arrayIngresos);
   }
 
   ngOnInit(): void {
@@ -99,19 +99,19 @@ export class RegistroComponent implements OnInit {
   };
 
   muestraPaises(){
-    this.usuariosService.traePaises().subscribe(res => {
+    this.usuarioService.traePaises().subscribe(res => {
       this.paises = res
     })
   }
 
   muestraProfesiones(){
-    this.usuariosService.traeProfesiones().subscribe(res => {
+    this.usuarioService.traeProfesiones().subscribe(res => {
       this.profesiones = res
     })
   }
 
   muestraIngresos(){
-    this.usuariosService.traeIngresos().subscribe(res => {
+    this.usuarioService.traeIngresos().subscribe(res => {
      this.ingresos = res
     })
   }

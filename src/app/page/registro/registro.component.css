@@ -565,3 +565,8 @@ input:checked + label {
     font-weight: 500;
     padding: 0.3rem;
 }
+
+html, body
+{
+	height: 100%;
+}

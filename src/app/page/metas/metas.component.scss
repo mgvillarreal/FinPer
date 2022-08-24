@@ -1,51 +1,52 @@
-@use "../../../assets/scss/variables" as var;
-
 *{
     font-family: 'Poppins', sans-serif;
 }
 
 .titulo{
-    color: var.$violeta;
-    font-size: 300%;
-    font-weight: 650;
+    color: #419f3e;
+    font-size: 45px;
+    font-weight: 630;
+    letter-spacing: 2px;
 }
 
-.grid-metas {
-    justify-content: space-between;
-    margin-left: 80px;
-    margin-right: 80px;
-}
+// .grid-metas {
+//     justify-content: space-between;
+//     margin-left: 80px;
+//     margin-right: 80px;
+// }
 
-.encabezado{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    background-color: #b87be4;
-    color: white;
-    font-size: 120%;
-    font-weight: 500;
-    line-height: 2.5;
-}
+// .encabezado{
+//     display: grid;
+//     grid-template-columns: repeat(4, 1fr);
+//     background-color: #b87be4;
+//     color: white;
+//     font-size: 120%;
+//     font-weight: 500;
+//     line-height: 2.5;
+// }
 
-.contenido{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    background-color: #e8e2ec;
-    color: black;
-    font-size: 110%;
-    font-weight: 400;
-    line-height: 2.5;
-}
+// .contenido{
+//     display: grid;
+//     grid-template-columns: repeat(4, 1fr);
+//     background-color: #e8e2ec;
+//     color: black;
+//     font-size: 110%;
+//     font-weight: 400;
+//     line-height: 2.5;
+// }
 
 .btn-agregar{
-    border-color:#9B2CEC;
-    color: #9B2CEC;
+    border-color:#419f3e;
+    color: #419f3e;
     font-size: 15px;
     text-transform: uppercase;
-    border-radius: 25px
+    border-radius: 25px;
+    margin-bottom: 10px;
+    margin-top: 4rem;
 }
 
 .btn-agregar:hover{
-    background-color:#9B2CEC;
+    background-color:#419f3e;
     color: white;
     font-size: 15px;
     text-transform: uppercase;
@@ -91,7 +92,7 @@ input{
 }
 
 .btn-modal:hover{
-    background-color:#9B2CEC;
+    background-color:#419f3e;
 }
 
 .grid-campos{
@@ -169,10 +170,11 @@ body {
       margin-bottom: 25px;
     }
     .table-header {
-      background-color: #95A5A6;
-      font-size: 14px;
+      background-color: #5abb57d0;
+      font-size: 15px;
       text-transform: uppercase;
       letter-spacing: 0.03em;
+      color: white;
     }
     .table-row {
       background-color: #ffffff;
@@ -192,6 +194,10 @@ body {
     }
     
     @media (min-width: 480px) and (max-width: 768px) {
+
+      .btn{
+        margin-bottom: 4px;
+      }
         
       .table-header {
         display: none;
