@@ -24,7 +24,7 @@ export class RegistroComponent implements OnInit {
   paises: PaisI[] = [];
   profesiones: ProfesionI[] = [];
   ingresos: IngresoI[] = [];
-  parteFormulario:number = 2;
+  parteFormulario:number = 0;
   formulario: FormGroup;
   arrayIngresos:any[] = [];
 

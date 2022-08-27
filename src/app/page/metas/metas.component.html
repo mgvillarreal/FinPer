@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="muestraMetas==1">
 
     <div class="titulo text-center mt-5 mb-5">Metas de Ahorro</div>
 
@@ -9,97 +9,233 @@
         </select>
     </div>
 
-    <!-- <div class="grid-metas mt-5 mb-5 text-center">
-        <div class="encabezado">
-            <div> Meta </div>
-            <div> Monto </div>
-            <div> Ahorrado </div>
-            <div> Fecha Límite </div>
-        </div>
-        <div class="contenido">
-            <div>Bicicleta</div>
-            <div>ARS 45.000,00</div>
-            <div>ARS 15.000,00</div>
-            <div>22-oct-2022</div>
-        </div>
-        <div class="contenido">
-            <div>Viaje</div>
-            <div>USD 2.000,00</div>
-            <div>USD 800,00</div>
-            <div>15-dic-2022</div>
-        </div>
-    </div> -->
-
     <ul class="responsive-table text-center mt-3">
         <li class="table-header">
           <div class="col col-1">Meta</div>
           <div class="col col-2">Monto</div>
           <div class="col col-3">Ahorrado</div>
           <div class="col col-4">Fecha Límite</div>
+          <div class="col col-5"></div>
         </li>
         <li class="table-row">
           <div class="col col-1" data-label="Meta">Bicicleta</div>
           <div class="col col-2" data-label="Monto">ARS 45.000,00</div>
           <div class="col col-3" data-label="Ahorrado">ARS 15.000,00</div>
           <div class="col col-4" data-label="Fecha Límite">22-oct-2022</div>
+          <div class="col col-5">
+            <div (click)="editarMeta()" class="btn-editar">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                    <line x1="16" y1="5" x2="19" y2="8" />
+                </svg>
+            </div>
+          </div>
         </li>
         <li class="table-row">
           <div class="col col-1" data-label="Meta">Viaje</div>
           <div class="col col-2" data-label="Monto">USD 2.000,00</div>
           <div class="col col-3" data-label="Ahorrado">USD 800,00</div>
           <div class="col col-4" data-label="Fecha Límite">15-dic-2022</div>
+          <div class="col col-5">
+            <div (click)="editarMeta()" class="btn-editar">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                    <line x1="16" y1="5" x2="19" y2="8" />
+                </svg>
+            </div>
+          </div>
         </li>
       </ul>
 
     <div class="text-center">
-        <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" href="#nuevaMeta">Agregar nueva meta</button>
-        <!-- <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" (click)="mostrarMensaje()">Agregar nueva meta</button>  -->
+        <button type="button" class="btn btn-outline-primary btn-agregar" (click)="cambiaAgregaMetaFlag()">Agregar nueva meta</button>
+        <!-- <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" href="#nuevaMeta">Agregar nueva meta</button>
+        <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" (click)="mostrarMensaje()">Agregar nueva meta</button>  -->
     </div>
 
 </div>
 
-<div class="modal fade" id="nuevaMeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header ftco-degree-bg modal-encabezado">
-                <div>
-                    <button type="button" class="close d-flex align-items-center justify-content-center btn-close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="ion-ios-close"> </span>
+<div class="limiter" *ngIf="agregaMetaFlag==1 && muestraMensajeFlag==0">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <button class="btn-close mb-4" (click)="cambiaAgregaMetaFlag()"> </button> <br><br>
+            <div class="titulo-nuevameta mb-4">Nueva Meta</div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
+                        <select name="moneda">
+                            <option value=" " selected>Moneda meta</option>
+                            <option value="1">ARS</option>
+                            <option value="2">USD</option>
+                        </select>
+                    </div>
+                    <div class="wrap-input100 modal-celda2 my-2">
+                        <input type="number" name="monto" placeholder="Monto de la meta">
+                    </div>
+                    <div class="wrap-input100 modal-celda3 my-2">
+                        <input type="text" name="detalleMeta" placeholder="Detalle de la meta">
+                    </div>
+                    <div class="wrap-input100 modal-celda4 my-2">
+                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')">
+                    </div>
+				</div>
+
+                <div class="container-login100-form-btn">
+                    <button class="btn btn-light btn-lg action-button btngreen" (click)="muestraMensajeOk()">
+                        Listo
                     </button>
                 </div>
-                <div class="text-center modal-encabezado-titulo">
-                    <span> Nueva Meta </span><br>
-                    <!-- <span> [espacio para monto] </span> -->
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="limiter" *ngIf="muestraMensajeFlag==1">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="68" height="68" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">Has añadido una nueva meta de ahorro</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjlight" (click)="volveraMetas()">
+                            Volver a mis metas
+                        </button>
+                    </div>
+                    <div>
+                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="crearOtraMeta()">
+                            Crear otra meta de ahorro
+                        </button>
+                    </div>
+                    
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="limiter" *ngIf="editaMetaFlag==1 && muestraMetas==0">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <button class="btn-close mb-4" (click)="volveraMetas()"> </button> <br><br>
+            <div class="titulo-nuevameta mb-4">Editar Meta</div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
+                        <select name="moneda">
+                            <option value=" " selected>Moneda meta</option>
+                            <option value="1">ARS</option>
+                            <option value="2">USD</option>
+                        </select>
+                    </div>
+                    <div class="wrap-input100 modal-celda2 my-2">
+                        <input type="number" name="monto" placeholder="Monto de la meta">
+                    </div>
+                    <div class="wrap-input100 modal-celda3 my-2">
+                        <input type="text" name="detalleMeta" placeholder="Detalle de la meta">
+                    </div>
+                    <div class="wrap-input100 modal-celda4 my-2">
+                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')">
+                    </div>
+				</div>
+
+                <div class="container-login100-form-btn">
+                    <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" (click)="muestraMensajeActOk()">
+                        Actualizar
+                    </button>
                 </div>
-            </div>
+                <div class="container-login100-form-btn">
+                    <button class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act" (click)="preguntaEliminar()">
+                        Eliminar
+                    </button>
+                </div>
+			</form>
+		</div>
+	</div>
+</div>
 
-            <div class="modal-contenedor">
-                <form>
-                    <div class="modal-input">
-                        <div class="modal-celda1 my-2">
-                            <select name="moneda" id="moneda">
-                                <option value="1" selected>ARS</option>
-                                <option value="2">USD</option>
-                            </select>
+<div class="limiter" *ngIf="preguntaEliminarFlag==1 && muestraMetas==0">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <line x1="4" y1="7" x2="20" y2="7" />
+                                <line x1="10" y1="11" x2="10" y2="17" />
+                                <line x1="14" y1="11" x2="14" y2="17" />
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg>
                         </div>
-                        <div class="modal-celda2 my-2">
-                            <input type="number" id="monto" placeholder="Monto de la meta">
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">¿Estás seguro que quieres eliminar esta meta?</p>
                         </div>
                     </div>
-                    <div class="modal-celda3 my-2 modal-input-w">
-                        <input type="text" id="detalle" placeholder="Detalle de la meta">
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjlight" (click)="eliminaMeta()">
+                            Eliminar
+                        </button>
+                    </div><br>
+                    <div>
+                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="cancela()">
+                            Cancelar
+                        </button>
                     </div>
-                    <div class="modal-celda4 my-2 modal-input-w">
-                        <input type="text" id="detalle" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}">
+                    
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="limiter" *ngIf="muestraMensajeActFlag==1">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="68" height="68" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">Tu meta ha sido actualizada</p>
+                        </div>
                     </div>
-
-
-                    <div class="mt-4">
-                        <button class="btn btn-modal mb-3">Listo</button>
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="volveraMetas()">
+                            Aceptar
+                        </button>
                     </div>
-                </form>
-            </div>
+                    
+				</div>
 
-        </div>
-    </div>
+			</form>
+		</div>
+	</div>
 </div>

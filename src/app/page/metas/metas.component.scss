@@ -9,32 +9,6 @@
     letter-spacing: 2px;
 }
 
-// .grid-metas {
-//     justify-content: space-between;
-//     margin-left: 80px;
-//     margin-right: 80px;
-// }
-
-// .encabezado{
-//     display: grid;
-//     grid-template-columns: repeat(4, 1fr);
-//     background-color: #b87be4;
-//     color: white;
-//     font-size: 120%;
-//     font-weight: 500;
-//     line-height: 2.5;
-// }
-
-// .contenido{
-//     display: grid;
-//     grid-template-columns: repeat(4, 1fr);
-//     background-color: #e8e2ec;
-//     color: black;
-//     font-size: 110%;
-//     font-weight: 400;
-//     line-height: 2.5;
-// }
-
 .btn-agregar{
     border-color:#419f3e;
     color: #419f3e;
@@ -52,25 +26,17 @@
     text-transform: uppercase;
 }
 
-.modal-encabezado{
-    background-color:#b96af2;
-    color: white;
-    display: grid;
-    grid-template-columns: repeat(2, 130px auto);
-}
-
-.modal-encabezado-titulo{
-    font-size: large;
-    font-weight: 160%;
-}
-
-.modal-contenedor{
-    padding: 2rem 3rem 2rem 3rem;
-    margin: 2px;
+select{
+  border:none;
+  color: #757575;
+  font-size:16px;
+  padding:10px 10px 10px 5px;
+  background-color: transparent;
+  text-align: center;
 }
 
 input{
-    font-size:18px;
+    font-size:16px;
     padding:10px 10px 10px 5px;
     display: inline;
     width:300px;
@@ -82,17 +48,6 @@ input{
     background-color: transparent;
     color: white;
     float: left;
-}
-
-.btn-modal{
-    background-color:#b96af2;
-    color: white;
-    font-size: 17px;
-    border-radius: 25px
-}
-
-.btn-modal:hover{
-    background-color:#419f3e;
 }
 
 .grid-campos{
@@ -129,7 +84,7 @@ input{
 }
 
 .modal-celda1 select{
-    max-width: 70px;
+    //max-width: 100px;
 }
 
 .modal-input-w input{
@@ -181,16 +136,24 @@ body {
       box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
     }
     .col-1 {
-      flex-basis: 10%;
+      flex-basis: 24%;
     }
     .col-2 {
-      flex-basis: 40%;
+      flex-basis: 24%;
     }
     .col-3 {
-      flex-basis: 25%;
+      flex-basis: 24%;
     }
     .col-4 {
-      flex-basis: 25%;
+      flex-basis: 24%;
+    }
+    .col-5{
+      flex-basis: 4%;
+    }
+
+    .col{
+      display: flex;
+      align-items: center;
     }
     
     @media (min-width: 480px) and (max-width: 768px) {
@@ -226,8 +189,145 @@ body {
         }
       }
 
-      .col-1, .col-2, .col-3, .col-4{
+      .col-1, .col-2, .col-3, .col-4, .col-5{
         width: 100% !important;
       }
     }
   }
+
+/* AGREGA META */
+.titulo-nuevameta{
+  color: #419f3e;
+  font-size: 35px;
+  font-weight: 630;
+  letter-spacing: 2px;
+}
+
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-login100 {
+  width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #f2f2f2;  
+}
+
+.wrap-login100 {
+  width: 390px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 55px 40px 33px 40px;
+
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrap-login100-form-btn {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.wrap-login100-form-btn:hover .login100-form-bgbtn {
+  left: 0;
+}
+
+@media (max-width: 576px) {
+  .wrap-login100 {
+    padding: 77px 15px 33px 15px;
+  }
+}
+
+.container-login100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 13px;
+}
+
+.wrap-login100-form-btn {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.wrap-login100-form-btn:hover .login100-form-bgbtn {
+  left: 0;
+}
+
+.btngreen{
+  background-color: #419f3e;
+  color: white;
+  font-size: 15px;
+  border-radius: 25px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  padding: 10px;
+  width: 40%;
+  left: 10%;
+  position: relative;
+  left: 30%;
+  margin-top: 10px;
+}
+
+.btn-act{
+  position: relative;
+  left: 0%;
+}
+
+.btn-msjlight{
+  border-color:#419f3e;
+  background-color: transparent;
+  color: #419f3e;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 450;
+  border-radius: 25px;
+  /*margin-bottom: 10px;
+  margin-top: 4rem;*/
+}
+
+.btn-msjdark{
+  background-color:#419f3e;
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  /*margin-bottom: 10px;
+  margin-top: 4rem;*/
+}
+
+.texto-mensaje{
+  font-size: 18px;
+}
+
+.btn-editar:hover{
+  cursor: pointer;
+}
