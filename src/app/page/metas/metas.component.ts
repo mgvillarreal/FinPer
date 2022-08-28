@@ -30,7 +30,9 @@ export class MetasComponent implements OnInit {
       //met_estado: 1
     }
     
-    this.metaServicio.guardaMetas(datos);
+    this.metaServicio.guardaMetas(datos).subscribe(data =>{
+      console.log(data);
+    });
   }
 
 }
