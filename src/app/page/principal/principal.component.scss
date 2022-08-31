@@ -1,212 +1,222 @@
-*{
-  font-family: 'Poppins', sans-serif;
-}
+@use "../../../assets/scss/variables" as var;
 
-.titulo{
-  display: flex;
-  align-items: center;
-  color: #4161e2;
-  font-size: 290%;
-  font-weight: 650;
-}
+// *{
+//   font-family: 'Poppins', sans-serif;
+// }
 
-a{
-  text-decoration: none !important;
-  color: #ee4dd3;
-  font-weight: 550;
-  font-size: large;
-}
+// .titulo{
+//   display: flex;
+//   align-items: center;
+//   color: #4161e2;
+//   font-size: 290%;
+//   font-weight: 650;
+// }
 
-.flex{
-  display: flex;
-  justify-content: space-between;
-}
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+// a{
+//   text-decoration: none !important;
+//   color: #ee4dd3;
+//   font-weight: 550;
+//   font-size: large;
+// }
 
-input[type=number] { -moz-appearance:textfield; }
+// .flex{
+//   display: flex;
+//   justify-content: space-between;
+// }
+// input[type=number]::-webkit-inner-spin-button,
+// input[type=number]::-webkit-outer-spin-button {
+//   -webkit-appearance: none;
+//   margin: 0;
+// }
 
-
-.card-fp{
-  width: 400px;
-  height: 150px;
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  color: white;
-  font-family: 'Poppins';
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.card-ingresos{
-  background: linear-gradient(to right, #42b5f4, #4285f4);
-}
-
-.card-egresos{
-  background: linear-gradient(to right, #f27674, #f2615e);
-}
-
-.dash-sup{
-  margin-top: 40px;
-
-  .dash-sup__title{
-    display: flex;
-    column-gap: 40px;
-    margin-bottom: 40px;
-
-    .title{
-      color: rgb(90, 90, 236);
-      font-size: 30px;
-      text-transform: capitalize;
-      font-family: 'Poppins';
-    }
-  }
-
-  .dash-sup__balance{
-    color: rgb(90, 90, 236);
-    text-transform: capitalize;
-    font-family: 'Poppins';
-    margin: 40px 25px;
-
-    .balance-title{
-      font-size: 30px;
-      color: #4161e2;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .balance-cantidad{
-      font-size: 25px;
-      color: #4161e2;
-      font-weight: 550;
-    }
-  }
-
-}
-
-.ingreso-egreso{
-  margin: 60px auto;
-}
-
-.card-title{
-  font-family: 15px;
-}
-
-.card-balance{
-  font-size: 30px;
-}
-
-.card-right .plus{
-  padding: 10px;
-  font-size: 35px;
-  font-weight: 200;
-  color: rgb(238, 238, 238);
-  border: 4px solid rgba(58, 58, 58, 0.116);
-  border-radius: 30%;
-  background-color: #c4c4c456;
-
-  &:hover{
-    cursor: pointer;
-  }
-}
-
-.contenido__modal{
-  text-align: center !important;
+// input[type=number] { -moz-appearance:textfield; }
 
 
-  .modal-header{
-    min-height: 100px;
-    width: 100%;
-    align-items: inherit;
-    padding: 5px;
-    flex: 1;
-    flex-wrap: wrap;
-    justify-content: right;
+// .card-fp{
+//   width: 400px;
+//   height: 150px;
+//   border-radius: 20px;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
 
-    .modal-title{
-      width: 100%;
-      font-family: 'Poppins';
-      font-size: 20px;
-      padding: 5px;
-      margin: 0;
-    }
+//   color: white;
+//   font-family: 'Poppins';
+//   font-size: 20px;
+//   font-weight: bold;
+// }
 
-    .monto{
-      color: white;
-      font-size: 40px;
+// .card-ingresos{
+//   background: linear-gradient(to right, #42b5f4, #4285f4);
+// }
 
-      .monto-input{
-        background-color: #4285f4;
-        border-style: none;
-        width: 100%;
-        text-align: right;
-        color:white;
+// .card-egresos{
+//   background: linear-gradient(to right, #f27674, #f2615e);
+// }
 
-        &:focus{
-          outline: none;
-        }
+// .dash-sup{
+//   margin-top: 40px;
 
-        &::placeholder{
-          color: white;
-        }
-      }
-    }
-  }
+//   .dash-sup__title{
+//     display: flex;
+//     column-gap: 40px;
+//     margin-bottom: 40px;
 
-  .color-ingreso{
-    background-color: #4285f4;
+//     .title{
+//       color: rgb(90, 90, 236);
+//       font-size: 30px;
+//       text-transform: capitalize;
+//       font-family: 'Poppins';
+//     }
+//   }
 
-    .calculadora .calculadora-numero{
-      border: 3px #4285f4 solid;
-    }
-  }
-  .color-egreso{
-    background-color: #f2615e;
-  }
+//   .dash-sup__balance{
+//     color: rgb(90, 90, 236);
+//     text-transform: capitalize;
+//     font-family: 'Poppins';
+//     margin: 40px 25px;
 
-  .calculadora{
+//     .balance-title{
+//       font-size: 30px;
+//       color: #4161e2;
+//       font-weight: 600;
+//       margin-bottom: 6px;
+//     }
 
-    margin: 0 auto;
+//     .balance-cantidad{
+//       font-size: 25px;
+//       color: #4161e2;
+//       font-weight: 550;
+//     }
+//   }
 
-    .calculadora-btn{
-      min-height: 85px;
-      min-width: 85px;
-      padding: 30px;
-      margin: 2px;
-      font-size: 25px;
-      border: 3px #4b4b4b solid;
-      border-radius: 10%;
+// }
 
-      &:hover{
-        cursor: pointer;
-        background-color: #6d97db;
+// .ingreso-egreso{
+//   margin: 60px auto;
+// }
 
-        transition: background-color .4s;
-      }
-    }
+// .card-title{
+//   font-family: 15px;
+// }
 
-    .calculadora-cero{
-      min-height: 85px;
-      min-width: 85px;
-      width: 100%;
-      padding: 30px;
-      margin: 2px;
-      font-size: 25px;
-      border: 3px #4b4b4b solid;
-      border-radius: 10px;
+// .card-balance{
+//   font-size: 30px;
+// }
 
-      &:hover{
-        cursor: pointer;
-        background-color: #6d97db;
+// .card-right .plus{
+//   padding: 10px;
+//   font-size: 35px;
+//   font-weight: 200;
+//   color: rgb(238, 238, 238);
+//   border: 4px solid rgba(58, 58, 58, 0.116);
+//   border-radius: 30%;
+//   background-color: #c4c4c456;
 
-        transition: background-color .4s;
-      }
-    }
+//   &:hover{
+//     cursor: pointer;
+//   }
+// }
+
+// .contenido__modal{
+//   text-align: center !important;
+
+
+//   .modal-header{
+//     min-height: 100px;
+//     width: 100%;
+//     align-items: inherit;
+//     padding: 5px;
+//     flex: 1;
+//     flex-wrap: wrap;
+//     justify-content: right;
+
+//     .modal-title{
+//       width: 100%;
+//       font-family: 'Poppins';
+//       font-size: 20px;
+//       padding: 5px;
+//       margin: 0;
+//     }
+
+//     .monto{
+//       color: white;
+//       font-size: 40px;
+
+//       .monto-input{
+//         background-color: #4285f4;
+//         border-style: none;
+//         width: 100%;
+//         text-align: right;
+//         color:white;
+
+//         &:focus{
+//           outline: none;
+//         }
+
+//         &::placeholder{
+//           color: white;
+//         }
+//       }
+//     }
+//   }
+
+//   .color-ingreso{
+//     background-color: #4285f4;
+
+//     .calculadora .calculadora-numero{
+//       border: 3px #4285f4 solid;
+//     }
+//   }
+//   .color-egreso{
+//     background-color: #f2615e;
+//   }
+
+//   .calculadora{
+
+//     margin: 0 auto;
+
+//     .calculadora-btn{
+//       min-height: 85px;
+//       min-width: 85px;
+//       padding: 30px;
+//       margin: 2px;
+//       font-size: 25px;
+//       border: 3px #4b4b4b solid;
+//       border-radius: 10%;
+
+//       &:hover{
+//         cursor: pointer;
+//         background-color: #6d97db;
+
+//         transition: background-color .4s;
+//       }
+//     }
+
+//     .calculadora-cero{
+//       min-height: 85px;
+//       min-width: 85px;
+//       width: 100%;
+//       padding: 30px;
+//       margin: 2px;
+//       font-size: 25px;
+//       border: 3px #4b4b4b solid;
+//       border-radius: 10px;
+
+//       &:hover{
+//         cursor: pointer;
+//         background-color: #6d97db;
+
+//         transition: background-color .4s;
+//       }
+//     }
+//   }
+// }
+
+.container{
+  display: grid;
+
+  .dash-sup{
+    display: grid;
   }
 }

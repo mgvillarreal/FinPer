@@ -24,8 +24,6 @@ export class AuthService {
     .pipe(tap(
       (res: JwtResponseI) => {
         if(res){
-          // guardar token
-          // this.guardaToken(res.token)
           this.guardaUsuario(res)
         }
       })

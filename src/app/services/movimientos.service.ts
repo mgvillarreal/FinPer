@@ -12,6 +12,7 @@ export class MovimientosService {
 
   url = 'https://hostinjor.com/finperapi/api/movimientos/'
   urlv1 = 'https://hostinjor.com/apifinper/v2/movimientos/'
+  urlv3 = 'https://hostinjor.com/apifinper/v3/movimientos/'
 
   constructor(
     public http: HttpClient
