@@ -28,6 +28,11 @@ export class MetasService {
     }))*/
   }
 
+  cambiaMetas(metas:any):Observable<ResponseI> {
+    //console.log(JSON.parse(JSON.stringify(metas)));
+    return this.http.post<ResponseI>(this.urlv4 + '/modificameta', metas) 
+  }
+
   /*traeUnMetas(id: string){
     return this.http.get<Movimiento>(id);
   }*/

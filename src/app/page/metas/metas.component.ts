@@ -24,15 +24,28 @@ export class MetasComponent implements OnInit {
     let datos = {
       "met_idusuario": 1,
       "met_monto": 10500,
-      "met_nombre": "Bariloche",
-      "met_flimite": "2022-08-26",
-      "met_idmoneda": 1
+      "met_nombre": "Miami",
+      "met_flimite": "2022-09-26",
+      "met_idmoneda": 2
       //met_estado: 1
     }
     
     this.metaServicio.guardaMetas(datos).subscribe(data =>{
       console.log(data);
     });
+  }
+
+  cambioMeta(){
+    let datos = {
+      "met_id": 6,
+      "met_monto": 1500,
+      "met_nombre": "Villa Angostura",
+      "met_flimite": "2022-09-15",
+      "met_idmoneda": 1
+    }
+  this.metaServicio.cambiaMetas(datos).subscribe(data =>{
+    console.log(data);
+  })
   }
 
 }
