@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Meta } from 'src/app/models/meta.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { MetasService } from 'src/app/services/metas.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-metas',
@@ -20,7 +22,7 @@ export class MetasComponent implements OnInit {
   public forma: FormGroup;
   meta = new Meta;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private metaServicio: MetasService) { }
 
   cambiaAgregaMetaFlag(){
     if(this.agregaMetaFlag==0){
@@ -95,13 +97,17 @@ export class MetasComponent implements OnInit {
   }
 
   crearMeta(){
-    this.meta.usuario = Number(localStorage.getItem("id"));
-    this.meta.moneda = this.forma.value['moneda'];
-    this.meta.monto = this.forma.value['monto'];
-    this.meta.detalle = this.forma.value['detalle'];
-    this.meta.fechaLimite = this.forma.value['fechaLimite'];
+    this.meta.met_idusuario = Number(localStorage.getItem("id"));
+    this.meta.met_idmoneda = this.forma.value['moneda'];
+    this.meta.met_monto = this.forma.value['monto'];
+    this.meta.met_nombre = this.forma.value['detalle'];
+    this.meta.met_flimite = this.forma.value['fechaLimite'];
     console.log('Meta creada: ', this.meta);
     this.muestraMensajeOk();
+    //this.metaServicio.guardaMetas(this.meta);
+    this.metaServicio.guardaMetas(this.meta).subscribe( data =>{
+      console.log(data)
+     });
   }
 
   
