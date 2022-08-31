@@ -30,7 +30,7 @@ export class MetasService {
 
   cambiaMetas(metas:any):Observable<ResponseI> {
     //console.log(JSON.parse(JSON.stringify(metas)));
-    return this.http.post<ResponseI>(this.urlv4 + '/modificameta', metas) 
+    return this.http.put<ResponseI>(this.urlv4 + '/modificameta', metas);
   }
 
   /*traeUnMetas(id: string){

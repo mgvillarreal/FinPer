@@ -23,8 +23,8 @@ export class MetasComponent implements OnInit {
     //let hoy = '${fecha.getFullYear()}-${('0'+(fecha.getMonth()+1)).slice(-2)}-${fecha.getDate()}';
     let datos = {
       "met_idusuario": 1,
-      "met_monto": 10500,
-      "met_nombre": "Miami",
+      "met_monto": 10555,
+      "met_nombre": "Chacabuco",
       "met_flimite": "2022-09-26",
       "met_idmoneda": 2
       //met_estado: 1
