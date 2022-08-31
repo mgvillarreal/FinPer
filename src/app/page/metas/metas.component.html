@@ -62,30 +62,49 @@
 <div class="limiter" *ngIf="agregaMetaFlag==1 && muestraMensajeFlag==0">
 	<div class="container-login100">
 		<div class="wrap-login100 text-center">
-            <button class="btn-close mb-4" (click)="cambiaAgregaMetaFlag()"> </button> <br><br>
+            <button class="btn-close mb-4" (click)="volveraMetas()"> </button> <br><br>
             <div class="titulo-nuevameta mb-4">Nueva Meta</div>
-			<form>
+			<form [formGroup]="forma" (ngSubmit)="crearMeta()">
 				<div class="login100-form validate-form text-center mt-3">
 					<div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select name="moneda">
+                        <select name="moneda" formControlName="moneda">
                             <option value=" " selected>Moneda meta</option>
                             <option value="1">ARS</option>
                             <option value="2">USD</option>
                         </select>
-                    </div>
+                    </div><br>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['moneda'].errors?.['required'] && forma.controls['moneda'].touched">
+                        Debe seleccionar una moneda.
+                    </small>
+
                     <div class="wrap-input100 modal-celda2 my-2">
-                        <input type="number" name="monto" placeholder="Monto de la meta">
+                        <input type="number" name="monto" placeholder="Monto de la meta" formControlName="monto">
                     </div>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
+                        El monto es requerido.
+                    </small>
+
                     <div class="wrap-input100 modal-celda3 my-2">
-                        <input type="text" name="detalleMeta" placeholder="Detalle de la meta">
+                        <input type="text" name="detalleMeta" placeholder="Detalle de la meta" formControlName="detalle">
                     </div>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+                        El detalle es requerido.
+                    </small>
+
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')">
+                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" formControlName="fechaLimite">
                     </div>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['fechaLimite'].errors?.['required'] && forma.controls['fechaLimite'].touched">
+                        La fecha límite es requerida.
+                    </small>
 				</div>
 
                 <div class="container-login100-form-btn">
-                    <button class="btn btn-light btn-lg action-button btngreen" (click)="muestraMensajeOk()">
+                    <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma.invalid">
                         Listo
                     </button>
                 </div>

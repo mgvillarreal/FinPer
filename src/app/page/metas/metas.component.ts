@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Meta } from 'src/app/models/meta.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-metas',
@@ -14,7 +17,10 @@ export class MetasComponent implements OnInit {
   muestraMensajeActFlag:number=0;
   preguntaEliminarFlag:number=0;
 
-  constructor() { }
+  public forma: FormGroup;
+  meta = new Meta;
+
+  constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   cambiaAgregaMetaFlag(){
     if(this.agregaMetaFlag==0){
@@ -76,9 +82,26 @@ export class MetasComponent implements OnInit {
   cancela(){
     this.muestraMetas = 0;
     this.editaMetaFlag = 1;
+    this.preguntaEliminarFlag = 0;
   }
 
   ngOnInit(): void {
+    this.forma = this.fb.group({
+      'moneda': ['', [Validators.required]],
+      'monto': ['', [Validators.required]],
+      'detalle': ['', [Validators.required]],
+      'fechaLimite': ['', [Validators.required]],
+    });
+  }
+
+  crearMeta(){
+    this.meta.usuario = Number(localStorage.getItem("id"));
+    this.meta.moneda = this.forma.value['moneda'];
+    this.meta.monto = this.forma.value['monto'];
+    this.meta.detalle = this.forma.value['detalle'];
+    this.meta.fechaLimite = this.forma.value['fechaLimite'];
+    console.log('Meta creada: ', this.meta);
+    this.muestraMensajeOk();
   }
 
   

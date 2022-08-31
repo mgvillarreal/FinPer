@@ -1,4 +1,5 @@
 export class Usuario {
+    id:number;
     nombre?:string;
     mail?:string;
     contrasena?:string;
@@ -13,7 +14,5 @@ export class Usuario {
     constructor(){  
 
     }
-
-  
 
 }
