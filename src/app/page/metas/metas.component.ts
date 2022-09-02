@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Meta } from 'src/app/models/meta.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -90,9 +90,16 @@ export class MetasComponent implements OnInit {
       'moneda': ['', [Validators.required]],
       'monto': ['', [Validators.required]],
       'detalle': ['', [Validators.required]],
-      'fechaLimite': ['', [Validators.required]],
-    });
+      'fechaLimite': ['', [Validators.required]]
+    }, { validators: this.fechaValidaValidator });
   }
+
+  fechaValidaValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const fechaHoy = new Date;
+    const fechaLimite = control.get('fechaLimite');
+
+    return fechaHoy.getDate() < fechaLimite.value ? { fechaInvalida: true } : null;
+  };
 
   crearMeta(){
     this.meta.usuario = Number(localStorage.getItem("id"));
