@@ -3,210 +3,217 @@
 }
 
 .titulo{
-  display: flex;
-  align-items: center;
-  color: #4161e2;
-  font-size: 290%;
-  font-weight: 650;
+  color: #419f3e;
+  font-size: 45px;
+  font-weight: 630;
+  letter-spacing: 2px;
 }
 
-a{
-  text-decoration: none !important;
-  color: #ee4dd3;
-  font-weight: 550;
-  font-size: large;
-}
-
-.flex{
-  display: flex;
-  justify-content: space-between;
-}
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] { -moz-appearance:textfield; }
-
-
-.card-fp{
-  width: 400px;
-  height: 150px;
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  color: white;
-  font-family: 'Poppins';
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.card-ingresos{
-  background: linear-gradient(to right, #42b5f4, #4285f4);
-}
-
-.card-egresos{
-  background: linear-gradient(to right, #f27674, #f2615e);
-}
-
-.dash-sup{
-  margin-top: 40px;
-
-  .dash-sup__title{
-    display: flex;
-    column-gap: 40px;
-    margin-bottom: 40px;
-
-    .title{
-      color: rgb(90, 90, 236);
-      font-size: 30px;
-      text-transform: capitalize;
-      font-family: 'Poppins';
-    }
-  }
-
-  .dash-sup__balance{
-    color: rgb(90, 90, 236);
-    text-transform: capitalize;
-    font-family: 'Poppins';
-    margin: 40px 25px;
-
-    .balance-title{
-      font-size: 30px;
-      color: #4161e2;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .balance-cantidad{
-      font-size: 25px;
-      color: #4161e2;
-      font-weight: 550;
-    }
-  }
-
-}
-
-.ingreso-egreso{
-  margin: 60px auto;
-}
-
-.card-title{
-  font-family: 15px;
-}
-
-.card-balance{
-  font-size: 30px;
-}
-
-.card-right .plus{
-  padding: 10px;
+.balance-titulo{
+  color: #1c6a1ab9;
   font-size: 35px;
-  font-weight: 200;
-  color: rgb(238, 238, 238);
-  border: 4px solid rgba(58, 58, 58, 0.116);
-  border-radius: 30%;
-  background-color: #c4c4c456;
-
-  &:hover{
-    cursor: pointer;
-  }
+  font-weight: 530;
+  letter-spacing: 2px;
 }
 
-.contenido__modal{
-  text-align: center !important;
+.balance-cantidad{
+  color: #1c6a1ab9;
+  font-size: 30px;
+  font-weight: 530;
+  letter-spacing: 1px;
+}
 
+.card{
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  padding: 25px 30px;
+  display: inline-block;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  width: 45%;
+}
 
-  .modal-header{
-    min-height: 100px;
-    width: 100%;
-    align-items: inherit;
-    padding: 5px;
-    flex: 1;
-    flex-wrap: wrap;
-    justify-content: right;
+.card-titulo{
+  font-size: 30px;
+  font-weight: 530;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
 
-    .modal-title{
-      width: 100%;
-      font-family: 'Poppins';
-      font-size: 20px;
-      padding: 5px;
-      margin: 0;
-    }
+.ingreso{
+  color: #3fd22f
+}
 
-    .monto{
-      color: white;
-      font-size: 40px;
+.egreso{
+  color: rgba(255, 0, 0, 0.903);
+}
 
-      .monto-input{
-        background-color: #4285f4;
-        border-style: none;
-        width: 100%;
-        text-align: right;
-        color:white;
+.card-cantidad{
+  font-size: 25px;
+  font-weight: 530;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+}
 
-        &:focus{
-          outline: none;
-        }
+.btn-nuevoingreso{
+  border-color:#3fd22f;
+  color: #3fd22f;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  margin-top: 1rem;
+}
 
-        &::placeholder{
-          color: white;
-        }
-      }
-    }
-  }
+.btn-nuevoingreso:hover{
+  background-color:#3fd22f;
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+}
 
-  .color-ingreso{
-    background-color: #4285f4;
+.btn-nuevoegreso{
+  border-color:rgba(255, 0, 0, 0.903);
+  color: rgba(255, 0, 0, 0.903);
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  margin-top: 1rem;
+}
 
-    .calculadora .calculadora-numero{
-      border: 3px #4285f4 solid;
-    }
-  }
-  .color-egreso{
-    background-color: #f2615e;
-  }
+.btn-nuevoegreso:hover{
+  background-color:rgba(255, 0, 0, 0.903);
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+}
 
-  .calculadora{
+.btn-detalleingreso{
+  border-bottom-color:#3fd22f;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  color: #3fd22f;
+  font-size: 15px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  margin-top: 1rem;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
-    margin: 0 auto;
+.btn-detalleingreso:hover, .btn-detalleegreso:hover{
+  font-weight: 500;
+  background-color: transparent;
+}
 
-    .calculadora-btn{
-      min-height: 85px;
-      min-width: 85px;
-      padding: 30px;
-      margin: 2px;
-      font-size: 25px;
-      border: 3px #4b4b4b solid;
-      border-radius: 10%;
+.btn-detalleegreso{
+  border-bottom-color:rgba(255, 0, 0, 0.903);
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  color: rgba(255, 0, 0, 0.903);
+  font-size: 15px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  margin-top: 1rem;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
-      &:hover{
-        cursor: pointer;
-        background-color: #6d97db;
+.ultmov{
+  color: #1c6a1ab9;
+  font-size: 25px;
+  font-weight: 530;
+  letter-spacing: 2px;
+  text-decoration: none;
+  margin-top: 3rem;
+}
 
-        transition: background-color .4s;
-      }
-    }
+/*FORMULARIOS*/
+.btn-close{
+  background-color: transparent;
+  color: white;
+  float: left;
+}
 
-    .calculadora-cero{
-      min-height: 85px;
-      min-width: 85px;
-      width: 100%;
-      padding: 30px;
-      margin: 2px;
-      font-size: 25px;
-      border: 3px #4b4b4b solid;
-      border-radius: 10px;
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
 
-      &:hover{
-        cursor: pointer;
-        background-color: #6d97db;
+.container-login100 {
+  width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #f2f2f2;  
+}
 
-        transition: background-color .4s;
-      }
-    }
-  }
+.wrap-login100 {
+  width: 390px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 55px 40px 33px 40px;
+
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+select.form{
+  border:none;
+  color: #757575;
+  font-size:16px;
+  padding:10px 10px 10px 5px;
+  background-color: transparent;
+  text-align: center;
+  width:290px;
+}
+
+input{
+    font-size:16px;
+    padding:10px 10px 10px 5px;
+    display: inline;
+    width:300px;
+    border:none;
+    border-bottom:1px solid #757575;
+}
+
+.container-login100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 13px;
+}
+
+.btngreen{
+  background-color: #3fd22f;
+  color: white;
+  font-size: 15px;
+  border-radius: 25px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  padding: 10px;
+  width: 40%;
+  left: 10%;
+  position: relative;
+  left: 30%;
+  margin-top: 10px;
 }

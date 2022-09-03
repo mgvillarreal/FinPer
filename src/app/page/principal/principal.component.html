@@ -1,4 +1,5 @@
-<div class="container">
+<!-- <div class="container">
+
 
   <div class="dash-sup flex">
     <div class="dash-sup__left">
@@ -162,5 +163,113 @@
 
     </div>
   </div>
+</div> -->
+
+<div class="container pt-4">
+
+  <div class="titulo text-center mt-2 mb-1"> Mis Cuentas </div>
+
+  <div class="text-center mt-4">
+    <select class="select-finper-default select-s" name="" id="">
+      <option value="1">Enero</option>
+      <option value="2">Febrero</option>
+      <option value="3">Marzo</option>
+      <option value="4">Abril</option>
+      <option value="5">Mayo</option>
+      <option value="6" selected>Junio</option>
+      <option value="7">Julio</option>
+      <option value="8">Agosto</option>
+      <option value="9">Septiembre</option>
+      <option value="10">Octubre</option>
+      <option value="11">Noviembre</option>
+      <option value="12">Diciembre</option>
+    </select>
+
+    <select class="select-finper-default select-xs" name="" id="">
+      <option value="2022" selected>2022</option>
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+    </select>
+  </div>
+
+  <div class="text-center py-4">
+    <span class="balance-titulo">Balance </span>
+    <span class="balance-cantidad">${{ balance }} </span>
+  </div>
+
+  <div class="text-center mb-2">
+    <div class="card">
+      <div class="card-titulo ingreso">Ingresos</div>
+      <div class="card-cantidad ingreso" >${{ ingreso }}</div>
+      <button class="btn btn-outline-primary btn-detalleingreso">Detalle de ingresos</button><br>
+      <button class="btn btn-outline-primary btn-nuevoingreso">Nuevo ingreso</button>
+    </div>
+
+    <div class="card">
+      <div class="card-titulo egreso">Gastos</div>
+      <div class="card-cantidad egreso" >${{ egreso }}</div>
+      <div class="btn btn-outline-primary btn-detalleegreso">Detalle de gastos</div><br>
+      <button class="btn btn-outline-primary btn-nuevoegreso">Nuevo gasto</button>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <a class="ultmov" routerLink="/ultimosmovimientos" >Mis Últimos Movimientos</a>
+  </div>
+
 </div>
 
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <button class="btn-close mb-4"> </button> <br>
+      <div class="card-titulo ingreso mb-4">Nuevo Ingreso</div>
+
+      <form>
+
+        <div class="wrap-input100 modal-celda2 my-2">
+          <input type="number" name="monto" placeholder="Monto del ingreso" formControlName="monto">
+        </div>
+        <!-- <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
+            El monto es requerido.
+        </small> -->
+
+        <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
+          <select class="form" name="categoria" formControlName="categoria">
+              <option value=" " selected>Categoría</option>
+              <option value="1">Salario</option>
+              <option value="2">Horas Extras</option>
+          </select>
+        </div><br>
+        <!-- <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['moneda'].errors?.['required'] && forma.controls['moneda'].touched">
+            Debe seleccionar una moneda.
+        </small> -->
+
+        <div class="wrap-input100 modal-celda3 my-2">
+            <input type="text" name="detalleIngreso" placeholder="Detalle del ingreso" formControlName="detalle">
+        </div>
+        <!-- <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+            El detalle es requerido.
+        </small> -->
+
+        <div class="wrap-input100 modal-celda4 my-2">
+            <input type="text" name="fechaLimite" placeholder="Fecha del ingreso" onfocus="(this.type='date')" formControlName="fechaIngreso">
+        </div>
+        <!-- <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['fechaLimite'].errors?.['required'] && forma.controls['fechaLimite'].touched">
+            La fecha límite es requerida.
+        </small> -->
+
+        <div class="container-login100-form-btn">
+          <button class="btn btn-light btn-lg action-button btngreen">
+            Listo
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
