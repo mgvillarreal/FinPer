@@ -165,7 +165,7 @@
   </div>
 </div> -->
 
-<div class="container pt-4">
+<div class="container pt-4" *ngIf="muestraPrincipalFlag==1 && nuevoIngFlag==0 && nuevoEgrFlag==0">
 
   <div class="titulo text-center mt-2 mb-1"> Mis Cuentas </div>
 
@@ -194,22 +194,22 @@
 
   <div class="text-center py-4">
     <span class="balance-titulo">Balance </span>
-    <span class="balance-cantidad">${{ balance }} </span>
+    <span class="balance-cantidad">ARS {{ balance }} </span>
   </div>
 
   <div class="text-center mb-2">
     <div class="card">
       <div class="card-titulo ingreso">Ingresos</div>
-      <div class="card-cantidad ingreso" >${{ ingreso }}</div>
-      <button class="btn btn-outline-primary btn-detalleingreso">Detalle de ingresos</button><br>
-      <button class="btn btn-outline-primary btn-nuevoingreso">Nuevo ingreso</button>
+      <div class="card-cantidad ingreso" >ARS {{ ingreso }}</div>
+      <button class="btn btn-outline-primary btn-detalleingreso" (click)="seleccionaDetalleIng()">Detalle de ingresos</button><br>
+      <button class="btn btn-outline-primary btn-nuevoingreso" (click)="seleccionaTipoMovimiento(1)">Nuevo ingreso</button>
     </div>
 
     <div class="card">
       <div class="card-titulo egreso">Gastos</div>
-      <div class="card-cantidad egreso" >${{ egreso }}</div>
+      <div class="card-cantidad egreso" >ARS {{ egreso }}</div>
       <div class="btn btn-outline-primary btn-detalleegreso">Detalle de gastos</div><br>
-      <button class="btn btn-outline-primary btn-nuevoegreso">Nuevo gasto</button>
+      <button class="btn btn-outline-primary btn-nuevoegreso" (click)="seleccionaTipoMovimiento(2)">Nuevo gasto</button>
     </div>
   </div>
 
@@ -219,21 +219,21 @@
 
 </div>
 
-<div class="limiter">
+<ng-template [ngIf]="nuevoIngFlag==1" class="limiter">
   <div class="container-login100">
     <div class="wrap-login100 text-center">
-      <button class="btn-close mb-4"> </button> <br>
-      <div class="card-titulo ingreso mb-4">Nuevo Ingreso</div>
+      <button class="btn-close mb-4" (click)="volveraPrincipal()"> </button> <br>
+      <div class="card-titulo ingreso mb-4"> Nuevo Ingreso </div>
 
-      <form>
+      <form [formGroup]="forma" (ngSubmit)="crearNuevoMovimiento()">
 
         <div class="wrap-input100 modal-celda2 my-2">
           <input type="number" name="monto" placeholder="Monto del ingreso" formControlName="monto">
         </div>
-        <!-- <small  class="texto-validacion text-center" 
+        <small  class="texto-validacion text-center" 
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
             El monto es requerido.
-        </small> -->
+        </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
@@ -242,29 +242,29 @@
               <option value="2">Horas Extras</option>
           </select>
         </div><br>
-        <!-- <small  class="texto-validacion text-center" 
-        *ngIf="forma.controls['moneda'].errors?.['required'] && forma.controls['moneda'].touched">
-            Debe seleccionar una moneda.
-        </small> -->
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['categoria'].errors?.['required'] && forma.controls['categoria'].touched">
+            Debe seleccionar una categoría.
+        </small>
 
         <div class="wrap-input100 modal-celda3 my-2">
             <input type="text" name="detalleIngreso" placeholder="Detalle del ingreso" formControlName="detalle">
         </div>
-        <!-- <small  class="texto-validacion text-center" 
+        <small  class="texto-validacion text-center" 
         *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
             El detalle es requerido.
-        </small> -->
+        </small>
 
         <div class="wrap-input100 modal-celda4 my-2">
-            <input type="text" name="fechaLimite" placeholder="Fecha del ingreso" onfocus="(this.type='date')" formControlName="fechaIngreso">
+            <input type="text" name="fechaLimite" placeholder="Fecha del ingreso" onfocus="(this.type='date')" formControlName="fecha">
         </div>
-        <!-- <small  class="texto-validacion text-center" 
-        *ngIf="forma.controls['fechaLimite'].errors?.['required'] && forma.controls['fechaLimite'].touched">
-            La fecha límite es requerida.
-        </small> -->
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+            La fecha es requerida.
+        </small>
 
         <div class="container-login100-form-btn">
-          <button class="btn btn-light btn-lg action-button btngreen">
+          <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma.invalid">
             Listo
           </button>
         </div>
@@ -272,4 +272,153 @@
 
     </div>
   </div>
-</div>
+</ng-template>
+
+<ng-template [ngIf]="nuevoEgrFlag==1" class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <button class="btn-close mb-4" (click)="volveraPrincipal()"> </button> <br>
+      <div class="card-titulo egreso mb-4"> Nuevo Gasto </div>
+
+      <form [formGroup]="forma" (ngSubmit)="crearNuevoMovimiento()">
+
+        <div class="wrap-input100 modal-celda2 my-2">
+          <input type="number" name="monto" placeholder="Monto del gasto" formControlName="monto">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
+            El monto es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
+          <select class="form" name="categoria" formControlName="categoria">
+              <option value=" " selected>Categoría</option>
+              <option value="1">Salario</option>
+              <option value="2">Horas Extras</option>
+          </select>
+        </div><br>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['categoria'].errors?.['required'] && forma.controls['categoria'].touched">
+            Debe seleccionar una categoría.
+        </small>
+
+        <div class="wrap-input100 modal-celda3 my-2">
+            <input type="text" name="detalleIngreso" placeholder="Detalle del gasto" formControlName="detalle">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+            El detalle es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda4 my-2">
+            <input type="text" name="fechaLimite" placeholder="Fecha del gasto" onfocus="(this.type='date')" formControlName="fecha">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+            La fecha es requerida.
+        </small>
+
+        <div class="container-login100-form-btn">
+          <button class="btn btn-light btn-lg action-button btnred" [disabled]="forma.invalid">
+            Listo
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="msjAltaOk==1 && muestraPrincipalFlag==0">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="68" height="68" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">Has añadido un nuevo movimiento a tus cuentas</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjlight" (click)="volveraPrincipal()">
+                            Aceptar
+                        </button>
+                    </div>
+                    <!-- <div>
+                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="crearOtroMov()">
+                            Crear otro movimiento
+                        </button>
+                    </div>
+                     -->
+				</div>
+
+			</form>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template [ngIf]="detalleIngFlag==1 && muestraPrincipalFlag==0" class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <button class="btn-close mb-4" (click)="volveraPrincipal()"> </button> <br>
+      <div class="card-detalle ingreso mb-4"> Detalle de Ingresos </div>
+
+      <div class="wrap-input100 modal-celda1 my-2 select-finper-default text-center">
+        <select class="form" name="mes">
+            <option value=" " selected>Septiembre 2022</option>
+            <option value="1">Octubre 2022</option>
+            <option value="2">Noviembre 2022</option>
+        </select>
+      </div>
+
+      <div class="card-detalle ingreso mt-3">ARS {{ ingreso }}</div>
+
+      <div>
+        <table class="table table-hover">
+          <!-- <thead>
+            <tr>
+              <th scope="col"> </th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Monto</th>
+            </tr>
+          </thead> -->
+          <tbody>
+            <tr>
+              <td scope="row">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fd22f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
+                  <path d="M12 6v2m0 8v2" />
+                </svg>
+              </td>
+              <td>Ingreso 1 </td>
+              <td>ARS 1.000,00 </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fd22f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
+                  <path d="M12 6v2m0 8v2" />
+                </svg>
+              </td>
+              <td>Ingreso 2 </td>
+              <td>ARS 5.000,00 </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</ng-template>

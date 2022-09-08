@@ -3,6 +3,8 @@ import { MovimientoI } from 'src/app/interfaces/movimiento';
 import { Movimiento } from 'src/app/models/movimiento.model';
 import { MovimientosService } from 'src/app/services/movimientos.service';
 import { DatePipe } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -16,7 +18,6 @@ export class PrincipalComponent implements OnInit {
   ingreso!: number
   egreso!: number
   balance: number = 0
-  tituloModal: string = 'Ingreso'
   monto: Number = 0
   montoString?: string
   dataMovimientos: MovimientoI[]
@@ -25,22 +26,29 @@ export class PrincipalComponent implements OnInit {
   ingresos: any[] =  []
   egresos: any[] =  []
 
-  constructor(
-    private movimientoService: MovimientosService
-    ) {
+  /*NUEVO*/
+  public forma: FormGroup;
+  movimiento = new Movimiento;
+  muestraPrincipalFlag=1;
+  nuevoIngFlag:number = 0;
+  nuevoEgrFlag:number = 0;
+  msjAltaOk:number = 0;
+  detalleIngFlag:number = 0;
+
+  constructor(private movimientoService: MovimientosService, private fb: FormBuilder, private authService: AuthService) {
     this.calcula()
   }
 
   ngOnInit(): void {
     this.fecha = new Date()
-  }
 
-  modalIngreso(){
-    this.tituloModal = 'Ingresos'
-  }
-
-  modalEgreso(){
-    this.tituloModal = 'Egresos'
+    /*NUEVO*/
+    this.forma = this.fb.group({
+      'monto': ['', [Validators.required]],
+      'categoria': ['', [Validators.required]],
+      'detalle': ['', [Validators.required]],
+      'fecha': ['', [Validators.required]]
+    });
   }
 
   agregaNumero(numero: number){
@@ -82,19 +90,19 @@ export class PrincipalComponent implements OnInit {
       this.dataMovimientos  = respuesta
       for(let dat of this.dataMovimientos)
       {
-        console.log(dat)
+        //console.log(dat)
         if(dat.tmov_descripcion=='Ingreso'){
-          console.log("Entre aca")
+          //console.log("Entre aca")
           this.fecha = dat.mov_fcreacion
           this.ingreso += Number(dat.mov_monto)
           this.balance += Number(dat.mov_monto)
         }else{
-          console.log("Tambien entre aca (o no)")
+          //console.log("Tambien entre aca (o no)")
           this.balance -= Number(dat.mov_monto)
           this.egreso += Number(dat.mov_monto)
         }
       }
-      console.info(this.ingreso)
+      //console.info(this.ingreso)
     })
 
   }
@@ -113,6 +121,48 @@ export class PrincipalComponent implements OnInit {
       }
     })
     return egreso
+  }
+
+  /*NUEVO*/
+  seleccionaTipoMovimiento(tipoMovimiento: number){
+  
+    if(tipoMovimiento == 1){
+      this.movimiento.tipo = 1;
+      this.nuevoIngFlag = 1;
+    }
+    else{
+      this.movimiento.tipo = 2;
+      this.nuevoEgrFlag = 1;
+    }
+  }
+
+  crearNuevoMovimiento(){
+    this.movimiento.usuario = Number(localStorage.getItem("id"));
+    this.movimiento.monto = this.forma.value['monto'];
+    this.movimiento.categoria = this.forma.value['categoria'];
+    this.movimiento.detalle = this.forma.value['detalle'];
+    this.movimiento.fecha = this.forma.value['fecha'];
+    console.log('Movimiento creado: ', this.movimiento);
+    this.muestraMsjAltaOk();
+  }
+
+  volveraPrincipal(){
+    this.muestraPrincipalFlag = 1;
+    this.nuevoIngFlag = 0;
+    this.nuevoEgrFlag = 0;
+    this.msjAltaOk = 0;
+  }
+
+  muestraMsjAltaOk(){
+    this.msjAltaOk = 1;
+    this.muestraPrincipalFlag = 0;
+    this.nuevoIngFlag = 0;
+    this.nuevoEgrFlag = 0;
+  }
+
+  seleccionaDetalleIng(){
+    this.detalleIngFlag = 1;
+    this.muestraPrincipalFlag = 0;
   }
 
 }
