@@ -18,11 +18,15 @@ export class MetasComponent implements OnInit {
   editaMetaFlag:number=0;
   muestraMensajeActFlag:number=0;
   preguntaEliminarFlag:number=0;
+  estado = 1;
+  metas = [];
 
   public forma: FormGroup;
   meta = new Meta;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private metaServicio: MetasService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private metaServicio: MetasService) {
+    this.traeMetaPorEstado(1);
+  }
 
   cambiaAgregaMetaFlag(){
     if(this.agregaMetaFlag==0){
@@ -107,9 +111,34 @@ export class MetasComponent implements OnInit {
     //this.metaServicio.guardaMetas(this.meta);
     this.metaServicio.guardaMetas(this.meta).subscribe( data =>{
       console.log(data)
+      setTimeout(() => {
+        this.traeMetaPorEstado(1);
+      }, 1500);
      });
   }
 
-  
+  cambiaEstado(){
+    if(this.estado == 1){
+      this.estado = 2;
+    }else{
+      this.estado = 1
+    }
+
+    this.traeMetaPorEstado(this.estado)
+  }
+
+  traeMetaPorEstado(estado: number) {
+    if(estado==1){
+      this.metaServicio.traeMetasPorEstado(1).subscribe( data => {
+        this.metas = data;
+      })
+    }else{
+      this.metaServicio.traeMetasPorEstado(2).subscribe( data => {
+        this.metas = data;
+      })
+    }
+  }
+
+
 
 }

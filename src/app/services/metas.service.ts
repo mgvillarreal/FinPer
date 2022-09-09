@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MetasI } from '../interfaces/metas';  
+import { MetasI } from '../interfaces/metas';
 import { ResponseI } from '../interfaces/response';
 import { HttpClient } from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
@@ -11,14 +11,17 @@ import { Meta } from '../models/meta.model';
 })
 export class MetasService {
   urlv4 = 'https://hostinjor.com/apifinper/v4/metas'
-  
+
   constructor(public http: HttpClient) {
-    
+
    }
 
-   traeMetas(){
-    // console.log(this.http.get<any>(this.url))
-    return this.http.get<any>(this.urlv4);
+   traeMetasPorEstado(estado: number){
+    let body = {
+      estado: estado,
+      id_usuario: Number(localStorage.getItem("id"))
+    };
+    return this.http.post<any>(this.urlv4 + '/metasporestado', body);
   }
 
   guardaMetas(metas: Meta):Observable<ResponseI> {

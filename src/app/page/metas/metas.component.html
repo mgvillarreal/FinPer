@@ -3,7 +3,7 @@
     <div class="titulo text-center mt-5 mb-5">Metas de Ahorro</div>
 
     <div class="mt-4 text-center">
-        <select class="select-finper-default select-s" name="estado" id="estado">
+        <select class="select-finper-default select-s" name="estado" id="estado" (ngModelChange)="cambiaEstado()" [(ngModel)]="estado">
             <option value="1" selected>Pendientes</option>
             <option value="2">Alcanzadas</option>
         </select>
@@ -17,11 +17,11 @@
           <div class="col col-4">Fecha Límite</div>
           <div class="col col-5"></div>
         </li>
-        <li class="table-row">
-          <div class="col col-1" data-label="Meta">Bicicleta</div>
-          <div class="col col-2" data-label="Monto">ARS 45.000,00</div>
+        <li class="table-row" *ngFor="let meta of metas">
+          <div class="col col-1" data-label="Meta">{{meta.met_nombre}}</div>
+          <div class="col col-2" data-label="Monto">ARS {{meta.met_monto}}</div>
           <div class="col col-3" data-label="Ahorrado">ARS 15.000,00</div>
-          <div class="col col-4" data-label="Fecha Límite">22-oct-2022</div>
+          <div class="col col-4" data-label="Fecha Límite">{{meta.met_flimite}}</div>
           <div class="col col-5">
             <div (click)="editarMeta()" class="btn-editar">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -33,7 +33,7 @@
             </div>
           </div>
         </li>
-        <li class="table-row">
+        <!-- <li class="table-row">
           <div class="col col-1" data-label="Meta">Viaje</div>
           <div class="col col-2" data-label="Monto">USD 2.000,00</div>
           <div class="col col-3" data-label="Ahorrado">USD 800,00</div>
@@ -48,7 +48,7 @@
                 </svg>
             </div>
           </div>
-        </li>
+        </li> -->
       </ul>
 
     <div class="text-center">
@@ -73,7 +73,7 @@
                             <option value="2">USD</option>
                         </select>
                     </div><br>
-                    <small  class="texto-validacion text-center" 
+                    <small  class="texto-validacion text-center"
                     *ngIf="forma.controls['moneda'].errors?.['required'] && forma.controls['moneda'].touched">
                         Debe seleccionar una moneda.
                     </small>
@@ -81,7 +81,7 @@
                     <div class="wrap-input100 modal-celda2 my-2">
                         <input type="number" name="monto" placeholder="Monto de la meta" formControlName="monto">
                     </div>
-                    <small  class="texto-validacion text-center" 
+                    <small  class="texto-validacion text-center"
                     *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
                         El monto es requerido.
                     </small>
@@ -89,7 +89,7 @@
                     <div class="wrap-input100 modal-celda3 my-2">
                         <input type="text" name="detalleMeta" placeholder="Detalle de la meta" formControlName="detalle">
                     </div>
-                    <small  class="texto-validacion text-center" 
+                    <small  class="texto-validacion text-center"
                     *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
                         El detalle es requerido.
                     </small>
@@ -97,7 +97,7 @@
                     <div class="wrap-input100 modal-celda4 my-2">
                         <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" formControlName="fechaLimite">
                     </div>
-                    <small  class="texto-validacion text-center" 
+                    <small  class="texto-validacion text-center"
                     *ngIf="forma.controls['fechaLimite'].errors?.['required'] && forma.controls['fechaLimite'].touched">
                         La fecha límite es requerida.
                     </small>
@@ -141,7 +141,7 @@
                             Crear otra meta de ahorro
                         </button>
                     </div>
-                    
+
 				</div>
 
 			</form>
@@ -220,7 +220,7 @@
                             Cancelar
                         </button>
                     </div>
-                    
+
 				</div>
 
 			</form>
@@ -251,7 +251,7 @@
                             Aceptar
                         </button>
                     </div>
-                    
+
 				</div>
 
 			</form>
