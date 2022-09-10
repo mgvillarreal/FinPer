@@ -165,12 +165,13 @@
   </div>
 </div> -->
 
-<div class="container pt-4" *ngIf="muestraPrincipalFlag==1 && nuevoIngFlag==0 && nuevoEgrFlag==0">
+<div class="container pt-4" *ngIf="muestraPrincipalFlag==1">
 
   <div class="titulo text-center mt-2 mb-1"> Mis Cuentas </div>
 
   <div class="text-center mt-4">
     <select class="select-finper-default select-s" name="" id="">
+      <!-- <option *ngFor="let mes of arrMeses" ng-model="mesActual">{{mes}}</option> -->
       <option value="1">Enero</option>
       <option value="2">Febrero</option>
       <option value="3">Marzo</option>
@@ -183,12 +184,13 @@
       <option value="10">Octubre</option>
       <option value="11">Noviembre</option>
       <option value="12">Diciembre</option>
-    </select>
+   </select>
 
     <select class="select-finper-default select-xs" name="" id="">
-      <option value="2022" selected>2022</option>
+      <option *ngFor="let anio of arrAnios">{{anio}}</option>
+      <!-- <option value="2022" selected>2022</option>
       <option value="2023">2023</option>
-      <option value="2024">2024</option>
+      <option value="2024">2024</option> -->
     </select>
   </div>
 
@@ -264,7 +266,7 @@
         </small>
 
         <div class="container-login100-form-btn">
-          <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma.invalid">
+          <button class="btn btn-light btn-lg action-button btngreen btr-r" [disabled]="forma.invalid">
             Listo
           </button>
         </div>
@@ -329,7 +331,7 @@
   </div>
 </ng-template>
 
-<ng-template class="limiter" [ngIf]="msjAltaOk==1 && muestraPrincipalFlag==0">
+<ng-template class="limiter" [ngIf]="msjAltaOk==1">
 	<div class="container-login100">
 		<div class="wrap-login100 text-center">
             <div class="titulo-nuevameta mb-4"> </div>
@@ -365,7 +367,7 @@
 	</div>
 </ng-template>
 
-<ng-template [ngIf]="detalleIngFlag==1 && muestraPrincipalFlag==0" class="limiter">
+<ng-template [ngIf]="detalleIngFlag==1" class="limiter">
   <div class="container-login100">
     <div class="wrap-login100 text-center">
       <button class="btn-close mb-4" (click)="volveraPrincipal()"> </button> <br>
@@ -391,7 +393,7 @@
             </tr>
           </thead> -->
           <tbody>
-            <tr>
+            <tr (click)="editarIngreso()">
               <td scope="row">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fd22f" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -421,4 +423,135 @@
 
     </div>
   </div>
+</ng-template>
+
+<ng-template [ngIf]="editaIngFlag==1" class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <button class="btn-close mb-4" > </button> <br>
+      <div class="card-titulo ingreso mb-4"> Editar Ingreso </div>
+
+      <form [formGroup]="forma" (ngSubmit)="editarIngreso()">
+
+        <div class="wrap-input100 modal-celda2 my-2">
+          <input type="number" name="monto" placeholder="Monto del ingreso" formControlName="monto">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
+            El monto es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
+          <select class="form" name="categoria" formControlName="categoria">
+              <option value=" " selected>Categoría</option>
+              <option value="1">Salario</option>
+              <option value="2">Horas Extras</option>
+          </select>
+        </div><br>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['categoria'].errors?.['required'] && forma.controls['categoria'].touched">
+            Debe seleccionar una categoría.
+        </small>
+
+        <div class="wrap-input100 modal-celda3 my-2">
+            <input type="text" name="detalleIngreso" placeholder="Detalle del ingreso" formControlName="detalle">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+            El detalle es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda4 my-2">
+            <input type="text" name="fechaLimite" placeholder="Fecha del ingreso" onfocus="(this.type='date')" formControlName="fecha">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+            La fecha es requerida.
+        </small>
+
+        <div class="container-login100-form-btn">
+          <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" (click)="muestraMensajeActOk()">
+            Actualizar
+          </button>
+        </div>
+        <div class="container-login100-form-btn">
+          <button class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act" (click)="preguntaEliminar()">
+            Eliminar
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="muestraMensajeActFlag==1">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="68" height="68" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">Tu movimiento ha sido actualizado</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="volveraPrincipal()">
+                            Aceptar
+                        </button>
+                    </div>
+                    
+				</div>
+
+			</form>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="preguntaEliminarFlag==1">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <line x1="4" y1="7" x2="20" y2="7" />
+                                <line x1="10" y1="11" x2="10" y2="17" />
+                                <line x1="14" y1="11" x2="14" y2="17" />
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">¿Estás seguro que quieres eliminar este movimiento?</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjlight" (click)="eliminaMovimiento()">
+                            Eliminar
+                        </button>
+                    </div><br>
+                    <div>
+                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="cancelaEliminar()">
+                            Cancelar
+                        </button>
+                    </div>
+                    
+				</div>
+
+			</form>
+		</div>
+	</div>
 </ng-template>

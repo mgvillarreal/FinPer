@@ -204,6 +204,11 @@ input{
   padding-top: 13px;
 }
 
+.btn-act{
+  position: relative;
+  left: 0%;
+}
+
 .btngreen{
   background-color: #3fd22f;
   color: white;
@@ -213,10 +218,12 @@ input{
   text-transform: uppercase;
   padding: 10px;
   width: 40%;
-  left: 10%;
   position: relative;
-  left: 30%;
   margin-top: 10px;
+}
+
+.btr-r{
+  left: 30%;
 }
 
 .btnred{
@@ -255,4 +262,18 @@ input{
   font-weight: 530;
   //letter-spacing: 1px;
   margin-bottom: 1rem;
+}
+
+.table-hover{
+  cursor: pointer;
+}
+
+.btn-msjdark{
+  background-color:#419f3e;
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  /*margin-bottom: 10px;
+  margin-top: 4rem;*/
 }

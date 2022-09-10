@@ -15,16 +15,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class PrincipalComponent implements OnInit {
 
-  ingreso!: number
-  egreso!: number
-  balance: number = 0
-  monto: Number = 0
-  montoString?: string
-  dataMovimientos: MovimientoI[]
-  fecha: Date
+  ingreso: number;
+  egreso: number;
+  balance: number = 0;
+  monto: Number = 0;
+  montoString: string;
+  dataMovimientos: MovimientoI[];
+  fecha: Date;
 
-  ingresos: any[] =  []
-  egresos: any[] =  []
+  ingresos: any[] =  [];
+  egresos: any[] =  [];
 
   /*NUEVO*/
   public forma: FormGroup;
@@ -34,6 +34,13 @@ export class PrincipalComponent implements OnInit {
   nuevoEgrFlag:number = 0;
   msjAltaOk:number = 0;
   detalleIngFlag:number = 0;
+  editaIngFlag:number = 0;
+  muestraMensajeActFlag:number = 0;
+  preguntaEliminarFlag:number = 0;
+
+  arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  arrAnios:number[] = [2021, 2022];
+  mesActual = new Date().getMonth();
 
   constructor(private movimientoService: MovimientosService, private fb: FormBuilder, private authService: AuthService) {
     this.calcula()
@@ -129,10 +136,12 @@ export class PrincipalComponent implements OnInit {
     if(tipoMovimiento == 1){
       this.movimiento.tipo = 1;
       this.nuevoIngFlag = 1;
+      this.muestraPrincipalFlag = 0;
     }
     else{
       this.movimiento.tipo = 2;
       this.nuevoEgrFlag = 1;
+      this.muestraPrincipalFlag = 0;
     }
   }
 
@@ -151,6 +160,9 @@ export class PrincipalComponent implements OnInit {
     this.nuevoIngFlag = 0;
     this.nuevoEgrFlag = 0;
     this.msjAltaOk = 0;
+    this.editaIngFlag = 0;
+    this.detalleIngFlag = 0;
+    this.muestraMensajeActFlag = 0;
   }
 
   muestraMsjAltaOk(){
@@ -165,4 +177,39 @@ export class PrincipalComponent implements OnInit {
     this.muestraPrincipalFlag = 0;
   }
 
+  editarIngreso(){
+    if(this.editaIngFlag==0){
+      this.editaIngFlag = 1;
+      this.muestraPrincipalFlag = 0;
+      this.detalleIngFlag = 0;
+    }
+  }
+
+  muestraMensajeActOk(){
+    if(this.muestraMensajeActFlag==0){
+      this.muestraMensajeActFlag = 1;
+      this.muestraPrincipalFlag = 0;
+      this.editaIngFlag = 0;
+    }
+  }
+
+  preguntaEliminar(){
+    if(this.preguntaEliminarFlag==0){
+      this.preguntaEliminarFlag = 1;
+      this.muestraPrincipalFlag = 0;
+      this.editaIngFlag = 0;
+    }
+  }
+
+  eliminaMovimiento(){
+    this.detalleIngFlag = 1;
+    this.editaIngFlag = 0;
+    this.preguntaEliminarFlag = 0;
+  }
+
+  cancelaEliminar(){
+    this.muestraPrincipalFlag = 0;
+    this.editaIngFlag = 1;
+    this.preguntaEliminarFlag = 0;
+  }
 }
