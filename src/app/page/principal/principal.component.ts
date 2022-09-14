@@ -175,6 +175,7 @@ export class PrincipalComponent implements OnInit {
   seleccionaDetalleIng(){
     this.detalleIngFlag = 1;
     this.muestraPrincipalFlag = 0;
+    this.editaIngFlag = 0;
   }
 
   editarIngreso(){
@@ -183,6 +184,17 @@ export class PrincipalComponent implements OnInit {
       this.muestraPrincipalFlag = 0;
       this.detalleIngFlag = 0;
     }
+  }
+
+  actualizarIngreso(){
+    this.movimiento.usuario = Number(localStorage.getItem("id"));
+    this.movimiento.monto = this.forma.value['monto'];
+    this.movimiento.categoria = this.forma.value['categoria'];
+    this.movimiento.detalle = this.forma.value['detalle'];
+    this.movimiento.fecha = this.forma.value['fecha'];
+    console.log('Movimiento modificado: ', this.movimiento);
+
+    this.muestraMensajeActOk();
   }
 
   muestraMensajeActOk(){

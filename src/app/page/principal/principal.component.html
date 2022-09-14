@@ -177,10 +177,10 @@
       <option value="3">Marzo</option>
       <option value="4">Abril</option>
       <option value="5">Mayo</option>
-      <option value="6" selected>Junio</option>
+      <option value="6">Junio</option>
       <option value="7">Julio</option>
       <option value="8">Agosto</option>
-      <option value="9">Septiembre</option>
+      <option value="9" selected>Septiembre</option>
       <option value="10">Octubre</option>
       <option value="11">Noviembre</option>
       <option value="12">Diciembre</option>
@@ -428,10 +428,10 @@
 <ng-template [ngIf]="editaIngFlag==1" class="limiter">
   <div class="container-login100">
     <div class="wrap-login100 text-center">
-      <button class="btn-close mb-4" > </button> <br>
+      <button class="btn-close mb-4" (click)="seleccionaDetalleIng()"> </button> <br>
       <div class="card-titulo ingreso mb-4"> Editar Ingreso </div>
 
-      <form [formGroup]="forma" (ngSubmit)="editarIngreso()">
+      <form [formGroup]="forma" (ngSubmit)="actualizarIngreso()">
 
         <div class="wrap-input100 modal-celda2 my-2">
           <input type="number" name="monto" placeholder="Monto del ingreso" formControlName="monto">
@@ -470,23 +470,24 @@
         </small>
 
         <div class="container-login100-form-btn">
-          <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" (click)="muestraMensajeActOk()">
+          <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" [disabled]="forma.invalid">
             Actualizar
-          </button>
-        </div>
-        <div class="container-login100-form-btn">
-          <button class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act" (click)="preguntaEliminar()">
-            Eliminar
           </button>
         </div>
 
       </form>
 
+      <div class="container-login100-form-btn">
+        <button class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act" (click)="preguntaEliminar()">
+          Eliminar
+        </button>
+      </div>
+
     </div>
   </div>
 </ng-template>
 
-<ng-template class="limiter" [ngIf]="muestraMensajeActFlag==1">
+<ng-template class="limiter" [ngIf]="muestraMensajeActFlag==1 && editaIngFlag==0">
 	<div class="container-login100">
 		<div class="wrap-login100 text-center">
             <div class="titulo-nuevameta mb-4"> </div>
