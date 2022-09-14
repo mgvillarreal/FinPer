@@ -37,6 +37,8 @@ export class PrincipalComponent implements OnInit {
   editaIngFlag:number = 0;
   muestraMensajeActFlag:number = 0;
   preguntaEliminarFlag:number = 0;
+  editaEgrFlag:number = 0;
+  detalleEgrFlag:number = 0;
 
   arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   arrAnios:number[] = [2021, 2022];
@@ -163,6 +165,7 @@ export class PrincipalComponent implements OnInit {
     this.editaIngFlag = 0;
     this.detalleIngFlag = 0;
     this.muestraMensajeActFlag = 0;
+    this.detalleEgrFlag = 0;
   }
 
   muestraMsjAltaOk(){
@@ -178,6 +181,12 @@ export class PrincipalComponent implements OnInit {
     this.editaIngFlag = 0;
   }
 
+  seleccionaDetalleEgr(){
+    this.detalleEgrFlag = 1;
+    this.muestraPrincipalFlag = 0;
+    this.editaEgrFlag = 0;
+  }
+
   editarIngreso(){
     if(this.editaIngFlag==0){
       this.editaIngFlag = 1;
@@ -186,7 +195,16 @@ export class PrincipalComponent implements OnInit {
     }
   }
 
-  actualizarIngreso(){
+  editarEgreso(){
+    if(this.editaEgrFlag==0){
+      this.editaEgrFlag = 1;
+      this.muestraPrincipalFlag = 0;
+      this.detalleEgrFlag = 0;
+    }
+  }
+
+
+  actualizarMovimiento(){
     this.movimiento.usuario = Number(localStorage.getItem("id"));
     this.movimiento.monto = this.forma.value['monto'];
     this.movimiento.categoria = this.forma.value['categoria'];
@@ -202,6 +220,7 @@ export class PrincipalComponent implements OnInit {
       this.muestraMensajeActFlag = 1;
       this.muestraPrincipalFlag = 0;
       this.editaIngFlag = 0;
+      this.editaEgrFlag = 0;
     }
   }
 
@@ -210,6 +229,7 @@ export class PrincipalComponent implements OnInit {
       this.preguntaEliminarFlag = 1;
       this.muestraPrincipalFlag = 0;
       this.editaIngFlag = 0;
+      this.editaEgrFlag = 0;
     }
   }
 

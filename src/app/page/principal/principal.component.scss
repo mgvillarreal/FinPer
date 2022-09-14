@@ -227,18 +227,17 @@ input{
 }
 
 .btnred{
-  background-color: rgba(255, 0, 0, 0.903);
-  color: white;
+  background-color: rgba(255, 0, 0, 0.903) !important;
+  border-color: rgba(255, 0, 0, 0.903) !important;
+  color: white !important;
   font-size: 15px;
   border-radius: 25px;
   line-height: 1.2;
   text-transform: uppercase;
   padding: 10px;
   width: 40%;
-  left: 10%;
-  position: relative;
-  left: 30%;
-  margin-top: 10px;
+  position: relative !important;
+  margin-top: 10px !important;
 }
 
 .texto-validacion{
