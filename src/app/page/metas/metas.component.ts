@@ -64,6 +64,7 @@ export class MetasComponent implements OnInit {
     this.muestraMensajeFlag = 0;
     this.muestraMetas = 1;
     this.muestraMensajeActFlag = 0;
+    this.editaMetaFlag = 0;
   }
 
   crearOtraMeta() {

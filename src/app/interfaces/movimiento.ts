@@ -11,4 +11,5 @@ export interface MovimientoI {
     tmov_descripcion:string;
     cmov_descripcion:string;
     mon_descripcion:string;
+    mon_simbolo:string;
 }

@@ -14,15 +14,17 @@
           <div class="col col-1">Meta</div>
           <div class="col col-2">Monto</div>
           <div class="col col-3">Ahorrado</div>
-          <div class="col col-4">Fecha Límite</div>
-          <div class="col col-5"></div>
+          <div class="col col-4">Por alcanzar</div>
+          <div class="col col-5">Fecha Límite</div>
+          <div class="col col-6"></div>
         </li>
         <li class="table-row" *ngFor="let meta of metas">
           <div class="col col-1" data-label="Meta">{{meta.met_nombre}}</div>
           <div class="col col-2" data-label="Monto">ARS {{meta.met_monto}}</div>
-          <div class="col col-3" data-label="Ahorrado">ARS 15.000,00</div>
-          <div class="col col-4" data-label="Fecha Límite">{{meta.met_flimite}}</div>
-          <div class="col col-5">
+          <div class="col col-3" data-label="Ahorrado">ARS 15000,00</div>
+          <div class="col col-4" data-label="Por alcanzar">ARS 5000,00</div>
+          <div class="col col-5" data-label="Fecha Límite">{{meta.met_flimite|date: 'dd/MM/YYYY H:mm'}}</div>
+          <div class="col col-6">
             <div (click)="editarMeta(meta.met_id)" class="btn-editar">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -33,28 +35,10 @@
             </div>
           </div>
         </li>
-        <!-- <li class="table-row">
-          <div class="col col-1" data-label="Meta">Viaje</div>
-          <div class="col col-2" data-label="Monto">USD 2.000,00</div>
-          <div class="col col-3" data-label="Ahorrado">USD 800,00</div>
-          <div class="col col-4" data-label="Fecha Límite">15-dic-2022</div>
-          <div class="col col-5">
-            <div (click)="editarMeta()" class="btn-editar">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-                    <line x1="16" y1="5" x2="19" y2="8" />
-                </svg>
-            </div>
-          </div>
-        </li> -->
       </ul>
 
     <div class="text-center">
         <button type="button" class="btn btn-outline-primary btn-agregar" (click)="cambiaAgregaMetaFlag()">Agregar nueva meta</button>
-        <!-- <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" href="#nuevaMeta">Agregar nueva meta</button>
-        <button type="button" class="btn btn-outline-primary btn-agregar" data-bs-toggle="modal" (click)="mostrarMensaje()">Agregar nueva meta</button>  -->
     </div>
 
 </div>
