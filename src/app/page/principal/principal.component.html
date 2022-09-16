@@ -393,7 +393,7 @@
             </tr>
           </thead> -->
           <tbody>
-            <tr (click)="editarIngreso()">
+            <tr (click)="editarIngreso()" *ngFor="let datos of this.ingresos">
               <td scope="row">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fd22f" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -402,10 +402,10 @@
                   <path d="M12 6v2m0 8v2" />
                 </svg>
               </td>
-              <td>Ingreso 1 </td>
-              <td>ARS 1.000,00 </td>
+              <td>{{datos.cmov_descripcion}} </td>
+              <td>{{datos.mon_simbolo}} {{datos.mov_monto}} </td>
             </tr>
-            <tr>
+            <!--tr>
               <td scope="row">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fd22f" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -416,7 +416,7 @@
               </td>
               <td>Ingreso 2 </td>
               <td>ARS 5.000,00 </td>
-            </tr>
+            </tr-->
           </tbody>
         </table>
       </div>
@@ -451,7 +451,7 @@
             </tr>
           </thead> -->
           <tbody>
-            <tr (click)="editarEgreso()">
+            <tr (click)="editarEgreso()" *ngFor="let datose of this.egresos">
               <td scope="row">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff2825" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -460,11 +460,11 @@
                   <path d="M12 6v2m0 8v2" />
                 </svg>
               </td>
-              <td>Egreso 1 </td>
-              <td>ARS 1.000,00 </td>
+              <td>{{datose.cmov_descripcion}} </td>
+              <td>{{datose.mon_simbolo}} {{datose.mov_monto}} </td>
             </tr>
             <tr>
-              <td scope="row">
+              <!--td scope="row">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff2825" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                   <circle cx="12" cy="12" r="9" />
@@ -474,7 +474,7 @@
               </td>
               <td>Egreso 2 </td>
               <td>ARS 5.000,00 </td>
-            </tr>
+            </tr-->
           </tbody>
         </table>
       </div>

@@ -95,7 +95,7 @@ export class PrincipalComponent implements OnInit {
     this.egreso = 0;
     this.balance = 0;
     this.movimientoService.traeMovimientos2(localStorage.getItem('id'))
-    .subscribe(respuesta => {
+    .subscribe(respuesta => {console.log(respuesta)
       this.dataMovimientos  = respuesta
       for(let dat of this.dataMovimientos)
       {
@@ -105,11 +105,13 @@ export class PrincipalComponent implements OnInit {
           this.fecha = dat.mov_fcreacion
           this.ingreso += Number(dat.mov_monto)
           this.balance += Number(dat.mov_monto)
+          this.ingresos.push(dat)
         }else{
           //console.log("Tambien entre aca (o no)")
           this.balance -= Number(dat.mov_monto)
           this.egreso += Number(dat.mov_monto)
-        }
+          this.egresos.push(dat)
+        }  
       }
       //console.info(this.ingreso)
     })
@@ -118,7 +120,7 @@ export class PrincipalComponent implements OnInit {
 
   calculaEgresos(): number{
     let egreso = 0
-    this.movimientoService.traeMovimientos2('11')
+    this.movimientoService.traeMovimientos2(localStorage.getItem('id'))
     .subscribe(respuesta => {
       let { data } = respuesta
       data = JSON.parse(data)
