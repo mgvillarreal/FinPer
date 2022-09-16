@@ -4,6 +4,7 @@ import { UsuarioI } from '../interfaces/usuario';
 import { JwtResponseI } from '../interfaces/jwt-response';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
   private token: string;
   public id: Number;
   public nombre: string;
+  public usuario: Usuario;
 
   constructor(
     private httpCliente: HttpClient,

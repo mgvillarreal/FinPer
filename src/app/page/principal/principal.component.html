@@ -1,4 +1,5 @@
-<div class="container">
+<!-- <div class="container">
+
 
   <div class="dash-sup flex">
     <div class="dash-sup__left">
@@ -162,5 +163,517 @@
 
     </div>
   </div>
+</div> -->
+
+<div class="container pt-4" *ngIf="muestraPrincipalFlag==1">
+
+  <div class="titulo text-center mt-2 mb-1"> Mis Cuentas </div>
+
+  <div class="text-center mt-4">
+    <select class="select-finper-default select-s" name="" id="">
+      <!-- <option *ngFor="let mes of arrMeses" ng-model="mesActual">{{mes}}</option> -->
+      <option value="1">Enero</option>
+      <option value="2">Febrero</option>
+      <option value="3">Marzo</option>
+      <option value="4">Abril</option>
+      <option value="5">Mayo</option>
+      <option value="6">Junio</option>
+      <option value="7">Julio</option>
+      <option value="8">Agosto</option>
+      <option value="9" selected>Septiembre</option>
+      <option value="10">Octubre</option>
+      <option value="11">Noviembre</option>
+      <option value="12">Diciembre</option>
+   </select>
+
+    <select class="select-finper-default select-xs" name="" id="">
+      <option *ngFor="let anio of arrAnios">{{anio}}</option>
+      <!-- <option value="2022" selected>2022</option>
+      <option value="2023">2023</option>
+      <option value="2024">2024</option> -->
+    </select>
+  </div>
+
+  <div class="text-center py-4">
+    <span class="balance-titulo">Balance </span>
+    <span class="balance-cantidad">ARS {{ balance }} </span>
+  </div>
+
+  <div class="text-center mb-2">
+    <div class="card">
+      <div class="card-titulo ingreso">Ingresos</div>
+      <div class="card-cantidad ingreso" >ARS {{ ingreso }}</div>
+      <button class="btn btn-outline-primary btn-detalleingreso" (click)="seleccionaDetalleIng()">Detalle de ingresos</button><br>
+      <button class="btn btn-outline-primary btn-nuevoingreso" (click)="seleccionaTipoMovimiento(1)">Nuevo ingreso</button>
+    </div>
+
+    <div class="card">
+      <div class="card-titulo egreso">Gastos</div>
+      <div class="card-cantidad egreso" >ARS {{ egreso }}</div>
+      <div class="btn btn-outline-primary btn-detalleegreso" (click)="seleccionaDetalleEgr()">Detalle de gastos</div><br>
+      <button class="btn btn-outline-primary btn-nuevoegreso" (click)="seleccionaTipoMovimiento(2)">Nuevo gasto</button>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <a class="ultmov" routerLink="/ultimosmovimientos" >Mis Últimos Movimientos</a>
+  </div>
+
 </div>
 
+<ng-template [ngIf]="nuevoIngFlag==1" class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <button class="btn-close mb-4" (click)="volveraPrincipal()"> </button> <br>
+      <div class="card-titulo ingreso mb-4"> Nuevo Ingreso </div>
+
+      <form [formGroup]="forma" (ngSubmit)="crearNuevoMovimiento()">
+
+        <div class="wrap-input100 modal-celda2 my-2">
+          <input type="number" name="monto" placeholder="Monto del ingreso" formControlName="monto">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
+            El monto es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
+          <select class="form" name="categoria" formControlName="categoria">
+              <option value=" " selected>Categoría</option>
+              <option value="1">Salario</option>
+              <option value="2">Horas Extras</option>
+          </select>
+        </div><br>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['categoria'].errors?.['required'] && forma.controls['categoria'].touched">
+            Debe seleccionar una categoría.
+        </small>
+
+        <div class="wrap-input100 modal-celda3 my-2">
+            <input type="text" name="detalleIngreso" placeholder="Detalle del ingreso" formControlName="detalle">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+            El detalle es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda4 my-2">
+            <input type="text" name="fechaLimite" placeholder="Fecha del ingreso" onfocus="(this.type='date')" formControlName="fecha">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+            La fecha es requerida.
+        </small>
+
+        <div class="container-login100-form-btn">
+          <button class="btn btn-light btn-lg action-button btngreen btr-r" [disabled]="forma.invalid">
+            Listo
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="nuevoEgrFlag==1" class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <button class="btn-close mb-4" (click)="volveraPrincipal()"> </button> <br>
+      <div class="card-titulo egreso mb-4"> Nuevo Gasto </div>
+
+      <form [formGroup]="forma" (ngSubmit)="crearNuevoMovimiento()">
+
+        <div class="wrap-input100 modal-celda2 my-2">
+          <input type="number" name="monto" placeholder="Monto del gasto" formControlName="monto">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
+            El monto es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
+          <select class="form" name="categoria" formControlName="categoria">
+              <option value=" " selected>Categoría</option>
+              <option value="1">Supermercado</option>
+              <option value="2">Expensas</option>
+          </select>
+        </div><br>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['categoria'].errors?.['required'] && forma.controls['categoria'].touched">
+            Debe seleccionar una categoría.
+        </small>
+
+        <div class="wrap-input100 modal-celda3 my-2">
+            <input type="text" name="detalleIngreso" placeholder="Detalle del gasto" formControlName="detalle">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+            El detalle es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda4 my-2">
+            <input type="text" name="fechaLimite" placeholder="Fecha del gasto" onfocus="(this.type='date')" formControlName="fecha">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+            La fecha es requerida.
+        </small>
+
+        <div class="container-login100-form-btn">
+          <button class="btn btn-light btn-lg action-button btnred" [disabled]="forma.invalid">
+            Listo
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="msjAltaOk==1">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="68" height="68" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">Has añadido un nuevo movimiento a tus cuentas</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjlight" (click)="volveraPrincipal()">
+                            Aceptar
+                        </button>
+                    </div>
+                    <!-- <div>
+                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="crearOtroMov()">
+                            Crear otro movimiento
+                        </button>
+                    </div>
+                     -->
+				</div>
+
+			</form>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template [ngIf]="detalleIngFlag==1" class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <button class="btn-close mb-4" (click)="volveraPrincipal()"> </button> <br>
+      <div class="card-detalle ingreso mb-4"> Detalle de Ingresos </div>
+
+      <div class="wrap-input100 modal-celda1 my-2 select-finper-default text-center">
+        <select class="form" name="mes">
+            <option value=" " selected>Septiembre 2022</option>
+            <option value="1">Octubre 2022</option>
+            <option value="2">Noviembre 2022</option>
+        </select>
+      </div>
+
+      <div class="card-detalle ingreso mt-3">ARS {{ ingreso }}</div>
+
+      <div>
+        <table class="table table-hover">
+          <!-- <thead>
+            <tr>
+              <th scope="col"> </th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Monto</th>
+            </tr>
+          </thead> -->
+          <tbody>
+            <tr (click)="editarIngreso()">
+              <td scope="row">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fd22f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
+                  <path d="M12 6v2m0 8v2" />
+                </svg>
+              </td>
+              <td>Ingreso 1 </td>
+              <td>ARS 1.000,00 </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fd22f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
+                  <path d="M12 6v2m0 8v2" />
+                </svg>
+              </td>
+              <td>Ingreso 2 </td>
+              <td>ARS 5.000,00 </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="detalleEgrFlag==1" class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <button class="btn-close mb-4" (click)="volveraPrincipal()"> </button> <br>
+      <div class="card-detalle egreso mb-4"> Detalle de Gastos </div>
+
+      <div class="wrap-input100 modal-celda1 my-2 select-finper-default text-center">
+        <select class="form" name="mes">
+            <option value=" " selected>Septiembre 2022</option>
+            <option value="1">Octubre 2022</option>
+            <option value="2">Noviembre 2022</option>
+        </select>
+      </div>
+
+      <div class="card-detalle egreso mt-3">ARS {{ egreso }}</div>
+
+      <div>
+        <table class="table table-hover">
+          <!-- <thead>
+            <tr>
+              <th scope="col"> </th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Monto</th>
+            </tr>
+          </thead> -->
+          <tbody>
+            <tr (click)="editarEgreso()">
+              <td scope="row">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff2825" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
+                  <path d="M12 6v2m0 8v2" />
+                </svg>
+              </td>
+              <td>Egreso 1 </td>
+              <td>ARS 1.000,00 </td>
+            </tr>
+            <tr>
+              <td scope="row">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff2825" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
+                  <path d="M12 6v2m0 8v2" />
+                </svg>
+              </td>
+              <td>Egreso 2 </td>
+              <td>ARS 5.000,00 </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template [ngIf]="editaIngFlag==1" class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <button class="btn-close mb-4" (click)="seleccionaDetalleIng()"> </button> <br>
+      <div class="card-titulo ingreso mb-4"> Editar Ingreso </div>
+
+      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento()">
+
+        <div class="wrap-input100 modal-celda2 my-2">
+          <input type="number" name="monto" placeholder="Monto del ingreso" formControlName="monto">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
+            El monto es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
+          <select class="form" name="categoria" formControlName="categoria">
+              <option value=" " selected>Categoría</option>
+              <option value="1">Salario</option>
+              <option value="2">Horas Extras</option>
+          </select>
+        </div><br>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['categoria'].errors?.['required'] && forma.controls['categoria'].touched">
+            Debe seleccionar una categoría.
+        </small>
+
+        <div class="wrap-input100 modal-celda3 my-2">
+            <input type="text" name="detalleIngreso" placeholder="Detalle del ingreso" formControlName="detalle">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+            El detalle es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda4 my-2">
+            <input type="text" name="fechaLimite" placeholder="Fecha del ingreso" onfocus="(this.type='date')" formControlName="fecha">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+            La fecha es requerida.
+        </small>
+
+        <div class="container-login100-form-btn">
+          <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" [disabled]="forma.invalid">
+            Actualizar
+          </button>
+        </div>
+
+      </form>
+
+      <div class="container-login100-form-btn">
+        <button class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act" (click)="preguntaEliminar()">
+          Eliminar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="editaEgrFlag==1" class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <button class="btn-close mb-4" (click)="seleccionaDetalleEgr()"> </button> <br>
+      <div class="card-titulo egreso mb-4"> Editar Gasto </div>
+
+      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento()">
+
+        <div class="wrap-input100 modal-celda2 my-2">
+          <input type="number" name="monto" placeholder="Monto del gasto" formControlName="monto">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
+            El monto es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
+          <select class="form" name="categoria" formControlName="categoria">
+              <option value=" " selected>Categoría</option>
+              <option value="1">Supermercado</option>
+              <option value="2">Expensas</option>
+          </select>
+        </div><br>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['categoria'].errors?.['required'] && forma.controls['categoria'].touched">
+            Debe seleccionar una categoría.
+        </small>
+
+        <div class="wrap-input100 modal-celda3 my-2">
+            <input type="text" name="detalleGasto" placeholder="Detalle del gasto" formControlName="detalle">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+            El detalle es requerido.
+        </small>
+
+        <div class="wrap-input100 modal-celda4 my-2">
+            <input type="text" name="fechaLimite" placeholder="Fecha del gasto" onfocus="(this.type='date')" formControlName="fecha">
+        </div>
+        <small  class="texto-validacion text-center" 
+        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+            La fecha es requerida.
+        </small>
+
+        <div class="container-login100-form-btn">
+          <button class="btn btn-light btn-lg action-button btnred btn-msjdark btn-act" [disabled]="forma.invalid">
+            Actualizar
+          </button>
+        </div>
+
+      </form>
+
+      <div class="container-login100-form-btn">
+        <button class="btn btn-light btn-lg action-button btnred btn-msjlight btn-act" (click)="preguntaEliminar()">
+          Eliminar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="muestraMensajeActFlag==1 && editaIngFlag==0">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="68" height="68" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">Tu movimiento ha sido actualizado</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="volveraPrincipal()">
+                            Aceptar
+                        </button>
+                    </div>
+                    
+				</div>
+
+			</form>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="preguntaEliminarFlag==1">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <line x1="4" y1="7" x2="20" y2="7" />
+                                <line x1="10" y1="11" x2="10" y2="17" />
+                                <line x1="14" y1="11" x2="14" y2="17" />
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">¿Estás seguro que quieres eliminar este movimiento?</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjlight" (click)="eliminaMovimiento()">
+                            Eliminar
+                        </button>
+                    </div><br>
+                    <div>
+                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="cancelaEliminar()">
+                            Cancelar
+                        </button>
+                    </div>
+                    
+				</div>
+
+			</form>
+		</div>
+	</div>
+</ng-template>

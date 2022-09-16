@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MetasI } from 'src/app/interfaces/metas';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Meta } from 'src/app/models/meta.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MetasService } from 'src/app/services/metas.service';
