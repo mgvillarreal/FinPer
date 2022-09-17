@@ -75,6 +75,22 @@ export class PrincipalComponent implements OnInit {
       movimiento = { monto: this.monto, tipo: 2 }
     }
 
+    /*this.movimiento.usuario = Number(localStorage.getItem('id'));
+    this.movimiento.categoria = this.forma.value['moneda'];
+    this.movimiento.detalle = this.forma.value['monto'];
+    this.movimiento.fecha = this.forma.value['detalle'];
+    this.movimiento.monto = this.forma.value['monto'];
+    this.movimiento.tipo = this.forma.value[''];
+    console.log('Movimiento creado: ', this.movimiento);
+    this.muestraMensajeOk();
+    //this.metaServicio.guardaMetas(this.meta);
+    this.movimientoService.guardaMovimiento(this.movimiento).subscribe((data) => {
+      console.log(data);
+      setTimeout(() => {
+        this.traeMetaPorEstado(1);
+      }, 1500);
+    });*/
+
 
     this.movimientoService.guardaMovimiento(movimiento).subscribe(
       resp => {
@@ -91,6 +107,8 @@ export class PrincipalComponent implements OnInit {
   }
 
   calcula(): void{
+    this.ingresos=[];
+    this.egresos=[];
     this.ingreso = 0;
     this.egreso = 0;
     this.balance = 0;
@@ -149,15 +167,23 @@ export class PrincipalComponent implements OnInit {
     }
   }
 
-  crearNuevoMovimiento(){
+  async crearNuevoMovimiento(){
+    
     this.movimiento.usuario = Number(localStorage.getItem("id"));
     this.movimiento.monto = this.forma.value['monto'];
     this.movimiento.categoria = this.forma.value['categoria'];
     this.movimiento.detalle = this.forma.value['detalle'];
     this.movimiento.fecha = this.forma.value['fecha'];
+    //this.movimiento.tipo = this.forma.value['tipo'];
+    
     console.log('Movimiento creado: ', this.movimiento);
-    this.muestraMsjAltaOk();
-  }
+    await this.movimientoService.guardaMovimiento(this.movimiento).subscribe((data) => {
+      console.log(data);
+      
+  })
+  this.muestraMsjAltaOk();
+  this.calcula();
+}
 
   volveraPrincipal(){
     this.muestraPrincipalFlag = 1;

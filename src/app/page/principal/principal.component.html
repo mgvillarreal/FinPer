@@ -240,8 +240,8 @@
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
               <option value=" " selected>Categoría</option>
-              <option value="1">Salario</option>
-              <option value="2">Horas Extras</option>
+              <option value="2">Salario</option>
+              <option value="4">Horas Extras</option>
           </select>
         </div><br>
         <small  class="texto-validacion text-center" 
@@ -296,7 +296,8 @@
           <select class="form" name="categoria" formControlName="categoria">
               <option value=" " selected>Categoría</option>
               <option value="1">Supermercado</option>
-              <option value="2">Expensas</option>
+              <option value="3">Recreacion</option>
+              <option value="5">Educacion</option>
           </select>
         </div><br>
         <small  class="texto-validacion text-center" 
@@ -402,7 +403,7 @@
                   <path d="M12 6v2m0 8v2" />
                 </svg>
               </td>
-              <td>{{datos.cmov_descripcion}} </td>
+              <td>{{datos.mov_detalle}} </td>
               <td>{{datos.mon_simbolo}} {{datos.mov_monto}} </td>
             </tr>
             <!--tr>
@@ -460,7 +461,7 @@
                   <path d="M12 6v2m0 8v2" />
                 </svg>
               </td>
-              <td>{{datose.cmov_descripcion}} </td>
+              <td>{{datose.mov_detalle}} </td>
               <td>{{datose.mon_simbolo}} {{datose.mov_monto}} </td>
             </tr>
             <tr>

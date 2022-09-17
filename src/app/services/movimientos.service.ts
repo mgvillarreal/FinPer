@@ -25,7 +25,7 @@ export class MovimientosService {
   }*/
 
   guardaMovimiento(movimiento: Movimiento){
-    return this.http.post(this.url, JSON.stringify(movimiento))
+    return this.http.post(this.urlv4 + 'cargamovimiento', movimiento)
   }
 
   traeUnMovimiento(id: string){
