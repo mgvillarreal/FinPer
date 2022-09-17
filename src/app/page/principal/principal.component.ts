@@ -29,6 +29,7 @@ export class PrincipalComponent implements OnInit {
   /*NUEVO*/
   public forma: FormGroup;
   movimiento = new Movimiento;
+  movimientoModificar:MovimientoI;
   muestraPrincipalFlag=1;
   nuevoIngFlag:number = 0;
   nuevoEgrFlag:number = 0;
@@ -215,20 +216,22 @@ export class PrincipalComponent implements OnInit {
     this.editaEgrFlag = 0;
   }
 
-  editarIngreso(){
+  editarIngreso(id_ingreso){
     if(this.editaIngFlag==0){
       this.editaIngFlag = 1;
       this.muestraPrincipalFlag = 0;
       this.detalleIngFlag = 0;
     }
+  this.buscaMovimiento(id_ingreso);
   }
 
-  editarEgreso(){
+  editarEgreso(id_egreso){
     if(this.editaEgrFlag==0){
       this.editaEgrFlag = 1;
       this.muestraPrincipalFlag = 0;
       this.detalleEgrFlag = 0;
     }
+    this.buscaMovimiento(id_egreso);
   }
 
 
@@ -271,5 +274,19 @@ export class PrincipalComponent implements OnInit {
     this.muestraPrincipalFlag = 0;
     this.editaIngFlag = 1;
     this.preguntaEliminarFlag = 0;
+  }
+
+  async buscaMovimiento(id){
+    console.log(id);
+    await this.dataMovimientos.forEach(movimiento =>{
+      if(id == movimiento.mov_id ){
+        this.movimientoModificar=movimiento;
+      }
+    })
+    this.forma.value['monto'] = this.movimientoModificar.mov_monto;
+    this.forma.value['categoria'] = this.movimientoModificar.mov_idcategoria;
+    this.forma.value['fecha'] = this.movimientoModificar.mov_fcreacion;
+    this.forma.value['detalle'] = this.movimientoModificar.mov_detalle;
+    console.log(this.movimientoModificar);
   }
 }
