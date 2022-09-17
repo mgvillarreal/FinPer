@@ -22,6 +22,9 @@ export class MetasComponent implements OnInit {
   muestraMontosFlag: number = 0;
   agregaMontoFlag: number = 0;
   muestraMensajeMontoFlag: number = 0;
+  editaMontoFlag: number = 0;
+  preguntaEliminarMontoFlag: number = 0;
+  muestraMensajeActMontoFlag: number = 0;
 
   estado = 1;
   metas = [];
@@ -207,17 +210,14 @@ export class MetasComponent implements OnInit {
   }
 
   /*MONTOS DE LAS METAS*/
-  mostrarMontos(idMeta: number){
+  mostrarMontos(idMeta: Number){
     if(this.muestraMontosFlag==0){
       this.muestraMontosFlag = 1;
       this.muestraMetas = 0;
+      this.agregaMontoFlag = 0;
     }
     //console.log('ID de la meta selec', idMeta);
     this.monto.mmet_idmeta = idMeta;
-  }
-
-  editarMonto(){
-    console.log('edita monto');
   }
 
   cambiaAgregaMontoFlag(){
@@ -241,6 +241,45 @@ export class MetasComponent implements OnInit {
     if (this.muestraMensajeMontoFlag == 0) {
       this.muestraMensajeMontoFlag = 1;
       this.agregaMontoFlag = 0;
+    }
+  }
+
+  editarMonto(){
+    if (this.editaMontoFlag == 0) {
+      this.editaMontoFlag = 1;
+      this.muestraMetas = 0;
+      this.muestraMontosFlag = 0;
+    }
+    //this.muestraMensajeActMontoOk();
+  }
+
+  preguntaEliminarMonto(){
+    if (this.preguntaEliminarMontoFlag == 0) {
+      this.preguntaEliminarMontoFlag = 1;
+      this.muestraMetas = 0;
+      this.muestraMontosFlag = 0;
+      this.muestraMensajeMontoFlag = 0;
+      this.editaMontoFlag = 0;
+    }
+  }
+
+  eliminaMonto(){
+    this.muestraMontosFlag = 1;
+    this.editaMontoFlag = 0;
+    this.preguntaEliminarMontoFlag = 0;
+  }
+
+  cancelaMonto(){
+    this.muestraMontosFlag = 0;
+    this.editaMontoFlag = 1;
+    this.preguntaEliminarMontoFlag = 0;
+  }
+
+  muestraMensajeActMontoOk() {
+    if (this.muestraMensajeActMontoFlag == 0) {
+      this.muestraMensajeActMontoFlag = 1;
+      this.muestraMetas = 0;
+      this.editaMontoFlag = 0;
     }
   }
 }
