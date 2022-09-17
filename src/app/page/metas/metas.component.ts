@@ -5,6 +5,7 @@ import { Meta } from 'src/app/models/meta.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MetasService } from 'src/app/services/metas.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { Monto } from 'src/app/models/monto.model';
 
 @Component({
   selector: 'app-metas',
@@ -18,10 +19,14 @@ export class MetasComponent implements OnInit {
   editaMetaFlag: number = 0;
   muestraMensajeActFlag: number = 0;
   preguntaEliminarFlag: number = 0;
+  muestraMontosFlag: number = 0;
+  agregaMontoFlag: number = 0;
+  muestraMensajeMontoFlag: number = 0;
+
   estado = 1;
   metas = [];
 
-//datos usados para pasar a moficacion con ngmodel
+  //datos usados para pasar a moficacion con ngmodel
   modificarId: number;
   modificarMonto: number;
   modificarDetalle: string;
@@ -34,7 +39,9 @@ export class MetasComponent implements OnInit {
 
   public forma: FormGroup;
   public editaForma: FormGroup;
+  public formaMonto: FormGroup;
   meta = new Meta();
+  monto = new Monto();
 
   constructor(
     private fb: FormBuilder,
@@ -65,6 +72,9 @@ export class MetasComponent implements OnInit {
     this.muestraMetas = 1;
     this.muestraMensajeActFlag = 0;
     this.editaMetaFlag = 0;
+    this.muestraMontosFlag = 0;
+    this.agregaMontoFlag = 0;
+    this.muestraMensajeMontoFlag = 0;
   }
 
   crearOtraMeta() {
@@ -116,7 +126,12 @@ export class MetasComponent implements OnInit {
       moneda: ['', [Validators.required]],
       monto: ['', [Validators.required]],
       detalle: ['', [Validators.required]],
-      fechaLimite: ['', [Validators.required]],
+      fechaLimite: ['', [Validators.required]]
+    });
+
+    this.formaMonto = this.fb.group({
+      montoMonto: ['', [Validators.required]],
+      fechaMonto: ['', [Validators.required]],
     });
   }
 
@@ -189,5 +204,43 @@ export class MetasComponent implements OnInit {
         this.traeMetaPorEstado(1);
       }, 1500);
     });
+  }
+
+  /*MONTOS DE LAS METAS*/
+  mostrarMontos(idMeta: number){
+    if(this.muestraMontosFlag==0){
+      this.muestraMontosFlag = 1;
+      this.muestraMetas = 0;
+    }
+    //console.log('ID de la meta selec', idMeta);
+    this.monto.mmet_idmeta = idMeta;
+  }
+
+  editarMonto(){
+    console.log('edita monto');
+  }
+
+  cambiaAgregaMontoFlag(){
+    if (this.agregaMontoFlag == 0) {
+      this.agregaMontoFlag = 1;
+      this.muestraMetas = 0;
+      this.muestraMontosFlag = 0;
+    } else {
+      this.agregaMontoFlag = 0;
+    }
+  }
+
+  crearMonto(){
+    this.monto.mmet_monto = this.formaMonto.value['montoMonto'];
+    this.monto.mmet_fcreacion = this.formaMonto.value['fechaMonto'];
+    console.log('Monto creado: ', this.monto);
+    this.muestraMensajeOkMonto();
+  }
+
+  muestraMensajeOkMonto() {
+    if (this.muestraMensajeMontoFlag == 0) {
+      this.muestraMensajeMontoFlag = 1;
+      this.agregaMontoFlag = 0;
+    }
   }
 }
