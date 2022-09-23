@@ -30,6 +30,7 @@ import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.com
 import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-movimientos.component';
 import localeEsAr from '@angular/common/locales/es-AR';
 import { DatosComponent } from './page/datos/datos.component';
+import { GraficoMiscuentasComponent } from './page/grafico-miscuentas/grafico-miscuentas.component';
 
 registerLocaleData(localeEsAr, 'es-Ar');
 
@@ -53,7 +54,8 @@ registerLocaleData(localeEsAr, 'es-Ar');
     ModalNoticeComponent,
     ValidaUsuarioComponent,
     UltimosMovimientosComponent,
-    DatosComponent
+    DatosComponent,
+    GraficoMiscuentasComponent
   ],
   imports: [
     BrowserModule,

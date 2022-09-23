@@ -8,6 +8,7 @@ import { ComofuncionaComponent } from './page/comofunciona/comofunciona.componen
 import { DatosComponent } from './page/datos/datos.component';
 import { ErrorComponent } from './page/error/error.component';
 import { FaqsComponent } from './page/faqs/faqs.component';
+import { GraficoMiscuentasComponent } from './page/grafico-miscuentas/grafico-miscuentas.component';
 import { InformesComponent } from './page/informes/informes.component';
 import { IngresoComponent } from './page/ingreso/ingreso.component';
 import { InicioComponent } from './page/inicio/inicio.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'validausuario', component: ValidaUsuarioComponent},
   { path: 'ultimosmovimientos', component: UltimosMovimientosComponent},
   { path: 'misdatos', component: DatosComponent},
+  { path: 'grafico-miscuentas', component: GraficoMiscuentasComponent},
   { path: '**', component: ErrorComponent},
 ];
 
