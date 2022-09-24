@@ -1,4 +1,4 @@
-<div>
+<ng-template [ngIf]="muestraPerfil == 1">
     <div class="nombre-usuario text-center">
         {{usuario.nombre}}
     </div>
@@ -28,7 +28,7 @@
         </div>
 
         <div>
-            <button type="button" class="btn btn-outline-primary btn-datos">Editar</button>
+            <button type="button" class="btn btn-outline-primary btn-datos" (click)="editaPerfilFlag()">Editar</button>
         </div>
     </div>
 
@@ -52,4 +52,8 @@
         </div>
     </div>
 
-</div>
+</ng-template>
+
+<ng-template [ngIf]="editaFlag == 1">
+    <app-edita-datos></app-edita-datos>
+</ng-template>
