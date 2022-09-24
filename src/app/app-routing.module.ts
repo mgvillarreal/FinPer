@@ -7,6 +7,7 @@ import { CategoriaComponent } from './page/categoria/categoria.component';
 import { ComofuncionaComponent } from './page/comofunciona/comofunciona.component';
 import { DatosComponent } from './page/datos/datos.component';
 import { EditaDatosComponent } from './page/datos/edita-datos/edita-datos.component';
+import { EliminaDatosComponent } from './page/datos/elimina-datos/elimina-datos.component';
 import { ErrorComponent } from './page/error/error.component';
 import { FaqsComponent } from './page/faqs/faqs.component';
 import { GraficoMiscuentasComponent } from './page/grafico-miscuentas/grafico-miscuentas.component';
@@ -35,9 +36,13 @@ const routes: Routes = [
   { path: 'modal', component: ModalComponent },
   { path: 'validausuario', component: ValidaUsuarioComponent},
   { path: 'ultimosmovimientos', component: UltimosMovimientosComponent},
-  { path: 'misdatos', component: DatosComponent},
+  { path: 'misdatos', component: DatosComponent,
+    children: [
+      { path: 'edita-datos', component: EditaDatosComponent},
+      { path: 'elimina-datos', component: EliminaDatosComponent},
+    ]
+  },
   { path: 'grafico-miscuentas', component: GraficoMiscuentasComponent},
-  { path: 'edita-datos', component: EditaDatosComponent},
   { path: '**', component: ErrorComponent},
 ];
 

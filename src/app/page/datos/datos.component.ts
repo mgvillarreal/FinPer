@@ -19,6 +19,7 @@ export class DatosComponent implements OnInit {
   /* FLAGS */
   muestraPerfil: number = 1;
   editaFlag: number = 0;
+  eliminaFlag: number = 0;
 
   constructor() {
     this.usuario.nombre = localStorage.getItem('name');;
@@ -29,6 +30,13 @@ export class DatosComponent implements OnInit {
   editaPerfilFlag(){
     if(this.editaFlag == 0){
       this.editaFlag = 1;
+      this.muestraPerfil = 0;
+    }
+  }
+
+  eliminaPerfilFlag(){
+    if(this.eliminaFlag == 0){
+      this.eliminaFlag = 1;
       this.muestraPerfil = 0;
     }
   }

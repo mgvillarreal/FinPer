@@ -39,7 +39,7 @@
 
         <div class="mt-4 mb-4 grid-botones">
             <div>
-                <button type="button" class="btn btn-outline-primary btn-preferencias">Eliminar Cuenta</button>
+                <button type="button" class="btn btn-outline-primary btn-preferencias" (click)="eliminaPerfilFlag()">Eliminar Cuenta</button>
             </div>
     
             <div>
@@ -56,4 +56,8 @@
 
 <ng-template [ngIf]="editaFlag == 1">
     <app-edita-datos></app-edita-datos>
+</ng-template>
+
+<ng-template [ngIf]="eliminaFlag == 1">
+    <app-elimina-datos></app-elimina-datos>
 </ng-template>
