@@ -54,10 +54,207 @@
 
 </ng-template>
 
-<ng-template [ngIf]="editaFlag == 1">
-    <app-edita-datos></app-edita-datos>
+<ng-template [ngIf]="editaFlag == 1 && parteFormulario==1">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <button class="btn-close mb-4" (click)="volveraPerfil()"> </button> <br>
+                <form [formGroup]="forma1" class="login100-form" (ngSubmit)="guardaFormaUno()">
+                    <div class="login100-form validate-form text-center">
+                    
+                        <div class="titulo-editadatos mb-4"> Editar Perfil </div>
+                        
+                            <div class="wrap-input100 mb-4">
+                                <input class="input100" type="text" name="nombre" placeholder="Nombre" formControlName="nombre">
+                            </div>
+                            <small  class="texto-validacion text-center" 
+                            *ngIf="forma1.controls['nombre'].errors?.['required'] && forma1.controls['nombre'].touched">
+                                El nombre es requerido.
+                            </small>
+            
+                            <div class="wrap-input100" >
+                                <label for="fnacimiento"></label>
+                                <input class="input100" type="text" name="fnacimiento" placeholder="Fecha de Nacimiento" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="fnacimiento">
+                            </div>
+                            <small  class="texto-validacion text-center" 
+                            *ngIf="forma1.controls['fnacimiento'].errors?.['required'] && forma1.controls['fnacimiento'].touched">
+                                La fecha de nacimiento es requerida.
+                            </small>
+                            <br>
+                            <div class="wrap-input100" >
+                                <select class="input100" name="residencia" formControlName="residencia">
+                                    <option value="" [disabled]="1">Lugar de Residencia</option>
+                                    <!-- <option value="{{pais.res_id}}" *ngFor="let pais of paises" [disabled]="pais.res_id != 13">{{pais.res_descripcion}}</option> -->
+                                    <option value="1">Argentina</option>
+                                </select>
+                            </div>
+                            <small  class="texto-validacion text-center" 
+                            *ngIf="forma1.controls['residencia'].errors?.['required'] && forma1.controls['residencia'].touched">
+                                La residencia es requerida.
+                            </small>
+            
+                            <div class="container-login100-form-btn">
+                                <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma1.invalid">
+                                    Continuar
+                                </button>
+                            </div>
+    
+    
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template [ngIf]="editaFlag == 1 && parteFormulario==2">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <button class="btn-close mb-4"> </button> <br>
+                <form [formGroup]="forma2" class="login100-form" (ngSubmit)="guardaFormaDos()">
+                    <div class="login100-form validate-form text-center">
+                    
+                        <span class="titulo-editadatos mb-4"> Editar Perfil </span>
+                        
+                        <div>
+                            <div>
+                                <label class="texto-label mt-4 mb-1">Modos de Ingreso</label>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="1">
+                                    <label class="modIng mt-1"> Desempleado </label>
+                                </div>
+                               <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="2">
+                                    <label class="modIng mt-1"> Estudiante </label>
+                               </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="3">
+                                    <label class="modIng mt-1"> Emprendedor </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="4">
+                                    <label class="modIng mt-1"> Jubilado </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="5">
+                                    <label class="modIng mt-1"> Trabajo a tiempo completo </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="6">
+                                    <label class="modIng mt-1"> Trabajo por horas </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="6">
+                                    <label class="modIng mt-1"> Profesional independiente </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="8">
+                                    <label class="modIng mt-1"> Otro </label>
+                                </div>
+                            </div>
+                            
+                            <small  class="texto-validacion text-center"
+                            *ngIf="forma2.controls['modoing'].errors?.['required']">
+                                Debe seleccionar al menos un modo de ingreso.
+                            </small><br>
+                        </div>  
+    
+                        <label class="texto-label mt-4">Profesión</label>
+                        
+                        <div class="d-flex justify-content-center">
+                            <div class="wrap-input100" >
+                                <select class="input100"  name="profesion" formControlName="profesion">
+                                    <option value="" selected [disabled]="1">Seleccione una profesión</option>
+                                    <!-- <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option> -->
+                                    <option value="1" >Administrador</option>
+                                </select>
+                            </div>
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma2.controls['profesion'].errors?.['required'] && forma2.controls['profesion'].touched">
+                            Debe seleccionar una profesion.
+                        </small>
+    
+                        <div class="container-login100-form-btn">
+                            <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma2.invalid">
+                                Actualizar
+                            </button>
+                        </div>
+    
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template [ngIf]="editaFlag == 1 && muestraMensajeFlag==1">
+    <div class="limiter" *ngIf="muestraMensajeFlag==1">
+        <div class="container-login100">
+            <div class="wrap-login100 text-center">
+                
+                <div class="login100-form validate-form text-center mt-3">
+                    <div>
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="68" height="68" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">Se han actualizado los datos de tu perfil correctamente</p>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-light btn-lg action-button btngreen" (click)="volveraPerfil()">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </ng-template>
 
 <ng-template [ngIf]="eliminaFlag == 1">
-    <app-elimina-datos></app-elimina-datos>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 text-center">
+                
+                <div class="login100-form validate-form text-center mt-3">
+                    <div>
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="48" height="48" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <line x1="4" y1="7" x2="20" y2="7" />
+                                <line x1="10" y1="11" x2="10" y2="17" />
+                                <line x1="14" y1="11" x2="14" y2="17" />
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje texto-label mt-2">Estás por eliminar tu cuenta</p>
+                            <p class="texto-mensaje">Ten en cuenta que perderás el acceso a tu perfil y se eliminarán todos los datos.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-light btn-lg action-button btn-eliminar">
+                            Eliminar
+                        </button>
+                    </div>
+                    <div>
+                        <button class="btn btn-light btn-lg action-button btngreen" (click)="volveraPerfil()">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </ng-template>
+
+
+

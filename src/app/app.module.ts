@@ -31,8 +31,6 @@ import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-
 import localeEsAr from '@angular/common/locales/es-AR';
 import { DatosComponent } from './page/datos/datos.component';
 import { GraficoMiscuentasComponent } from './page/grafico-miscuentas/grafico-miscuentas.component';
-import { EditaDatosComponent } from './page/datos/edita-datos/edita-datos.component';
-import { EliminaDatosComponent } from './page/datos/elimina-datos/elimina-datos.component';
 
 registerLocaleData(localeEsAr, 'es-Ar');
 
@@ -57,9 +55,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
     ValidaUsuarioComponent,
     UltimosMovimientosComponent,
     DatosComponent,
-    GraficoMiscuentasComponent,
-    EditaDatosComponent,
-    EliminaDatosComponent
+    GraficoMiscuentasComponent
   ],
   imports: [
     BrowserModule,
