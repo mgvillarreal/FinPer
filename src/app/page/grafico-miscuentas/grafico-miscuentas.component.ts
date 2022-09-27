@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js'
+import { Component, OnInit, Input } from '@angular/core';
+import {Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
 
 @Component({
   selector: 'app-grafico-miscuentas',
@@ -7,6 +7,9 @@ import {Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/
   styleUrls: ['./grafico-miscuentas.component.css']
 })
 export class GraficoMiscuentasComponent implements OnInit {
+
+  @Input() porcentajeIngreso = 0;
+  @Input() porcentajeEgreso = 0;
 
   constructor() { }
 
@@ -58,7 +61,8 @@ export class GraficoMiscuentasComponent implements OnInit {
       ],
       datasets: [{
         label: 'Mis Cuentas',
-        data: [76, 24],
+        //data: [76, 24],
+        data: [this.porcentajeIngreso, this.porcentajeEgreso],
         backgroundColor: [
           '#3fd22f',
           'rgba(255, 0, 0, 0.903)',

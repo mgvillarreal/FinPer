@@ -40,12 +40,17 @@ export class PrincipalComponent implements OnInit {
   editaEgrFlag:number = 0;
   detalleEgrFlag:number = 0;
 
+  porcentajeIngreso: number;
+  porcentajeEgreso: number;
+
+  porcentajes = 100;
+
   arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   arrAnios:number[] = [2021, 2022];
   mesActual = new Date().getMonth();
 
   constructor(private movimientoService: MovimientosService, private fb: FormBuilder, private authService: AuthService) {
-    this.calcula()
+    this.calcula();
   }
 
   ngOnInit(): void {
@@ -90,11 +95,11 @@ export class PrincipalComponent implements OnInit {
 
   }
 
-  calcula(): void{
+  async calcula() {
     this.ingreso = 0;
     this.egreso = 0;
     this.balance = 0;
-    this.movimientoService.traeMovimientos2(localStorage.getItem('id'))
+    await this.movimientoService.traeMovimientos2(localStorage.getItem('id'))
     .subscribe(respuesta => {
       this.dataMovimientos  = respuesta
       for(let dat of this.dataMovimientos)
@@ -112,24 +117,37 @@ export class PrincipalComponent implements OnInit {
         }
       }
       //console.info(this.ingreso)
-    })
+    });
 
+    this.calculaPorcentajes();
   }
 
-  calculaEgresos(): number{
-    let egreso = 0
-    this.movimientoService.traeMovimientos2('11')
-    .subscribe(respuesta => {
-      let { data } = respuesta
-      data = JSON.parse(data)
-      for(let dat of data)
-      {
-        if(dat['tipo']==2){
-          egreso += dat['monto']
-        }
-      }
-    })
-    return egreso
+  // calculaEgresos(): number{
+  //   let egreso = 0
+  //   this.movimientoService.traeMovimientos2('11')
+  //   .subscribe(respuesta => {
+  //     let { data } = respuesta
+  //     data = JSON.parse(data)
+  //     for(let dat of data)
+  //     {
+  //       if(dat['tipo']==2){
+  //         egreso += dat['monto']
+  //       }
+  //     }
+  //   })
+  //   return egreso
+  // }
+
+  calculaPorcentajes(): void{
+    let total = 7250.5 + 2300; //this.ingreso + this.egreso;
+    console.log('ingreso: ', this.ingreso);
+    console.log('egreso: ', this.egreso);
+    console.log('total: ', total);
+
+    this.porcentajeIngreso = (7250.5/total)*100;
+    this.porcentajeEgreso = (2300/total)*100;
+
+    console.log('porcentajes: ', this.porcentajeIngreso, this.porcentajeEgreso);
   }
 
   /*NUEVO*/
