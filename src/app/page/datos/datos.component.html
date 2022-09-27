@@ -43,7 +43,7 @@
             </div>
     
             <div>
-                <button type="button" class="btn btn-outline-primary btn-preferencias">Cambiar Contraseña</button>
+                <button type="button" class="btn btn-outline-primary btn-preferencias" (click)="cambiarContrasenaFlag()">Cambiar Contraseña</button>
             </div>
     
             <div>
@@ -241,7 +241,7 @@
                         </div>
                     </div>
                     <div>
-                        <button class="btn btn-light btn-lg action-button btn-eliminar">
+                        <button class="btn btn-light btn-lg action-button btn-eliminar" (click)="eliminarPerfil()">
                             Eliminar
                         </button>
                     </div>
@@ -256,5 +256,84 @@
     </div>
 </ng-template>
 
+<ng-template [ngIf]="cambiaContrasenaFlag == 1">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <button class="btn-close mb-4" (click)="volveraPerfil()"> </button> <br>
+                <form [formGroup]="forma" class="login100-form" (ngSubmit)="cambiarContrasena()">
+                    <div class="login100-form validate-form text-center">
+
+                        <div class="titulo-cambiacontrasena mb-2"> Cambiar Contraseña </div>
+
+                        <div class="wrap-input100">
+                            <input class="input100 input-margin" type="email" name="email" placeholder="Email" formControlName="email" readonly>
+                        </div><br>
+
+                        <div class="wrap-input100">
+                            <input class="input100 input-margin" type="password" name="pwd" placeholder="Nueva contraseña" formControlName="contrasenaNueva">
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['contrasenaNueva'].errors?.['required'] && forma.controls['contrasenaNueva'].touched">
+                            La contraseña nueva es requerida.
+                        </small><br>
+                        <!-- <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['contrasenaNueva'].errors?.['minLength']">
+                            La contraseña debe tener al menos 6 caracteres.
+                        </small><br> -->
+
+                        <div class="wrap-input100">
+                            <input class="input100 input-margin" type="password" name="pwdconfirm" placeholder="Confirme nueva contraseña" formControlName="contrasenaConfirm">
+                        </div>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['contrasenaConfirm'].errors?.['required'] && forma.controls['contrasenaConfirm'].touched">
+                            La confirmación de contraseña es requerida.
+                        </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.errors?.['contrasenasIguales']">
+                            Las contraseñas no coinciden.
+                        </small><br>
+
+                        <div class="container-login100-form-btn">
+                            <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma.invalid">
+                                Cambiar
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template [ngIf]="muestraMensajeContrasenaFlag==1">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 text-center">
+                
+                <div class="login100-form validate-form text-center mt-3">
+                    <div>
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="68" height="68" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">Se han modificado tu contraseña correctamente</p>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-light btn-lg action-button btngreen" (click)="volveraPerfil()">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
 
 

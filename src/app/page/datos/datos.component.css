@@ -223,4 +223,12 @@ input, select{
     width: 40%;
 }
 
+.titulo-cambiacontrasena{
+    color: #419f3e;
+    font-size: 35px;
+    font-weight: 630;
+    letter-spacing: 2px;
+    line-height: 2.3rem;
+}
+
   

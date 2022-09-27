@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PaisI } from 'src/app/interfaces/pais';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -12,6 +13,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class DatosComponent implements OnInit {
 
   usuario = new Usuario();
+  public forma: FormGroup;
 
   nombre = localStorage.getItem('name');
   residencia:string;
@@ -25,6 +27,8 @@ export class DatosComponent implements OnInit {
   eliminaFlag: number = 0;
   parteFormulario: number = 1;
   muestraMensajeFlag: number = 0;
+  cambiaContrasenaFlag: number = 0;
+  muestraMensajeContrasenaFlag: number = 0;
 
   /* EDITA DATOS */
   public forma1: FormGroup;
@@ -32,8 +36,8 @@ export class DatosComponent implements OnInit {
   paises: PaisI[] = [];
   arrayIngresos:any[] = [];
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuariosService ) {
-    this.usuario.nombre = localStorage.getItem('name');;
+  constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router ) {
+    this.usuario.nombre = localStorage.getItem('name');
   }
 
   /* MANEJO DE FLAGS */
@@ -51,11 +55,20 @@ export class DatosComponent implements OnInit {
     this.eliminaFlag = 0;
     this.parteFormulario = 1;
     this.muestraMensajeFlag = 0;
+    this.cambiaContrasenaFlag = 0;
+    this.muestraMensajeContrasenaFlag = 0;
   }
 
   eliminaPerfilFlag(){
     if(this.eliminaFlag == 0){
       this.eliminaFlag = 1;
+      this.muestraPerfil = 0;
+    }
+  }
+
+  cambiarContrasenaFlag(){
+    if(this.cambiaContrasenaFlag == 0){
+      this.cambiaContrasenaFlag = 1;
       this.muestraPerfil = 0;
     }
   }
@@ -94,6 +107,17 @@ export class DatosComponent implements OnInit {
     this.usuario.modoIngreso = (this.arrayIngresos);
   }
 
+  eliminarPerfil(){
+    this.router.navigate(['inicio']);
+  }
+
+  cambiarContrasena(){
+    this.usuario.contrasena = this.forma.value['contrasenaConfirm'];
+    console.log('Contrasena Nueva del Usuario: ', this.usuario.contrasena);
+    this.muestraMensajeContrasenaFlag = 1;
+    this.cambiaContrasenaFlag = 0;
+  }
+
   ngOnInit(): void {
     this.forma1 = this.fb.group({
       'nombre': ['', [Validators.required]],
@@ -105,7 +129,19 @@ export class DatosComponent implements OnInit {
       'modoing': ['', [Validators.required]],
       'profesion': ['', [Validators.required]],
     });
+
+    this.forma = this.fb.group({
+      'contrasenaNueva': ['', [Validators.required]],
+      'contrasenaConfirm': ['', Validators.required],
+    }, { validators: this.contrasenasIgualesValidator });
   }
+
+  contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const pwd = control.get('contrasenaNueva');
+    const pwdConfirm = control.get('contrasenaConfirm');
+
+    return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
+  };
 
 
 }
