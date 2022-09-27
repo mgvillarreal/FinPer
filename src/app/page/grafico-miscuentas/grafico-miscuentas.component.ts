@@ -14,7 +14,7 @@ export class GraficoMiscuentasComponent implements OnInit {
     this.creaGrafico();
   }
 
-  /* GRAFICO DE LINEA 
+  /* GRAFICO DE LINEA
   creaGrafico(): void {
     Chart.register(...registerables);
 
