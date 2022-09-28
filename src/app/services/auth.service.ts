@@ -61,6 +61,7 @@ export class AuthService {
   public auth()
   {
     this.getToken()
+    this.getNombre()
     if(this.token){
       return this.token;
     }else{
@@ -86,15 +87,16 @@ export class AuthService {
   }
 
   public getId(): void{
-    if(!this.token){
+    if(!this.id){
       this.id = Number(localStorage.getItem("id"));
     }
     // return this.id;
   }
 
   public getNombre(): void{
-    if(!this.token){
-      this.nombre = localStorage.getItem("nombre");
+    if(!this.nombre){
+      this.nombre = localStorage.getItem("name");
+      console.log(this.nombre)
     }
   }
 }

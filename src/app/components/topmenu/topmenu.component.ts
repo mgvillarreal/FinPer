@@ -13,6 +13,7 @@ export class TopmenuComponent implements OnInit {
   menu:string = "cerrado";
   // menuDesplegado = false
   usuario: Usuario = new Usuario
+  userLogged = this.muestraNombre();
   @Input() menuDesplegado
   @Output() eventoDesplegar: EventEmitter<any> = new EventEmitter()
 
@@ -49,9 +50,9 @@ export class TopmenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(localStorage.getItem('TOKEN')){
-      this.usuario.nombre = localStorage.getItem('name')
-    }
   }
 
+  muestraNombre(){
+    return this.usuario.nombre;
+  }
 }
