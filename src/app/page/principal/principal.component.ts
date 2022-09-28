@@ -109,17 +109,20 @@ export class PrincipalComponent implements OnInit {
           //console.log("Entre aca")
           this.fecha = dat.mov_fcreacion
           this.ingreso += Number(dat.mov_monto)
+          
           this.balance += Number(dat.mov_monto)
         }else{
           //console.log("Tambien entre aca (o no)")
           this.balance -= Number(dat.mov_monto)
           this.egreso += Number(dat.mov_monto)
+          
         }
       }
+
       //console.info(this.ingreso)
+      this.calculaPorcentajes();
     });
 
-    this.calculaPorcentajes();
   }
 
   // calculaEgresos(): number{
@@ -139,7 +142,7 @@ export class PrincipalComponent implements OnInit {
   // }
 
   calculaPorcentajes(): void{
-    let total = 7250.5 + 2300; //this.ingreso + this.egreso;
+    let total = this.ingreso + this.egreso;
     console.log('ingreso: ', this.ingreso);
     console.log('egreso: ', this.egreso);
     console.log('total: ', total);
