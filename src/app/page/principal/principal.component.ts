@@ -43,6 +43,7 @@ export class PrincipalComponent implements OnInit {
   arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   arrAnios:number[] = [2021, 2022];
   mesActual = new Date().getMonth();
+  anioActual = new Date().getFullYear();
 
   constructor(private movimientoService: MovimientosService, private fb: FormBuilder, private authService: AuthService) {
     this.calcula()
