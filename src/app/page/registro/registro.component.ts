@@ -48,6 +48,12 @@ export class RegistroComponent implements OnInit {
     this.tomaModosIngreso();
     //this.router.navigate(['ingreso']); //SE DEBE MOSTRAR EL MENSAJE QUE ENVIA PARA VALIDAR
     console.log('Datos de Usuario: ', this.usuario);
+    this.authService.register(this.usuario).subscribe(resp => {
+      if(resp.codigo == 200)
+      {
+        this.router.navigateByUrl('validausuario/' + resp.id);
+      }
+    })
     //this.registraUsuario();
     //this.mostrarMensaje();
   }
@@ -64,8 +70,8 @@ export class RegistroComponent implements OnInit {
 
   tomaModosIngreso():void{
     let checks = document.querySelectorAll('#modoingreso');
-   
-    checks.forEach((e)=>{ 
+
+    checks.forEach((e)=>{
       if((e as HTMLInputElement).checked){
         this.arrayIngresos.push((e as HTMLInputElement).value);
       }

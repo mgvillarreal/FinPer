@@ -12,6 +12,7 @@ import { Usuario } from '../models/usuario.model';
 export class AuthService {
 
   auth_url: string = 'https://hostinjor.com/apifinper/v1/usuarios/'
+  auth_url2: string = 'https://hostinjor.com/apifinper/v5/usuarios/'
   authSubject = new BehaviorSubject(false)
   private token: string;
   public id: Number;
@@ -23,21 +24,20 @@ export class AuthService {
     private route: Router
     ) { }
 
-  register(user: UsuarioI): Observable<any> {
-    return this.httpCliente.post<any>(this.auth_url, user)
-    .pipe(tap(
-      (res: JwtResponseI) => {
-        if(res){
-          // guardar token
-          // this.guardaToken(res.token)
-          this.guardaUsuario(res)
-        }
-      })
-    )
+  register(user): Observable<any> {
+    return this.httpCliente.post<any>(this.auth_url2, user)
+    // .pipe(tap(
+    //   (res: JwtResponseI) => {
+    //     if(res){
+    //       // guardar token
+    //       this.guardaUsuario(res)
+    //     }
+    //   })
+    // )
   }
 
   login(user: UsuarioI): Observable<any> {
-    return this.httpCliente.post<any>(this.auth_url + 'login', user)
+    return this.httpCliente.post<any>(this.auth_url2 + 'login', user)
     .pipe(tap(
       (res: JwtResponseI) => {
         if(res){
@@ -69,6 +69,11 @@ export class AuthService {
     }
   }
 
+  confirmaCuenta(form)
+  {
+    return this.httpCliente.post<any>(this.auth_url2 + 'confirma', form)
+  }
+
   private guardaToken(token: string): void{
     localStorage.setItem("TOKEN", token)
     this.token = token
@@ -96,7 +101,6 @@ export class AuthService {
   public getNombre(): void{
     if(!this.nombre){
       this.nombre = localStorage.getItem("name");
-      console.log(this.nombre)
     }
   }
 }
