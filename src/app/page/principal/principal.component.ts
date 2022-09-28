@@ -134,7 +134,7 @@ export class PrincipalComponent implements OnInit {
 
   /*NUEVO*/
   seleccionaTipoMovimiento(tipoMovimiento: number){
-  
+
     if(tipoMovimiento == 1){
       this.movimiento.tipo = 1;
       this.nuevoIngFlag = 1;

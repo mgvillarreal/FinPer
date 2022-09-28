@@ -1,29 +1,29 @@
 *{
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .titulo{
-    color: #419f3e;
-    font-size: 45px;
-    font-weight: 630;
-    letter-spacing: 2px;
+  color: #419f3e;
+  font-size: 45px;
+  font-weight: 630;
+  letter-spacing: 2px;
 }
 
 .btn-agregar{
-    border-color:#419f3e;
-    color: #419f3e;
-    font-size: 15px;
-    text-transform: uppercase;
-    border-radius: 25px;
-    margin-bottom: 10px;
-    margin-top: 4rem;
+  border-color:#419f3e;
+  color: #419f3e;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  margin-top: 4rem;
 }
 
 .btn-agregar:hover{
-    background-color:#419f3e;
-    color: white;
-    font-size: 15px;
-    text-transform: uppercase;
+  background-color:#419f3e;
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
 }
 
 select{
@@ -36,66 +36,22 @@ select{
 }
 
 input{
-    font-size:16px;
-    padding:10px 10px 10px 5px;
-    display: inline;
-    width:300px;
-    border:none;
-    border-bottom:1px solid #757575;
+  font-size:16px;
+  padding:10px 10px 10px 5px;
+  display: inline;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #757575;
 }
 
 .btn-close{
-    background-color: transparent;
-    color: white;
-    float: left;
-}
-
-.grid-campos{
-    display: grid;
-    grid-template-columns: (2, 1fr);
-}
-
-.modal-input{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-row-gap: 5px;
-    grid-auto-rows: minmax(15px, auto);
-}
-
-.modal-celda1{
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.modal-celda2{
-    grid-column: 2;
-    grid-row: 1;
-    line-height: 1;
-}
-
-.modal-celda3{
-    grid-column: 1/2;
-    grid-row: 2;
-}
-
-.modal-celda4{
-    grid-column: 1/2;
-    grid-row: 3;
-}
-
-.modal-celda1 select{
-    //max-width: 100px;
-}
-
-.modal-input-w input{
-    width: 100%;
+  background-color: transparent;
+  color: white;
+  float: left;
 }
 
 /*NUEVO DISENO*/
 
-body {
-    font-family: 'Montserrat', sans-serif;
-  }
   .container {
     max-width: 1000px;
     margin-left: auto;
@@ -136,19 +92,22 @@ body {
       box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
     }
     .col-1 {
-      flex-basis: 24%;
+      flex-basis: 18.8%;
     }
     .col-2 {
-      flex-basis: 24%;
+      flex-basis: 18.8%;
     }
     .col-3 {
-      flex-basis: 24%;
+      flex-basis: 18.8%;
     }
     .col-4 {
-      flex-basis: 24%;
+      flex-basis: 18.8%;
     }
     .col-5{
-      flex-basis: 4%;
+      flex-basis: 18.8%;
+    }
+    .col-6{
+      flex-basis: 6%;
     }
 
     .col{
@@ -165,9 +124,10 @@ body {
       .table-header {
         display: none;
       }
-      .table-row{
 
-      }
+      //.table-row{
+
+      //}
 
       li {
         display: block;
@@ -185,12 +145,12 @@ body {
           padding-right: 10px;
           content: attr(data-label);
           flex-basis: 50%;
-          text-align: right;
+          text-align: center;
         }
       }
 
       .col-1, .col-2, .col-3, .col-4, .col-5{
-        width: 100% !important;
+        width: 100% ;
       }
     }
   }
@@ -340,4 +300,22 @@ body {
 .table-row:hover{
   cursor: pointer;
   background-color: #fafafa !important;
+}
+
+/* MONTOS */
+.card-titulo{
+  color: #419f3e;
+  font-size: 27px;
+  font-weight: 530;
+  //letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.txt-green{
+  color:#1c6a1ab9;
+  font-size: 17px;
+}
+
+.table-hover{
+  cursor: pointer;
 }

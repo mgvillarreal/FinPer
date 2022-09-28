@@ -3,9 +3,9 @@
         <div class="wrap-login100">
             <form [formGroup]="forma" class="login100-form validate-form text-center" (ngSubmit)="ingresar()">
                 <a>
-                    <img src="./assets/img/icons/logo-fp-negro.png" class="imagen-logo " alt="" />
+                    <img src="./assets/img/icons/FinPerLogo.png" class="imagen-logo " alt="Logo FinPer" />
                 </a>
-                <span class="login100-form-title p-b-26">
+                <span class="login100-form-title p-b-26 mt-2">
                     Ingreso
                 </span>
 
@@ -30,12 +30,9 @@
                 </small>
 
                 <div class="container-login100-form-btn mt-4">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                        <button class="login100-form-btn" [disabled]="forma.invalid">
-                            Ingresar
-                        </button>
-                    </div>
+                    <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma.invalid">
+                        Ingresar
+                    </button>
                 </div>
 
                 <div class="mt-5">

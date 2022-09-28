@@ -1,28 +1,3 @@
-<!-- <div>
-    <div class="titulo text-center mt-5 mb-5">Últimos Movimientos</div>
-
-    <div class="grid-metas mt-5 mb-5 text-center">
-        <div class="encabezado">
-            <div> Tipo </div>
-            <div> Categoría </div>
-            <div> Monto </div>
-            <div> Fecha </div>
-        </div>
-        <div class="contenido" *ngFor="let movimiento of listadoMovimientos">
-            <div>{{movimiento.tmov_descripcion}}</div>
-            <div>{{movimiento.cmov_descripcion}}</div>
-            <div>{{movimiento.mon_descripcion + " " + movimiento.mov_monto}}</div>
-            <div>{{movimiento.mov_fcreacion|date: 'dd-MM-YYYY'}}</div>
-        </div>
-        
-    </div>
-
-    <div class="text-center">
-        <a routerLink="/miscuentas">Volver</a>
-    </div>
-
-</div> -->
-
 <div>
     <div class="titulo text-center mt-5 mb-5"> Últimos Movimientos </div>
 
@@ -34,11 +9,16 @@
           <div class="col col-4">Fecha</div>
         </li>
         <li class="table-row"  *ngFor="let movimiento of listadoMovimientos">
-            <div>{{movimiento.tmov_descripcion}}</div>
-            <div>{{movimiento.cmov_descripcion}}</div>
-            <div>{{movimiento.mon_descripcion + " " + movimiento.mov_monto}}</div>
-            <div>{{movimiento.mov_fcreacion|date: 'dd/MM/YYYY'}}</div>
+            <div class="col col-1">{{movimiento.tmov_descripcion}}</div>
+            <div class="col col-2">{{movimiento.cmov_descripcion}}</div>
+            <div class="col col-3">{{movimiento.mon_simbolo + " " + movimiento.mov_monto}}</div>
+            <div class="col col-4">{{movimiento.mov_fcreacion|date: 'dd/MM/YYYY H:mm'}}</div>
         </li>
         
       </ul>
+
+    <div class="text-center mb-4">
+        <a routerLink="/miscuentas">Volver</a>
+    </div>
+
 </div>

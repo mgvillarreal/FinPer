@@ -16,9 +16,9 @@
 }
 
 @media (min-width:768px) {
-  .header-blue {
+  /*.header-blue {
     //padding-bottom:120px;
-  }
+  }*/
 }
 
 .header-blue .navbar {
@@ -32,10 +32,10 @@
 }
 
 @media (min-width:768px) {
-  .header-blue .navbar {
+ /* .header-blue .navbar {
      //padding-top:1rem;
     // padding-bottom:1rem;
-  }
+  }*/
 }
 
 .header-blue .navbar .navbar-brand {
@@ -85,10 +85,10 @@
 }
 
 @media (min-width: 768px) {
-  .header-blue .navbar-nav .nav-link {
+  /*.header-blue .navbar-nav .nav-link {
     //padding-left:.7rem;
     //padding-right:.7rem;
-  }
+  }*/
 }
 
 @media (min-width: 992px) {
@@ -219,7 +219,7 @@
   border:1px solid #444;
   background-color:#aaa;
   overflow:hidden;
-  background:url('../../../assets/img/iphone.svg');
+  //background:url('../../../assets/img/iphone.svg');
   background-size:cover;
   background-position:center;
 }
@@ -285,7 +285,7 @@
   top:100%;
   padding:0;
   background-color: #caf6c8;
-  width: 140px;
+  width: 170px;
   z-index: 1000000;
 
 

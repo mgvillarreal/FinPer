@@ -3,13 +3,13 @@
         <div class="wrap-login100">
             <form [formGroup]="forma" class="login100-form" (ngSubmit)="registrar()">
                 <div class="login100-form validate-form text-center">
-                    <a> <img src="./assets/img/icons/FinPerLogo.png" class="imagen-logo mb-2" alt="" /> </a>
+                    <a> <img src="./assets/img/icons/FinPerLogo.png" class="imagen-logo mb-2" alt="Logo FinPer"/> </a>
 
                     <div *ngIf="parteFormulario==0">
-                        <span class="login100-form-title"> Registro </span>
+                        <span class="login100-form-title mt-2"> Registro </span>
 
                         <div class="wrap-input100">
-                            <input class="input100" type="email" name="email" placeholder="Email" formControlName="email">
+                            <input class="input100 input-margin" type="email" name="email" placeholder="Email" formControlName="email">
                         </div>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['email'].errors?.['required'] && forma.controls['email'].touched">
@@ -21,7 +21,7 @@
                         </small>
 
                         <div class="wrap-input100">
-                            <input class="input100" type="password" name="pwd" placeholder="Contraseña" formControlName="contrasena">
+                            <input class="input100 input-margin" type="password" name="pwd" placeholder="Contraseña" formControlName="contrasena">
                         </div>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['contrasena'].errors?.['required'] && forma.controls['contrasena'].touched">
@@ -33,7 +33,7 @@
                         </small>
 
                         <div class="wrap-input100">
-                            <input class="input100" type="password" name="pwdconfirm" placeholder="Confirme contraseña" formControlName="pwdConfirm">
+                            <input class="input100 input-margin" type="password" name="pwdconfirm" placeholder="Confirme contraseña" formControlName="pwdConfirm">
                         </div>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['pwdConfirm'].errors?.['required'] && forma.controls['pwdConfirm'].touched">
@@ -45,12 +45,9 @@
                         </small>
 
                         <div class="container-login100-form-btn">
-                            <div class="wrap-login100-form-btn">
-                                <div class="login100-form-bgbtn"></div>
-                                <button class="login100-form-btn" (click)="pasarParteUno()">
-                                    Continuar
-                                </button>
-                            </div>
+                            <button class="btn btn-light btn-lg action-button btngreen" (click)="pasarParteUno()">
+                                Continuar
+                            </button>
                         </div>
 
                         <div class="mt-5">
@@ -94,12 +91,9 @@
                         </small>
         
                         <div class="container-login100-form-btn">
-                            <div class="wrap-login100-form-btn">
-                                <div class="login100-form-bgbtn"></div>
-                                <button class="login100-form-btn" (click)="pasarParteDos()">
-                                    Continuar
-                                </button>
-                            </div>
+                            <button class="btn btn-light btn-lg action-button btngreen" (click)="pasarParteDos()">
+                                Continuar
+                            </button>
                         </div>
                     </div>
 
@@ -150,49 +144,6 @@
                             </small><br>
                         </div>  
 
-                        <!-- <div>
-                            <div *ngFor="let modo of modosIng">
-                                <input type="checkbox" name="modoing[]" formControlName="modoing"/>
-                                <label class="modIng"> {{modo.nombre}} </label>
-                            </div>
-                            <pre>{{ modosIng | json }}</pre>
-                            <small  class="texto-validacion text-center"
-                            *ngIf="forma.controls['modoing'].errors?.['required']">
-                                Debe seleccionar al menos un modo de ingreso.
-                            </small><br>
-                        </div>   -->
-
-                        <!-- <div class="grid-ingresos">
-                            <label class="btn btn-outline-primary btn-agregar mt-1">
-                                <input type="checkbox" name="modoing" formControlName="modoing" value="1"> <span>Desempleado</span>
-                            </label>
-                            <label class="btn btn-outline-primary btn-agregar mt-1">
-                                <input type="checkbox" name="modoing" formControlName="modoing" value="2"> <span>Estudiante</span>
-                            </label>
-                            <label class="btn btn-outline-primary btn-agregar mt-1">
-                                <input type="checkbox" name="modoing" formControlName="modoing" value="3"> <span>Emprendedor</span>
-                            </label>
-                            <label class="btn btn-outline-primary btn-agregar mt-1">
-                                <input type="checkbox" name="modoing" formControlName="modoing" value="4"> <span>Jubilado</span>
-                            </label>
-                            <label class="btn btn-outline-primary btn-agregar mt-1">
-                                <input type="checkbox" name="modoing" formControlName="modoing" value="7"> <span>Trabajo por horas</span>
-                            </label>
-                            <label class="btn btn-outline-primary btn-agregar mt-1">
-                                <input type="checkbox" name="modoing" formControlName="modoing" value="8"> <span>Otro</span>
-                            </label>
-                            <label class="btn btn-outline-primary btn-agregar mt-1">
-                                <input type="checkbox" name="modoing" formControlName="modoing" value="5"> <span>Profesional independiente</span>
-                            </label>
-                            <label class="btn btn-outline-primary btn-agregar mt-1">
-                                <input type="checkbox" name="modoing" formControlName="modoing" value="6"> <span>Trabajo a tiempo completo</span>
-                            </label>
-                        </div>
-                        <small  class="texto-validacion text-center"
-                        *ngIf="forma.controls['modoing'].errors?.['required']">
-                            Debe seleccionar al menos un modo de ingreso.
-                        </small><br> -->
-
                         <label class="texto-label mt-4">Profesión</label>
                         
                         <div class="d-flex justify-content-center">
@@ -211,10 +162,7 @@
                         <div class="container-login100-form-btn">
                             <div class="wrap-login100-form-btn">
                                 <div class="login100-form-bgbtn"></div>
-                                <!-- <button class="login100-form-btn" data-bs-toggle="modal">
-                                    Registrar
-                                </button> -->
-                                <button class="login100-form-btn" data-bs-toggle="modal" href="#exampleModalCenter">
+                                <button class="btn btn-light btn-lg action-button btngreen" data-bs-toggle="modal" href="#exampleModalCenter">
                                     Registrar
                                 </button> 
                             </div>
@@ -226,30 +174,3 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header ftco-degree-bg">
-          <button type="button" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" class="ion-ios-close"></span>
-          </button>
-        </div>
-        <div class="text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-forward" width="80" height="80" viewBox="0 0 24 24" stroke-width="2" stroke="#6f32be" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M12 18h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7.5" />
-                <path d="M3 6l9 6l9 -6" />
-                <path d="M15 18h6" />
-                <path d="M18 15l3 3l-3 3" />
-            </svg>
-        </div>
-        <div class="modal-body pt-md-0 pb-md-5 text-center mt-2">
-            <p class="texto-modal">Hemos enviado un email a tu correo electrónico para validar tu perfil</p>
-        </div>
-        <div class="text-center mt-4">
-            <button class="btn btn-modal mb-4">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>
