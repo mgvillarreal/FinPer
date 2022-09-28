@@ -11,6 +11,7 @@ import { Meta } from '../models/meta.model';
 })
 export class MetasService {
   urlv4 = 'https://hostinjor.com/apifinper/v4/metas'
+  urlMontos = 'https://hostinjor.com/apifinper/v5/montos/'
 
   constructor(public http: HttpClient) {
 
@@ -43,6 +44,11 @@ export class MetasService {
 
   traeMetas2(id: string){
     return this.http.get<any>(this.urlv4 + id)
+  }
+
+  traeMontos(id)
+  {
+    return this.http.get<any>(this.urlMontos + id)
   }
 
 }

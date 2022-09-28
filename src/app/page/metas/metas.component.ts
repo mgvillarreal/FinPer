@@ -29,6 +29,8 @@ export class MetasComponent implements OnInit {
   estado = 1;
   metas = [];
 
+  metaSeleccionada;
+
   //datos usados para pasar a moficacion con ngmodel
   modificarId: number;
   modificarMonto: number;
@@ -37,7 +39,7 @@ export class MetasComponent implements OnInit {
   modificarFecha: Date;
   //hasta datos a modificar
   modificarEstado: number;
-  
+
   metaAModificar: MetasI;
 
   public forma: FormGroup;
@@ -45,6 +47,10 @@ export class MetasComponent implements OnInit {
   public formaMonto: FormGroup;
   meta = new Meta();
   monto = new Monto();
+
+  // Montos
+
+  arrMontos = []
 
   constructor(
     private fb: FormBuilder,
@@ -187,7 +193,7 @@ export class MetasComponent implements OnInit {
         this.modificarFecha=this.metaAModificar.met_fcreacion;
         this.modificarMoneda=this.metaAModificar.met_idmoneda;
         //console.log(meta);
-       
+
       }
     });
   }
@@ -210,14 +216,23 @@ export class MetasComponent implements OnInit {
   }
 
   /*MONTOS DE LAS METAS*/
-  mostrarMontos(idMeta: Number){
+  async mostrarMontos(meta){
     if(this.muestraMontosFlag==0){
       this.muestraMontosFlag = 1;
       this.muestraMetas = 0;
       this.agregaMontoFlag = 0;
     }
+
+    await this.selMeta(meta);
+
+    this.traerMontos(this.metaSeleccionada.met_id)
+
     //console.log('ID de la meta selec', idMeta);
-    this.monto.mmet_idmeta = idMeta;
+    // this.monto.mmet_idmeta = idMeta;
+  }
+
+  selMeta(meta){
+    return this.metaSeleccionada = meta;
   }
 
   cambiaAgregaMontoFlag(){
@@ -281,5 +296,12 @@ export class MetasComponent implements OnInit {
       this.muestraMetas = 0;
       this.editaMontoFlag = 0;
     }
+  }
+
+  traerMontos(id){
+    this.metaServicio.traeMontos(id).subscribe(resp => {
+      console.log(resp)
+      this.arrMontos = resp
+    })
   }
 }
