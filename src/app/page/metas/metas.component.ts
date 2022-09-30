@@ -51,6 +51,8 @@ export class MetasComponent implements OnInit {
   // Montos
 
   arrMontos = []
+  arrMontosAhorrados = []
+  arrDiferencia = []
 
   constructor(
     private fb: FormBuilder,
@@ -154,7 +156,7 @@ export class MetasComponent implements OnInit {
     this.muestraMensajeOk();
     //this.metaServicio.guardaMetas(this.meta);
     this.metaServicio.guardaMetas(this.meta).subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       setTimeout(() => {
         this.traeMetaPorEstado(1);
       }, 1500);
@@ -171,16 +173,14 @@ export class MetasComponent implements OnInit {
     this.traeMetaPorEstado(this.estado);
   }
 
-  traeMetaPorEstado(estado: number) {
-    //if (estado == 1) {
-    this.metaServicio.traeMetasPorEstado(estado).subscribe((data) => {
+  async traeMetaPorEstado(estado: number) {
+    await this.metaServicio.traeMetasPorEstado(estado).subscribe((data) => {
       this.metas = data;
+      this.calculaMontos()
+      console.log(this.metas)
     });
-    /*} else {
-      this.metaServicio.traeMetasPorEstado(2).subscribe((data) => {
-        this.metas = data;
-      });
-    }*/
+
+
   }
 
   mostrarDatosEditar(id: number) {
@@ -245,10 +245,17 @@ export class MetasComponent implements OnInit {
     }
   }
 
-  crearMonto(){
-    this.monto.mmet_monto = this.formaMonto.value['montoMonto'];
-    this.monto.mmet_fcreacion = this.formaMonto.value['fechaMonto'];
+  async crearMonto(){
+    this.monto.meta = this.metaSeleccionada.met_id;
+    this.monto.monto = this.formaMonto.value['montoMonto'];
+    this.monto.fecha = this.formaMonto.value['fechaMonto'];
     console.log('Monto creado: ', this.monto);
+
+    await this.metaServicio.agregaMonto(this.monto).subscribe(resp => {
+      console.log(resp)
+    })
+
+    this.monto = new Monto();
     this.muestraMensajeOkMonto();
   }
 
@@ -298,10 +305,33 @@ export class MetasComponent implements OnInit {
     }
   }
 
-  traerMontos(id){
+  async traerMontos(id){
     this.metaServicio.traeMontos(id).subscribe(resp => {
-      console.log(resp)
-      this.arrMontos = resp
+      this.arrMontos = resp;
     })
+  }
+
+ calculaMontos()
+  {
+    if(this.metas.length > 0){
+      this.metas.forEach(meta => {
+        this.calculaUnAhorrado(meta.met_id)
+      })
+    }
+  }
+
+  calculaUnAhorrado(id)
+  {
+    let ahorrado: number = 0;
+
+    this.metaServicio.traeMontos(id).subscribe(resp => {
+      resp.forEach(monto => {
+        ahorrado += Number(monto.mmet_monto)
+      })
+      this.arrMontosAhorrados.push(ahorrado)
+      console.log(this.arrMontosAhorrados)
+    })
+
+
   }
 }

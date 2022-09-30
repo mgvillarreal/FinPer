@@ -51,4 +51,8 @@ export class MetasService {
     return this.http.get<any>(this.urlMontos + id)
   }
 
+  agregaMonto(monto)
+  {
+    return this.http.post<any>(this.urlMontos + "crear", monto)
+  }
 }
