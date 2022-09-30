@@ -13,27 +13,27 @@ export class MovimientosService {
   url = 'https://hostinjor.com/finperapi/api/movimientos/'
   urlv1 = 'https://hostinjor.com/apifinper/v2/movimientos/'
   urlv4 = 'https://hostinjor.com/apifinper/v4/movimientos/'
+  urlv5 = 'https://hostinjor.com/apifinper/v5/movimientos/'
 
   constructor(
     public http: HttpClient
   ) { }
 
-
-  traeMovimientos(){
-    // console.log(this.http.get<any>(this.url))
-    return this.http.get<any>(this.url);
-  }
-
   guardaMovimiento(movimiento: Movimiento){
-    return this.http.post(this.url, JSON.stringify(movimiento))
+    return this.http.post(this.urlv5 + 'cargamovimiento', movimiento)
   }
 
-  traeUnMovimiento(id: string){
-    return this.http.get<Movimiento>(id);
+  traeMovimientos(id: string){
+    return this.http.get<any>(this.urlv5 + id)
   }
 
-  traeMovimientos2(id: string){
-    return this.http.get<any>(this.urlv4 + id)
+  borraUnMovimiento(id){
+    return this.http.put<any>(this.urlv4 + 'borramovimiento', id)
+  }
+
+  traeCategorias()
+  {
+
   }
 
 }

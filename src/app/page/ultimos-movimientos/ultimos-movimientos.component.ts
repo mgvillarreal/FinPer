@@ -14,7 +14,7 @@ export class UltimosMovimientosComponent implements OnInit {
   constructor(private MovimientoServ: MovimientosService) { }
 
   muestraMovimientos():void{
-    this.MovimientoServ.traeMovimientos2(localStorage.getItem("id")).subscribe(resp => { 
+    this.MovimientoServ.traeMovimientos(localStorage.getItem("id")).subscribe(resp => {
                                                                                           this.listadoMovimientos = resp;
                                                                                         })
   }

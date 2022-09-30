@@ -29,6 +29,7 @@ export class PrincipalComponent implements OnInit {
   /*NUEVO*/
   public forma: FormGroup;
   movimiento = new Movimiento;
+  movimientoModificar:MovimientoI;
   muestraPrincipalFlag=1;
   nuevoIngFlag:number = 0;
   nuevoEgrFlag:number = 0;
@@ -44,6 +45,9 @@ export class PrincipalComponent implements OnInit {
   arrAnios:number[] = [2021, 2022];
   mesActual = new Date().getMonth();
   anioActual = new Date().getFullYear();
+
+  movimientoSeleccionado: MovimientoI
+  categorias = []
 
   constructor(private movimientoService: MovimientosService, private fb: FormBuilder, private authService: AuthService) {
     this.calcula()
@@ -92,45 +96,32 @@ export class PrincipalComponent implements OnInit {
   }
 
   calcula(): void{
+    this.ingresos=[];
+    this.egresos=[];
     this.ingreso = 0;
     this.egreso = 0;
     this.balance = 0;
-    this.movimientoService.traeMovimientos2(localStorage.getItem('id'))
+    this.movimientoService.traeMovimientos(localStorage.getItem('id'))
     .subscribe(respuesta => {
+      console.log(respuesta)
       this.dataMovimientos  = respuesta
       for(let dat of this.dataMovimientos)
       {
-        //console.log(dat)
         if(dat.tmov_descripcion=='Ingreso'){
-          //console.log("Entre aca")
           this.fecha = dat.mov_fcreacion
           this.ingreso += Number(dat.mov_monto)
           this.balance += Number(dat.mov_monto)
+          this.ingresos.push(dat)
         }else{
           //console.log("Tambien entre aca (o no)")
           this.balance -= Number(dat.mov_monto)
           this.egreso += Number(dat.mov_monto)
+          this.egresos.push(dat)
         }
       }
       //console.info(this.ingreso)
     })
 
-  }
-
-  calculaEgresos(): number{
-    let egreso = 0
-    this.movimientoService.traeMovimientos2('11')
-    .subscribe(respuesta => {
-      let { data } = respuesta
-      data = JSON.parse(data)
-      for(let dat of data)
-      {
-        if(dat['tipo']==2){
-          egreso += dat['monto']
-        }
-      }
-    })
-    return egreso
   }
 
   /*NUEVO*/
@@ -148,15 +139,23 @@ export class PrincipalComponent implements OnInit {
     }
   }
 
-  crearNuevoMovimiento(){
+  async crearNuevoMovimiento(){
+
     this.movimiento.usuario = Number(localStorage.getItem("id"));
     this.movimiento.monto = this.forma.value['monto'];
     this.movimiento.categoria = this.forma.value['categoria'];
     this.movimiento.detalle = this.forma.value['detalle'];
     this.movimiento.fecha = this.forma.value['fecha'];
+    //this.movimiento.tipo = this.forma.value['tipo'];
+
     console.log('Movimiento creado: ', this.movimiento);
-    this.muestraMsjAltaOk();
-  }
+    await this.movimientoService.guardaMovimiento(this.movimiento).subscribe((data) => {
+      console.log(data);
+
+  })
+  this.muestraMsjAltaOk();
+  this.calcula();
+}
 
   volveraPrincipal(){
     this.muestraPrincipalFlag = 1;
@@ -188,15 +187,17 @@ export class PrincipalComponent implements OnInit {
     this.editaEgrFlag = 0;
   }
 
-  editarIngreso(){
+  editarIngreso(movimiento){
     if(this.editaIngFlag==0){
       this.editaIngFlag = 1;
       this.muestraPrincipalFlag = 0;
       this.detalleIngFlag = 0;
     }
+
+    this.movimientoSeleccionado = movimiento
   }
 
-  editarEgreso(){
+  editarEgreso(id_egreso){
     if(this.editaEgrFlag==0){
       this.editaEgrFlag = 1;
       this.muestraPrincipalFlag = 0;
@@ -245,4 +246,6 @@ export class PrincipalComponent implements OnInit {
     this.editaIngFlag = 1;
     this.preguntaEliminarFlag = 0;
   }
+
+
 }
