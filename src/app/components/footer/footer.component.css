@@ -1,9 +1,10 @@
 .footer {
-  background:linear-gradient(135deg, #4161e2, #ee4dd3);
-  background-color:#184e8e;
+  /*background:linear-gradient(135deg, #4161e2, #ee4dd3);
+  background-color:#184e8e;*/
+  background-color:#defadd;
   font-family:'Poppins', sans-serif !important;
   height: 50px;
-  color: white;
+  color: #419f3e;
   font-size: 13px;
   display: flex;
   width: 100%;

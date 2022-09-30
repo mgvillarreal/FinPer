@@ -1,3 +1,16 @@
+/* FUENTES */
+
+:root {
+  --fuente: 'Poppins', sans-serif;
+}
+
+/* COLORES */
+
+:root {
+  --principal: #3C89E5;
+}
+
+
 .min-h{
   min-height: calc(100vh - 126px);
 }

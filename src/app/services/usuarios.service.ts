@@ -23,7 +23,6 @@ export class UsuariosService {
   ) {}
 
   datosUsuario(){
-    console.log(this.auth.auth())
 
     let data: any = {
       "token": this.auth.auth()

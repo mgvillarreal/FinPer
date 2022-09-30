@@ -3,7 +3,7 @@
         <div class="wrap-login100">
             <form [formGroup]="forma" class="login100-form" (ngSubmit)="registrar()">
                 <div class="login100-form validate-form text-center">
-                    <a> <img src="./assets/img/icons/logo-fp-negro.png" class="imagen-logo" alt="" /> </a>
+                    <a> <img src="./assets/img/icons/FinPerLogo.png" class="imagen-logo mb-2" alt="" /> </a>
 
                     <div *ngIf="parteFormulario==0">
                         <span class="login100-form-title"> Registro </span>
@@ -105,20 +105,95 @@
 
                     <div *ngIf="parteFormulario==2">
                         <span class="login100-form-title p-b-26"> Más sobre ti </span>
-    
-                        <div class="d-flex justify-content-center">
-                            <div class="wrap-input100">
-                                <select class="input100"  name="modoIngresos" formControlName="modoIngreso">
-                                    <option value="" selected [disabled]="1">Modos de Ingreso</option>
-                                    <option value="{{ingreso.ming_id}}" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['modoIngreso'].errors?.['required'] && forma.controls['modoIngreso'].touched">
-                            Debe seleccionar un modo de ingreso.
-                        </small>
 
+                        <label class="texto-label mb-4">Modos de Ingreso</label>
+
+                        <div>
+                            <div >
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="1">
+                                    <label class="modIng mt-1"> Desempleado </label>
+                                </div>
+                               <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="2">
+                                    <label class="modIng mt-1"> Estudiante </label>
+                               </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="3">
+                                    <label class="modIng mt-1"> Emprendedor </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="4">
+                                    <label class="modIng mt-1"> Jubilado </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="5">
+                                    <label class="modIng mt-1"> Trabajo a tiempo completo </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="6">
+                                    <label class="modIng mt-1"> Trabajo por horas </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="6">
+                                    <label class="modIng mt-1"> Profesional independiente </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="8">
+                                    <label class="modIng mt-1"> Otro </label>
+                                </div>
+                            </div>
+                            
+                            <small  class="texto-validacion text-center"
+                            *ngIf="forma.controls['modoing'].errors?.['required']">
+                                Debe seleccionar al menos un modo de ingreso.
+                            </small><br>
+                        </div>  
+
+                        <!-- <div>
+                            <div *ngFor="let modo of modosIng">
+                                <input type="checkbox" name="modoing[]" formControlName="modoing"/>
+                                <label class="modIng"> {{modo.nombre}} </label>
+                            </div>
+                            <pre>{{ modosIng | json }}</pre>
+                            <small  class="texto-validacion text-center"
+                            *ngIf="forma.controls['modoing'].errors?.['required']">
+                                Debe seleccionar al menos un modo de ingreso.
+                            </small><br>
+                        </div>   -->
+
+                        <!-- <div class="grid-ingresos">
+                            <label class="btn btn-outline-primary btn-agregar mt-1">
+                                <input type="checkbox" name="modoing" formControlName="modoing" value="1"> <span>Desempleado</span>
+                            </label>
+                            <label class="btn btn-outline-primary btn-agregar mt-1">
+                                <input type="checkbox" name="modoing" formControlName="modoing" value="2"> <span>Estudiante</span>
+                            </label>
+                            <label class="btn btn-outline-primary btn-agregar mt-1">
+                                <input type="checkbox" name="modoing" formControlName="modoing" value="3"> <span>Emprendedor</span>
+                            </label>
+                            <label class="btn btn-outline-primary btn-agregar mt-1">
+                                <input type="checkbox" name="modoing" formControlName="modoing" value="4"> <span>Jubilado</span>
+                            </label>
+                            <label class="btn btn-outline-primary btn-agregar mt-1">
+                                <input type="checkbox" name="modoing" formControlName="modoing" value="7"> <span>Trabajo por horas</span>
+                            </label>
+                            <label class="btn btn-outline-primary btn-agregar mt-1">
+                                <input type="checkbox" name="modoing" formControlName="modoing" value="8"> <span>Otro</span>
+                            </label>
+                            <label class="btn btn-outline-primary btn-agregar mt-1">
+                                <input type="checkbox" name="modoing" formControlName="modoing" value="5"> <span>Profesional independiente</span>
+                            </label>
+                            <label class="btn btn-outline-primary btn-agregar mt-1">
+                                <input type="checkbox" name="modoing" formControlName="modoing" value="6"> <span>Trabajo a tiempo completo</span>
+                            </label>
+                        </div>
+                        <small  class="texto-validacion text-center"
+                        *ngIf="forma.controls['modoing'].errors?.['required']">
+                            Debe seleccionar al menos un modo de ingreso.
+                        </small><br> -->
+
+                        <label class="texto-label mt-4">Profesión</label>
                         
                         <div class="d-flex justify-content-center">
                             <div class="wrap-input100" >
@@ -136,14 +211,15 @@
                         <div class="container-login100-form-btn">
                             <div class="wrap-login100-form-btn">
                                 <div class="login100-form-bgbtn"></div>
-                                <button class="login100-form-btn" data-bs-toggle="modal">
-                                    Registrar
-                                </button>
-                                <!-- <button class="login100-form-btn" data-bs-toggle="modal" href="#exampleModalCenter">
+                                <!-- <button class="login100-form-btn" data-bs-toggle="modal">
                                     Registrar
                                 </button> -->
+                                <button class="login100-form-btn" data-bs-toggle="modal" href="#exampleModalCenter">
+                                    Registrar
+                                </button> 
                             </div>
                         </div>
+
                     </div>
                 </div>
             </form>

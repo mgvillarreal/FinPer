@@ -5,7 +5,7 @@ import { MovimientosService } from 'src/app/services/movimientos.service';
 @Component({
   selector: 'app-ultimos-movimientos',
   templateUrl: './ultimos-movimientos.component.html',
-  styleUrls: ['./ultimos-movimientos.component.css']
+  styleUrls: ['./ultimos-movimientos.component.scss']
 })
 export class UltimosMovimientosComponent implements OnInit {
 

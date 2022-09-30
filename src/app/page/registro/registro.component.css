@@ -2,11 +2,11 @@
     margin: 0px; 
     padding: 0px; 
     box-sizing: border-box;
+    font-family:'Poppins', sans-serif;
 }
   
 body, html {
     height: 100%;
-    font-family:'Poppins', sans-serif;
 }
   
 a {
@@ -111,7 +111,7 @@ iframe {
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    padding: 55px 55px 33px 55px;
+    padding: 55px 40px 33px 40px;
   
     box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
@@ -286,6 +286,7 @@ iframe {
     border-radius: 25px;
     overflow: hidden;
     margin: 0 auto;
+    border: 1px solid #419f3e;
 }
   
 .login100-form-bgbtn {
@@ -293,14 +294,13 @@ iframe {
     z-index: -1;
     width: 300%;
     height: 100%;
-    background: #a64bf4;
-    background: -webkit-linear-gradient(to right, #4161e2, #ee4dd3, #4161e2, #ee4dd3);
+    background: #defadd;
+    /* background: -webkit-linear-gradient(to right, #4161e2, #ee4dd3, #4161e2, #ee4dd3);
     background: -o-linear-gradient(to right, #4161e2, #ee4dd3, #4161e2, #ee4dd3);
     background: -moz-linear-gradient(to right, #4161e2, #ee4dd3, #4161e2, #ee4dd3);
-    background: linear-gradient(to right, #4161e2, #ee4dd3, #4161e2, #ee4dd3);
+    background: linear-gradient(to right, #4161e2, #ee4dd3, #4161e2, #ee4dd3); */
     top: 0;
     left: -100%;
-  
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
@@ -310,7 +310,7 @@ iframe {
 .login100-form-btn {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
-    color:white;
+    color:#419f3e;
     line-height: 1.2;
     text-transform: uppercase;
   
@@ -518,4 +518,55 @@ iframe {
     color:white;
     line-height: 1.2;
     text-transform: uppercase;
+}
+
+.grid-ingresos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 1em;
+    grid-column-gap: 0.4rem;
+    justify-content: space-between;
+}
+
+.grid-checkbox {
+    display: flex;
+}
+
+.texto-label{
+    color: black;
+    font-size: large;
+}
+
+.btn-agregar{
+    border-color:#9B2CEC;
+    color: #666666;
+    font-size: 15px;
+    border-radius: 25px
+}
+
+.btn-agregar:hover{
+    background-color:#9c2cecc9;
+    color: white;
+    font-size: 15px;
+    /*text-transform: uppercase;*/
+}
+
+.modIng {
+    color: #666666;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 0.3rem;
+}
+
+input:checked + label {
+    color: #9c2cecc9;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0.3rem;
+}
+
+html, body
+{
+	height: 100%;
 }

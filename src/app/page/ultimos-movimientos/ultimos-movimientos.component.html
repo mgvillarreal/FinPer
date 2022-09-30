@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <div class="titulo text-center mt-5 mb-5">Últimos Movimientos</div>
 
     <div class="grid-metas mt-5 mb-5 text-center">
@@ -21,4 +21,24 @@
         <a routerLink="/miscuentas">Volver</a>
     </div>
 
+</div> -->
+
+<div>
+    <div class="titulo text-center mt-5 mb-5"> Últimos Movimientos </div>
+
+    <ul class="responsive-table text-center mt-3">
+        <li class="table-header">
+          <div class="col col-1">Tipo</div>
+          <div class="col col-2">Categoría</div>
+          <div class="col col-3">Monto</div>
+          <div class="col col-4">Fecha</div>
+        </li>
+        <li class="table-row"  *ngFor="let movimiento of listadoMovimientos">
+            <div>{{movimiento.tmov_descripcion}}</div>
+            <div>{{movimiento.cmov_descripcion}}</div>
+            <div>{{movimiento.mon_descripcion + " " + movimiento.mov_monto}}</div>
+            <div>{{movimiento.mov_fcreacion|date: 'dd/MM/YYYY'}}</div>
+        </li>
+        
+      </ul>
 </div>

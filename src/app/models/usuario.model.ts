@@ -1,10 +1,11 @@
 export class Usuario {
+    id:number;
     nombre?:string;
     mail?:string;
     contrasena?:string;
     fnacimiento?:Date;
     residencia:number;
-    modoIngreso:[];
+    modoIngreso:Number[];
     profesion?:[];
     fcreacion?:Date;
     estado?:number;
@@ -13,7 +14,5 @@ export class Usuario {
     constructor(){  
 
     }
-
-  
 
 }

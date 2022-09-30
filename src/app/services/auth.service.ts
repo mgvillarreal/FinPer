@@ -4,6 +4,7 @@ import { UsuarioI } from '../interfaces/usuario';
 import { JwtResponseI } from '../interfaces/jwt-response';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,10 @@ export class AuthService {
 
   auth_url: string = 'https://hostinjor.com/apifinper/v1/usuarios/'
   authSubject = new BehaviorSubject(false)
-  private token: string
+  private token: string;
+  public id: Number;
+  public nombre: string;
+  public usuario: Usuario;
 
   constructor(
     private httpCliente: HttpClient,
@@ -76,6 +80,19 @@ export class AuthService {
   public getToken(): void{
     if(!this.token){
       this.token = localStorage.getItem("TOKEN")
+    }
+  }
+
+  public getId(): void{
+    if(!this.token){
+      this.id = Number(localStorage.getItem("id"));
+    }
+    // return this.id;
+  }
+
+  public getNombre(): void{
+    if(!this.token){
+      this.nombre = localStorage.getItem("nombre");
     }
   }
 }
