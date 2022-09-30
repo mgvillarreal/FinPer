@@ -171,15 +171,11 @@
 
   <div class="text-center mt-4">
     <select class="select-finper-default select-s" name="" id="">
-      <!-- <option *ngFor="let mes of arrMeses" ng-model="mesActual">{{mes}}</option> -->
       <option *ngFor="let mes of arrMeses; let i = index" value="{{i}}" [selected]="i == mesActual">{{mes}}</option>
    </select>
 
     <select class="select-finper-default select-xs" name="" id="">
       <option *ngFor="let anio of arrAnios" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
-      <!-- <option value="2022" selected>2022</option>
-      <option value="2023">2023</option>
-      <option value="2024">2024</option> -->
     </select>
   </div>
 
