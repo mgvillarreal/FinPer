@@ -63,6 +63,8 @@ export class PrincipalComponent implements OnInit {
       'detalle': ['', [Validators.required]],
       'fecha': ['', [Validators.required]]
     });
+
+    this.traeCategorias()
   }
 
   agregaNumero(numero: number){
@@ -206,12 +208,13 @@ export class PrincipalComponent implements OnInit {
   }
 
 
-  actualizarMovimiento(){
+  actualizarMovimiento(id){
     this.movimiento.usuario = Number(localStorage.getItem("id"));
     this.movimiento.monto = this.forma.value['monto'];
     this.movimiento.categoria = this.forma.value['categoria'];
     this.movimiento.detalle = this.forma.value['detalle'];
     this.movimiento.fecha = this.forma.value['fecha'];
+    this.movimiento.id =id;
     console.log('Movimiento modificado: ', this.movimiento);
 
     this.muestraMensajeActOk();
@@ -239,6 +242,8 @@ export class PrincipalComponent implements OnInit {
     this.detalleIngFlag = 1;
     this.editaIngFlag = 0;
     this.preguntaEliminarFlag = 0;
+
+    console.log('Eliminar: ', this.movimientoSeleccionado.mov_id)
   }
 
   cancelaEliminar(){
@@ -247,5 +252,9 @@ export class PrincipalComponent implements OnInit {
     this.preguntaEliminarFlag = 0;
   }
 
-
+  traeCategorias(){
+    this.movimientoService.traeCategorias().subscribe(resp => {
+      this.categorias = resp
+    })
+  }
 }

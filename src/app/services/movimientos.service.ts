@@ -33,7 +33,7 @@ export class MovimientosService {
 
   traeCategorias()
   {
-
+    return this.http.get<any>(this.urlv5)
   }
 
 }

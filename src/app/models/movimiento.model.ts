@@ -5,5 +5,6 @@ export class Movimiento{
   detalle: string;
   tipo: number;
   usuario: number;
-  
+  id: number;
+
 }

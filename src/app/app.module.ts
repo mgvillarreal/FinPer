@@ -32,7 +32,6 @@ import { DatosComponent } from './page/datos/datos.component';
 import { GraficoMiscuentasComponent } from './page/grafico-miscuentas/grafico-miscuentas.component';
 
 registerLocaleData(localeEsAr, 'es-Ar');
-
 @NgModule({
   declarations: [
     AppComponent,

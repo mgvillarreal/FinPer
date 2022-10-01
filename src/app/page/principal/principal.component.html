@@ -391,7 +391,7 @@
       <br />
       <div class="card-titulo ingreso mb-4">Editar Ingreso</div>
 
-      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento()">
+      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento(movimientoSeleccionado.mov_id)">
         <div class="wrap-input100 modal-celda2 my-2">
           <input
             type="number"
@@ -409,9 +409,7 @@
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
             <option value=" " [selected]="" disabled>Categoría</option>
-            <option value="1" [selected]="movimientoSeleccionado.mov_idcategoria == 1">Salario</option>
-            <option value="2" [selected]="movimientoSeleccionado.mov_idcategoria == 1">Horas Extras</option>
-            <option *ngFor="let categoria of categorias">Horas Extras</option>
+            <option *ngFor="let categoria of categorias" value="{{categoria.cmov_id}}" [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id">{{categoria.cmov_descripcion}}</option>
           </select>
         </div><br>
         <small  class="texto-validacion text-center"
@@ -477,7 +475,7 @@
       <br />
       <div class="card-titulo egreso mb-4">Editar Gasto</div>
 
-      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento()">
+      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento(2)">
         <div class="wrap-input100 modal-celda2 my-2">
           <input
             type="number"
