@@ -78,6 +78,10 @@
                         *ngIf="forma.controls['fnacimiento'].errors?.['required'] && forma.controls['fnacimiento'].touched">
                             La fecha de nacimiento es requerida.
                         </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['fechaMayorA15']">
+                            Debes ser mayor a 15 años.
+                        </small>
                         <br>
                         <div class="wrap-input100" >
                             <select class="input100" name="residencia" formControlName="residencia">
