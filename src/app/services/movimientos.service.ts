@@ -31,6 +31,11 @@ export class MovimientosService {
     return this.http.put<any>(this.urlv4 + 'borramovimiento', id)
   }
 
+  editaUnMovimiento(movimiento)
+  {
+    return this.http.put<any>(this.urlv5 + 'modificamovimiento', movimiento)
+  }
+
   traeCategorias()
   {
     return this.http.get<any>(this.urlv5)

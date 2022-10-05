@@ -284,8 +284,8 @@
           </thead> -->
           <tbody>
             <tr
-              (click)="editarIngreso(datos)"
-              *ngFor="let datos of this.ingresos"
+              (click)="editarIngreso(movimiento)"
+              *ngFor="let movimiento of this.ingresos"
             >
               <td scope="row">
                 <svg
@@ -308,8 +308,8 @@
                   <path d="M12 6v2m0 8v2" />
                 </svg>
               </td>
-              <td>{{ datos.mov_detalle }}</td>
-              <td>{{ datos.mon_simbolo }} {{ datos.mov_monto }}</td>
+              <td>{{ movimiento.mov_detalle }}</td>
+              <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto }}</td>
             </tr>
           </tbody>
         </table>
@@ -391,7 +391,7 @@
       <br />
       <div class="card-titulo ingreso mb-4">Editar Ingreso</div>
 
-      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento(movimientoSeleccionado.mov_id)">
+      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento()">
         <div class="wrap-input100 modal-celda2 my-2">
           <input
             type="number"
@@ -475,7 +475,7 @@
       <br />
       <div class="card-titulo egreso mb-4">Editar Gasto</div>
 
-      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento(2)">
+      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento()">
         <div class="wrap-input100 modal-celda2 my-2">
           <input
             type="number"
