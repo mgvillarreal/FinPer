@@ -5,15 +5,17 @@
         <li class="table-header">
           <div class="col col-1">Tipo</div>
           <div class="col col-2">Categoría</div>
-          <div class="col col-3">Monto</div>
-          <div class="col col-4">Fecha</div>
+          <div class="col col-3">Descripción</div>
+          <div class="col col-4">Monto</div>
+          <div class="col col-5">Fecha</div>
         </li>
         <li  class="table-row"  *ngFor="let movimiento of listadoMovimientos"
         [ngClass]="(movimiento.tmov_descripcion=='Ingreso')? 'Ingreso' : 'Egreso' ">
             <div class="col col-1">{{movimiento.tmov_descripcion}}</div>
             <div class="col col-2">{{movimiento.cmov_descripcion}}</div>
-            <div class="col col-3">{{movimiento.mon_simbolo + " " + movimiento.mov_monto}}</div>
-            <div class="col col-4">{{movimiento.mov_fcreacion|date: 'dd/MM/YYYY H:mm'}}</div>
+            <div class="col col-3">{{movimiento.mov_detalle}}</div>
+            <div class="col col-4">{{movimiento.mon_simbolo + " " + movimiento.mov_monto}}</div>
+            <div class="col col-5">{{movimiento.mov_fcreacion|date: 'dd/MM/YYYY H:mm'}}</div>
         </li>
         
       </ul>
