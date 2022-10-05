@@ -10,6 +10,7 @@ import { MovimientosService } from 'src/app/services/movimientos.service';
 export class UltimosMovimientosComponent implements OnInit {
 
   listadoMovimientos:MovimientoI[];
+  tipoMovimiento: string;
 
   constructor(private MovimientoServ: MovimientosService) { }
 

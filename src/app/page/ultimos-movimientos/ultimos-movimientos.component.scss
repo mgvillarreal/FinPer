@@ -50,7 +50,7 @@ h2 {
   }
 
   .table-row {
-    background-color: #ffffff;
+    //background-color: #ffffff;
     box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
   }
 
@@ -120,4 +120,14 @@ a{
   text-decoration: none;
   cursor: pointer;
   font-size: 14px;
+}
+
+/* COLORES FILAS */
+
+.Ingreso{
+  background-color: #4cb44931;
+}
+
+.Egreso{
+  background-color: rgba(253, 32, 32, 0.215);
 }

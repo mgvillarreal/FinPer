@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaqsComponent implements OnInit {
 
+  pregUnoFlag: number = 0;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  muestraPreguntaUno(){
+    if(this.pregUnoFlag == 0){
+      this.pregUnoFlag = 1;
+    }
+    else{
+      this.pregUnoFlag = 0;
+    }
   }
 
 }

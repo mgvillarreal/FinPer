@@ -11,12 +11,12 @@
           <div class="tabs">
 
               <div class="tab">
-                  <input type="checkbox" id="faq1">
+                  <!-- <input type="checkbox" id="faq1"> -->
                   <div class="collapse-indicator">
-                      <p>❯</p>
+                      <p (click)="muestraPreguntaUno()">❯</p>
                   </div>
-                  <label class="tab-label" for="faq1">¿Cómo funciona FinPer?</label>
-                  <div class="tab-content">
+                  <div class="tab-label" for="faq1" (click)="muestraPreguntaUno()">¿Cómo funciona FinPer?</div>
+                  <div class="tab-content" *ngIf="pregUnoFlag==1">
                       <h2><strong>FinPer es muy sencilla de usar:</strong></h2>
                       <ol>
                           <li>Desde 'Mis Cuentas' podrás ingresar movimientos financieros que tengas en el mes, tanto ingresos como egresos.</li>

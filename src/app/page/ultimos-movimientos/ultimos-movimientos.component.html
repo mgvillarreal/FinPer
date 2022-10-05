@@ -8,7 +8,8 @@
           <div class="col col-3">Monto</div>
           <div class="col col-4">Fecha</div>
         </li>
-        <li class="table-row"  *ngFor="let movimiento of listadoMovimientos">
+        <li  class="table-row"  *ngFor="let movimiento of listadoMovimientos"
+        [ngClass]="(movimiento.tmov_descripcion=='Ingreso')? 'Ingreso' : 'Egreso' ">
             <div class="col col-1">{{movimiento.tmov_descripcion}}</div>
             <div class="col col-2">{{movimiento.cmov_descripcion}}</div>
             <div class="col col-3">{{movimiento.mon_simbolo + " " + movimiento.mov_monto}}</div>
