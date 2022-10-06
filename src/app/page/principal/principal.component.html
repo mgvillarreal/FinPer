@@ -51,15 +51,38 @@
         Nuevo gasto
       </button>
     </div>
+
+    <div class="card">
+      <div class="card-titulo ahorro">Ahorros</div>
+      <div class="card-cantidad ahorro">ARS 5.000</div>
+      <button
+        class="btn btn-outline-primary btn-irahorro" routerLink="/metas"
+      >
+        Ir a metas de ahorro
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-titulo ultmov">Últimos Movimientos</div>
+      <div class="card-cantidad ultmov">Octubre 2022</div>
+      <button
+        class="btn btn-outline-primary btn-irultmov" routerLink="/ultimosmovimientos"
+      >
+        Ir a últimos movimientos
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="position-grafico">
+        <app-grafico-miscuentas></app-grafico-miscuentas>
+      </div>
+    </div>
+
   </div>
 
-  <div class="position-grafico">
-    <app-grafico-miscuentas></app-grafico-miscuentas>
-  </div>
-
-  <div class="text-center mt-4 mb-4">
-    <a class="ultmov" routerLink="/ultimosmovimientos" >Mis Últimos Movimientos</a>
-  </div>
+  <!-- <div class="text-center mt-4 mb-4">
+    <a class="misultmov" routerLink="/ultimosmovimientos" >Mis Últimos Movimientos</a>
+  </div> -->
 </div>
 
 <ng-template [ngIf]="nuevoIngFlag == 1" class="limiter">
