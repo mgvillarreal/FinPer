@@ -355,8 +355,8 @@ export class MetasComponent implements OnInit {
 
   async retirarMonto(){
     this.monto.meta = this.metaSeleccionada.met_id;
-    this.monto.monto = this.formaMonto.value['montoRet'];
-    this.monto.fecha = this.formaMonto.value['fechaRet'];
+    this.monto.monto = this.formaMontoRet.value['montoRet'];
+    this.monto.fecha = this.formaMontoRet.value['fechaRet'];
     console.log('Monto retirado: ', this.monto);
 
     // await this.metaServicio.agregaMonto(this.monto).subscribe(resp => {

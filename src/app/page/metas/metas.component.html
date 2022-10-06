@@ -383,17 +383,6 @@
             <div class="titulo-nuevameta mb-4">Editar Monto</div>
 			<form [formGroup]="formaMonto" (ngSubmit)="crearMonto()">
 				<div class="login100-form validate-form text-center mt-3">
-					<!-- <div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select name="moneda" formControlName="moneda">
-                            <option value=" " selected>Moneda meta</option>
-                            <option value="1">ARS</option>
-                            <option value="2">USD</option>
-                        </select>
-                    </div><br>
-                    <small  class="texto-validacion text-center"
-                    *ngIf="forma.controls['moneda'].errors?.['required'] && forma.controls['moneda'].touched">
-                        Debe seleccionar una moneda.
-                    </small> -->
 
                     <div class="wrap-input100 modal-celda2 my-2">
                         <input type="number" name="montoMonto" placeholder="Monto ahorrado" formControlName="montoMonto" >
@@ -481,7 +470,7 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">Tu monto ha sido actualizada</p>
+                            <p class="texto-mensaje mt-2">Tu monto ha sido actualizado</p>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
