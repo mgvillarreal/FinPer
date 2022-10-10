@@ -6,15 +6,12 @@ import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.component.html',
-  styleUrls: ['./principal.component.scss']
+  styleUrls: ['./principal.component.scss'],
 })
 export class PrincipalComponent implements OnInit {
-
   ingreso: number;
   egreso: number;
   balance: number = 0;
@@ -23,143 +20,156 @@ export class PrincipalComponent implements OnInit {
   dataMovimientos: MovimientoI[];
   fecha: Date;
 
-  ingresos: any[] =  [];
-  egresos: any[] =  [];
+  ingresos: any[] = [];
+  egresos: any[] = [];
 
   /*NUEVO*/
   public forma: FormGroup;
-  movimiento = new Movimiento;
-  movimientoModificar:MovimientoI;
-  muestraPrincipalFlag=1;
-  nuevoIngFlag:number = 0;
-  nuevoEgrFlag:number = 0;
-  msjAltaOk:number = 0;
-  detalleIngFlag:number = 0;
-  editaIngFlag:number = 0;
-  muestraMensajeActFlag:number = 0;
-  preguntaEliminarFlag:number = 0;
-  editaEgrFlag:number = 0;
-  detalleEgrFlag:number = 0;
+  movimiento = new Movimiento();
+  movimientoModificar: MovimientoI;
+  muestraPrincipalFlag = 1;
+  nuevoIngFlag: number = 0;
+  nuevoEgrFlag: number = 0;
+  msjAltaOk: number = 0;
+  detalleIngFlag: number = 0;
+  editaIngFlag: number = 0;
+  muestraMensajeActFlag: number = 0;
+  preguntaEliminarFlag: number = 0;
+  editaEgrFlag: number = 0;
+  detalleEgrFlag: number = 0;
 
-  arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-  arrAnios:number[] = [2021, 2022];
+  arrMeses: string[] = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
+  ];
+  arrAnios: number[] = [2021, 2022];
   mesActual = new Date().getMonth();
   anioActual = new Date().getFullYear();
 
-  movimientoSeleccionado: MovimientoI
-  categorias = []
+  movimientoSeleccionado: MovimientoI;
+  categorias = [];
 
-  constructor(private movimientoService: MovimientosService, private fb: FormBuilder, private authService: AuthService) {
-    this.calcula()
+  constructor(
+    private movimientoService: MovimientosService,
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) {
+    this.calcula();
   }
 
   ngOnInit(): void {
-    this.fecha = new Date()
+    this.fecha = new Date();
 
     /*NUEVO*/
     this.forma = this.fb.group({
-      'monto': ['', [Validators.required]],
-      'categoria': ['', [Validators.required]],
-      'detalle': ['', [Validators.required]],
-      'fecha': ['', [Validators.required]]
+      monto: ['', [Validators.required]],
+      categoria: ['', [Validators.required]],
+      detalle: ['', [Validators.required]],
+      fecha: ['', [Validators.required]],
     });
 
-    this.traeCategorias()
+    this.traeCategorias();
   }
 
-  agregaNumero(numero: number){
-    this.montoString = String(this.monto)
-    this.montoString += "" + numero
-    this.monto = Number(this.montoString)
+  agregaNumero(numero: number) {
+    this.montoString = String(this.monto);
+    this.montoString += '' + numero;
+    this.monto = Number(this.montoString);
   }
 
-  nuevoIngreso(tipo: string)
-  {
+  nuevoIngreso(tipo: string) {
     let movimiento;
-    if(tipo === 'Ingresos'){
-      movimiento = { monto: this.monto, tipo: 1 }
-    }else{
-      movimiento = { monto: this.monto, tipo: 2 }
+    if (tipo === 'Ingresos') {
+      movimiento = { monto: this.monto, tipo: 1 };
+    } else {
+      movimiento = { monto: this.monto, tipo: 2 };
     }
 
-
-    this.movimientoService.guardaMovimiento(movimiento).subscribe(
-      resp => {
-        this.calcula()
-      }
-    )
-    this.monto = 0
-
+    this.movimientoService.guardaMovimiento(movimiento).subscribe((resp) => {
+      this.calcula();
+    });
+    this.monto = 0;
   }
 
-  actualizaBalances()
-  {
+  actualizaBalances() {}
 
-  }
-
-  calcula(): void{
-    this.ingresos=[];
-    this.egresos=[];
+  calcula(): void {
+    this.ingresos = [];
+    this.egresos = [];
     this.ingreso = 0;
     this.egreso = 0;
     this.balance = 0;
-    this.movimientoService.traeMovimientos(localStorage.getItem('id'))
-    .subscribe(respuesta => {
-      console.log(respuesta)
-      this.dataMovimientos  = respuesta
-      for(let dat of this.dataMovimientos)
-      {
-        if(dat.tmov_descripcion=='Ingreso'){
-          this.fecha = dat.mov_fcreacion
-          this.ingreso += Number(dat.mov_monto)
-          this.balance += Number(dat.mov_monto)
-          this.ingresos.push(dat)
-        }else{
-          //console.log("Tambien entre aca (o no)")
-          this.balance -= Number(dat.mov_monto)
-          this.egreso += Number(dat.mov_monto)
-          this.egresos.push(dat)
+    this.movimientoService
+      .traeMovimientos(localStorage.getItem('id'))
+      .subscribe((respuesta) => {
+        console.log(respuesta);
+        this.dataMovimientos = respuesta;
+        for (let dat of this.dataMovimientos) {
+          if (dat.tmov_descripcion == 'Ingreso') {
+            this.fecha = dat.mov_fcreacion;
+            this.ingreso += Number(dat.mov_monto);
+            this.balance += Number(dat.mov_monto);
+            this.ingresos.push(dat);
+          } else {
+            //console.log("Tambien entre aca (o no)")
+            this.balance -= Number(dat.mov_monto);
+            this.egreso += Number(dat.mov_monto);
+            this.egresos.push(dat);
+          }
         }
-      }
-      //console.info(this.ingreso)
-    })
-
+        //console.info(this.ingreso)
+      });
   }
 
   /*NUEVO*/
-  seleccionaTipoMovimiento(tipoMovimiento: number){
-
-    if(tipoMovimiento == 1){
+  seleccionaTipoMovimiento(tipoMovimiento: number) {
+    if (tipoMovimiento == 1) {
       this.movimiento.tipo = 1;
       this.nuevoIngFlag = 1;
       this.muestraPrincipalFlag = 0;
-    }
-    else{
+    } else {
       this.movimiento.tipo = 2;
       this.nuevoEgrFlag = 1;
       this.muestraPrincipalFlag = 0;
     }
   }
 
-  async crearNuevoMovimiento(){
+  async crearNuevoMovimiento() {
+    //aca balance-ingreso
+    if (this.movimiento.tipo == 2) {
+      if (this.balance - this.forma.value['monto'] > 0) {
+        this.movimiento.usuario = Number(localStorage.getItem('id'));
+        this.movimiento.monto = this.forma.value['monto'];
+        this.movimiento.categoria = this.forma.value['categoria'];
+        this.movimiento.detalle = this.forma.value['detalle'];
+        this.movimiento.fecha = this.forma.value['fecha'];
+        //this.movimiento.tipo = this.forma.value['tipo'];
 
-    this.movimiento.usuario = Number(localStorage.getItem("id"));
-    this.movimiento.monto = this.forma.value['monto'];
-    this.movimiento.categoria = this.forma.value['categoria'];
-    this.movimiento.detalle = this.forma.value['detalle'];
-    this.movimiento.fecha = this.forma.value['fecha'];
-    //this.movimiento.tipo = this.forma.value['tipo'];
+        console.log('Movimiento creado: ', this.movimiento);
+        await this.movimientoService
+          .guardaMovimiento(this.movimiento)
+          .subscribe((data) => {
+            console.log(data);
+          });
+        this.muestraMsjAltaOk();
+        this.calcula();
+      } else {
+        console.log('no se puede hacer el movimiento');
+      }
+    }
+  }
 
-    console.log('Movimiento creado: ', this.movimiento);
-    await this.movimientoService.guardaMovimiento(this.movimiento).subscribe((data) => {
-      console.log(data);
-
-  })
-  this.muestraMsjAltaOk();
-  this.calcula();
-}
-
-  volveraPrincipal(){
+  volveraPrincipal() {
     this.muestraPrincipalFlag = 1;
     this.nuevoIngFlag = 0;
     this.nuevoEgrFlag = 0;
@@ -170,58 +180,57 @@ export class PrincipalComponent implements OnInit {
     this.detalleEgrFlag = 0;
   }
 
-  muestraMsjAltaOk(){
+  muestraMsjAltaOk() {
     this.msjAltaOk = 1;
     this.muestraPrincipalFlag = 0;
     this.nuevoIngFlag = 0;
     this.nuevoEgrFlag = 0;
   }
 
-  seleccionaDetalleIng(){
+  seleccionaDetalleIng() {
     this.detalleIngFlag = 1;
     this.muestraPrincipalFlag = 0;
     this.editaIngFlag = 0;
   }
 
-  seleccionaDetalleEgr(){
+  seleccionaDetalleEgr() {
     this.detalleEgrFlag = 1;
     this.muestraPrincipalFlag = 0;
     this.editaEgrFlag = 0;
   }
 
-  editarIngreso(movimiento){
-    if(this.editaIngFlag==0){
+  editarIngreso(movimiento) {
+    if (this.editaIngFlag == 0) {
       this.editaIngFlag = 1;
       this.muestraPrincipalFlag = 0;
       this.detalleIngFlag = 0;
     }
 
-    this.movimientoSeleccionado = movimiento
+    this.movimientoSeleccionado = movimiento;
   }
 
-  editarEgreso(id_egreso){
-    if(this.editaEgrFlag==0){
+  editarEgreso(id_egreso) {
+    if (this.editaEgrFlag == 0) {
       this.editaEgrFlag = 1;
       this.muestraPrincipalFlag = 0;
       this.detalleEgrFlag = 0;
     }
   }
 
-
-  actualizarMovimiento(id){
-    this.movimiento.usuario = Number(localStorage.getItem("id"));
+  actualizarMovimiento(id) {
+    this.movimiento.usuario = Number(localStorage.getItem('id'));
     this.movimiento.monto = this.forma.value['monto'];
     this.movimiento.categoria = this.forma.value['categoria'];
     this.movimiento.detalle = this.forma.value['detalle'];
     this.movimiento.fecha = this.forma.value['fecha'];
-    this.movimiento.id =id;
+    this.movimiento.id = id;
     console.log('Movimiento modificado: ', this.movimiento);
 
     this.muestraMensajeActOk();
   }
 
-  muestraMensajeActOk(){
-    if(this.muestraMensajeActFlag==0){
+  muestraMensajeActOk() {
+    if (this.muestraMensajeActFlag == 0) {
       this.muestraMensajeActFlag = 1;
       this.muestraPrincipalFlag = 0;
       this.editaIngFlag = 0;
@@ -229,8 +238,8 @@ export class PrincipalComponent implements OnInit {
     }
   }
 
-  preguntaEliminar(){
-    if(this.preguntaEliminarFlag==0){
+  preguntaEliminar() {
+    if (this.preguntaEliminarFlag == 0) {
       this.preguntaEliminarFlag = 1;
       this.muestraPrincipalFlag = 0;
       this.editaIngFlag = 0;
@@ -238,23 +247,23 @@ export class PrincipalComponent implements OnInit {
     }
   }
 
-  eliminaMovimiento(){
+  eliminaMovimiento() {
     this.detalleIngFlag = 1;
     this.editaIngFlag = 0;
     this.preguntaEliminarFlag = 0;
 
-    console.log('Eliminar: ', this.movimientoSeleccionado.mov_id)
+    console.log('Eliminar: ', this.movimientoSeleccionado.mov_id);
   }
 
-  cancelaEliminar(){
+  cancelaEliminar() {
     this.muestraPrincipalFlag = 0;
     this.editaIngFlag = 1;
     this.preguntaEliminarFlag = 0;
   }
 
-  traeCategorias(){
-    this.movimientoService.traeCategorias().subscribe(resp => {
-      this.categorias = resp
-    })
+  traeCategorias() {
+    this.movimientoService.traeCategorias().subscribe((resp) => {
+      this.categorias = resp;
+    });
   }
 }
