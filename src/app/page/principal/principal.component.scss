@@ -1,4 +1,6 @@
-@use "../../../assets/scss/variables" as var;
+*{
+  font-family: 'Poppins', sans-serif;
+}
 
 .titulo{
   color: #419f3e;
@@ -47,6 +49,14 @@
   color: rgba(255, 0, 0, 0.903);
 }
 
+.ahorro{
+  color: #F7D501;
+}
+
+.ultmov{
+  color: #419f3e;
+}
+
 .card-cantidad{
   font-size: 25px;
   font-weight: 530;
@@ -88,6 +98,40 @@
   text-transform: uppercase;
 }
 
+.btn-irahorro{
+  border-color:#F7D501;
+  color: #F7D501;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  margin-top: 1rem;
+}
+
+.btn-irahorro:hover{
+  background-color:#F7D501;
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.btn-irultmov{
+  border-color:#419f3e;
+  color:#419f3e;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  margin-top: 1rem;
+}
+
+.btn-irultmov:hover{
+  background-color:#419f3e;
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
 .btn-detalleingreso{
   border-bottom-color:#3fd22f;
   border-top-color: transparent;
@@ -121,7 +165,7 @@
   padding-right: 10px;
 }
 
-.ultmov{
+.misultmov{
   color: #1c6a1ab9;
   font-size: 25px;
   font-weight: 530;
@@ -277,7 +321,7 @@ input{
 
 .position-grafico{
   position: relative;
-  left: 35%;
+  left: 23%;
 }
 
 .form-detalles{

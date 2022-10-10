@@ -25,6 +25,8 @@ export class MetasComponent implements OnInit {
   editaMontoFlag: number = 0;
   preguntaEliminarMontoFlag: number = 0;
   muestraMensajeActMontoFlag: number = 0;
+  retiraMontoFlag: number = 0;
+  muestraMensajeMontoRetFlag: number = 0;
 
   estado = 1;
   metas = [];
@@ -45,6 +47,7 @@ export class MetasComponent implements OnInit {
   public forma: FormGroup;
   public editaForma: FormGroup;
   public formaMonto: FormGroup;
+  public formaMontoRet: FormGroup;
   meta = new Meta();
   monto = new Monto();
 
@@ -86,6 +89,7 @@ export class MetasComponent implements OnInit {
     this.muestraMontosFlag = 0;
     this.agregaMontoFlag = 0;
     this.muestraMensajeMontoFlag = 0;
+    this.retiraMontoFlag = 0;
   }
 
   crearOtraMeta() {
@@ -143,6 +147,11 @@ export class MetasComponent implements OnInit {
     this.formaMonto = this.fb.group({
       montoMonto: ['', [Validators.required]],
       fechaMonto: ['', [Validators.required]],
+    });
+
+    this.formaMontoRet = this.fb.group({
+      montoRet: ['', [Validators.required]],
+      fechaRet: ['', [Validators.required]],
     });
   }
 
@@ -333,5 +342,36 @@ export class MetasComponent implements OnInit {
     })
 
 
+  }
+
+  /* RETIRO MONTOS */
+
+  haceRetiroFlag(){
+    if(this.retiraMontoFlag==0){
+      this.retiraMontoFlag = 1;
+      this.muestraMontosFlag = 0;
+    }
+  }
+
+  async retirarMonto(){
+    this.monto.meta = this.metaSeleccionada.met_id;
+    this.monto.monto = this.formaMontoRet.value['montoRet'];
+    this.monto.fecha = this.formaMontoRet.value['fechaRet'];
+    console.log('Monto retirado: ', this.monto);
+
+    // await this.metaServicio.agregaMonto(this.monto).subscribe(resp => {
+    //   console.log(resp)
+    // })
+
+    // this.monto = new Monto();
+    this.muestraMensajeOkMontoRet();
+  }
+
+  muestraMensajeOkMontoRet(){
+    if (this.muestraMensajeMontoRetFlag == 0) {
+      this.muestraMensajeMontoRetFlag = 1;
+      this.retiraMontoFlag = 0;
+      this.agregaMontoFlag = 0;
+    }
   }
 }

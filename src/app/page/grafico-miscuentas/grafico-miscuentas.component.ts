@@ -58,14 +58,17 @@ export class GraficoMiscuentasComponent implements OnInit {
       labels: [
         '% Ingresos',
         '% Gastos',
+        '% Ahorros'
       ],
       datasets: [{
         label: 'Mis Cuentas',
         //data: [76, 24],
         data: [this.porcentajeIngreso, this.porcentajeEgreso],
+        // data: [70, 20, 10],
         backgroundColor: [
           '#3fd22f',
           'rgba(255, 0, 0, 0.903)',
+          '#F7D501'
         ],
         hoverOffset: 4
       }]

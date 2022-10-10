@@ -134,7 +134,7 @@ export class PrincipalComponent implements OnInit {
     this.porcentajeIngreso = (7250.5/total)*100;
     this.porcentajeEgreso = (2300/total)*100;
 
-    console.log('porcentajes: ', this.porcentajeIngreso, this.porcentajeEgreso);
+    // console.log('porcentajes: ', this.porcentajeIngreso, this.porcentajeEgreso);
   }
 
   /*NUEVO*/

@@ -291,6 +291,10 @@
             <button type="button" class="btn btn-outline-primary btn-agregar" (click)="cambiaAgregaMontoFlag()">Nuevo monto</button>
         </div>
 
+        <div class="text-center">
+            <button type="button" class="btn btn-outline-primary btn-retirar" (click)="haceRetiroFlag()">Retirar monto</button>
+        </div>
+
       </div>
     </div>
 </ng-template>
@@ -379,17 +383,6 @@
             <div class="titulo-nuevameta mb-4">Editar Monto</div>
 			<form [formGroup]="formaMonto" (ngSubmit)="crearMonto()">
 				<div class="login100-form validate-form text-center mt-3">
-					<!-- <div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select name="moneda" formControlName="moneda">
-                            <option value=" " selected>Moneda meta</option>
-                            <option value="1">ARS</option>
-                            <option value="2">USD</option>
-                        </select>
-                    </div><br>
-                    <small  class="texto-validacion text-center"
-                    *ngIf="forma.controls['moneda'].errors?.['required'] && forma.controls['moneda'].touched">
-                        Debe seleccionar una moneda.
-                    </small> -->
 
                     <div class="wrap-input100 modal-celda2 my-2">
                         <input type="number" name="montoMonto" placeholder="Monto ahorrado" formControlName="montoMonto" >
@@ -477,12 +470,78 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">Tu monto ha sido actualizada</p>
+                            <p class="texto-mensaje mt-2">Tu monto ha sido actualizado</p>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
                         <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="mostrarMontos(monto.mmet_idmeta)">
                             Aceptar
+                        </button>
+                    </div>
+
+				</div>
+
+			</form>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="retiraMontoFlag==1 && muestraMensajeFlag==0">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <button class="btn-close mb-4" (click)="mostrarMontos(monto.mmet_idmeta)"> </button> <br><br>
+            <div class="titulo-nuevameta txt-rojo mb-4">Retirar Monto</div>
+			<form [formGroup]="formaMontoRet" (ngSubmit)="retirarMonto()">
+				<div class="login100-form validate-form text-center mt-3">
+
+                    <div class="wrap-input100 modal-celda2 my-2">
+                        <input type="number" name="montoRet" placeholder="Monto a retirar" formControlName="montoRet" >
+                    </div>
+                    <small  class="texto-validacion text-center"
+                    *ngIf="formaMonto.controls['montoRet'].errors?.['required'] && formaMonto.controls['montoRet'].touched">
+                        El monto es requerido.
+                    </small>
+
+                    <div class="wrap-input100 modal-celda4 my-2">
+                        <input type="text" name="fechaRet" placeholder="Fecha del retiro" onfocus="(this.type='date')" formControlName="fechaRet">
+                    </div>
+                    <small  class="texto-validacion text-center"
+                    *ngIf="formaMonto.controls['fechaRet'].errors?.['required'] && formaMonto.controls['fechaRet'].touched">
+                        La fecha del monto es requerida.
+                    </small>
+				</div>
+
+                <div class="container-login100-form-btn">
+                    <button class="btn btn-light btn-lg action-button btn-retirar-listo" [disabled]="formaMontoRet.invalid">
+                        Listo
+                    </button>
+                </div>
+			</form>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="muestraMensajeMontoRetFlag==1">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="68" height="68" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">Has retirado correctamente un monto de tu meta de ahorro.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjlight" (click)="volveraMetas()">
+                            Volver a mis metas
                         </button>
                     </div>
 

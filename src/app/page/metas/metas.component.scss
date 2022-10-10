@@ -319,3 +319,37 @@ input{
 .table-hover{
   cursor: pointer;
 }
+
+/* RETIRO MONTOS */
+
+.btn-retirar{
+  border-color:rgba(255, 0, 0, 0.903);
+  color: rgba(255, 0, 0, 0.903);
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  margin-top: 1rem;
+}
+
+.btn-retirar:hover{
+  background-color:rgba(255, 0, 0, 0.903);
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.txt-rojo{
+  color: rgba(255, 0, 0, 0.903);
+}
+
+.btn-retirar-listo{
+  border-color:rgba(255, 0, 0, 0.903);
+  background-color:rgba(255, 0, 0, 0.903);
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  margin-top: 1rem;
+}
