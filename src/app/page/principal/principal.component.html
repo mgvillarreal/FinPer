@@ -77,7 +77,9 @@
 
     <div class="card">
       <div class="position-grafico">
-        <app-grafico-miscuentas [porcentajeIngreso]="porcentajeIngreso" [porcentajeEgreso]="porcentajeEgreso"></app-grafico-miscuentas>
+        <app-grafico-miscuentas [porcentajeIngreso]="porcentajeIngreso" [porcentajeEgreso]="porcentajeEgreso">
+
+        </app-grafico-miscuentas>
       </div>
     </div>
 
@@ -102,12 +104,15 @@
             name="monto"
             placeholder="Monto del ingreso"
             formControlName="monto"
-            value="{{movimientoSeleccionado.mov_monto}}"
           />
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
             El monto es requerido.
+        </small>
+        <small  class="texto-validacion text-center"
+        *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
+            No pueden ingresar montos negativos.
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -181,6 +186,10 @@
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
             El monto es requerido.
+        </small>
+        <small  class="texto-validacion text-center"
+        *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
+            No pueden ingresar montos negativos.
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -354,11 +363,11 @@
       <div
         class="wrap-input100 modal-celda1 my-2 select-finper-default text-center"
       >
-        <select class="form" name="mes">
+        <!-- <select class="form" name="mes">
           <option value=" " selected>Septiembre 2022</option>
           <option value="1">Octubre 2022</option>
           <option value="2">Noviembre 2022</option>
-        </select>
+        </select> -->
       </div>
 
       <div class="card-detalle egreso mt-3">ARS {{ egreso }}</div>
@@ -374,7 +383,7 @@
           </thead> -->
           <tbody>
             <tr
-              (click)="editarEgreso(datose.mov_id)"
+              (click)="editarEgreso(datose)"
               *ngFor="let datose of this.egresos"
             >
               <td scope="row">
@@ -431,17 +440,20 @@
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
             El monto es requerido.
         </small>
+        <small  class="texto-validacion text-center"
+        *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
+            No pueden ingresar montos negativos.
+        </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
-            <option value=" " [selected]="" disabled>Categoría</option>
-            <option *ngFor="let categoria of categorias" value="{{categoria.cmov_id}}" [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id">{{categoria.cmov_descripcion}}</option>
+            <option 
+            *ngFor="let categoria of categorias" 
+            [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
+              {{categoria.cmov_descripcion}}
+            </option>
           </select>
         </div><br>
-        <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['categoria'].errors?.['required'] && forma.controls['categoria'].touched">
-            Debe seleccionar una categoría.
-        </small>
 
         <div class="wrap-input100 modal-celda3 my-2">
           <input
@@ -486,7 +498,7 @@
         <button
           class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act"
           (click)="preguntaEliminar()"
-        >
+        > 
           Eliminar
         </button>
       </div>
@@ -508,18 +520,25 @@
             name="monto"
             placeholder="Monto del gasto"
             formControlName="monto"
+            [(ngModel)]="movimientoSeleccionado.mov_monto"
           />
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
             El monto es requerido.
         </small>
+        <small  class="texto-validacion text-center"
+        *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
+            No pueden ingresar montos negativos.
+        </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
-            <option value=" " selected>Categoría</option>
-            <option value="1">Supermercado</option>
-            <option value="2">Expensas</option>
+            <option 
+            *ngFor="let categoria of categorias" 
+            [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
+              {{categoria.cmov_descripcion}}
+            </option>
           </select>
         </div><br>
         <small  class="texto-validacion text-center"
@@ -533,6 +552,7 @@
             name="detalleGasto"
             placeholder="Detalle del gasto"
             formControlName="detalle"
+            [(ngModel)]="movimientoSeleccionado.mov_detalle"
           />
         </div>
         <small  class="texto-validacion text-center"
@@ -547,6 +567,7 @@
             placeholder="Fecha del gasto"
             onfocus="(this.type='date')"
             formControlName="fecha"
+            [(ngModel)]="movimientoSeleccionado.mov_fcreacion"
           />
         </div>
         <small  class="texto-validacion text-center"

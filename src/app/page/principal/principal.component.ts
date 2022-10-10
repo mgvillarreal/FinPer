@@ -63,8 +63,8 @@ export class PrincipalComponent implements OnInit {
 
     /*NUEVO*/
     this.forma = this.fb.group({
-      monto: ['', [Validators.required]],
-      categoria: ['', [Validators.required]],
+      monto: ['', [Validators.required, Validators.min(1)]],
+      categoria: ['', []],
       detalle: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
     });
@@ -76,24 +76,6 @@ export class PrincipalComponent implements OnInit {
     this.montoString = String(this.monto);
     this.montoString += '' + numero;
     this.monto = Number(this.montoString);
-  }
-
-  nuevoIngreso(tipo: string) {
-    let movimiento;
-    if (tipo === 'Ingresos') {
-      movimiento = { monto: this.monto, tipo: 1 };
-    } else {
-      movimiento = { monto: this.monto, tipo: 2 };
-    }
-
-    this.movimientoService.guardaMovimiento(movimiento).subscribe((resp) => {
-      this.calcula();
-    });
-    this.monto = 0;
-  }
-
-  actualizaBalances() {
-
   }
 
   calcula(): void {
@@ -121,7 +103,8 @@ export class PrincipalComponent implements OnInit {
           }
         }
         //console.info(this.ingreso)
-        this.calculaPorcentajes();
+
+          this.calculaPorcentajes();
       });
   }
 
@@ -150,29 +133,29 @@ export class PrincipalComponent implements OnInit {
     }
   }
 
-  async crearNuevoMovimiento() {
+  crearNuevoMovimiento() {
     //aca balance-ingreso
-    if (this.movimiento.tipo == 2) {
-      if (this.balance - this.forma.value['monto'] > 0) {
-        this.movimiento.usuario = Number(localStorage.getItem('id'));
-        this.movimiento.monto = this.forma.value['monto'];
-        this.movimiento.categoria = this.forma.value['categoria'];
-        this.movimiento.detalle = this.forma.value['detalle'];
-        this.movimiento.fecha = this.forma.value['fecha'];
-        //this.movimiento.tipo = this.forma.value['tipo'];
-
-        console.log('Movimiento creado: ', this.movimiento);
-        await this.movimientoService
-          .guardaMovimiento(this.movimiento)
-          .subscribe((data) => {
-            console.log(data);
-          });
-        this.muestraMsjAltaOk();
-        this.calcula();
-      } else {
-        console.log('no se puede hacer el movimiento');
+    if (this.movimiento.tipo == 2){
+      if(this.balance < this.forma.value['monto']) {
+        console.log('El monto ingresado es incorrecto.');
+        // this.muestraMsjAltaError(); ACA METER EL LLAMADO A MSJ DE ERROR
+        return
       }
-    }
+    } 
+
+    this.movimiento.usuario = Number(localStorage.getItem('id'));
+    this.movimiento.monto = this.forma.value['monto'];
+    this.movimiento.categoria = this.forma.value['categoria'];
+    this.movimiento.detalle = this.forma.value['detalle'];
+    this.movimiento.fecha = this.forma.value['fecha'];
+    this.movimientoService
+      .guardaMovimiento(this.movimiento)
+      .subscribe((data) => {
+        console.log(data);
+      });
+    this.muestraMsjAltaOk();
+    this.calcula();
+
   }
 
   volveraPrincipal() {
@@ -214,25 +197,20 @@ export class PrincipalComponent implements OnInit {
 
     this.movimientoSeleccionado = movimiento;
   }
-
-  editarEgreso(id_egreso) {
+  
+  editarEgreso(movimiento) {
     if (this.editaEgrFlag == 0) {
       this.editaEgrFlag = 1;
       this.muestraPrincipalFlag = 0;
       this.detalleEgrFlag = 0;
     }
+
+    this.movimientoSeleccionado = movimiento;
   }
 
   actualizarMovimiento() {
-    // this.movimiento.usuario = Number(localStorage.getItem('id'));
-    // this.movimiento.monto = this.forma.value['monto'];
-    // this.movimiento.categoria = this.forma.value['categoria'];
-    // this.movimiento.detalle = this.forma.value['detalle'];
-    // this.movimiento.fecha = this.forma.value['fecha'];
-    // this.movimiento.id = id;
-    console.log('Movimiento modificado: ', this.movimiento);
-
-    // this.muestraMensajeActOk();
+    this.movimientoService.editaUnMovimiento(this.movimientoSeleccionado).subscribe()
+    this.muestraMensajeActOk();
   }
 
   muestraMensajeActOk() {
@@ -258,6 +236,15 @@ export class PrincipalComponent implements OnInit {
     this.editaIngFlag = 0;
     this.preguntaEliminarFlag = 0;
 
+    let data = {
+      id: this.movimientoSeleccionado.mov_id
+    }
+
+    this.movimientoService.borraUnMovimiento(data).subscribe(resp => {
+      console.log(resp)
+      this.calcula()
+    })
+
     console.log('Eliminar: ', this.movimientoSeleccionado.mov_id);
   }
 
@@ -270,6 +257,7 @@ export class PrincipalComponent implements OnInit {
   traeCategorias() {
     this.movimientoService.traeCategorias().subscribe((resp) => {
       this.categorias = resp;
+      console.log(this.categorias)
     });
   }
 }
