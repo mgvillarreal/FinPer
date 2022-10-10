@@ -1,0 +1,107 @@
+*, ::after, ::before {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.titulo{
+  color: #419f3e;
+  font-size: 45px;
+  font-weight: 630;
+  letter-spacing: 2px;
+}
+
+.container{
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  width: 100%;
+}
+
+@media (min-width: 768px){
+  .container {
+    max-width: 720px;
+  }
+}
+
+#faq-section .col {
+  flex: 1;
+  padding: 0;
+}
+
+.col{
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+}
+
+#faq-section .tabs {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px 4px rgb(24 40 72 / 12%);
+}
+
+#faq-section .tab:first-child {
+  border-top: 0px solid;
+}
+
+#faq-section .tab {
+  position: relative;
+  width: 100%;
+  color: #ffffff;
+  overflow: hidden;
+  border-top: 2px solid rgba(24, 40, 72, 0.12);
+  background-color: #419f3e // #79BA96;
+}
+
+#faq-section input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+input[type=checkbox], input[type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+input {
+  outline: 0 !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  -webkit-transition: none !important;
+  overflow: visible;
+  margin: 0;
+  line-height: inherit;
+}
+
+#faq-section .collapse-indicator {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  transform-origin: center;
+  transition: all 0.5s ease-in-out;
+  transform: rotate(90deg);
+}
+
+#faq-section .tab-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 16px 16px 56px;
+  background: #419f3e; //#79BA96;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0;
+  border-bottom: 1px #fff;
+  transition: all 0.25s ease-in-out;
+}
+
+#faq-section .tab-content {
+  max-height: 0;
+  padding: 0 32px;
+  color: #182848;
+  background: #fafafa;
+  transition: all 0.5s ease-in-out;
+}

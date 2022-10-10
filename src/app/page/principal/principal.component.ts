@@ -25,34 +25,25 @@ export class PrincipalComponent implements OnInit {
 
   /*NUEVO*/
   public forma: FormGroup;
-  movimiento = new Movimiento();
-  movimientoModificar: MovimientoI;
-  muestraPrincipalFlag = 1;
-  nuevoIngFlag: number = 0;
-  nuevoEgrFlag: number = 0;
-  msjAltaOk: number = 0;
-  detalleIngFlag: number = 0;
-  editaIngFlag: number = 0;
-  muestraMensajeActFlag: number = 0;
-  preguntaEliminarFlag: number = 0;
-  editaEgrFlag: number = 0;
-  detalleEgrFlag: number = 0;
+  movimiento = new Movimiento;
+  muestraPrincipalFlag=1;
+  nuevoIngFlag:number = 0;
+  nuevoEgrFlag:number = 0;
+  msjAltaOk:number = 0;
+  detalleIngFlag:number = 0;
+  editaIngFlag:number = 0;
+  muestraMensajeActFlag:number = 0;
+  preguntaEliminarFlag:number = 0;
+  editaEgrFlag:number = 0;
+  detalleEgrFlag:number = 0;
 
-  arrMeses: string[] = [
-    'Enero',
-    'Febrero',
-    'Marzo',
-    'Abril',
-    'Mayo',
-    'Junio',
-    'Julio',
-    'Agosto',
-    'Septiembre',
-    'Octubre',
-    'Noviembre',
-    'Diciembre',
-  ];
-  arrAnios: number[] = [2021, 2022];
+  porcentajeIngreso: number;
+  porcentajeEgreso: number;
+
+  porcentajes = 100;
+
+  arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  arrAnios:number[] = [2021, 2022];
   mesActual = new Date().getMonth();
   anioActual = new Date().getFullYear();
 
@@ -130,7 +121,20 @@ export class PrincipalComponent implements OnInit {
           }
         }
         //console.info(this.ingreso)
+        this.calculaPorcentajes();
       });
+  }
+
+  calculaPorcentajes(): void{
+    let total = this.ingreso + this.egreso;
+    console.log('ingreso: ', this.ingreso);
+    console.log('egreso: ', this.egreso);
+    console.log('total: ', total);
+
+    this.porcentajeIngreso = (7250.5/total)*100;
+    this.porcentajeEgreso = (2300/total)*100;
+
+    console.log('porcentajes: ', this.porcentajeIngreso, this.porcentajeEgreso);
   }
 
   /*NUEVO*/

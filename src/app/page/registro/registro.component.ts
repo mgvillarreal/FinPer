@@ -58,16 +58,6 @@ export class RegistroComponent implements OnInit {
     //this.mostrarMensaje();
   }
 
-  registraUsuario(){
-    // this.authService.registraUsuario(this.usuario).subscribe(resp => {
-    //   console.log(resp);
-    // })
-  }
-
-  // mostrarMensaje():void{
-  //   this.modalService.alerta("email", "Hemos enviado un mail a tu correo electrónico para validar tu perfil", "Aceptar").subscribe((answer) => {});
-  // }
-
   tomaModosIngreso():void{
     let checks = document.querySelectorAll('#modoingreso');
 
@@ -85,15 +75,14 @@ export class RegistroComponent implements OnInit {
       'contrasena': ['', [Validators.required, Validators.minLength(6)]],
       'pwdConfirm': ['', Validators.required],
       'nombre': ['', [Validators.required]],
-      'fnacimiento': ['', [Validators.required]],
+      'fnacimiento': ['', [Validators.required, /*this.fechaMayorA15Validator*/ ]],
       'residencia': [13, [Validators.required]],
       'modoing': ['', [Validators.required]],
       'profesion': ['', [Validators.required]],
     }, { validators: this.contrasenasIgualesValidator });
-    this.muestraPaises()
-    this.muestraProfesiones()
-    this.muestraIngresos()
-
+    this.muestraPaises();
+    this.muestraProfesiones();
+    this.muestraIngresos();
 
   }
 
@@ -102,7 +91,16 @@ export class RegistroComponent implements OnInit {
     const pwdConfirm = control.get('pwdConfirm');
 
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
-  };
+  }
+
+  fechaMayorA15Validator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const fnacimiento = new Date(this.forma.value['fnacimiento']);
+    const factual = new Date();
+
+    let years = (factual.getFullYear() - fnacimiento.getFullYear());
+
+    return years < 15 ? { fechaMayorA15 : true } : null;
+  }
 
   muestraPaises(){
     this.usuarioService.traePaises().subscribe(res => {
