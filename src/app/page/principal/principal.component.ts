@@ -36,6 +36,7 @@ export class PrincipalComponent implements OnInit {
   preguntaEliminarFlag:number = 0;
   editaEgrFlag:number = 0;
   detalleEgrFlag:number = 0;
+  muestraErrorEgFlag: number = 0;
 
   porcentajeIngreso: number;
   porcentajeEgreso: number;
@@ -138,7 +139,7 @@ export class PrincipalComponent implements OnInit {
     if (this.movimiento.tipo == 2){
       if(this.balance < this.forma.value['monto']) {
         console.log('El monto ingresado es incorrecto.');
-        // this.muestraMsjAltaError(); ACA METER EL LLAMADO A MSJ DE ERROR
+        this.muestraErrorEg();
         return
       }
     } 
@@ -167,6 +168,7 @@ export class PrincipalComponent implements OnInit {
     this.detalleIngFlag = 0;
     this.muestraMensajeActFlag = 0;
     this.detalleEgrFlag = 0;
+    this.muestraErrorEgFlag = 0;
   }
 
   muestraMsjAltaOk() {
@@ -219,6 +221,16 @@ export class PrincipalComponent implements OnInit {
       this.muestraPrincipalFlag = 0;
       this.editaIngFlag = 0;
       this.editaEgrFlag = 0;
+    }
+  }
+
+  muestraErrorEg(){
+    if(this.muestraErrorEgFlag == 0){
+      this.muestraErrorEgFlag = 1;
+      this.muestraPrincipalFlag = 0;
+      this.editaIngFlag = 0;
+      this.editaEgrFlag = 0;
+      this.nuevoEgrFlag = 0;
     }
   }
 

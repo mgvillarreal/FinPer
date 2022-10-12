@@ -28,6 +28,7 @@ import { ModalService } from './services/modal.service';
 import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.component';
 import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-movimientos.component';
 import localeEsAr from '@angular/common/locales/es-AR';
+registerLocaleData(localeEsAr);
 import { DatosComponent } from './page/datos/datos.component';
 import { GraficoMiscuentasComponent } from './page/grafico-miscuentas/grafico-miscuentas.component';
 
@@ -67,6 +68,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
   ],
   providers: [
     ModalService,
+    //{ provide: LOCALE_ID, useValue: 'es' }
   ],
   bootstrap: [AppComponent],
   entryComponents: [

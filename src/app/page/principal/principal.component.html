@@ -66,12 +66,12 @@
     </div>
 
     <div class="card">
-      <div class="card-titulo ultmov">Últimos Movimientos</div>
+      <div class="card-titulo ultmov">Movimientos</div>
       <div class="card-cantidad ultmov">Octubre 2022</div>
       <button
         class="btn btn-outline-primary btn-irultmov" routerLink="/ultimosmovimientos"
       >
-        Ir a últimos movimientos
+        Ir a movimientos
       </button>
     </div>
 
@@ -297,14 +297,14 @@
       <br />
       <div class="card-detalle ingreso mb-4">Detalle de Ingresos</div>
 
-      <div class="flex text-center">
+      <!-- <div class="flex text-center">
         <select class="form-detalles form" name="mesDetalle">
             <option *ngFor="let mes of arrMeses; let i = index" value="{{i+1}}" [selected]="i == mesActual">{{mes}}</option>
           </select>
         <select class="form-detalles form" name="anioDetalle">
             <option *ngFor="let anio of arrAnios; let i = index" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
         </select>
-      </div>
+      </div> -->
 
       <div class="card-detalle ingreso mt-3">ARS {{ ingreso }}</div>
 
@@ -345,6 +345,7 @@
               </td>
               <td>{{ movimiento.mov_detalle }}</td>
               <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto }}</td>
+              <td>{{ movimiento.mov_fcreacion | date: 'MMM d'}} </td>
             </tr>
           </tbody>
         </table>
@@ -409,6 +410,7 @@
               </td>
               <td>{{ datose.mov_detalle }}</td>
               <td>{{ datose.mon_simbolo }} {{ datose.mov_monto }}</td>
+              <td>{{ datose.mov_fcreacion | date: 'MMM d'}} </td>
             </tr>
             <tr>
             </tr>
@@ -694,6 +696,41 @@
               (click)="cancelaEliminar()"
             >
               Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="muestraErrorEgFlag == 1">
+  <div class="container-login100">
+    <div class="wrap-login100 text-center">
+      <div class="titulo-nuevameta mb-4"></div>
+      <form>
+        <div class="login100-form validate-form text-center mt-3">
+          <div class="wrap-input100">
+            <div class="mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-octagon" width="52" height="52" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M8.7 3h6.6c.3 0 .5 .1 .7 .3l4.7 4.7c.2 .2 .3 .4 .3 .7v6.6c0 .3 -.1 .5 -.3 .7l-4.7 4.7c-.2 .2 -.4 .3 -.7 .3h-6.6c-.3 0 -.5 -.1 -.7 -.3l-4.7 -4.7c-.2 -.2 -.3 -.4 -.3 -.7v-6.6c0 -.3 .1 -.5 .3 -.7l4.7 -4.7c.2 -.2 .4 -.3 .7 -.3z" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+            </div>
+            <div class="mb-4">
+              <p class="texto-mensaje mt-2">
+                El gasto que intentas ingresar es mayor a tu balance.
+              </p>
+            </div>
+          </div>
+          <div class="mt-4 mb-2">
+            <button
+              class="btn btn-light btn-lg action-button btn-msjlight"
+              (click)="volveraPrincipal()"
+            >
+              Aceptar
             </button>
           </div>
         </div>
