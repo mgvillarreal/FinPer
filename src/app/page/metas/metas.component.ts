@@ -331,17 +331,25 @@ export class MetasComponent implements OnInit {
 
   calculaUnAhorrado(id)
   {
-    let ahorrado: number = 0;
-
-    this.metaServicio.traeMontos(id).subscribe(resp => {
-      resp.forEach(monto => {
-        ahorrado += Number(monto.mmet_monto)
-      })
-      this.arrMontosAhorrados.push(ahorrado)
+    let ahorrado = 0;
+    
+    this.metaServicio.traeMontos(id).subscribe(
+    {
+      next: resp => {
+        resp.forEach( monto => {
+          ahorrado += Number(monto.mmet_monto)
+        });
+        this.arrMontosAhorrados.push(ahorrado)
+      },
+      error: err => {
+        // console.log(err)
+        // // ahorrado = 0;
+        // this.arrMontosAhorrados.push(ahorrado)
+      }
+    })    
+    setTimeout(() => {
       console.log(this.arrMontosAhorrados)
-    })
-
-
+    }, 1000); 
   }
 
   /* RETIRO MONTOS */
