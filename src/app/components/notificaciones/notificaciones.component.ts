@@ -26,6 +26,7 @@ export class NotificacionesComponent implements OnInit {
     if(this.muestraNotificacionFlag == 0){
       this.muestraNotificacionFlag = 1;
       this.muestraTodasNotifFlag = 0;
+      this.preguntaEliminNotifFlag = 0;
     }
   }
 
