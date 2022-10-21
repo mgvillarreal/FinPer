@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from '@angular/router';
 import { ModalComponent } from './components/modal/modal.component';
+import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
 import { AutGuard } from './guards/aut.guard';
 import { CategoriaComponent } from './page/categoria/categoria.component';
 import { ComofuncionaComponent } from './page/comofunciona/comofunciona.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'ultimosmovimientos', component: UltimosMovimientosComponent},
   { path: 'misdatos', component: DatosComponent},
   { path: 'grafico-miscuentas', component: GraficoMiscuentasComponent},
+  { path: 'notificaciones', component: NotificacionesComponent},
   { path: '**', component: ErrorComponent},
 ];
 
