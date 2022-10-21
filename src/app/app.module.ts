@@ -31,6 +31,7 @@ import localeEsAr from '@angular/common/locales/es-AR';
 registerLocaleData(localeEsAr);
 import { DatosComponent } from './page/datos/datos.component';
 import { GraficoMiscuentasComponent } from './page/grafico-miscuentas/grafico-miscuentas.component';
+import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
 
 registerLocaleData(localeEsAr, 'es-Ar');
 @NgModule({
@@ -54,7 +55,8 @@ registerLocaleData(localeEsAr, 'es-Ar');
     ValidaUsuarioComponent,
     UltimosMovimientosComponent,
     DatosComponent,
-    GraficoMiscuentasComponent
+    GraficoMiscuentasComponent,
+    NotificacionesComponent
   ],
   imports: [
     BrowserModule,
