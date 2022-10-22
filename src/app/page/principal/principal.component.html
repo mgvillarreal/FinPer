@@ -2,11 +2,11 @@
   <div class="titulo text-center mt-2 mb-1">Mis Cuentas</div>
 
   <div class="text-center mt-4">
-    <select class="select-finper-default select-s" name="" id="">
-      <option *ngFor="let mes of arrMeses; let i = index" value="{{i}}" [selected]="i == mesActual">{{mes}}</option>
+    <select (change)="changeMes()" class="select-finper-default select-s" name="" id="" [(ngModel)]="mesActual">
+      <option *ngFor="let mes of arrMeses; let i = index" value="{{i}}" [selected]="i == mesActual" >{{mes}}</option>
    </select>
 
-    <select class="select-finper-default select-xs" name="" id="">
+    <select (change)="changeMes()" class="select-finper-default select-xs" name="" id="" [(ngModel)]="anioActual">
       <option *ngFor="let anio of arrAnios" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
     </select>
   </div>

@@ -45,8 +45,9 @@ export class PrincipalComponent implements OnInit {
 
   arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   arrAnios:number[] = [2021, 2022];
-  mesActual = new Date().getMonth();
-  anioActual = new Date().getFullYear();
+  // mesActual = new Date().getMonth();
+  mesActual:number = Number(new Date().getMonth());
+  anioActual:number =  Number(new Date().getFullYear());
 
   movimientoSeleccionado: MovimientoI;
   categorias = [];
@@ -80,15 +81,16 @@ export class PrincipalComponent implements OnInit {
   }
 
   calcula(): void {
+    // console.log(this.mesActual)
     this.ingresos = [];
     this.egresos = [];
     this.ingreso = 0;
     this.egreso = 0;
     this.balance = 0;
     this.movimientoService
-      .traeMovimientos(localStorage.getItem('id'))
+      .traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
       .subscribe((respuesta) => {
-        console.log(respuesta);
+        // console.log(respuesta);
         this.dataMovimientos = respuesta;
         for (let dat of this.dataMovimientos) {
           if (dat.tmov_descripcion == 'Ingreso') {
@@ -111,9 +113,9 @@ export class PrincipalComponent implements OnInit {
 
   calculaPorcentajes(): void{
     let total = this.ingreso + this.egreso;
-    console.log('ingreso: ', this.ingreso);
-    console.log('egreso: ', this.egreso);
-    console.log('total: ', total);
+    // console.log('ingreso: ', this.ingreso);
+    // console.log('egreso: ', this.egreso);
+    // console.log('total: ', total);
 
     this.porcentajeIngreso = (7250.5/total)*100;
     this.porcentajeEgreso = (2300/total)*100;
@@ -271,5 +273,11 @@ export class PrincipalComponent implements OnInit {
       this.categorias = resp;
       console.log(this.categorias)
     });
+  }
+
+  changeMes(){
+    this.mesActual = Number(this.mesActual)
+    this.anioActual = Number(this.anioActual)
+    this.calcula()
   }
 }

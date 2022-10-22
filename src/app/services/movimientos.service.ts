@@ -27,6 +27,16 @@ export class MovimientosService {
     return this.http.get<any>(this.urlv5 + id)
   }
 
+  traeMovimientosMes(id: string, mes: number, anio: number){
+    let data = {
+      'id': id,
+      'mes': mes,
+      'anio': anio
+    }
+    console.log(data)
+    return this.http.post<any>(this.urlv5 + 'traemovimientos', data)
+  }
+
   borraUnMovimiento(id){
     return this.http.put<any>(this.urlv4 + 'borramovimiento', id)
   }
