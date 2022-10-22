@@ -10,101 +10,17 @@
       <div class="col">
           <div class="tabs">
 
-              <div class="tab">
+              <div class="tab" *ngFor="let faq of faqs">
                   <!-- <input type="checkbox" id="faq1"> -->
                   <div class="collapse-indicator">
-                      <p (click)="muestraPreguntaUno()">❯</p>
+                      <!-- <p>❯</p> -->
                   </div>
-                  <div class="tab-label" for="faq1" (click)="muestraPreguntaUno()">¿Cómo funciona FinPer?</div>
-                  <div class="tab-content" *ngIf="pregUnoFlag==1">
-                      <h2><strong>FinPer es muy sencilla de usar:</strong></h2>
-                      <ol>
-                          <li>Desde 'Mis Cuentas' podrás ingresar movimientos financieros que tengas en el mes, tanto ingresos como egresos.</li>
-                          <li>Éstos podrás categorizarlos cada vez según su tipo, lo que te ayudará a establecer en que categoría tienes más ingresos o más gastos.</li>
-                          <li>Al ingresar un movimiento, FinPer automáticamente realizará el cálculo del dinero disponible, así en todo momento tu situación financiera.</li>
-                      </ol>
+                  <div class="tab-label" for="faq1" >{{faq.faqs_pregunta}}</div>
+                  <div class="tab-content" [innerHTML]="faq.faqs_respuesta">
+
                   </div>
               </div>
 
-              <div class="tab">
-                <input type="checkbox" id="faq2">
-                <div class="collapse-indicator">
-                    <p>❯</p>
-                </div>
-                <label class="tab-label" for="faq2">¿Puedo modificar datos de los movimientos?</label>
-                <div class="tab-content">
-                    <h2><strong>Con FinPer todo es posible, así que tendrás que:</strong></h2>
-                    <ol>
-                        <li>1. En la card del tipo de movimiento que desees modificar, selecciona el botón de Detalle. </li>
-                        <li>2. Selecciona con un click el movimiento a modificar.</li>
-                        <li>3. Edita el movimiento según los nuevos datos.</li>
-                        <li>4. Presiona botón Actualizar.</li>
-                    </ol>
-                </div>
-            </div>
-
-              <div class="tab">
-                  <input type="checkbox" id="faq3">
-                  <div class="collapse-indicator">
-                      <p>❯</p>
-                  </div>
-                  <label class="tab-label" for="faq3">¿Puedo eliminar movimientos?</label>
-                  <div class="tab-content">
-                      <h2><strong>Todos nos podemos equivocar, así que podrás:</strong></h2>
-                      <ol>
-                        <li>1. Seleccionar el botón de Detalle en la card del tipo de movimiento que desees eliminar. </li>
-                        <li>2. Seleccionar con un click el movimiento a modificar.</li>
-                        <li>4. Presiona botón Eliminar y confirmar.</li>
-                      </ol>
-                  </div>
-              </div>
-
-              <div class="tab">
-                  <input type="checkbox" id="faq4">
-                  <div class="collapse-indicator">
-                      <p>❯</p>
-                  </div>
-                  <label class="tab-label" for="faq4">¿Cómo funciona la sección de Metas?</label>
-                  <div class="tab-content">
-                    <h2><strong>Si para algo queremos ahorrar, es para alcanzar nuestras metas.</strong></h2>
-                    <ol>
-                      <li>Desde 'Mis Metas' podrás ingresar metas de ahorro con un monto y fecha límite.</li>
-                      <li>Regularmente (o cada vez que quieras) podrás ingresar montos de ahorro que te acerquen a llegar a ella.</li>
-                      <li>Desde la sección principal verás el total ahorrado según todos los montos ingresados y el monto restante por alcanzar.</li>
-                    </ol>
-                  </div>
-              </div>
-
-              <div class="tab">
-                  <input type="checkbox" id="faq5">
-                  <div class="collapse-indicator">
-                      <p>❯</p>
-                  </div>
-                  <label class="tab-label" for="faq5">¿Cómo volver el balance a cero?</label>
-                  <div class="tab-content">
-                      <h2><strong>Sabemos que los nuevos comienzos con buenos, así que:</strong></h2>
-                      <ol>
-                          <li>1. Desde el desplegable del menú, selecciona la opción 'Mi datos'.</li>
-                          <li>2. En el apartado 'Preferencias de la cuenta', presiona el botón 'Resetear Balance'. </li>
-                      </ol>
-                  </div>
-              </div>
-
-              <div class="tab">
-                  <input type="checkbox" id="faq6">
-                  <div class="collapse-indicator">
-                      <p>❯</p>
-                  </div>
-                  <label class="tab-label" for="faq6">¿Puedo eliminar mi cuenta?</label>
-                  <div class="tab-content">
-                      <h2><strong>Lo que menos deseamos es que te vayas, pero de ser así:</strong></h2>
-                      <ol>
-                        <li>1. Desde el desplegable del menú, selecciona la opción 'Mi datos'.</li>
-                        <li>2. En el apartado 'Preferencias de la cuenta', presiona el botón 'Eliminar'. </li>
-                        <li>3. Confirma que realmente quieres hacerlo, pues perderás el acceso a la cuenta y todos los datos guardados. </li>
-                      </ol>
-                  </div>
-              </div>
           </div>
       </div>
   </div>

@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+li{
+  list-style: none;
+}
+
 .titulo{
   color: #419f3e;
   font-size: 45px;
@@ -99,8 +103,8 @@ input {
 }
 
 #faq-section .tab-content {
-  max-height: 0;
-  padding: 0 32px;
+  // max-height: 0;
+  padding: 32px;
   color: #182848;
   background: #fafafa;
   transition: all 0.5s ease-in-out;

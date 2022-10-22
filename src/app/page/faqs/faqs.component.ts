@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FaqI } from 'src/app/interfaces/faq';
+import { FaqsService } from 'src/app/services/faqs.service';
 
 @Component({
   selector: 'app-faqs',
@@ -8,10 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class FaqsComponent implements OnInit {
 
   pregUnoFlag: number = 0;
+  faqs: FaqI[]
 
-  constructor() { }
+  constructor(private faqService: FaqsService) { }
 
   ngOnInit(): void {
+    this.traeFaqs()
   }
 
   muestraPreguntaUno(){
@@ -21,6 +25,13 @@ export class FaqsComponent implements OnInit {
     else{
       this.pregUnoFlag = 0;
     }
+  }
+
+  traeFaqs(){
+    this.faqService.traeFaqs().subscribe(resp => {
+      this.faqs = resp
+      console.log(resp)
+    })
   }
 
 }
