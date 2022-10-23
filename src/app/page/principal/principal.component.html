@@ -52,9 +52,6 @@
       </button>
     </div>
 
-  <!-- <div class="position-grafico">
-    <app-grafico-miscuentas [porcentajeIngreso]="porcentajeIngreso" [porcentajeEgreso]="porcentajeEgreso"></app-grafico-miscuentas>
-  </div> -->
     <div class="card">
       <div class="card-titulo ahorro">Ahorros</div>
       <div class="card-cantidad ahorro">ARS 5.000</div>
@@ -77,9 +74,10 @@
 
     <div class="card">
       <div class="position-grafico">
-        <app-grafico-miscuentas [porcentajeIngreso]="porcentajeIngreso" [porcentajeEgreso]="porcentajeEgreso">
-
-        </app-grafico-miscuentas>
+        <!-- <app-grafico-miscuentas [porcentajeIngreso]="porcentajeIngreso" [porcentajeEgreso]="porcentajeEgreso"> </app-grafico-miscuentas> -->
+        <div class="chart-container">
+          <canvas class="text-center" id="grafico-miscuentas"> </canvas>
+        </div>
       </div>
     </div>
 
@@ -599,10 +597,7 @@
   </div>
 </ng-template>
 
-<ng-template
-  class="limiter"
-  [ngIf]="muestraMensajeActFlag == 1 && editaIngFlag == 0"
->
+<ng-template class="limiter" [ngIf]="muestraMensajeActFlag == 1 && editaIngFlag == 0">
   <div class="container-login100">
     <div class="wrap-login100 text-center">
       <div class="titulo-nuevameta mb-4"></div>

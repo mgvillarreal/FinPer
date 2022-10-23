@@ -5,6 +5,7 @@ import { MovimientosService } from 'src/app/services/movimientos.service';
 import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
 
 @Component({
   selector: 'app-principal',
@@ -119,6 +120,8 @@ export class PrincipalComponent implements OnInit {
 
     this.porcentajeIngreso = (7250.5/total)*100;
     this.porcentajeEgreso = (2300/total)*100;
+
+    this.creaGrafico();
 
     // console.log('porcentajes: ', this.porcentajeIngreso, this.porcentajeEgreso);
   }
@@ -279,5 +282,39 @@ export class PrincipalComponent implements OnInit {
     this.mesActual = Number(this.mesActual)
     this.anioActual = Number(this.anioActual)
     this.calcula()
+  }
+
+  /* GRAFICO */
+  creaGrafico(): void {
+    Chart.register(...registerables);
+
+    const data = {
+      labels: [
+        '% Ingresos',
+        '% Gastos',
+        '% Ahorros'
+      ],
+      datasets: [{
+        label: 'Mis Cuentas',
+        //data: [76, 24],
+        data: [this.porcentajeIngreso, this.porcentajeEgreso],
+        //data: [70, 20, 10],
+        backgroundColor: [
+          '#3fd22f',
+          'rgba(255, 0, 0, 0.903)',
+          '#F7D501'
+        ],
+        hoverOffset: 4
+      }]
+    };
+
+    const config: ChartConfiguration = {
+      type: 'doughnut',
+      data: data,
+    };
+
+    const chartItem: ChartItem = document.getElementById('grafico-miscuentas') as ChartItem;
+
+    new Chart(chartItem, config);
   }
 }
