@@ -15,7 +15,7 @@ import { AuthService } from './auth.service';
 export class UsuariosService {
 
   usuario: Usuario
-  url = 'https://hostinjor.com/apifinper/v1/usuarios/';
+  url = 'https://hostinjor.com/apifinper/v5/usuarios/';
 
   constructor(
     public http: HttpClient,
@@ -27,8 +27,8 @@ export class UsuariosService {
     let data: any = {
       "token": this.auth.auth()
     }
-    
-    
+
+
    return this.http.post<Usuario>(this.url + 'id/token', data)
   }
 
@@ -44,6 +44,9 @@ export class UsuariosService {
     return this.http.get<IngresoI[]>(this.url + 'modosingresos')
   }
 
-
+  traeDatosUsuario(id: number)
+  {
+    return this.http.get<UsuarioI>(this.url + 'datos/' + id)
+  }
 
 }

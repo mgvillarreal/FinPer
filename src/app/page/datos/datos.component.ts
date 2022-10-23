@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PaisI } from 'src/app/interfaces/pais';
+import { UsuarioI } from 'src/app/interfaces/usuario';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -13,13 +14,8 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class DatosComponent implements OnInit {
 
   usuario = new Usuario();
+  user: UsuarioI
   public forma: FormGroup;
-
-  nombre = localStorage.getItem('name');
-  residencia:string;
-  profesion:string;
-  // fnacimiento ;
-  email:string;
 
   /* FLAGS */
   muestraPerfil: number = 1;
@@ -38,6 +34,8 @@ export class DatosComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router ) {
     this.usuario.nombre = localStorage.getItem('name');
+    this.traeDatosUsuario()
+
   }
 
   /* MANEJO DE FLAGS */
@@ -98,8 +96,8 @@ export class DatosComponent implements OnInit {
 
   tomaModosIngreso():void{
     let checks = document.querySelectorAll('#modoingreso');
-   
-    checks.forEach((e)=>{ 
+
+    checks.forEach((e)=>{
       if((e as HTMLInputElement).checked){
         this.arrayIngresos.push((e as HTMLInputElement).value);
       }
@@ -120,8 +118,8 @@ export class DatosComponent implements OnInit {
 
   ngOnInit(): void {
     this.forma1 = this.fb.group({
-      'nombre': ['', [Validators.required]],
-      'fnacimiento': ['', [Validators.required]],
+      'nombre': [this.user.usu_nombre, [Validators.required]],
+      'fnacimiento': [this.user.usu_fnacimiento, [Validators.required]],
       'residencia': [13, [Validators.required]],
     });
 
@@ -142,6 +140,22 @@ export class DatosComponent implements OnInit {
 
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
   };
+
+  traeDatosUsuario()
+  {
+    this.usuarioService.traeDatosUsuario(Number(localStorage.getItem('id'))).subscribe(resp => {
+      this.user = resp[0]
+      this.ageCalculator(resp[0].usu_fnacimiento)
+    })
+  }
+
+  ageCalculator(edad){
+    if(edad){
+      const convertAge = new Date(edad);
+      const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+      this.user.edad = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+    }
+  }
 
 
 }

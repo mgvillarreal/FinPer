@@ -36,3 +36,4 @@ export class NotificacionesService {
     return this.http.put<any>(this.urlv5 + 'borranotificacion', data);
   }
 }
+
