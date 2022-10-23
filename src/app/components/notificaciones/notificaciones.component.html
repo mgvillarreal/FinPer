@@ -30,7 +30,7 @@
               </div>
 
             </div>
-            <div class="col col-2">{{ notificacion.not_fcreacion }}</div>
+            <div class="col col-2">{{ notificacion.not_fcreacion | date: 'dd/MM/YYYY H:mm' }}</div>
             <div class="col col-3">{{ notificacion.not_mensaje }}</div>
             <div class="col col-4 iconos" (click)="muestraNotificacion(notificacion)">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hand-click" width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
