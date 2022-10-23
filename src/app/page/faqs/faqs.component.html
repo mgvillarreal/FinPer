@@ -1,3 +1,4 @@
+
 <div class="titulo text-center mt-5 mb-5">Preguntas Frecuentes</div>
 
 <div class="container text-center">
@@ -5,23 +6,21 @@
   <p class="mb-3">Si no encuentras lo que estás buscando, no dudes en comunicarte con nosotros.</p>
 </div>
 
-<div class="mt-4" id="faq-section">
-  <div class="container">
-      <div class="col">
-          <div class="tabs">
 
-              <div class="tab" *ngFor="let faq of faqs">
-                  <!-- <input type="checkbox" id="faq1"> -->
-                  <div class="collapse-indicator">
-                      <!-- <p>❯</p> -->
-                  </div>
-                  <div class="tab-label" for="faq1" >{{faq.faqs_pregunta}}</div>
-                  <div class="tab-content" [innerHTML]="faq.faqs_respuesta">
-
-                  </div>
-              </div>
-
-          </div>
+<div class="container">
+  
+    <section class="accordion"  id="faq-section">
+      <div class="item-faqs" *ngFor="let faq of faqs; let i = index">
+        <div class="collapse-ind">
+            >
+        </div>
+        <input class="tab-label" id="ac-{{i}}" name="accordion-{{i+1}}" type="checkbox">
+        <label for="ac-{{i}}">{{faq.faqs_pregunta}}</label>
+        <article>
+          <p [innerHTML]="faq.faqs_respuesta"></p>
+        </article>
       </div>
-  </div>
+    
+    </section>
+    
 </div>

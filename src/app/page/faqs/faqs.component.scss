@@ -109,3 +109,104 @@ input {
   background: #fafafa;
   transition: all 0.5s ease-in-out;
 }
+
+
+body {
+  background-color: #607D8B;
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.wraper {
+  max-width: 500px;
+  margin: 0 auto
+}
+
+.accordion {
+    width: 100%;
+    margin: 10px auto 30px auto;
+}
+
+.accordion label {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 16px 16px 56px;
+  background: #419f3e; //#79BA96;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0;
+  border-bottom: 1px #fff;
+  transition: all 0.25s ease-in-out;
+}
+
+.accordion label:hover {
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, .3);
+}
+
+.accordion input:checked + label,
+.accordion input:checked + label:hover {
+    color: rgb(253, 239, 218);
+    margin-bottom: 0;
+}
+
+// .accordion label:after,
+// .accordion input:checked + label:after {
+//     content: '+';
+//     position: absolute;
+//     right: 20px;
+//     top: 7px;
+// }
+
+// .accordion input:checked + label:after {
+//     content: '-';
+// }
+
+.accordion input {
+    display: none;
+}
+
+.accordion article {
+    border-top: 0;
+    margin-top: -1px;
+    display: none;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.accordion article p {
+    color: #000;
+    line-height: 22px;
+    font-size: 14px;
+    padding: 20px;
+    margin: 0
+}
+
+.accordion input:checked ~ article {
+    display: block;
+}
+
+.collapse-ind{
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  transform-origin: center;
+  transition: all 0.5s ease-in-out;
+  transform: rotate(90deg);
+}
+
+.item-faqs{
+  // border-bottom: 1px solid #378534;
+  position: relative;
+  color: white;
+  margin-bottom: 2px;
+}
+
+#faq-section{
+  
+}

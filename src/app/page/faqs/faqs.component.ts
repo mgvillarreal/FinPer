@@ -18,14 +18,6 @@ export class FaqsComponent implements OnInit {
     this.traeFaqs()
   }
 
-  muestraPreguntaUno(){
-    if(this.pregUnoFlag == 0){
-      this.pregUnoFlag = 1;
-    }
-    else{
-      this.pregUnoFlag = 0;
-    }
-  }
 
   traeFaqs(){
     this.faqService.traeFaqs().subscribe(resp => {

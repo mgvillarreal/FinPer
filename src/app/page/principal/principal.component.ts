@@ -258,7 +258,6 @@ export class PrincipalComponent implements OnInit {
     }
 
     this.movimientoService.borraUnMovimiento(data).subscribe(resp => {
-      console.log(resp)
       this.calcula()
     })
 
