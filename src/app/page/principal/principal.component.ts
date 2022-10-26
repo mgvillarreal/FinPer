@@ -53,6 +53,8 @@ export class PrincipalComponent implements OnInit {
   movimientoSeleccionado: MovimientoI;
   categorias = [];
 
+  balanceTotal
+
   constructor(
     private movimientoService: MovimientosService,
     private fb: FormBuilder,
@@ -73,6 +75,8 @@ export class PrincipalComponent implements OnInit {
     });
 
     this.traeCategorias();
+    this.traeBalance()
+
   }
 
   agregaNumero(numero: number) {
@@ -109,7 +113,13 @@ export class PrincipalComponent implements OnInit {
         //console.info(this.ingreso)
 
           this.calculaPorcentajes();
-      });
+        });
+  }
+
+  traeBalance(){
+    this.movimientoService.traeBalance(localStorage.getItem('id')).subscribe(resp => {
+      console.log(resp)
+    })
   }
 
   calculaPorcentajes(): void{
@@ -161,6 +171,10 @@ export class PrincipalComponent implements OnInit {
       });
     this.muestraMsjAltaOk();
     this.calcula();
+    
+    setTimeout(() => {
+      this.calculaPorcentajes();
+    }, 1500);
 
   }
 
