@@ -132,12 +132,14 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 16px 16px 16px 56px;
-  background: #419f3e; //#79BA96;
+  background: #defadd; //#419f3e; #79BA96;
   font-weight: bold;
   cursor: pointer;
   margin: 0;
   border-bottom: 1px #fff;
   transition: all 0.25s ease-in-out;
+  color: #419f3e;
+  border-radius: 5px;
 }
 
 .accordion label:hover {
@@ -146,7 +148,8 @@ body {
 
 .accordion input:checked + label,
 .accordion input:checked + label:hover {
-    color: rgb(253, 239, 218);
+    color: #419f3e;
+    font-size: large;
     margin-bottom: 0;
 }
 
@@ -181,7 +184,8 @@ body {
     line-height: 22px;
     font-size: 14px;
     padding: 20px;
-    margin: 0
+    margin: 0;
+    border-radius: 20px;
 }
 
 .accordion input:checked ~ article {
@@ -198,6 +202,8 @@ body {
   transform-origin: center;
   transition: all 0.5s ease-in-out;
   transform: rotate(90deg);
+  color: #419f3e;
+  border-radius: 10%;
 }
 
 .item-faqs{
@@ -207,6 +213,7 @@ body {
   margin-bottom: 2px;
 }
 
-#faq-section{
-  
+strong{
+  font-family: 'Poppins', sans-serif;
+  color: black;
 }
