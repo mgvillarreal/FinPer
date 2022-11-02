@@ -7,5 +7,5 @@ export class Meta{
     met_flimite:Date;
     met_estado:number;
     met_fcreacion:Date;
-    
+    sumaMonto:number
 }

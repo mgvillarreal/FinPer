@@ -10,7 +10,7 @@ import { Meta } from '../models/meta.model';
   providedIn: 'root'
 })
 export class MetasService {
-  urlv4 = 'https://hostinjor.com/apifinper/v4/metas'
+  urlv4 = 'https://hostinjor.com/apifinper/v5/metas'
   urlMontos = 'https://hostinjor.com/apifinper/v5/montos/'
 
   constructor(public http: HttpClient) {

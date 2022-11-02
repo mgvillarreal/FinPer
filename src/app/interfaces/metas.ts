@@ -7,4 +7,5 @@ export interface MetasI {
         met_idmoneda: number
         met_estado: number
         met_fcreacion:Date
+        sumaMonto:number
 }
