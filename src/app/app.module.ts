@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,13 +25,16 @@ import { ModalNoticeComponent } from './components/modal/modal-notice/modal-noti
 import { ModalService } from './services/modal.service';
 import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.component';
 import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-movimientos.component';
-import localeEsAr from '@angular/common/locales/es-AR';
-registerLocaleData(localeEsAr);
 import { DatosComponent } from './page/datos/datos.component';
 import { GraficoMiscuentasComponent } from './page/grafico-miscuentas/grafico-miscuentas.component';
 import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
 
-registerLocaleData(localeEsAr, 'es-Ar');
+import {LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es'); //Esto no es un import, pero va justo despues de ellos!
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +71,7 @@ registerLocaleData(localeEsAr, 'es-Ar');
   ],
   providers: [
     ModalService,
-    //{ provide: LOCALE_ID, useValue: 'es' }
+    { provide: LOCALE_ID, useValue: 'es' }
   ],
   bootstrap: [AppComponent],
   entryComponents: [

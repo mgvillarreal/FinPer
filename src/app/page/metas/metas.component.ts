@@ -90,6 +90,7 @@ export class MetasComponent implements OnInit {
     this.agregaMontoFlag = 0;
     this.muestraMensajeMontoFlag = 0;
     this.retiraMontoFlag = 0;
+    this.editaMontoFlag = 0;
   }
 
   crearOtraMeta() {
