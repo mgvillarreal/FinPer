@@ -1,95 +1,97 @@
-<div class="container pt-4" *ngIf="muestraPrincipalFlag == 1">
-  <div class="titulo text-center mt-2 mb-1">Mis Cuentas</div>
-
-  <div class="text-center mt-4">
-    <select (change)="changeMes()" class="select-finper-default select-s" name="" id="" [(ngModel)]="mesActual">
-      <option *ngFor="let mes of arrMeses; let i = index" value="{{i}}" [selected]="i == mesActual" >{{mes}}</option>
-   </select>
-
-    <select (change)="changeMes()" class="select-finper-default select-xs" name="" id="" [(ngModel)]="anioActual">
-      <option *ngFor="let anio of arrAnios" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
-    </select>
-  </div>
-
-  <div class="text-center pt-4 pb-1">
-    <span class="balance-titulo">Balance Total: </span>
-    <span class="balance-cantidad"> ARS {{ balance }} </span>
-  </div>
-  <div class="text-center pb-3">
-    <span class="subbalance-titulo">Balance Mes: </span>
-    <span class="subbalance-cantidad"> ARS {{ balance }} </span>
-  </div>
-
-  <div class="text-center mb-2">
-    <div class="card">
-      <div class="card-titulo ingreso">Ingresos</div>
-      <div class="card-cantidad ingreso">ARS {{ ingreso }}</div>
-      <button
-        class="btn btn-outline-primary btn-detalleingreso"
-        (click)="seleccionaDetalleIng()"
-      >
-        Detalle de ingresos</button
-      ><br />
-      <button
-        class="btn btn-outline-primary btn-nuevoingreso"
-        (click)="seleccionaTipoMovimiento(1)"
-      >
-        Nuevo ingreso
-      </button>
+<div class="bg">
+  <div class="container pt-4" *ngIf="muestraPrincipalFlag == 1">
+    <div class="titulo text-center mt-2 mb-1">Mis Cuentas</div>
+  
+    <div class="text-center mt-4">
+      <select (change)="changeMes()" class="select-finper-default select-s" name="" id="" [(ngModel)]="mesActual">
+        <option *ngFor="let mes of arrMeses; let i = index" value="{{i}}" [selected]="i == mesActual" >{{mes}}</option>
+     </select>
+  
+      <select (change)="changeMes()" class="select-finper-default select-xs" name="" id="" [(ngModel)]="anioActual">
+        <option *ngFor="let anio of arrAnios" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
+      </select>
     </div>
-
-    <div class="card">
-      <div class="card-titulo egreso">Gastos</div>
-      <div class="card-cantidad egreso">ARS {{ egreso }}</div>
-      <div
-        class="btn btn-outline-primary btn-detalleegreso"
-        (click)="seleccionaDetalleEgr()"
-      >
-        Detalle de gastos
+  
+    <div class="text-center pt-4 pb-1">
+      <span class="balance-titulo">Balance Total: </span>
+      <span class="balance-cantidad"> ARS {{ balance }} </span>
+    </div>
+    <div class="text-center pb-3">
+      <span class="subbalance-titulo">Balance Mes: </span>
+      <span class="subbalance-cantidad"> ARS {{ balance }} </span>
+    </div>
+  
+    <div class="text-center mb-2">
+      <div class="card">
+        <div class="card-titulo ingreso">Ingresos</div>
+        <div class="card-cantidad ingreso">ARS {{ ingreso }}</div>
+        <button
+          class="btn btn-outline-primary btn-detalleingreso"
+          (click)="seleccionaDetalleIng()"
+        >
+          Detalle de ingresos</button
+        ><br />
+        <button
+          class="btn btn-outline-primary btn-nuevoingreso"
+          (click)="seleccionaTipoMovimiento(1)"
+        >
+          Nuevo ingreso
+        </button>
       </div>
-      <br />
-      <button
-        class="btn btn-outline-primary btn-nuevoegreso"
-        (click)="seleccionaTipoMovimiento(2)"
-      >
-        Nuevo gasto
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="card-titulo ahorro">Ahorros</div>
-      <div class="card-cantidad ahorro">ARS 5.000</div>
-      <button
-        class="btn btn-outline-primary btn-irahorro" routerLink="/metas"
-      >
-        Ir a metas de ahorro
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="card-titulo ultmov">Movimientos</div>
-      <div class="card-cantidad ultmov">Octubre 2022</div>
-      <button
-        class="btn btn-outline-primary btn-irultmov" routerLink="/ultimosmovimientos"
-      >
-        Ir a movimientos
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="position-grafico">
-        <!-- <app-grafico-miscuentas [porcentajeIngreso]="porcentajeIngreso" [porcentajeEgreso]="porcentajeEgreso"> </app-grafico-miscuentas> -->
-        <div class="chart-container">
-          <canvas class="text-center" id="grafico-miscuentas"> </canvas>
+  
+      <div class="card">
+        <div class="card-titulo egreso">Gastos</div>
+        <div class="card-cantidad egreso">ARS {{ egreso }}</div>
+        <div
+          class="btn btn-outline-primary btn-detalleegreso"
+          (click)="seleccionaDetalleEgr()"
+        >
+          Detalle de gastos
+        </div>
+        <br />
+        <button
+          class="btn btn-outline-primary btn-nuevoegreso"
+          (click)="seleccionaTipoMovimiento(2)"
+        >
+          Nuevo gasto
+        </button>
+      </div>
+  
+      <div class="card">
+        <div class="card-titulo ahorro">Ahorros</div>
+        <div class="card-cantidad ahorro">ARS 5.000</div>
+        <button
+          class="btn btn-outline-primary btn-irahorro" routerLink="/metas"
+        >
+          Ir a metas de ahorro
+        </button>
+      </div>
+  
+      <div class="card">
+        <div class="card-titulo ultmov">Movimientos</div>
+        <div class="card-cantidad ultmov">Octubre 2022</div>
+        <button
+          class="btn btn-outline-primary btn-irultmov" routerLink="/ultimosmovimientos"
+        >
+          Ir a movimientos
+        </button>
+      </div>
+  
+      <div class="card">
+        <div class="position-grafico">
+          <!-- <app-grafico-miscuentas [porcentajeIngreso]="porcentajeIngreso" [porcentajeEgreso]="porcentajeEgreso"> </app-grafico-miscuentas> -->
+          <div class="chart-container">
+            <canvas class="text-center" id="grafico-miscuentas"> </canvas>
+          </div>
         </div>
       </div>
+  
     </div>
-
+  
+    <!-- <div class="text-center mt-4 mb-4">
+      <a class="misultmov" routerLink="/ultimosmovimientos" >Mis Últimos Movimientos</a>
+    </div> -->
   </div>
-
-  <!-- <div class="text-center mt-4 mb-4">
-    <a class="misultmov" routerLink="/ultimosmovimientos" >Mis Últimos Movimientos</a>
-  </div> -->
 </div>
 
 <ng-template [ngIf]="nuevoIngFlag == 1" class="limiter">
