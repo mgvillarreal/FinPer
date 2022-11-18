@@ -3,6 +3,8 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { MensajesService } from 'src/app/services/mensajes.service';
+import { NotificacionesService } from 'src/app/services/notificaciones.service';
+import { NotificacionI } from 'src/app/interfaces/notificacion';
 
 @Component({
   selector: 'app-topmenu',
@@ -12,7 +14,7 @@ import { MensajesService } from 'src/app/services/mensajes.service';
 export class TopmenuComponent implements OnInit {
 
   menu:string = "cerrado";
-  // menuDesplegado = false
+  notificaciones: NotificacionI[] = []
   usuario: Usuario = new Usuario
   userLogged = this.muestraNombre();
   mensajeNuevo:boolean = false;
@@ -20,12 +22,13 @@ export class TopmenuComponent implements OnInit {
   @Input() menuDesplegado
   @Output() eventoDesplegar: EventEmitter<any> = new EventEmitter()
 
-  constructor(public auth: AuthService,
+  constructor(
+    public auth: AuthService,
     public usuarioService: UsuariosService,
-    private mensajeInterno: MensajesService) {
+    public notificacionesService: NotificacionesService
+    ) {
       //verifica si hay mensajes
-      this.mensajeInterno.buscaMensajeNuevo();
-      this.mensajeNuevo = this.mensajeInterno.mensajeNuevo;
+
      }
 
   cambiaEstadoMenu(): void{
@@ -58,22 +61,20 @@ export class TopmenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.traeNotificaciones();
+    this.notificacionesService.notificacionesActivas();
   }
 
   muestraNombre(){
     return this.usuario.nombre;
   }
 
-  /*verificaMensaje(){
-    
-    if( this.mensajeInterno.buscaMensajeNuevo()){
-      console.log('mensaje: '+this.mensajeInterno.buscaMensajeNuevo());
-      this.mensajeNuevo = true;
-    }
-    else{
-      this.mensajeNuevo = false;
-    }
-    
-    this.mensajeNuevo = this.mensajeInterno.mensajeNuevo;
-  }*/
+  traeNotificaciones()
+  {
+    this.notificacionesService.traeNotificaciones(localStorage.getItem('id')).subscribe(resp => {
+      this.notificaciones = resp;
+      console.log(resp)
+    })
+  }
+
 }

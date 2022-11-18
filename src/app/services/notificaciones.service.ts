@@ -9,13 +9,14 @@ import { NotificacionI } from '../interfaces/notificacion';
 })
 export class NotificacionesService {
 
+  notificacionesAct = false;
   urlv5 = 'https://hostinjor.com/apifinper/v5/notificaciones/'
 
   constructor(
     public http: HttpClient
   ) { }
 
-  traeNotificaciones(id: number)
+  traeNotificaciones(id: string)
   {
     return this.http.get<NotificacionI[]>(this.urlv5 + id);
   }
@@ -34,6 +35,12 @@ export class NotificacionesService {
       "id": id
     }
     return this.http.put<any>(this.urlv5 + 'borranotificacion', data);
+  }
+
+  notificacionesActivas(){
+    this.http.get<boolean>(this.urlv5 + 'activas/' + localStorage.getItem('id')).subscribe(resp => {
+      this.notificacionesAct = resp;
+      });
   }
 }
 
