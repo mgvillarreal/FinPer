@@ -38,6 +38,8 @@ export class PrincipalComponent implements OnInit {
   editaEgrFlag:number = 0;
   detalleEgrFlag:number = 0;
   muestraErrorEgFlag: number = 0;
+  muestraIngresosFlag: number = 0;
+  muestraEgresosFlag: number = 0;
 
   porcentajeIngreso: number;
   porcentajeEgreso: number;
@@ -99,12 +101,14 @@ export class PrincipalComponent implements OnInit {
         this.dataMovimientos = respuesta;
         for (let dat of this.dataMovimientos) {
           if (dat.tmov_descripcion == 'Ingreso') {
+            this.muestraIngresosFlag = 1;
             this.fecha = dat.mov_fcreacion;
             this.ingreso += Number(dat.mov_monto);
             this.balance += Number(dat.mov_monto);
             this.ingresos.push(dat);
           } else {
             //console.log("Tambien entre aca (o no)")
+            this.muestraEgresosFlag = 1;
             this.balance -= Number(dat.mov_monto);
             this.egreso += Number(dat.mov_monto);
             this.egresos.push(dat);

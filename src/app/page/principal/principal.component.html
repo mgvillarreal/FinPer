@@ -301,59 +301,67 @@
       <br />
       <div class="card-detalle ingreso mb-4">Detalle de Ingresos</div>
 
-      <!-- <div class="flex text-center">
-        <select class="form-detalles form" name="mesDetalle">
-            <option *ngFor="let mes of arrMeses; let i = index" value="{{i+1}}" [selected]="i == mesActual">{{mes}}</option>
-          </select>
-        <select class="form-detalles form" name="anioDetalle">
-            <option *ngFor="let anio of arrAnios; let i = index" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
-        </select>
-      </div> -->
-
-      <div class="card-detalle ingreso mt-3">ARS {{ ingreso }}</div>
-
-      <div>
-        <table class="table table-hover">
-          <!-- <thead>
-            <tr>
-              <th scope="col"> </th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Monto</th>
-            </tr>
-          </thead> -->
-          <tbody>
-            <tr
-              (click)="editarIngreso(movimiento)"
-              *ngFor="let movimiento of this.ingresos"
-            >
-              <td scope="row">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-coin"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="#3fd22f"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <circle cx="12" cy="12" r="9" />
-                  <path
-                    d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"
-                  />
-                  <path d="M12 6v2m0 8v2" />
-                </svg>
-              </td>
-              <td>{{ movimiento.mov_detalle }}</td>
-              <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto }}</td>
-              <td>{{ movimiento.mov_fcreacion | date: 'EEEE d'}} </td>
-            </tr>
-          </tbody>
-        </table>
+      <div *ngIf="muestraIngresosFlag==0">
+        Aún no existen ingresos.
       </div>
+
+      <div *ngIf="muestraIngresosFlag==1">
+        <!-- <div class="flex text-center">
+          <select class="form-detalles form" name="mesDetalle">
+              <option *ngFor="let mes of arrMeses; let i = index" value="{{i+1}}" [selected]="i == mesActual">{{mes}}</option>
+            </select>
+          <select class="form-detalles form" name="anioDetalle">
+              <option *ngFor="let anio of arrAnios; let i = index" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
+          </select>
+        </div> -->
+
+        <div class="card-detalle ingreso mt-3">ARS {{ ingreso }}</div>
+
+        <div>
+          <table class="table table-hover">
+            <!-- <thead>
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Monto</th>
+              </tr>
+            </thead> -->
+            <tbody>
+              <tr
+                (click)="editarIngreso(movimiento)"
+                *ngFor="let movimiento of this.ingresos"
+              >
+                <td scope="row">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-coin"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#3fd22f"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <circle cx="12" cy="12" r="9" />
+                    <path
+                      d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"
+                    />
+                    <path d="M12 6v2m0 8v2" />
+                  </svg>
+                </td>
+                <td>{{ movimiento.mov_detalle }}</td>
+                <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto }}</td>
+                <td>{{ movimiento.mov_fcreacion | date: 'EEEE d'}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </ng-template>
@@ -365,62 +373,67 @@
       <br />
       <div class="card-detalle egreso mb-4">Detalle de Gastos</div>
 
-      <div
-        class="wrap-input100 modal-celda1 my-2 select-finper-default text-center"
-      >
-        <!-- <select class="form" name="mes">
-          <option value=" " selected>Septiembre 2022</option>
-          <option value="1">Octubre 2022</option>
-          <option value="2">Noviembre 2022</option>
-        </select> -->
+      <div *ngIf="muestraEgresosFlag==0">
+        Aún no existen gastos.
       </div>
+
+      <div *ngIf="muestraEgresosFlag==1">
+        <!-- <div class="wrap-input100 modal-celda1 my-2 select-finper-default text-center">
+          <select class="form" name="mes">
+            <option value=" " selected>Septiembre 2022</option>
+            <option value="1">Octubre 2022</option>
+            <option value="2">Noviembre 2022</option>
+          </select>
+        </div> -->
 
       <div class="card-detalle egreso mt-3">ARS {{ egreso }}</div>
 
       <div>
         <table class="table table-hover">
           <!-- <thead>
-            <tr>
-              <th scope="col"> </th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Monto</th>
-            </tr>
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Monto</th>
+              </tr>
           </thead> -->
-          <tbody>
-            <tr
-              (click)="editarEgreso(datose)"
-              *ngFor="let datose of this.egresos"
-            >
-              <td scope="row">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-coin"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="#ff2825"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <circle cx="12" cy="12" r="9" />
-                  <path
-                    d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"
-                  />
-                  <path d="M12 6v2m0 8v2" />
-                </svg>
-              </td>
-              <td>{{ datose.mov_detalle }}</td>
-              <td>{{ datose.mon_simbolo }} {{ datose.mov_monto }}</td>
-              <td>{{ datose.mov_fcreacion | date: 'MMM d'}} </td>
-            </tr>
-            <tr>
-            </tr>
-          </tbody>
-        </table>
+            <tbody>
+              <tr
+                (click)="editarEgreso(datose)"
+                *ngFor="let datose of this.egresos"
+              >
+                <td scope="row">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-coin"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#ff2825"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <circle cx="12" cy="12" r="9" />
+                    <path
+                      d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"
+                    />
+                    <path d="M12 6v2m0 8v2" />
+                  </svg>
+                </td>
+                <td>{{ datose.mov_detalle }}</td>
+                <td>{{ datose.mon_simbolo }} {{ datose.mov_monto }}</td>
+                <td>{{ datose.mov_fcreacion | date: 'MMM d'}} </td>
+              </tr>
+              <tr>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+
     </div>
   </div>
 </ng-template>

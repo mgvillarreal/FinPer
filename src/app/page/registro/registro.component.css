@@ -311,3 +311,8 @@ iframe {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.txt-select{
+    color: #adadad;
+    padding-left: 0px;
+}
