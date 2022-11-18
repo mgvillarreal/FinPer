@@ -48,9 +48,9 @@ export class PrincipalComponent implements OnInit {
 
   arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   arrAnios:number[] = [2021, 2022];
-  // mesActual = new Date().getMonth();
   mesActual:number = Number(new Date().getMonth());
   anioActual:number =  Number(new Date().getFullYear());
+  mesActualCardMov:any = new Date();
 
   movimientoSeleccionado: MovimientoI;
   categorias = [];
