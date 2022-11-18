@@ -21,6 +21,7 @@ export class NotificacionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.traeNotificaciones();
+    this.notService.notificacionesAct = false;
   }
 
   volveraNotificaciones(){
@@ -61,7 +62,7 @@ export class NotificacionesComponent implements OnInit {
 
   traeNotificaciones()
   {
-    this.notService.traeNotificaciones(11).subscribe(resp => {
+    this.notService.traeNotificaciones(localStorage.getItem('id')).subscribe(resp => {
       this.notificaciones = resp;
       console.log(resp)
     })
