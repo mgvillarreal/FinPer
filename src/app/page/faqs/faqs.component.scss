@@ -132,13 +132,13 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 16px 16px 16px 56px;
-  background: #defadd; //#419f3e; #79BA96;
+  background: #419f3e; //#419f3e; #79BA96;
   font-weight: bold;
   cursor: pointer;
   margin: 0;
   border-bottom: 1px #fff;
   transition: all 0.25s ease-in-out;
-  color: #419f3e;
+  color: white;
   border-radius: 5px;
 }
 
@@ -148,7 +148,7 @@ body {
 
 .accordion input:checked + label,
 .accordion input:checked + label:hover {
-    color: #419f3e;
+    color: white;
     font-size: large;
     margin-bottom: 0;
 }
@@ -202,7 +202,7 @@ body {
   transform-origin: center;
   transition: all 0.5s ease-in-out;
   transform: rotate(90deg);
-  color: #419f3e;
+  color: white;
   border-radius: 10%;
 }
 
