@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-principal',
@@ -50,7 +51,6 @@ export class PrincipalComponent implements OnInit {
   arrAnios:number[] = [2021, 2022];
   mesActual:number = Number(new Date().getMonth());
   anioActual:number =  Number(new Date().getFullYear());
-  mesActualCardMov:any = new Date();
 
   movimientoSeleccionado: MovimientoI;
   categorias = [];
@@ -60,7 +60,8 @@ export class PrincipalComponent implements OnInit {
   constructor(
     private movimientoService: MovimientosService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.calcula();
   }
@@ -299,6 +300,11 @@ export class PrincipalComponent implements OnInit {
     this.mesActual = Number(this.mesActual)
     this.anioActual = Number(this.anioActual)
     this.calcula()
+  }
+
+  seleccionaUltMovimientos(mes, anio){
+    console.log('Fecha para ultimos movimientos: ', mes, anio);
+    this.router.navigate(['ultimosmovimientos']);
   }
 
   /* GRAFICO */
