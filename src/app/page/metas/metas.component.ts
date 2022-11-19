@@ -57,6 +57,9 @@ export class MetasComponent implements OnInit {
   arrMontosAhorrados = []
   arrDiferencia = []
 
+  //estados
+  arrEstados:string[] = ['Pendiente', 'Alcanzada', 'Cancelada', 'Todas'];
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
