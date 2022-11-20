@@ -1,26 +1,27 @@
+<div class="limiter">
+  <div class="titulo text-center mt-5 mb-5">Preguntas Frecuentes</div>
 
-<div class="titulo text-center mt-5 mb-5">Preguntas Frecuentes</div>
-
-<div class="container text-center">
-  <p>Acá encontrarás un listado de las preguntas más realizadas acerca de FinPer.</p>
-  <p class="mb-3">Si no encuentras lo que estás buscando, no dudes en comunicarte con nosotros.</p>
-</div>
+  <div class="container text-center">
+    <p>Acá encontrarás un listado de las preguntas más realizadas acerca de FinPer.</p>
+    <p class="mb-3">Si no encuentras lo que estás buscando, no dudes en comunicarte con nosotros.</p>
+  </div>
 
 
-<div class="container">
-  
-    <section class="accordion"  id="faq-section">
-      <div class="item-faqs" *ngFor="let faq of faqs; let i = index">
-        <div class="collapse-ind">
-            >
+  <div class="container">
+    
+      <section class="accordion"  id="faq-section">
+        <div class="item-faqs" *ngFor="let faq of faqs; let i = index">
+          <div class="collapse-ind">
+              >
+          </div>
+          <input class="tab-label" id="ac-{{i}}" name="accordion-{{i+1}}" type="checkbox">
+          <label class="" for="ac-{{i}}">{{faq.faqs_pregunta}}</label>
+          <article>
+            <p [innerHTML]="faq.faqs_respuesta"></p>
+          </article>
         </div>
-        <input class="tab-label" id="ac-{{i}}" name="accordion-{{i+1}}" type="checkbox">
-        <label class="" for="ac-{{i}}">{{faq.faqs_pregunta}}</label>
-        <article>
-          <p [innerHTML]="faq.faqs_respuesta"></p>
-        </article>
-      </div>
-    
-    </section>
-    
+      
+      </section>
+      
+  </div>
 </div>

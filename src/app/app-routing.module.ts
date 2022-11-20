@@ -19,26 +19,28 @@ import { RegistroComponent } from './page/registro/registro.component';
 import { SoporteComponent } from './page/soporte/soporte.component';
 import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-movimientos.component';
 import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.component';
+import { AuthGuard } from './guardian/auth.guard';
+import { NoauthGuard } from './guardian/noauth.guard';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'inicio', component: InicioComponent},
-  { path: 'ingreso', component: IngresoComponent},
-  { path: 'registro', component: RegistroComponent},
-  { path: 'miscuentas', component: PrincipalComponent, canActivate: [AutGuard]},
+  { path: 'ingreso', component: IngresoComponent, canActivate:[NoauthGuard]},
+  { path: 'registro', component: RegistroComponent, canActivate:[NoauthGuard]},
+  { path: 'miscuentas', component: PrincipalComponent, canActivate: [AuthGuard]},
   { path: 'comofunciona', component: ComofuncionaComponent},
   { path: 'faqs', component: FaqsComponent},
-  { path: 'informes', component: InformesComponent},
-  { path: 'metas', component: MetasComponent},
-  { path: 'soporte', component: SoporteComponent},
-  { path: 'categoria', component: CategoriaComponent},
-  { path: 'modal', component: ModalComponent },
-  { path: 'validausuario/:id', component: ValidaUsuarioComponent},
-  { path: 'validausuario/:id/:token', component: ValidaUsuarioComponent},
-  { path: 'ultimosmovimientos', component: UltimosMovimientosComponent},
-  { path: 'misdatos', component: DatosComponent},
-  { path: 'grafico-miscuentas', component: GraficoMiscuentasComponent},
-  { path: 'notificaciones', component: NotificacionesComponent},
+  { path: 'informes', component: InformesComponent, canActivate: [AuthGuard]},
+  { path: 'metas', component: MetasComponent, canActivate: [AuthGuard]},
+  { path: 'soporte', component: SoporteComponent, canActivate: [AuthGuard]},
+  { path: 'categoria', component: CategoriaComponent, canActivate: [AuthGuard]},
+  { path: 'modal', component: ModalComponent, canActivate: [AuthGuard] },
+  { path: 'validausuario/:id', component: ValidaUsuarioComponent, canActivate: [AuthGuard]},
+  { path: 'validausuario/:id/:token', component: ValidaUsuarioComponent, canActivate: [AuthGuard]},
+  { path: 'ultimosmovimientos', component: UltimosMovimientosComponent, canActivate: [AuthGuard]},
+  { path: 'misdatos', component: DatosComponent, canActivate: [AuthGuard]},
+  { path: 'grafico-miscuentas', component: GraficoMiscuentasComponent, canActivate: [AuthGuard]},
+  { path: 'notificaciones', component: NotificacionesComponent, canActivate: [AuthGuard]},
   { path: '**', component: ErrorComponent},
 ];
 

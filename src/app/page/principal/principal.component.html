@@ -69,12 +69,20 @@
   
       <div class="card">
         <div class="card-titulo ultmov">Movimientos</div>
-        <div class="card-cantidad ultmov">{{mesActualCardMov | date: 'MMMM'}} {{anioActual}}</div>
-        <button
-          class="btn btn-outline-primary btn-irultmov" routerLink="/ultimosmovimientos"
-        >
-          Ir a movimientos
-        </button>
+        <span *ngFor="let mes of arrMeses; let i = index; ">
+          <span *ngFor="let anio of arrAnios">
+            <div class="card-cantidad ultmov" *ngIf="i==mesActual && anio == anioActual">
+              {{mes}} {{anio}}
+              <div>
+                <button class="btn btn-outline-primary btn-irultmov" (click)="seleccionaUltMovimientos(mes, anio)">
+                  Ir a movimientos
+                </button>
+              </div>
+            </div>
+          </span>
+        </span>
+        
+        
       </div>
   
       <div class="card">
@@ -121,7 +129,7 @@
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
-            <option value=" " selected>Categoría</option>
+            <option value=" ">Categoría</option>
             <option value="2">Salario</option>
             <option value="4">Horas Extras</option>
           </select>

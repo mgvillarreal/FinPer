@@ -2,10 +2,13 @@
 
     <div class="titulo text-center mt-5 mb-5">Metas de Ahorro</div>
 
-    <div class="mt-4 text-center">
+    <div class="mt-2 text-center">
         <select class="select-finper-default select-s" name="estado" id="estado" (ngModelChange)="cambiaEstado()" [(ngModel)]="estado">
-            <option value="1" selected>Pendientes</option>
-            <option value="2">Alcanzadas</option>
+            <option *ngFor="let estado of arrEstados; let i = index" value="{{i}}" [selected]="i == 0" >{{estado}}</option>
+            <!-- <option value="0" selected>Pendientes</option>
+            <option value="1">Alcanzadas</option>
+            <option value="2">Canceladas</option>
+            <option value="10">Todas</option> -->
         </select>
     </div>
 
@@ -16,7 +19,8 @@
           <div class="col col-3">Ahorrado</div>
           <div class="col col-4">Por alcanzar</div>
           <div class="col col-5">Fecha Límite</div>
-          <div class="col col-6"></div>
+          <div class="col col-6">Estado</div>
+          <div class="col col-7"></div>
         </li>
         <li class="table-row" *ngFor="let meta of metas; let i = index" (click)="mostrarMontos(meta)">
           <div class="col col-1" data-label="Meta">{{meta.met_nombre}}</div>
@@ -24,7 +28,8 @@
           <div class="col col-3" data-label="Ahorrado">ARS {{meta.sumaMonto}}</div>
           <div class="col col-4" data-label="Por alcanzar">ARS {{meta.met_monto - meta.sumaMonto}}</div>
           <div class="col col-5" data-label="Fecha Límite">{{meta.met_flimite|date: 'dd/MM/YYYY'}}</div>
-          <div class="col col-6">
+          <div class="col col-6" data-label="Estado">{{meta.met_estado}}</div>
+          <div class="col col-7">
             <div (click)="editarMeta(meta.met_id)" class="btn-editar">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
