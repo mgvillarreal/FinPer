@@ -72,7 +72,11 @@
 }
 
 .header-blue .navbar .navbar-toggler {
-  border-color:#419f3e //rgba(255,255,255,0.3);
+  border-color:#419f3e; //rgba(255,255,255,0.3);
+}
+
+.navbar-toggler-icon{
+  color: #419f3e !important;
 }
 
 .header-blue .navbar .navbar-toggler:hover, .header-blue .navbar-toggler:focus {
