@@ -174,6 +174,9 @@ export class PrincipalComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
         this.calcula();
+
+        // COLOCAR ACA LA FUNCIÓN PARA RENOVAR EL GRAFICO DE DONA
+
       });
     this.muestraMsjAltaOk();
 
