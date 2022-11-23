@@ -79,8 +79,8 @@
                             La fecha de nacimiento es requerida.
                         </small>
                         <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['fnacimiento'].errors?.['fechaMayorA15']">
-                            Debes ser mayor a 15 años.
+                        *ngIf="forma.controls['fnacimiento'].errors?.['fechaInvalida']">
+                            Debes tener entre 15 y 99 años.
                         </small>
                         <br>
                         <div class="wrap-input100" >

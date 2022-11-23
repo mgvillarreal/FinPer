@@ -163,11 +163,6 @@ export class MetasComponent implements OnInit {
     return (control: AbstractControl): ValidationErrors | null => {
       const fechaIngresada = new Date(control.value);
       const factual = new Date();
-
-      // if(fechaIngresada < factual){
-      //   return {fechaInvalida: true}
-      // }
-      // return null;
   
       return fechaIngresada < factual ? { fechaInvalida : true } : null;
     }

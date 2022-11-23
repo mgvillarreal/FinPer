@@ -83,7 +83,6 @@ export class RegistroComponent implements OnInit {
     this.muestraPaises();
     this.muestraProfesiones();
     this.muestraIngresos();
-    this.fechaMayorA15();
   }
 
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -98,39 +97,10 @@ export class RegistroComponent implements OnInit {
       const fnacimiento = new Date(control.value);
       const factual = new Date();
       let years = (factual.getFullYear() - fnacimiento.getFullYear());
-      
-      //const edadValida = /[<15]+/.test(toString(years));
   
-      return years > 15 ? { fechaMayorA15 : true } : null;
+      return years < 15  || years > 99 ? { fechaInvalida : true } : null;
     }
   }
-  
-
-  fechaMayorA15(){
-      const fnacimiento = new Date('2021-11-19');
-      const factual = new Date();
-  
-      let years = (factual.getFullYear() - fnacimiento.getFullYear());
-  
-      if(years < 15){
-        console.log("hago algo aqui: ", fnacimiento, factual, years);
-      }
-  
-      return years < 15 ? { fechaMayorA15 : true } : null;
-  }
-
-
-
-  // fechaMayorA15Validator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  //   const fnacimiento = new Date(this.forma.value['fnacimiento']);
-  //   const factual = new Date();
-
-  //   let years = (factual.getFullYear() - fnacimiento.getFullYear());
-
-  //   console.log("hago algo aqui: ", years);
-
-  //   return years < 15 ? { fechaMayorA15 : true } : null;
-  // }
 
   muestraPaises(){
     this.usuarioService.traePaises().subscribe(res => {
