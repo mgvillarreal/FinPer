@@ -12,6 +12,18 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 
+export function fechaMayorA15Validator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const fnacimiento = new Date(control.value);
+    const factual = new Date();
+    let years = (factual.getFullYear() - fnacimiento.getFullYear());
+    
+    //const edadValida = /[<15]+/.test(toString(years));
+
+    return years > 15 ? { fechaMayorA15 : true } : null;
+  }
+}
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -24,7 +36,7 @@ export class RegistroComponent implements OnInit {
   paises: PaisI[] = [];
   profesiones: ProfesionI[] = [];
   ingresos: IngresoI[] = [];
-  parteFormulario:number = 0;
+  parteFormulario:number = 1;
   formulario: FormGroup;
   arrayIngresos:any[] = [];
 
@@ -75,15 +87,15 @@ export class RegistroComponent implements OnInit {
       'contrasena': ['', [Validators.required, Validators.minLength(6)]],
       'pwdConfirm': ['', Validators.required],
       'nombre': ['', [Validators.required]],
-      'fnacimiento': ['', [Validators.required, /*this.fechaMayorA15Validator*/ ]],
+      'fnacimiento': ['', [Validators.required, fechaMayorA15Validator ]],
       'residencia': [13, [Validators.required]],
       'modoing': ['', [Validators.required]],
       'profesion': ['', [Validators.required]],
-    }, { validators: this.contrasenasIgualesValidator });
+    }, { validators: this.contrasenasIgualesValidator});
     this.muestraPaises();
     this.muestraProfesiones();
     this.muestraIngresos();
-
+    this.fechaMayorA15();
   }
 
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -93,14 +105,33 @@ export class RegistroComponent implements OnInit {
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
   }
 
-  fechaMayorA15Validator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    const fnacimiento = new Date(this.forma.value['fnacimiento']);
-    const factual = new Date();
+  
 
-    let years = (factual.getFullYear() - fnacimiento.getFullYear());
-
-    return years < 15 ? { fechaMayorA15 : true } : null;
+  fechaMayorA15(){
+      const fnacimiento = new Date('2021-11-19');
+      const factual = new Date();
+  
+      let years = (factual.getFullYear() - fnacimiento.getFullYear());
+  
+      if(years < 15){
+        console.log("hago algo aqui: ", fnacimiento, factual, years);
+      }
+  
+      return years < 15 ? { fechaMayorA15 : true } : null;
   }
+
+
+
+  // fechaMayorA15Validator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  //   const fnacimiento = new Date(this.forma.value['fnacimiento']);
+  //   const factual = new Date();
+
+  //   let years = (factual.getFullYear() - fnacimiento.getFullYear());
+
+  //   console.log("hago algo aqui: ", years);
+
+  //   return years < 15 ? { fechaMayorA15 : true } : null;
+  // }
 
   muestraPaises(){
     this.usuarioService.traePaises().subscribe(res => {
