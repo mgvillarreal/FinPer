@@ -145,11 +145,11 @@ export class MetasComponent implements OnInit {
       moneda: ['', [Validators.required]],
       monto: ['', [Validators.required]],
       detalle: ['', [Validators.required]],
-      fechaLimite: ['', [Validators.required, this.fechaValidaValidator()]]
+      fechaLimite: ['', [Validators.required, this.fechaValidaValidator() ]]
     });
 
     this.formaMonto = this.fb.group({
-      montoMonto: ['', [Validators.required]],
+      montoMonto: ['', [Validators.required ]],
       fechaMonto: ['', [Validators.required]],
     });
 
