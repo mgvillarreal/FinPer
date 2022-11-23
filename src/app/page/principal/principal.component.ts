@@ -162,7 +162,7 @@ export class PrincipalComponent implements OnInit {
         this.muestraErrorEg();
         return
       }
-    } 
+    }
 
     this.movimiento.usuario = Number(localStorage.getItem('id'));
     this.movimiento.monto = this.forma.value['monto'];
@@ -173,10 +173,13 @@ export class PrincipalComponent implements OnInit {
       .guardaMovimiento(this.movimiento)
       .subscribe((data) => {
         console.log(data);
+        this.calcula();
+
+        // COLOCAR ACA LA FUNCIÓN PARA RENOVAR EL GRAFICO DE DONA
+
       });
     this.muestraMsjAltaOk();
-    this.calcula();
-    
+
     setTimeout(() => {
       this.calculaPorcentajes();
     }, 1500);
@@ -223,7 +226,7 @@ export class PrincipalComponent implements OnInit {
 
     this.movimientoSeleccionado = movimiento;
   }
-  
+
   editarEgreso(movimiento) {
     if (this.editaEgrFlag == 0) {
       this.editaEgrFlag = 1;
