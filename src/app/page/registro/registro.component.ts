@@ -24,7 +24,7 @@ export class RegistroComponent implements OnInit {
   paises: PaisI[] = [];
   profesiones: ProfesionI[] = [];
   ingresos: IngresoI[] = [];
-  parteFormulario:number = 0;
+  parteFormulario:number = 1;
   formulario: FormGroup;
   arrayIngresos:any[] = [];
 
@@ -75,15 +75,14 @@ export class RegistroComponent implements OnInit {
       'contrasena': ['', [Validators.required, Validators.minLength(6)]],
       'pwdConfirm': ['', Validators.required],
       'nombre': ['', [Validators.required]],
-      'fnacimiento': ['', [Validators.required, /*this.fechaMayorA15Validator*/ ]],
+      'fnacimiento': ['', [Validators.required, this.fechaMayorA15Validator() ]],
       'residencia': [13, [Validators.required]],
       'modoing': ['', [Validators.required]],
       'profesion': ['', [Validators.required]],
-    }, { validators: this.contrasenasIgualesValidator });
+    }, { validators: this.contrasenasIgualesValidator});
     this.muestraPaises();
     this.muestraProfesiones();
     this.muestraIngresos();
-
   }
 
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -93,13 +92,14 @@ export class RegistroComponent implements OnInit {
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
   }
 
-  fechaMayorA15Validator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    const fnacimiento = new Date(this.forma.value['fnacimiento']);
-    const factual = new Date();
-
-    let years = (factual.getFullYear() - fnacimiento.getFullYear());
-
-    return years < 15 ? { fechaMayorA15 : true } : null;
+  fechaMayorA15Validator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fnacimiento = new Date(control.value);
+      const factual = new Date();
+      let years = (factual.getFullYear() - fnacimiento.getFullYear());
+  
+      return years < 15  || years > 99 ? { fechaInvalida : true } : null;
+    }
   }
 
   muestraPaises(){

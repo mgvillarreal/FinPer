@@ -130,7 +130,7 @@ export class DatosComponent implements OnInit {
 
     this.forma = this.fb.group({
       'contrasenaNueva': ['', [Validators.required]],
-      'contrasenaConfirm': ['', Validators.required],
+      'contrasenaConfirm': ['', [Validators.required]],
     }, { validators: this.contrasenasIgualesValidator });
   }
 
