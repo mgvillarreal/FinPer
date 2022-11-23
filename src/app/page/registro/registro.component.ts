@@ -12,18 +12,6 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 
-export function fechaMayorA15Validator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const fnacimiento = new Date(control.value);
-    const factual = new Date();
-    let years = (factual.getFullYear() - fnacimiento.getFullYear());
-    
-    //const edadValida = /[<15]+/.test(toString(years));
-
-    return years > 15 ? { fechaMayorA15 : true } : null;
-  }
-}
-
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -87,7 +75,7 @@ export class RegistroComponent implements OnInit {
       'contrasena': ['', [Validators.required, Validators.minLength(6)]],
       'pwdConfirm': ['', Validators.required],
       'nombre': ['', [Validators.required]],
-      'fnacimiento': ['', [Validators.required, fechaMayorA15Validator ]],
+      'fnacimiento': ['', [Validators.required, this.fechaMayorA15Validator() ]],
       'residencia': [13, [Validators.required]],
       'modoing': ['', [Validators.required]],
       'profesion': ['', [Validators.required]],
@@ -105,6 +93,17 @@ export class RegistroComponent implements OnInit {
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
   }
 
+  fechaMayorA15Validator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fnacimiento = new Date(control.value);
+      const factual = new Date();
+      let years = (factual.getFullYear() - fnacimiento.getFullYear());
+      
+      //const edadValida = /[<15]+/.test(toString(years));
+  
+      return years > 15 ? { fechaMayorA15 : true } : null;
+    }
+  }
   
 
   fechaMayorA15(){

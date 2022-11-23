@@ -145,7 +145,7 @@ export class MetasComponent implements OnInit {
       moneda: ['', [Validators.required]],
       monto: ['', [Validators.required]],
       detalle: ['', [Validators.required]],
-      fechaLimite: ['', [Validators.required]]
+      fechaLimite: ['', [Validators.required, this.fechaValidaValidator()]]
     });
 
     this.formaMonto = this.fb.group({
@@ -157,6 +157,20 @@ export class MetasComponent implements OnInit {
       montoRet: ['', [Validators.required]],
       fechaRet: ['', [Validators.required]],
     });
+  }
+
+  fechaValidaValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fechaIngresada = new Date(control.value);
+      const factual = new Date();
+
+      // if(fechaIngresada < factual){
+      //   return {fechaInvalida: true}
+      // }
+      // return null;
+  
+      return fechaIngresada < factual ? { fechaInvalida : true } : null;
+    }
   }
 
   crearMeta() {
