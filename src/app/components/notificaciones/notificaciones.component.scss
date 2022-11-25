@@ -1,16 +1,16 @@
 *{
     font-family: 'Poppins', sans-serif;
   }
-  
+
   .titulo{
     color: #419f3e;
     font-size: 45px;
     font-weight: 630;
     letter-spacing: 2px;
   }
-  
+
   /*NUEVO DISENO*/
-  
+
   .container {
     max-width: 1000px;
     margin-left: auto;
@@ -18,7 +18,7 @@
     padding-left: 10px;
     padding-right: 10px;
   }
-    
+
   h2 {
     font-size: 26px;
     margin: 20px 0;
@@ -27,12 +27,12 @@
       font-size: 0.5em;
     }
   }
-    
+
   .responsive-table {
     margin-left: 3% !important;
     margin-right: 3% !important;
     padding: 0 !important;
-  
+
     li {
       border-radius: 3px;
       padding: 25px 30px;
@@ -40,7 +40,7 @@
       justify-content: space-between;
       margin-bottom: 5px;
     }
-  
+
     .table-header {
       background-color: #5abb57d0;
       font-size: 15px;
@@ -48,59 +48,59 @@
       letter-spacing: 0.03em;
       color: white;
     }
-  
+
     .table-row {
       //background-color: #ffffff;
       box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
     }
-  
+
     .col-1 {
       flex-basis: 13.3%;
     }
-  
+
     .col-2 {
       flex-basis: 20%;
     }
-  
+
     .col-3 {
       flex-basis: 40%;
     }
-  
+
     .col-4 {
       flex-basis: 13.3%;
     }
-  
+
     .col-5 {
       flex-basis: 13.3%;
     }
-  
+
     .col{
       display: flex;
       align-items: center;
     }
-      
+
     @media (min-width: 480px) and (max-width: 768px) {
-  
+
       .btn{
         margin-bottom: 4px;
       }
-          
+
       .table-header {
         display: none;
       }
-  
+
       //.table-row{
-        
+
       //}
-  
+
       li {
         display: block;
       }
-  
+
       .col {
         flex-basis: 100%;
       }
-  
+
       .col {
         display: flex;
         padding: 10px 0;
@@ -112,26 +112,26 @@
           text-align: center;
         }
       }
-  
+
       .col-1, .col-2, .col-3, .col-4, .col-5{
         width: 100% !important;
       }
     }
   }
-  
+
   a{
     color: #419f3e;
     text-decoration: none;
     cursor: pointer;
     font-size: 14px;
   }
-  
+
   /* COLORES FILAS */
-  
+
 .Ingreso{
   background-color: #4cb44931;
 }
-  
+
 .Egreso{
   background-color: rgba(253, 32, 32, 0.215);
 }
@@ -162,7 +162,7 @@
   border-radius: 10px;
   overflow: hidden;
   padding: 55px 40px 33px 40px;
-  
+
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
@@ -203,4 +203,9 @@
 
 .iconos{
   cursor: pointer;
+}
+
+.item-notificacion:hover{
+  cursor: pointer;
+  background-color: #419f3e17;
 }
