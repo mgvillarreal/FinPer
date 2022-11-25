@@ -235,7 +235,7 @@
             type="text"
             name="fechaLimite"
             placeholder="Fecha del gasto"
-            onfocus="(this.type='date')"
+            onfocus="(this.type='datetime-local')"
             formControlName="fecha"
           />
         </div>
@@ -362,7 +362,7 @@
                 </td>
                 <td>{{ movimiento.mov_detalle }}</td>
                 <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto }}</td>
-                <td>{{ movimiento.mov_fcreacion | date: 'EEEE d'}} </td>
+                <td>{{ movimiento.mov_fcreacion | date: 'EEEE d HH:mm'}} </td>
               </tr>
             </tbody>
           </table>
@@ -433,7 +433,7 @@
                 </td>
                 <td>{{ datose.mov_detalle }}</td>
                 <td>{{ datose.mon_simbolo }} {{ datose.mov_monto }}</td>
-                <td>{{ datose.mov_fcreacion | date: 'EEEE d'}} </td>
+                <td>{{ datose.mov_fcreacion | date: 'EEEE d HH:mm'}} </td>
               </tr>
               <tr>
               </tr>
@@ -501,7 +501,7 @@
             type="text"
             name="fechaLimite"
             placeholder="Fecha del ingreso"
-            onfocus="(this.type='date')"
+            onfocus="(this.type='datetime-local')"
             formControlName="fecha"
             [(ngModel)]="movimientoSeleccionado.mov_fcreacion"
           />
@@ -592,7 +592,7 @@
             type="text"
             name="fechaLimite"
             placeholder="Fecha del gasto"
-            onfocus="(this.type='date')"
+            onfocus="(this.type='datetime-local')"
             formControlName="fecha"
             [(ngModel)]="movimientoSeleccionado.mov_fcreacion"
           />

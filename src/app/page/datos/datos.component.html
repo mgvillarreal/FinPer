@@ -15,7 +15,7 @@
             </div>
             <div>
                 <span class="titulo-campos">Profesión</span><br>
-                <span>Estudiante</span>
+                <span>{{user.pro_descripcion}}</span>
             </div>
             <div>
                 <span class="titulo-campos">Edad</span><br>
@@ -61,7 +61,7 @@
                         <div class="titulo-editadatos mb-4"> Editar Perfil </div>
 
                             <div class="wrap-input100 mb-4">
-                                <input class="input100" type="text" name="nombre" placeholder="Nombre" formControlName="nombre">
+                                <input class="input100" type="text" name="nombre" formControlName="nombre" [(ngModel)]="user.usu_nombre">
                             </div>
                             <small  class="texto-validacion text-center"
                             *ngIf="forma1.controls['nombre'].errors?.['required'] && forma1.controls['nombre'].touched">
@@ -70,7 +70,7 @@
 
                             <div class="wrap-input100" >
                                 <label for="fnacimiento"></label>
-                                <input class="input100" type="text" name="fnacimiento" placeholder="Fecha de Nacimiento" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="fnacimiento">
+                                <input class="input100" type="text" name="fnacimiento" placeholder="Fecha de Nacimiento" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="fnacimiento" [(ngModel)]="user.usu_fnacimiento">
                             </div>
                             <small  class="texto-validacion text-center"
                             *ngIf="forma1.controls['fnacimiento'].errors?.['required'] && forma1.controls['fnacimiento'].touched">
@@ -79,9 +79,8 @@
                             <br>
                             <div class="wrap-input100" >
                                 <select class="input100" name="residencia" formControlName="residencia">
-                                    <option value="" [disabled]="1" [selected]="true">Lugar de Residencia</option>
-                                    <!-- <option value="{{pais.res_id}}" *ngFor="let pais of paises" [disabled]="pais.res_id != 13">{{pais.res_descripcion}}</option> -->
-                                    <option value="1">Argentina</option>
+                                    <option value="" disabled>Lugar de Residencia</option>
+                                    <option value="1" [selected]>{{user.res_descripcion}}</option>
                                 </select>
                             </div>
                             <small  class="texto-validacion text-center"

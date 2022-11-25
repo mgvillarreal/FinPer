@@ -28,7 +28,7 @@ export class RegistroComponent implements OnInit {
   formulario: FormGroup;
   arrayIngresos:any[] = [];
 
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private usuarioService: UsuariosService) { } //private modalService: ModalService
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private usuarioService: UsuariosService) { }
 
   pasarParteUno(): void {
     this.usuario.mail = this.forma.value['email'];

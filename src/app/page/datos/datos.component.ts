@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PaisI } from 'src/app/interfaces/pais';
+import { ProfesionI } from 'src/app/interfaces/profesion';
 import { UsuarioI } from 'src/app/interfaces/usuario';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -32,6 +33,9 @@ export class DatosComponent implements OnInit {
   paises: PaisI[] = [];
   arrayIngresos:any[] = [];
 
+  profesiones: ProfesionI[] = [];
+  usuarioSeleccionado: UsuarioI;
+
   constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router ) {
     this.usuario.nombre = localStorage.getItem('name');
     this.traeDatosUsuario()
@@ -44,6 +48,8 @@ export class DatosComponent implements OnInit {
     if(this.editaFlag == 0){
       this.editaFlag = 1;
       this.muestraPerfil = 0;
+      console.log("Usuario a editar: ", this.user);
+      this.usuarioSeleccionado = this.user;
     }
   }
 
@@ -78,6 +84,13 @@ export class DatosComponent implements OnInit {
       this.paises = res
     })
   }
+
+  muestraProfesiones(){
+    this.usuarioService.traeProfesiones().subscribe(res => {
+      this.profesiones = res
+    })
+  }
+
 
   guardaFormaUno(){
     this.usuario.nombre = this.forma1.value['nombre'];
@@ -118,9 +131,9 @@ export class DatosComponent implements OnInit {
 
   ngOnInit(): void {
     this.forma1 = this.fb.group({
-      'nombre': [this.user.usu_nombre, [Validators.required]],
-      'fnacimiento': [this.user.usu_fnacimiento, [Validators.required]],
-      'residencia': [13, [Validators.required]],
+      'nombre': ['', [Validators.required]],
+      'fnacimiento': ['', [Validators.required]],
+      'residencia': ['', [Validators.required]],
     });
 
     this.forma2 = this.fb.group({
@@ -132,6 +145,8 @@ export class DatosComponent implements OnInit {
       'contrasenaNueva': ['', [Validators.required]],
       'contrasenaConfirm': ['', [Validators.required]],
     }, { validators: this.contrasenasIgualesValidator });
+
+    this.muestraProfesiones();
   }
 
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
