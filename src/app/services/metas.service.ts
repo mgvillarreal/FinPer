@@ -22,7 +22,14 @@ export class MetasService {
       estado: estado,
       id_usuario: Number(localStorage.getItem("id"))
     };
-    return this.http.post<any>(this.urlv4 + '/metasporestado', body);
+
+    if(estado!=10){
+      return this.http.post<any>(this.urlv4 + '/metasporestado', body);
+    }
+    else{
+      return this.http.post<any>(this.urlv4 + '/todaslasmetas', body);
+    }
+    
   }
 
   guardaMetas(metas: Meta):Observable<ResponseI> {

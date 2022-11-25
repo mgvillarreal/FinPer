@@ -58,7 +58,13 @@ export class MetasComponent implements OnInit {
   arrDiferencia = []
 
   //estados
-  arrEstados:string[] = ['Pendiente', 'Alcanzada', 'Cancelada', 'Todas'];
+  arrEstados = [
+    { value: 0, name: "Pendientes" },
+    { value: 1, name: "Alcanzadas" },
+    { value: 2, name: "Canceladas" },
+    { value: 10, name: "Todas" }
+  ];
+  estadoMeta:any;
 
   constructor(
     private fb: FormBuilder,
@@ -186,13 +192,13 @@ export class MetasComponent implements OnInit {
   }
 
   cambiaEstado() {
-    if (this.estado == 1) {
-      this.estado = 2;
-    } else {
-      this.estado = 1;
-    }
-
-    this.traeMetaPorEstado(this.estado);
+    // if (this.estado == 1) {
+    //   this.estado = 2;
+    // } else {
+    //   this.estado = 1;
+    // }
+    console.log('Estado meta: ', this.estadoMeta);
+    this.traeMetaPorEstado(this.estadoMeta);
   }
 
   async traeMetaPorEstado(estado: number) {
