@@ -1,17 +1,17 @@
 <div class="bg">
   <div class="container pt-4" *ngIf="muestraPrincipalFlag == 1">
     <div class="titulo text-center mt-2 mb-1">Mis Cuentas</div>
-  
+
     <div class="text-center mt-4">
       <select (change)="changeMes()" class="select-finper-default select-s" name="" id="" [(ngModel)]="mesActual">
         <option *ngFor="let mes of arrMeses; let i = index" value="{{i}}" [selected]="i == mesActual" >{{mes}}</option>
      </select>
-  
+
       <select (change)="changeMes()" class="select-finper-default select-xs" name="" id="" [(ngModel)]="anioActual">
         <option *ngFor="let anio of arrAnios" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
       </select>
     </div>
-  
+
     <div class="text-center pt-4 pb-1">
       <span class="balance-titulo">Balance Total: </span>
       <span class="balance-cantidad"> ARS {{ balance }} </span>
@@ -20,7 +20,7 @@
       <span class="subbalance-titulo">Balance Mes: </span>
       <span class="subbalance-cantidad"> ARS {{ balance }} </span>
     </div>
-  
+
     <div class="text-center mb-2">
       <div class="card">
         <div class="card-titulo ingreso">Ingresos</div>
@@ -38,7 +38,7 @@
           Nuevo ingreso
         </button>
       </div>
-  
+
       <div class="card">
         <div class="card-titulo egreso">Gastos</div>
         <div class="card-cantidad egreso">ARS {{ egreso }}</div>
@@ -56,7 +56,7 @@
           Nuevo gasto
         </button>
       </div>
-  
+
       <div class="card">
         <div class="card-titulo ahorro">Ahorros</div>
         <div class="card-cantidad ahorro">ARS 5.000</div>
@@ -66,7 +66,7 @@
           Ir a metas de ahorro
         </button>
       </div>
-  
+
       <div class="card">
         <div class="card-titulo ultmov">Movimientos</div>
         <span *ngFor="let mes of arrMeses; let i = index; ">
@@ -81,10 +81,10 @@
             </div>
           </span>
         </span>
-        
-        
+
+
       </div>
-  
+
       <div class="card">
         <div class="position-grafico">
           <!-- <app-grafico-miscuentas [porcentajeIngreso]="porcentajeIngreso" [porcentajeEgreso]="porcentajeEgreso"> </app-grafico-miscuentas> -->
@@ -93,9 +93,9 @@
           </div>
         </div>
       </div>
-  
+
     </div>
-  
+
     <!-- <div class="text-center mt-4 mb-4">
       <a class="misultmov" routerLink="/ultimosmovimientos" >Mis Últimos Movimientos</a>
     </div> -->
@@ -157,7 +157,7 @@
             type="text"
             name="fechaLimite"
             placeholder="Fecha del ingreso"
-            onfocus="(this.type='date')"
+            onfocus="(this.type='datetime-local')"
             formControlName="fecha"
           />
         </div>
@@ -235,7 +235,7 @@
             type="text"
             name="fechaLimite"
             placeholder="Fecha del gasto"
-            onfocus="(this.type='date')"
+            onfocus="(this.type='datetime-local')"
             formControlName="fecha"
           />
         </div>
@@ -362,7 +362,7 @@
                 </td>
                 <td>{{ movimiento.mov_detalle }}</td>
                 <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto }}</td>
-                <td>{{ movimiento.mov_fcreacion | date: 'EEEE d'}} </td>
+                <td>{{ movimiento.mov_fcreacion | date: 'EEEE d HH:mm'}} </td>
               </tr>
             </tbody>
           </table>
@@ -433,7 +433,7 @@
                 </td>
                 <td>{{ datose.mov_detalle }}</td>
                 <td>{{ datose.mon_simbolo }} {{ datose.mov_monto }}</td>
-                <td>{{ datose.mov_fcreacion | date: 'EEEE d'}} </td>
+                <td>{{ datose.mov_fcreacion | date: 'EEEE d HH:mm'}} </td>
               </tr>
               <tr>
               </tr>
@@ -474,7 +474,9 @@
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
-            <option *ngFor="let categoria of categorias" [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
+            <option
+            *ngFor="let categoria of categorias"
+            [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
               {{categoria.cmov_descripcion}}
             </option>
           </select>
@@ -499,7 +501,7 @@
             type="text"
             name="fechaLimite"
             placeholder="Fecha del ingreso"
-            onfocus="(this.type='date')"
+            onfocus="(this.type='datetime-local')"
             formControlName="fecha"
             [(ngModel)]="movimientoSeleccionado.mov_fcreacion"
           />
@@ -523,7 +525,7 @@
         <button
           class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act"
           (click)="preguntaEliminar()"
-        > 
+        >
           Eliminar
         </button>
       </div>
@@ -559,8 +561,8 @@
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
-            <option 
-            *ngFor="let categoria of categorias" 
+            <option
+            *ngFor="let categoria of categorias"
             [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
               {{categoria.cmov_descripcion}}
             </option>
@@ -590,7 +592,7 @@
             type="text"
             name="fechaLimite"
             placeholder="Fecha del gasto"
-            onfocus="(this.type='date')"
+            onfocus="(this.type='datetime-local')"
             formControlName="fecha"
             [(ngModel)]="movimientoSeleccionado.mov_fcreacion"
           />
