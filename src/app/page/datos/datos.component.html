@@ -78,9 +78,10 @@
                             </small>
                             <br>
                             <div class="wrap-input100" >
-                                <select class="input100" name="residencia" formControlName="residencia">
-                                    <option value="" disabled>Lugar de Residencia</option>
-                                    <option value="1" [selected]>{{user.res_descripcion}}</option>
+                                <select class="input100" name="residencia" formControlName="residencia" >
+                                    <!-- <option value="" disabled>Lugar de Residencia</option> -->
+                                    <option value="{{pais.res_id}}" *ngFor="let pais of paises" [disabled]="pais.res_id != 13" [selected]="pais.res_id==13">{{pais.res_descripcion}}</option>
+                                    <!-- <option value="{{pais.res_id}}" *ngFor="let pais of paises" [disabled]="pais.res_id != 13"></option> -->
                                 </select>
                             </div>
                             <small  class="texto-validacion text-center"

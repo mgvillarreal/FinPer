@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PaisI } from 'src/app/interfaces/pais';
 import { ProfesionI } from 'src/app/interfaces/profesion';
@@ -22,7 +22,7 @@ export class DatosComponent implements OnInit {
   muestraPerfil: number = 1;
   editaFlag: number = 0;
   eliminaFlag: number = 0;
-  parteFormulario: number = 1;
+  parteFormulario: number = 2;
   muestraMensajeFlag: number = 0;
   cambiaContrasenaFlag: number = 0;
   muestraMensajeContrasenaFlag: number = 0;
@@ -34,11 +34,10 @@ export class DatosComponent implements OnInit {
   arrayIngresos:any[] = [];
 
   profesiones: ProfesionI[] = [];
-  usuarioSeleccionado: UsuarioI;
 
   constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router ) {
     this.usuario.nombre = localStorage.getItem('name');
-    this.traeDatosUsuario()
+    this.traeDatosUsuario();
 
   }
 
@@ -49,7 +48,6 @@ export class DatosComponent implements OnInit {
       this.editaFlag = 1;
       this.muestraPerfil = 0;
       console.log("Usuario a editar: ", this.user);
-      this.usuarioSeleccionado = this.user;
     }
   }
 
@@ -90,7 +88,6 @@ export class DatosComponent implements OnInit {
       this.profesiones = res
     })
   }
-
 
   guardaFormaUno(){
     this.usuario.nombre = this.forma1.value['nombre'];
@@ -146,6 +143,7 @@ export class DatosComponent implements OnInit {
       'contrasenaConfirm': ['', [Validators.required]],
     }, { validators: this.contrasenasIgualesValidator });
 
+    this.muestraPaises();
     this.muestraProfesiones();
   }
 
@@ -159,8 +157,8 @@ export class DatosComponent implements OnInit {
   traeDatosUsuario()
   {
     this.usuarioService.traeDatosUsuario(Number(localStorage.getItem('id'))).subscribe(resp => {
-      this.user = resp[0]
-      this.ageCalculator(resp[0].usu_fnacimiento)
+      this.user = resp[0];
+      this.ageCalculator(resp[0].usu_fnacimiento);
     })
   }
 
