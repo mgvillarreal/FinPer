@@ -38,7 +38,6 @@ export class DatosComponent implements OnInit {
   constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router ) {
     this.usuario.nombre = localStorage.getItem('name');
     this.traeDatosUsuario();
-
   }
 
   /* MANEJO DE FLAGS */
@@ -124,6 +123,10 @@ export class DatosComponent implements OnInit {
     console.log('Contrasena Nueva del Usuario: ', this.usuario.contrasena);
     this.muestraMensajeContrasenaFlag = 1;
     this.cambiaContrasenaFlag = 0;
+
+    let idUser = localStorage.getItem('id');
+    console.log("ID: ", idUser);
+    this.usuarioService.modificaContrasena(this.forma.value['contrasenaConfirm'], idUser).subscribe();
   }
 
   ngOnInit(): void {
@@ -139,6 +142,7 @@ export class DatosComponent implements OnInit {
     });
 
     this.forma = this.fb.group({
+      'email': ['', [Validators.required]],
       'contrasenaNueva': ['', [Validators.required]],
       'contrasenaConfirm': ['', [Validators.required]],
     }, { validators: this.contrasenasIgualesValidator });
@@ -161,7 +165,7 @@ export class DatosComponent implements OnInit {
       this.ageCalculator(resp[0].usu_fnacimiento);
     })
   }
-
+  
   ageCalculator(edad){
     if(edad){
       const convertAge = new Date(edad);

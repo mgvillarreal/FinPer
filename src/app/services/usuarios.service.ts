@@ -49,4 +49,14 @@ export class UsuariosService {
     return this.http.get<UsuarioI>(this.url + 'datos/' + id)
   }
 
+  modificaContrasena(contrasenaNueva, id)
+  {
+    let usuarioChangePwd = {
+      'id': id,
+      'contrasena': contrasenaNueva
+    }
+
+    return this.http.put<any>(this.url + 'modificacontrasena', usuarioChangePwd);
+  }
+
 }
