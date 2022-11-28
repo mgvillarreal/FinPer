@@ -23,11 +23,9 @@ export class UsuariosService {
   ) {}
 
   datosUsuario(){
-
     let data: any = {
       "token": this.auth.auth()
     }
-
 
    return this.http.post<Usuario>(this.url + 'id/token', data)
   }
@@ -57,6 +55,12 @@ export class UsuariosService {
     }
 
     return this.http.put<any>(this.url + 'modificacontrasena', usuarioChangePwd);
+  }
+
+  eliminaUsuario(id)
+  {
+    console.log("user id en service: ", id);
+    return this.http.put<any>(this.url + 'eliminausuario', id);
   }
 
 }

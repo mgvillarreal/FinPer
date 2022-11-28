@@ -5,6 +5,7 @@ import { PaisI } from 'src/app/interfaces/pais';
 import { ProfesionI } from 'src/app/interfaces/profesion';
 import { UsuarioI } from 'src/app/interfaces/usuario';
 import { Usuario } from 'src/app/models/usuario.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -35,7 +36,7 @@ export class DatosComponent implements OnInit {
 
   profesiones: ProfesionI[] = [];
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router ) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router, public auth: AuthService ) {
     this.usuario.nombre = localStorage.getItem('name');
     this.traeDatosUsuario();
   }
@@ -115,17 +116,19 @@ export class DatosComponent implements OnInit {
   }
 
   eliminarPerfil(){
+    let idUser = localStorage.getItem('id');
+    console.log("user id", idUser);
+    this.usuarioService.eliminaUsuario(idUser).subscribe();
     this.router.navigate(['inicio']);
+    this.auth.logout();
   }
 
   cambiarContrasena(){
     this.usuario.contrasena = this.forma.value['contrasenaConfirm'];
-    console.log('Contrasena Nueva del Usuario: ', this.usuario.contrasena);
     this.muestraMensajeContrasenaFlag = 1;
     this.cambiaContrasenaFlag = 0;
 
     let idUser = localStorage.getItem('id');
-    console.log("ID: ", idUser);
     this.usuarioService.modificaContrasena(this.forma.value['contrasenaConfirm'], idUser).subscribe();
   }
 
