@@ -26,12 +26,15 @@ import { ModalService } from './services/modal.service';
 import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.component';
 import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-movimientos.component';
 import { DatosComponent } from './page/datos/datos.component';
-import { GraficoMiscuentasComponent } from './page/grafico-miscuentas/grafico-miscuentas.component';
 import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
+import { GraficosprincipalComponent } from './page/graficosprincipal/graficosprincipal.component';
 
 import {LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { GraficoscategoriasComponent } from './page/graficoscategorias/graficoscategorias.component';
+import { GraficosmovimientosmensualComponent } from './page/graficosmovimientosmensual/graficosmovimientosmensual.component';
+import { GraficosmovimientosanualComponent } from './page/graficosmovimientosanual/graficosmovimientosanual.component';
 registerLocaleData(localeEs, 'es'); //Esto no es un import, pero va justo despues de ellos!
 
 
@@ -56,8 +59,11 @@ registerLocaleData(localeEs, 'es'); //Esto no es un import, pero va justo despue
     ValidaUsuarioComponent,
     UltimosMovimientosComponent,
     DatosComponent,
-    GraficoMiscuentasComponent,
-    NotificacionesComponent
+    NotificacionesComponent,
+    GraficosprincipalComponent,
+    GraficoscategoriasComponent,
+    GraficosmovimientosmensualComponent,
+    GraficosmovimientosanualComponent
   ],
   imports: [
     BrowserModule,
