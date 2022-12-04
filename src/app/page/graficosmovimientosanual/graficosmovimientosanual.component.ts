@@ -8,10 +8,20 @@ import { Chart, ChartConfiguration, ChartItem, registerables } from 'chart.js';
 })
 export class GraficosmovimientosanualComponent implements OnInit {
 
+  arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  arrAnios:number[] = [2021, 2022];
+  mesActual:number = Number(new Date().getMonth());
+  anioActual:number =  Number(new Date().getFullYear());
+
   constructor() { }
 
   ngOnInit(): void {
     this.creaGraficoMovimientosAnual();
+  }
+
+  changeMes(){
+    this.mesActual = Number(this.mesActual);
+    this.anioActual = Number(this.anioActual);
   }
 
   creaGraficoMovimientosAnual(): void {

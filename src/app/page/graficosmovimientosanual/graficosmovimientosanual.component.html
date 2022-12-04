@@ -1,8 +1,34 @@
-<div class="card">
+<div class="container text-center">
+
+  <div class="titulo text-center mt-2 mb-1">Informe Anual por Movimientos</div>
+
+  <div class="mt-4 mb-4">
+    <div class="text-center mt-4">
+      <select (change)="changeMes()" class="select-finper-default select-s" name="" id="" [(ngModel)]="mesActual">
+        <option *ngFor="let mes of arrMeses; let i = index" value="{{i}}" [selected]="i == mesActual" >{{mes}}</option>
+     </select>
+
+      <select (change)="changeMes()" class="select-finper-default select-xs" name="" id="" [(ngModel)]="anioActual">
+        <option *ngFor="let anio of arrAnios" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card">
     <div class="position-grafico">
       <div class="chart-container">
         <canvas class="text-center" id="grafico-movimientosanual"> </canvas>
       </div>
     </div>
+  </div>
+
+  <div>
+    <button class="btn btn-outline-primary btn-descarga">Descargar</button>
+  </div>
+
+  <div class="text-center mb-4 mt-3">
+    <a routerLink="/graficosprincipal">Volver</a>
+  </div>
+
 </div>
 
