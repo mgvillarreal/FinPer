@@ -6,7 +6,8 @@
     display: inline-block;
     justify-content: space-between;
     margin-bottom: 25px;
-    width: 45%;
+    width: 1000px;
+    height: 600px;
 }
 
 .position-grafico{

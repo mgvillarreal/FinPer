@@ -6,13 +6,13 @@
     display: inline-block;
     justify-content: space-between;
     margin-bottom: 25px;
-    width: 1000px;
-    height: 600px;
+    width: 1050px;
+    height: 560px;
 }
 
 .position-grafico{
     position: relative;
-    left: 23%;
+    /*left: 23%;*/
 }
 
 .chart-container{
