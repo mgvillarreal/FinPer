@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartItem, registerables } from 'chart.js';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'app-graficosmovimientosanual',
@@ -44,19 +45,32 @@ export class GraficosmovimientosanualComponent implements OnInit {
       ],
       datasets: [
         {
-        label: 'Ingresos',
-        data: [80000, 80000, 90000, 87000, 70000, 135000, 100000, 97000, 110000, 110000, 120000, 160000],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
+          label: 'Ingresos',
+          data: [80000, 80000, 90000, 87000, 70000, 135000, 100000, 97000, 110000, 110000, 120000, 160000],
+          fill: false,
+          borderColor: '#3fd22f',
+          tension: 0.19,
+          pointBorderColor: '#3fd22f',
+          pointBackgroundColor: '#3fd22f',
         },
         {
           label: 'Gastos',
           data: [70000, 60000, 80000, 85000, 65000, 100000, 90000, 90000, 100000, 90000, 100000, 160000],
           fill: false,
-          borderColor: '#EE270C',
-          tension: 0.1
+          borderColor: 'rgba(255, 0, 0, 0.903)',
+          tension: 0.19,
+          pointBorderColor: 'rgba(255, 0, 0, 0.903)',
+          pointBackgroundColor: 'rgba(255, 0, 0, 0.903)',
         },
+        {
+          label: 'Ahorros',
+          data: [10000, 15000, 5000, 7000, 8600, 13000, 18000, 8000, 0, 4500, 6000, 10000],
+          fill: false,
+          borderColor: '#F7D501',
+          tension: 0.19,
+          pointBorderColor: '#F7D501',
+          pointBackgroundColor: '#F7D501',
+        }
     ]
     };
 
@@ -65,9 +79,33 @@ export class GraficosmovimientosanualComponent implements OnInit {
       data: data,
       options: {
         scales: {
-          y: {
+          yAxes: {
+            ticks: {
+              stepSize: 20000,
+              maxTicksLimit: 400000
+            },
             beginAtZero: false
           }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Movimientos por Mes',
+            font: {
+              size: 18,
+              family: 'Poppins, sans-serif',
+            }
+          },
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              font: {
+                size: 11,
+                family: 'Poppins, sans-serif',
+              },
+            }
+          },
         }
       }
     };

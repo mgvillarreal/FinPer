@@ -65,6 +65,19 @@ export class GraficosmovimientosmensualComponent implements OnInit {
           y: {
             beginAtZero: true
           }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Tittle',
+            font: {
+              size: 18,
+              family: 'Poppins, sans-serif',
+            }
+          },
+          legend: {
+            display: false
+          }
         }
       }
     };
