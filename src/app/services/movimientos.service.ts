@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { CategoriaI } from '../interfaces/categoria';
 import { Movimiento } from '../models/movimiento.model';
 
 @Injectable({
@@ -52,7 +53,7 @@ export class MovimientosService {
 
   traeCategorias()
   {
-    return this.http.get<any>(this.urlv5)
+    return this.http.get<CategoriaI[]>(this.urlv5)
   }
 
 }

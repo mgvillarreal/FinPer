@@ -35,6 +35,7 @@ import { registerLocaleData } from '@angular/common';
 import { GraficoscategoriasComponent } from './page/graficoscategorias/graficoscategorias.component';
 import { GraficosmovimientosmensualComponent } from './page/graficosmovimientosmensual/graficosmovimientosmensual.component';
 import { GraficosmovimientosanualComponent } from './page/graficosmovimientosanual/graficosmovimientosanual.component';
+import { CategoriaPipe } from './pipes/categoria.pipe';
 registerLocaleData(localeEs, 'es'); //Esto no es un import, pero va justo despues de ellos!
 
 
@@ -63,7 +64,8 @@ registerLocaleData(localeEs, 'es'); //Esto no es un import, pero va justo despue
     GraficosprincipalComponent,
     GraficoscategoriasComponent,
     GraficosmovimientosmensualComponent,
-    GraficosmovimientosanualComponent
+    GraficosmovimientosanualComponent,
+    CategoriaPipe
   ],
   imports: [
     BrowserModule,

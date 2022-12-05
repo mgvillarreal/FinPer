@@ -129,9 +129,8 @@
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
-            <option value=" ">Categoría</option>
-            <option value="2">Salario</option>
-            <option value="4">Horas Extras</option>
+            <option [selected]="true" [disabled]="true" value="0">Seleccione categoría</option>
+            <option *ngFor="let categoria of categoriasIngreso" value="{{categoria.cmov_id}}">{{categoria.cmov_descripcion}}</option>
           </select>
         </div><br>
         <small  class="texto-validacion text-center"
@@ -206,10 +205,8 @@
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
-            <option value=" " selected>Categoría</option>
-            <option value="1">Supermercado</option>
-            <option value="3">Recreacion</option>
-            <option value="5">Educacion</option>
+            <option [selected]="true" [disabled]="true" value="0">Seleccione categoría</option>
+            <option *ngFor="let categoria of categoriasEgreso" value="{{categoria.cmov_id}}">{{categoria.cmov_descripcion}}</option>
           </select>
         </div><br>
         <small  class="texto-validacion text-center"
@@ -475,7 +472,7 @@
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
             <option
-            *ngFor="let categoria of categorias"
+            *ngFor="let categoria of categoriasIngreso"
             [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
               {{categoria.cmov_descripcion}}
             </option>
@@ -562,7 +559,7 @@
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
             <option
-            *ngFor="let categoria of categorias"
+            *ngFor="let categoria of categoriasEgreso"
             [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
               {{categoria.cmov_descripcion}}
             </option>

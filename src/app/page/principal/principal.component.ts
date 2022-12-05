@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
 import { Router, RouterLink } from '@angular/router';
+import { CategoriaI } from 'src/app/interfaces/categoria';
 
 @Component({
   selector: 'app-principal',
@@ -53,7 +54,9 @@ export class PrincipalComponent implements OnInit {
   anioActual:number =  Number(new Date().getFullYear());
 
   movimientoSeleccionado: MovimientoI;
-  categorias = [];
+  categorias: CategoriaI[];
+  categoriasIngreso: CategoriaI[];
+  categoriasEgreso: CategoriaI[];
 
   balanceTotal
 
@@ -72,7 +75,7 @@ export class PrincipalComponent implements OnInit {
     /*NUEVO*/
     this.forma = this.fb.group({
       monto: ['', [Validators.required, Validators.min(1)]],
-      categoria: ['', []],
+      categoria: ['0', [Validators.required, Validators.min(1)]],
       detalle: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
     });
@@ -295,6 +298,9 @@ export class PrincipalComponent implements OnInit {
   traeCategorias() {
     this.movimientoService.traeCategorias().subscribe((resp) => {
       this.categorias = resp;
+      console.info(this.categorias)
+      this.divisorCategoria()
+      console.log(this.categoriasIngreso)
       console.log(this.categorias)
     });
   }
@@ -342,5 +348,10 @@ export class PrincipalComponent implements OnInit {
     const chartItem: ChartItem = document.getElementById('grafico-miscuentas') as ChartItem;
 
     new Chart(chartItem, config);
+  }
+
+  divisorCategoria(){
+    this.categoriasIngreso = this.categorias.filter(categoria => categoria.cmov_tipo == 1)
+    this.categoriasEgreso = this.categorias.filter(categoria => categoria.cmov_tipo == 2)
   }
 }
