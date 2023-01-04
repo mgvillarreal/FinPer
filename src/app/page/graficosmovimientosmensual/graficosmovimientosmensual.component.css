@@ -11,12 +11,11 @@
     justify-content: space-between;
     margin-bottom: 25px;
     width: 1000px;
-    height: 600px;
+    height: 500px;
 }
 
 .position-grafico{
     position: relative;
-    left: 23%;
 }
 
 .chart-container{

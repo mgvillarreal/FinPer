@@ -29,6 +29,9 @@ export class GraficosmovimientosmensualComponent implements OnInit {
 
     const data = {
       labels: [
+        'Sueldo',
+        'Horas Extras',
+        'Frelancee',
         'Alquiler',
         'Expensas',
         'Servicios',
@@ -41,8 +44,11 @@ export class GraficosmovimientosmensualComponent implements OnInit {
       ],
       datasets: [{
         label: 'Mis Movimientos',
-        data: [32000, 8000, 8000, 24000, 16000, 16000, 8000, 8000, 40000],
+        data: [70000, 0, 15000, 32000, 8000, 8000, 24000, 16000, 16000, 8000, 8000, 40000],
         backgroundColor: [
+          '#359B08',
+          '#50BD20',
+          '#57AB33',
           '#F70101',
           '#FA2424',
           '#E34040',
@@ -69,7 +75,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
         plugins: {
           title: {
             display: true,
-            text: 'Tittle',
+            text: 'Movimientos en un Mes',
             font: {
               size: 18,
               family: 'Poppins, sans-serif',
