@@ -10,7 +10,7 @@ import { skip } from 'rxjs';
 export class GraficosmovimientosanualComponent implements OnInit {
 
   arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-  arrAnios:number[] = [2021, 2022];
+  arrAnios:number[] = [2021, 2022, 2023];
   mesActual:number = Number(new Date().getMonth());
   anioActual:number =  Number(new Date().getFullYear());
 

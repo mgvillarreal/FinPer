@@ -100,6 +100,7 @@ export class MetasComponent implements OnInit {
     this.muestraMensajeMontoFlag = 0;
     this.retiraMontoFlag = 0;
     this.editaMontoFlag = 0;
+    this.muestraMensajeMontoRetFlag = 0;
   }
 
   crearOtraMeta() {
@@ -396,9 +397,9 @@ export class MetasComponent implements OnInit {
 
   muestraMensajeOkMontoRet(){
     if (this.muestraMensajeMontoRetFlag == 0) {
-      this.muestraMensajeMontoRetFlag = 1;
       this.retiraMontoFlag = 0;
       this.agregaMontoFlag = 0;
+      this.muestraMensajeMontoRetFlag = 1;
     }
   }
 }

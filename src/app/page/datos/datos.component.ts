@@ -23,7 +23,7 @@ export class DatosComponent implements OnInit {
   muestraPerfil: number = 1;
   editaFlag: number = 0;
   eliminaFlag: number = 0;
-  parteFormulario: number = 2;
+  parteFormulario: number = 1;
   muestraMensajeFlag: number = 0;
   cambiaContrasenaFlag: number = 0;
   muestraMensajeContrasenaFlag: number = 0;

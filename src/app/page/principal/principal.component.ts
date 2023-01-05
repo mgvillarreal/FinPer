@@ -49,7 +49,7 @@ export class PrincipalComponent implements OnInit {
   porcentajes = 100;
 
   arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-  arrAnios:number[] = [2021, 2022];
+  arrAnios:number[] = [2021, 2022, 2023];
   mesActual:number = Number(new Date().getMonth());
   anioActual:number =  Number(new Date().getFullYear());
 
@@ -199,6 +199,8 @@ export class PrincipalComponent implements OnInit {
     this.muestraMensajeActFlag = 0;
     this.detalleEgrFlag = 0;
     this.muestraErrorEgFlag = 0;
+    this.muestraIngresosFlag = 0;
+    this.muestraEgresosFlag = 0;
   }
 
   muestraMsjAltaOk() {
