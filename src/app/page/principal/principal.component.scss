@@ -46,11 +46,11 @@
   background-color: #ffffff;
   box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
   border-radius: 20px;
-  padding: 25px 30px;
+  padding: 35px;
   display: inline-block;
   justify-content: space-between;
-  margin-bottom: 25px;
-  width: 45%;
+  width: 99%;
+  height: 99%;
 }
 
 .card-titulo{
@@ -353,4 +353,42 @@ input{
   position: relative;
   width: 300px;
   height: 300px;
+}
+
+.container-cards{
+  display: grid;
+  height: 100%;
+  grid-template-columns: auto auto;
+}
+
+.containercards-column1{
+  width: 50%;
+}
+
+.containercards-column2{
+  width: 50%;
+}
+
+.containercard-item1{
+  height: 50%;
+}
+
+.containercard-item2{
+  height: 50%;
+}
+
+.containercard-item3{
+  height: 33.33%;
+}
+
+.containercard-item4{
+  height: 33.33%;
+}
+
+.containercard-item5{
+  height: 33.33%;
+}
+
+.aling-center{
+  line-height: 50px
 }
