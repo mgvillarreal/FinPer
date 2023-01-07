@@ -20,6 +20,7 @@ a:focus {
 a:hover {
     text-decoration: none;
     color: #419f3e;
+    cursor: pointer;
 }
   
 h1,h2,h3,h4,h5,h6 {
@@ -304,4 +305,10 @@ iframe {
     padding: 10px;
     width:80%;
     margin-top: 10px;
+}
+
+.btn-close{
+    background-color: transparent;
+    color: white;
+    float: left;
 }
