@@ -60,7 +60,10 @@ export class UsuariosService {
   eliminaUsuario(id)
   {
     console.log("user id en service: ", id);
-    return this.http.put<any>(this.url + 'eliminausuario', id);
+    let usuario = {
+      'id': id
+    }
+    return this.http.put<any>(this.url + 'eliminausuario', usuario);
   }
 
 }
