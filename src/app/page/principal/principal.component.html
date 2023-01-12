@@ -28,7 +28,6 @@
         <div class="containercard-item1">
           <div class="card">
             <div class="position-grafico">
-              <!-- <app-grafico-miscuentas [porcentajeIngreso]="porcentajeIngreso" [porcentajeEgreso]="porcentajeEgreso"> </app-grafico-miscuentas> -->
               <div class="chart-container">
                 <canvas class="text-center" id="grafico-miscuentas"> </canvas>
               </div>
@@ -38,8 +37,11 @@
   
         <div class="containercard-item2">
           <div class="card text-center aling-center">
-            <div class="card-titulo ahorro">Ahorros</div>
+            <div class="card-titulo ahorro">Metas de Ahorros</div>
             <div class="card-cantidad ahorro">ARS 5.000</div>
+            <div class="cardahorro-mensaje text">
+              <p style="margin: 0">Tienes 5 metas de ahorros pendientes.</p>
+            </div>
             <button class="btn btn-outline-primary btn-irahorro" routerLink="/metas">
               Ir a metas de ahorro
             </button>

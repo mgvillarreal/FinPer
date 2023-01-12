@@ -351,8 +351,8 @@ input{
 
 .chart-container{
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
 }
 
 .container-cards{
@@ -370,25 +370,36 @@ input{
 }
 
 .containercard-item1{
-  height: 50%;
+  height: 60%;
 }
 
 .containercard-item2{
-  height: 50%;
+  height: 40%;
 }
 
 .containercard-item3{
-  height: 33.33%;
+  height: 35%;
 }
 
 .containercard-item4{
-  height: 33.33%;
+  height: 35%;
 }
 
 .containercard-item5{
-  height: 33.33%;
+  height: 30%;
 }
 
 .aling-center{
-  line-height: 50px
+  line-height: 35px;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.cardahorro-mensaje{
+  border-radius: 10px;
+  color:#F7D501;
+  font-size: large;
+  background-color: #f3e8a366;
+  margin-top: 15px;
+  padding: 10px;
 }
