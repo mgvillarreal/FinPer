@@ -14,6 +14,7 @@ export class NotificacionesComponent implements OnInit {
   muestraTodasNotifFlag = 1;
   muestraNotificacionFlag = 0;
   preguntaEliminNotifFlag = 0;
+  tieneNotifFlag = 1;
   notificaciones: NotificacionI[] = []
   notificacionSeleccionada: NotificacionI
 

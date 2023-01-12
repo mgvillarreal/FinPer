@@ -13,6 +13,4 @@
 
 .min-h{
   min-height: calc(100vh - 126px);
-  /* min-height: 100%;
-  position: relative; */
 }

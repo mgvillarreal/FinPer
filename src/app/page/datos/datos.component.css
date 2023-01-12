@@ -144,7 +144,8 @@ span{
 
 .container-login100 {
     width: 100%;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
+    min-height: calc(100vh - 126px);
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -154,7 +155,7 @@ span{
     justify-content: center;
     align-items: center;
     padding: 15px;
-    background: #f2f2f2;
+    background: #fbfafaa9;
 }
 
 .wrap-login100 {
