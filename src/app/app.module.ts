@@ -36,6 +36,7 @@ import { GraficoscategoriasComponent } from './page/graficoscategorias/graficosc
 import { GraficosmovimientosmensualComponent } from './page/graficosmovimientosmensual/graficosmovimientosmensual.component';
 import { GraficosmovimientosanualComponent } from './page/graficosmovimientosanual/graficosmovimientosanual.component';
 import { CategoriaPipe } from './pipes/categoria.pipe';
+import { RecuperaContrasenaComponent } from './page/recupera-contrasena/recupera-contrasena.component';
 registerLocaleData(localeEs, 'es'); //Esto no es un import, pero va justo despues de ellos!
 
 
@@ -65,7 +66,8 @@ registerLocaleData(localeEs, 'es'); //Esto no es un import, pero va justo despue
     GraficoscategoriasComponent,
     GraficosmovimientosmensualComponent,
     GraficosmovimientosanualComponent,
-    CategoriaPipe
+    CategoriaPipe,
+    RecuperaContrasenaComponent
   ],
   imports: [
     BrowserModule,

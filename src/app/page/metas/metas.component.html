@@ -5,32 +5,30 @@
     <div class="container-login100" *ngIf="tieneMetasFlag==0">
 		<div class="wrap-login100 text-center">
             <div class="titulo-nuevameta mb-4"> </div>
-			<form>
-				<div class="login100-form validate-form text-center mt-3">
-					<div class="wrap-input100">
-                        <div class="mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-zoom-money" width="64" height="64" viewBox="0 0 24 24" stroke-width="1.5" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                <circle cx="10" cy="10" r="7" />
-                                <path d="M21 21l-6 -6" />
-                                <path d="M12 7h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
-                                <path d="M10 13v1m0 -8v1" />
-                            </svg>
-                        </div>
-                        <div class="mb-4">
-                            <p class="texto-mensaje mt-2">Aún no tienes metas de ahorro.</p>
-                        </div>
+			<div class="login100-form validate-form text-center mt-3">
+				<div class="wrap-input100">
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-zoom-money" width="64" height="64" viewBox="0 0 24 24" stroke-width="1.5" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <circle cx="10" cy="10" r="7" />
+                            <path d="M21 21l-6 -6" />
+                            <path d="M12 7h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
+                            <path d="M10 13v1m0 -8v1" />
+                        </svg>
                     </div>
-                    <div class="mt-4 mb-2">
-                        <!-- <button class="btn btn-light btn-lg action-button btn-msjlight">
-                            Aceptar
-                        </button> -->
-                        <button type="button" class="btn btn-outline-primary btn-agregar text-center" (click)="cambiaAgregaMetaFlag()">
-                            Agregar nueva meta
-                        </button>
-                    </div><br>
-				</div>
-			</form>
+                    <div class="mb-4">
+                        <p class="texto-mensaje mt-2">Aún no tienes metas de ahorro.</p>
+                    </div>
+                </div>
+                <div class="mt-4 mb-2">
+                    <!-- <button class="btn btn-light btn-lg action-button btn-msjlight">
+                        Aceptar
+                    </button> -->
+                    <button type="button" class="btn btn-outline-primary btn-agregar text-center" (click)="cambiaAgregaMetaFlag()">
+                        Agregar nueva meta
+                    </button>
+                </div><br>
+			</div>
 		</div>
 	</div>
 

@@ -1,0 +1,41 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form [formGroup]="forma" class="login100-form validate-form text-center" (ngSubmit)="recuperarContrasena()">
+                <a>
+                    <img src="./assets/img/icons/FinPerLogo.png" class="imagen-logo " alt="Logo FinPer" />
+                </a>
+                <span class="login100-form-title p-b-26 mt-3">
+                    Recuperar Contraseña
+                </span>
+
+                <div class="wrap-input100">
+                    <input class="input100 input-margin" type="password" name="pwd" placeholder="Contraseña" formControlName="contrasena">
+                </div>
+                <small  class="texto-validacion text-center" 
+                *ngIf="forma.controls['contrasena'].errors?.['required'] && forma.controls['contrasena'].touched">
+                    La contraseña es requerida.
+                </small>
+
+                <div class="wrap-input100">
+                    <input class="input100 input-margin" type="password" name="pwdconfirm" placeholder="Confirme contraseña" formControlName="pwdConfirm">
+                </div>
+                <small  class="texto-validacion text-center" 
+                *ngIf="forma.controls['pwdConfirm'].errors?.['required'] && forma.controls['pwdConfirm'].touched">
+                    La confirmación de contraseña es requerida.
+                </small>
+                <small  class="texto-validacion text-center" 
+                *ngIf="forma.errors?.['contrasenasIguales']">
+                    Las contraseñas no coinciden.
+                </small>
+
+                <div class="container-login100-form-btn mt-4">
+                    <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma.invalid">
+                        Recuperar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -83,11 +83,43 @@
 
                 <div class="container-login100-form-btn mt-4">
                     <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma2.invalid">
-                        Aceptar
+                        Recuperar
                     </button>
                 </div>
 
             </form>
         </div>
     </div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="msjRecuperaContrasenaFlag == 1">
+    <div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<div class="login100-form validate-form text-center mt-3">
+				<div class="text-center">
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-forward" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 18h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7.5" />
+                            <path d="M3 6l9 6l9 -6" />
+                            <path d="M15 18h6" />
+                            <path d="M18 15l3 3l-3 3" />
+                        </svg>
+                    </div>
+                    <div class="mb-4">
+                        <p class="texto-mensaje mt-2">Te hemos enviado un mail con los pasos para generar una nueva contraseña.</p>
+                    </div>
+                </div>
+                <div class="mt-4 mb-2">
+                    <!-- <button class="btn btn-light btn-lg action-button btn-msjlight">
+                        Aceptar
+                    </button> -->
+                    <button type="button" class="btn btn-light btn-lg action-button btngreen" (click)="volveraIngreso()">
+                        Aceptar
+                    </button>
+                </div><br>
+			</div>
+		</div>
+	</div>
 </ng-template>

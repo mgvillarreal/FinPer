@@ -18,6 +18,7 @@ export class IngresoComponent implements OnInit {
 
   recuperaContrasenaFlag: number = 0;
   muestraIngresoFlag: number = 1;
+  msjRecuperaContrasenaFlag: number = 0;
 
   constructor(
     private fb: FormBuilder, 
@@ -43,11 +44,15 @@ export class IngresoComponent implements OnInit {
 
   validarMail(){
     console.log('Correo electrónico a validar: ', this.forma2.value['correoe']);
+    this.muestraIngresoFlag = 0;
+    this.recuperaContrasenaFlag = 0;
+    this.msjRecuperaContrasenaFlag = 1;
   }
 
   volveraIngreso(){
     this.muestraIngresoFlag = 1;
     this.recuperaContrasenaFlag = 0;
+    this.msjRecuperaContrasenaFlag = 0;
   }
 
   ngOnInit(): void {
