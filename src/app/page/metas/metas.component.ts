@@ -27,7 +27,7 @@ export class MetasComponent implements OnInit {
   muestraMensajeActMontoFlag: number = 0;
   retiraMontoFlag: number = 0;
   muestraMensajeMontoRetFlag: number = 0;
-  tieneMetasFlag: number = 0;
+  tieneMetasFlag: number = 1;
 
   estado = 1;
   metas = [];
