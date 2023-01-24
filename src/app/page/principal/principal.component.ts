@@ -21,6 +21,7 @@ export class PrincipalComponent implements OnInit {
   montoString: string;
   dataMovimientos: MovimientoI[];
   fecha: Date;
+  fechaActual: Date;
 
   ingresos: any[] = [];
   egresos: any[] = [];
@@ -143,6 +144,7 @@ export class PrincipalComponent implements OnInit {
 
   /*NUEVO*/
   seleccionaTipoMovimiento(tipoMovimiento: number) {
+    this.fechaActual = new Date();
     if (tipoMovimiento == 1) {
       this.movimiento.tipo = 1;
       this.nuevoIngFlag = 1;

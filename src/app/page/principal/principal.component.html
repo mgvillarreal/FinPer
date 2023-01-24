@@ -159,6 +159,7 @@
             placeholder="Fecha del ingreso"
             onfocus="(this.type='datetime-local')"
             formControlName="fecha"
+            [ngModel]="fechaActual | date:'yyyy-MM-dd HH:mm:ss'"
           />
         </div>
         <small  class="texto-validacion text-center"
@@ -237,6 +238,7 @@
             placeholder="Fecha del gasto"
             onfocus="(this.type='datetime-local')"
             formControlName="fecha"
+            [ngModel]="fechaActual | date:'yyyy-MM-dd HH:mm:ss'"
           />
         </div>
         <small  class="texto-validacion text-center"

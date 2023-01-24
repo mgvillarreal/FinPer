@@ -72,8 +72,7 @@ export class NotificacionesComponent implements OnInit {
   {
     this.notService.leeNotificacion(this.notificacionSeleccionada.not_id).subscribe(resp => {
       console.log(resp)
-
-        this.traeNotificaciones();
+      this.traeNotificaciones();
     })
   }
 
