@@ -1,4 +1,4 @@
-<div class="limiter">
+<ng-template class="limiter" [ngIf]="mensajeSolicitaValidacion == 0">
     <div class="container-login100">
         <div class="wrap-login100">
             <form [formGroup]="forma" class="login100-form" (ngSubmit)="registrar()">
@@ -104,51 +104,21 @@
                     <div *ngIf="parteFormulario==2">
                         <span class="login100-form-title p-b-26"> Más sobre ti </span>
 
-                        <label class="texto-label mb-4">Modos de Ingreso</label>
+                        <!-- <label class="texto-label mb-4">Modos de Ingreso</label> -->
 
                         <div>
-                            <div >
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="1">
-                                    <label class="modIng mt-1"> Desempleado </label>
-                                </div>
-                               <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="2">
-                                    <label class="modIng mt-1"> Estudiante </label>
-                               </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="3">
-                                    <label class="modIng mt-1"> Emprendedor </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="4">
-                                    <label class="modIng mt-1"> Jubilado </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="5">
-                                    <label class="modIng mt-1"> Trabajo a tiempo completo </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="6">
-                                    <label class="modIng mt-1"> Trabajo por horas </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="6">
-                                    <label class="modIng mt-1"> Profesional independiente </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="8">
-                                    <label class="modIng mt-1"> Otro </label>
-                                </div>
+                            <div class="wrap-input100" >
+                                <select class="input100"  name="modoingreso" formControlName="modoing">
+                                    <option value="" selected [disabled]="1">Seleccione un modo de ingreso</option>
+                                    <option value="{{ingreso.ming_id}}" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option>
+                                </select>
                             </div>
                             
                             <small  class="texto-validacion text-center"
-                            *ngIf="forma.controls['modoing'].errors?.['required']">
+                            *ngIf="forma.controls['modoing'].errors?.['required'] && forma.controls['modoing'].touched">
                                 Debe seleccionar al menos un modo de ingreso.
                             </small><br>
-                        </div>  
-
-                        <label class="texto-label mt-4">Profesión</label>
+                        </div>
                         
                         <div class="d-flex justify-content-center">
                             <div class="wrap-input100" >
@@ -177,4 +147,33 @@
             </form>
         </div>
     </div>
-</div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="mensajeSolicitaValidacion == 1">
+    <div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<div class="login100-form validate-form text-center mt-3">
+				<div class="text-center">
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-forward" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 18h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7.5" />
+                            <path d="M3 6l9 6l9 -6" />
+                            <path d="M15 18h6" />
+                            <path d="M18 15l3 3l-3 3" />
+                        </svg>
+                    </div>
+                    <div class="mb-4">
+                        <p class="texto-mensaje mt-2">Te hemos enviado un mail para validar tu correo electrónico.</p>
+                    </div>
+                </div>
+                <div class="mt-4 mb-2">
+                    <button type="button" class="btn btn-light btn-lg action-button btngreen" (click)="volveraRegistro()">
+                        Aceptar
+                    </button>
+                </div><br>
+			</div>
+		</div>
+	</div>
+</ng-template>
