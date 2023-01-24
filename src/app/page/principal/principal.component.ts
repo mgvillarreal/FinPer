@@ -81,8 +81,7 @@ export class PrincipalComponent implements OnInit {
     });
 
     this.traeCategorias();
-    this.traeBalance()
-
+    this.traeBalance();
   }
 
   agregaNumero(numero: number) {
@@ -110,8 +109,7 @@ export class PrincipalComponent implements OnInit {
             this.ingreso += Number(dat.mov_monto);
             this.balance += Number(dat.mov_monto);
             this.ingresos.push(dat);
-          } else {
-            //console.log("Tambien entre aca (o no)")
+          } else { //dat.tmov_descripcion == 'Egreso'
             this.muestraEgresosFlag = 1;
             this.balance -= Number(dat.mov_monto);
             this.egreso += Number(dat.mov_monto);
@@ -126,7 +124,7 @@ export class PrincipalComponent implements OnInit {
 
   traeBalance(){
     this.movimientoService.traeBalance(localStorage.getItem('id')).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     })
   }
 
@@ -199,6 +197,9 @@ export class PrincipalComponent implements OnInit {
     this.muestraMensajeActFlag = 0;
     this.detalleEgrFlag = 0;
     this.muestraErrorEgFlag = 0;
+    this.muestraIngresosFlag = 0;
+    this.muestraEgresosFlag = 0;
+
     this.muestraIngresosFlag = 0;
     this.muestraEgresosFlag = 0;
   }
