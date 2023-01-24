@@ -341,18 +341,7 @@
             <div class="titulo-nuevameta mb-4">Nuevo Monto</div>
 			<form [formGroup]="formaMonto" (ngSubmit)="crearMonto()">
 				<div class="login100-form validate-form text-center mt-3">
-					<!-- <div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select name="moneda" formControlName="moneda">
-                            <option value=" " selected>Moneda meta</option>
-                            <option value="1">ARS</option>
-                            <option value="2">USD</option>
-                        </select>
-                    </div><br>
-                    <small  class="texto-validacion text-center"
-                    *ngIf="forma.controls['moneda'].errors?.['required'] && forma.controls['moneda'].touched">
-                        Debe seleccionar una moneda.
-                    </small> -->
-
+				
                     <div class="wrap-input100 modal-celda2 my-2">
                         <input type="number" name="montoMonto" placeholder="Monto ahorrado" formControlName="montoMonto" >
                     </div>
@@ -372,7 +361,7 @@
 
                 <div class="container-login100-form-btn">
                     <button class="btn btn-light btn-lg action-button btngreen" [disabled]="formaMonto.invalid">
-                        Listo
+                        Aceptar
                     </button>
                 </div>
 			</form>
@@ -395,7 +384,7 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">Has añadido un nuevo monto a tu meta de ahorro</p>
+                            <p class="texto-mensaje mt-2">Has añadido un nuevo monto a tu meta de ahorro.</p>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
@@ -469,7 +458,7 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">¿Estás seguro que quieres eliminar esta monto?</p>
+                            <p class="texto-mensaje mt-2">¿Estás seguro que quieres eliminar este monto?</p>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
@@ -548,7 +537,7 @@
 
                 <div class="container-login100-form-btn">
                     <button class="btn btn-light btn-lg action-button btn-retirar-listo" [disabled]="formaMontoRet.invalid">
-                        Listo
+                        Aceptar
                     </button>
                 </div>
 			</form>
