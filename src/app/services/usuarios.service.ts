@@ -59,11 +59,19 @@ export class UsuariosService {
 
   eliminaUsuario(id)
   {
-    console.log("user id en service: ", id);
     let usuario = {
       'id': id
     }
     return this.http.put<any>(this.url + 'eliminausuario', usuario);
+  }
+
+  modificaUsuario(usuarioModif, id){
+    let usuario = {
+      'id': id,
+      'usuModif': usuarioModif
+    }
+    console.log('Usuario a modificar en servicio: ', usuario);
+    return this.http.put<any>(this.url + 'modificausuario', usuario);
   }
 
 }

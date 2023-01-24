@@ -113,59 +113,29 @@
 
                         <span class="titulo-editadatos mb-4"> Editar Perfil </span>
 
-                        <div>
-                            <div>
-                                <label class="texto-label mt-4 mb-1">Modos de Ingreso</label>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="1">
-                                    <label class="modIng mt-1"> Desempleado </label>
-                                </div>
-                               <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="2">
-                                    <label class="modIng mt-1"> Estudiante </label>
-                               </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="3">
-                                    <label class="modIng mt-1"> Emprendedor </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="4">
-                                    <label class="modIng mt-1"> Jubilado </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="5">
-                                    <label class="modIng mt-1"> Trabajo a tiempo completo </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="6">
-                                    <label class="modIng mt-1"> Trabajo por horas </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="6">
-                                    <label class="modIng mt-1"> Profesional independiente </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="8">
-                                    <label class="modIng mt-1"> Otro </label>
-                                </div>
-                            </div>
-
-                            <small  class="texto-validacion text-center"
-                            *ngIf="forma2.controls['modoing'].errors?.['required']">
-                                Debe seleccionar al menos un modo de ingreso.
-                            </small><br>
+                        <!-- <label class="texto-label mt-4 mb-1">Modos de Ingreso</label> -->
+                                
+                        <div class="wrap-input100 mt-4">
+                            <select class="input100"  name="modoingreso" formControlName="modoing">
+                                <option value="" selected [disabled]="1">Seleccione un modo de ingreso</option>
+                                <!-- <option value="{{ingreso.ming_id}}" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option> -->
+                                <option value="3">Trabajo por horas</option> 
+                            </select>
                         </div>
 
-                        <label class="texto-label mt-4">Profesión</label>
+                        <small  class="texto-validacion text-center"
+                        *ngIf="forma.controls['modoing'].errors?.['required'] && forma.controls['modoing'].touched">
+                             Debe seleccionar un modo de ingreso.
+                        </small><br>
+                        
+                        <!-- <label class="texto-label mt-4">Profesión</label> -->
 
-                        <div class="d-flex justify-content-center">
-                            <div class="wrap-input100" >
-                                <select class="input100"  name="profesion" formControlName="profesion">
-                                    <option value="" selected [disabled]="1">Seleccione una profesión</option>
-                                    <!-- <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option> -->
-                                    <option value="1" >Administrador</option>
-                                </select>
-                            </div>
+                        <div class="wrap-input100 mt-4">
+                            <select class="input100"  name="profesion" formControlName="profesion">
+                                <option value="" selected [disabled]="1">Seleccione una profesión</option>
+                                <!-- <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option> -->
+                                <option value="9">Derecho</option> 
+                            </select>
                         </div>
                         <small  class="texto-validacion text-center"
                         *ngIf="forma2.controls['profesion'].errors?.['required'] && forma2.controls['profesion'].touched">

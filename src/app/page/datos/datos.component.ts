@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IngresoI } from 'src/app/interfaces/ingreso';
 import { PaisI } from 'src/app/interfaces/pais';
 import { ProfesionI } from 'src/app/interfaces/profesion';
 import { UsuarioI } from 'src/app/interfaces/usuario';
@@ -32,8 +33,7 @@ export class DatosComponent implements OnInit {
   public forma1: FormGroup;
   public forma2: FormGroup;
   paises: PaisI[] = [];
-  arrayIngresos:any[] = [];
-
+  ingresos: IngresoI[] = [];
   profesiones: ProfesionI[] = [];
 
   constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router, public auth: AuthService ) {
@@ -79,13 +79,19 @@ export class DatosComponent implements OnInit {
 
   muestraPaises(){
     this.usuarioService.traePaises().subscribe(res => {
-      this.paises = res
+      this.paises = res;
     })
   }
 
   muestraProfesiones(){
     this.usuarioService.traeProfesiones().subscribe(res => {
-      this.profesiones = res
+      this.profesiones = res;
+    })
+  }
+
+  muestraIngresos(){
+    this.usuarioService.traeIngresos().subscribe(res => {
+     this.ingresos = res;
     })
   }
 
@@ -98,21 +104,17 @@ export class DatosComponent implements OnInit {
 
   guardaFormaDos(){
     this.usuario.profesion = this.forma2.value['profesion'];
-    this.tomaModosIngreso();
+    this.usuario.modoIngreso = this.forma2.value['modoing'];
     this.muestraMensajeFlag = 1;
     this.parteFormulario = 0;
     console.log('Datos Modificados del Usuario: ', this.usuario);
+
+    this.modificarDatos();
   }
 
-  tomaModosIngreso():void{
-    let checks = document.querySelectorAll('#modoingreso');
-
-    checks.forEach((e)=>{
-      if((e as HTMLInputElement).checked){
-        this.arrayIngresos.push((e as HTMLInputElement).value);
-      }
-    });
-    this.usuario.modoIngreso = (this.arrayIngresos);
+  modificarDatos(){
+    let idUser = localStorage.getItem('id');
+    this.usuarioService.modificaUsuario(this.usuario, idUser).subscribe();
   }
 
   eliminarPerfil(){
@@ -166,6 +168,7 @@ export class DatosComponent implements OnInit {
     this.usuarioService.traeDatosUsuario(Number(localStorage.getItem('id'))).subscribe(resp => {
       this.user = resp[0];
       this.ageCalculator(resp[0].usu_fnacimiento);
+      console.log('Datos del Usuario:', this.user);
     })
   }
   
