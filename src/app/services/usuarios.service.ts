@@ -23,11 +23,9 @@ export class UsuariosService {
   ) {}
 
   datosUsuario(){
-
     let data: any = {
       "token": this.auth.auth()
     }
-
 
    return this.http.post<Usuario>(this.url + 'id/token', data)
   }
@@ -47,6 +45,33 @@ export class UsuariosService {
   traeDatosUsuario(id: number)
   {
     return this.http.get<UsuarioI>(this.url + 'datos/' + id)
+  }
+
+  modificaContrasena(contrasenaNueva, id)
+  {
+    let usuarioChangePwd = {
+      'id': id,
+      'contrasena': contrasenaNueva
+    }
+
+    return this.http.put<any>(this.url + 'modificacontrasena', usuarioChangePwd);
+  }
+
+  eliminaUsuario(id)
+  {
+    let usuario = {
+      'id': id
+    }
+    return this.http.put<any>(this.url + 'eliminausuario', usuario);
+  }
+
+  modificaUsuario(usuarioModif, id){
+    let usuario = {
+      'id': id,
+      'usuModif': usuarioModif
+    }
+    console.log('Usuario a modificar en servicio: ', usuario);
+    return this.http.put<any>(this.url + 'modificausuario', usuario);
   }
 
 }

@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
 import { Router, RouterLink } from '@angular/router';
+import { CategoriaI } from 'src/app/interfaces/categoria';
 
 @Component({
   selector: 'app-principal',
@@ -49,12 +50,14 @@ export class PrincipalComponent implements OnInit {
   porcentajes = 100;
 
   arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-  arrAnios:number[] = [2021, 2022];
+  arrAnios:number[] = [2021, 2022, 2023];
   mesActual:number = Number(new Date().getMonth());
   anioActual:number =  Number(new Date().getFullYear());
 
   movimientoSeleccionado: MovimientoI;
-  categorias = [];
+  categorias: CategoriaI[];
+  categoriasIngreso: CategoriaI[];
+  categoriasEgreso: CategoriaI[];
 
   balanceTotal
 
@@ -73,14 +76,13 @@ export class PrincipalComponent implements OnInit {
     /*NUEVO*/
     this.forma = this.fb.group({
       monto: ['', [Validators.required, Validators.min(1)]],
-      categoria: ['', []],
+      categoria: ['0', [Validators.required, Validators.min(1)]],
       detalle: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
     });
 
     this.traeCategorias();
-    this.traeBalance()
-
+    this.traeBalance();
   }
 
   agregaNumero(numero: number) {
@@ -108,8 +110,7 @@ export class PrincipalComponent implements OnInit {
             this.ingreso += Number(dat.mov_monto);
             this.balance += Number(dat.mov_monto);
             this.ingresos.push(dat);
-          } else {
-            //console.log("Tambien entre aca (o no)")
+          } else { //dat.tmov_descripcion == 'Egreso'
             this.muestraEgresosFlag = 1;
             this.balance -= Number(dat.mov_monto);
             this.egreso += Number(dat.mov_monto);
@@ -124,7 +125,7 @@ export class PrincipalComponent implements OnInit {
 
   traeBalance(){
     this.movimientoService.traeBalance(localStorage.getItem('id')).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     })
   }
 
@@ -198,6 +199,11 @@ export class PrincipalComponent implements OnInit {
     this.muestraMensajeActFlag = 0;
     this.detalleEgrFlag = 0;
     this.muestraErrorEgFlag = 0;
+    this.muestraIngresosFlag = 0;
+    this.muestraEgresosFlag = 0;
+
+    this.muestraIngresosFlag = 0;
+    this.muestraEgresosFlag = 0;
   }
 
   muestraMsjAltaOk() {
@@ -297,6 +303,9 @@ export class PrincipalComponent implements OnInit {
   traeCategorias() {
     this.movimientoService.traeCategorias().subscribe((resp) => {
       this.categorias = resp;
+      console.info(this.categorias)
+      this.divisorCategoria()
+      console.log(this.categoriasIngreso)
       console.log(this.categorias)
     });
   }
@@ -344,5 +353,10 @@ export class PrincipalComponent implements OnInit {
     const chartItem: ChartItem = document.getElementById('grafico-miscuentas') as ChartItem;
 
     new Chart(chartItem, config);
+  }
+
+  divisorCategoria(){
+    this.categoriasIngreso = this.categorias.filter(categoria => categoria.cmov_tipo == 1)
+    this.categoriasEgreso = this.categorias.filter(categoria => categoria.cmov_tipo == 2)
   }
 }

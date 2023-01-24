@@ -14,7 +14,7 @@ body {
 
 .select-finper-default{
   font-size: 15px;
-  padding: 5px 5px 5px 5px;
+  padding: 5px 0;
   display: inline;
   border: none;
   border-bottom: 1px solid #757575;

@@ -27,6 +27,7 @@ export class MetasComponent implements OnInit {
   muestraMensajeActMontoFlag: number = 0;
   retiraMontoFlag: number = 0;
   muestraMensajeMontoRetFlag: number = 0;
+  tieneMetasFlag: number = 1;
 
   estado = 1;
   metas = [];
@@ -100,6 +101,7 @@ export class MetasComponent implements OnInit {
     this.muestraMensajeMontoFlag = 0;
     this.retiraMontoFlag = 0;
     this.editaMontoFlag = 0;
+    this.muestraMensajeMontoRetFlag = 0;
   }
 
   crearOtraMeta() {
@@ -396,9 +398,9 @@ export class MetasComponent implements OnInit {
 
   muestraMensajeOkMontoRet(){
     if (this.muestraMensajeMontoRetFlag == 0) {
-      this.muestraMensajeMontoRetFlag = 1;
       this.retiraMontoFlag = 0;
       this.agregaMontoFlag = 0;
+      this.muestraMensajeMontoRetFlag = 1;
     }
   }
 }

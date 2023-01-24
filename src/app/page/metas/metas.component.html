@@ -2,46 +2,78 @@
 
     <div class="titulo text-center mt-5 mb-5">Metas de Ahorro</div>
 
-    <div class="mt-2 text-center">
-        <select class="select-finper-default select-s" name="estado" [(ngModel)]="estadoMeta" (ngModelChange)="cambiaEstado()">
-            <option *ngFor="let estado of arrEstados" [value]="estado.value">
-              {{estado.name}}
-            </option>
-        </select>
-    </div>
+    <div class="container-login100" *ngIf="tieneMetasFlag==0">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<div class="login100-form validate-form text-center mt-3">
+				<div class="wrap-input100">
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-zoom-money" width="64" height="64" viewBox="0 0 24 24" stroke-width="1.5" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <circle cx="10" cy="10" r="7" />
+                            <path d="M21 21l-6 -6" />
+                            <path d="M12 7h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
+                            <path d="M10 13v1m0 -8v1" />
+                        </svg>
+                    </div>
+                    <div class="mb-4">
+                        <p class="texto-mensaje mt-2">Aún no tienes metas de ahorro.</p>
+                    </div>
+                </div>
+                <div class="mt-4 mb-2">
+                    <!-- <button class="btn btn-light btn-lg action-button btn-msjlight">
+                        Aceptar
+                    </button> -->
+                    <button type="button" class="btn btn-outline-primary btn-agregar text-center" (click)="cambiaAgregaMetaFlag()">
+                        Agregar nueva meta
+                    </button>
+                </div><br>
+			</div>
+		</div>
+	</div>
 
-    <ul class="responsive-table text-center mt-3">
-        <li class="table-header">
-          <div class="col col-1">Meta</div>
-          <div class="col col-2">Monto</div>
-          <div class="col col-3">Ahorrado</div>
-          <div class="col col-4">Por alcanzar</div>
-          <div class="col col-5">Fecha Límite</div>
-          <div class="col col-6">Estado</div>
-          <div class="col col-7"></div>
-        </li>
-        <li class="table-row" *ngFor="let meta of metas; let i = index" (click)="mostrarMontos(meta)">
-          <div class="col col-1" data-label="Meta">{{meta.met_nombre}}</div>
-          <div class="col col-2" data-label="Monto">ARS {{meta.met_monto}}</div>
-          <div class="col col-3" data-label="Ahorrado">ARS {{meta.sumaMonto}}</div>
-          <div class="col col-4" data-label="Por alcanzar">ARS {{meta.met_monto - meta.sumaMonto}}</div>
-          <div class="col col-5" data-label="Fecha Límite">{{meta.met_flimite|date: 'dd/MM/YYYY'}}</div>
-          <div class="col col-6" data-label="Estado">{{meta.metest_descripcion}}</div>
-          <div class="col col-7">
-            <div (click)="editarMeta(meta.met_id)" class="btn-editar">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-                    <line x1="16" y1="5" x2="19" y2="8" />
-                </svg>
-            </div>
-          </div>
-        </li>
-      </ul>
-
-    <div class="text-center">
-        <button type="button" class="btn btn-outline-primary btn-agregar" (click)="cambiaAgregaMetaFlag()">Agregar nueva meta</button>
+    <div *ngIf="tieneMetasFlag==1">
+        <div class="mt-2 text-center">
+            <select class="select-finper-default select-s" name="estado" [(ngModel)]="estadoMeta" (ngModelChange)="cambiaEstado()">
+                <option *ngFor="let estado of arrEstados" [value]="estado.value">
+                  {{estado.name}}
+                </option>
+            </select>
+        </div>
+    
+        <ul class="responsive-table text-center mt-3">
+            <li class="table-header">
+              <div class="col col-1">Meta</div>
+              <div class="col col-2">Monto</div>
+              <div class="col col-3">Ahorrado</div>
+              <div class="col col-4">Por alcanzar</div>
+              <div class="col col-5">Fecha Límite</div>
+              <div class="col col-6">Estado</div>
+              <div class="col col-7"></div>
+            </li>
+            <li class="table-row" *ngFor="let meta of metas; let i = index" (click)="mostrarMontos(meta)">
+              <div class="col col-1" data-label="Meta">{{meta.met_nombre}}</div>
+              <div class="col col-2" data-label="Monto">ARS {{meta.met_monto}}</div>
+              <div class="col col-3" data-label="Ahorrado">ARS {{meta.sumaMonto}}</div>
+              <div class="col col-4" data-label="Por alcanzar">ARS {{meta.met_monto - meta.sumaMonto}}</div>
+              <div class="col col-5" data-label="Fecha Límite">{{meta.met_flimite|date: 'dd/MM/YYYY'}}</div>
+              <div class="col col-6" data-label="Estado">{{meta.metest_descripcion}}</div>
+              <div class="col col-7">
+                <div (click)="editarMeta(meta.met_id)" class="btn-editar">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                        <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                        <line x1="16" y1="5" x2="19" y2="8" />
+                    </svg>
+                </div>
+              </div>
+            </li>
+          </ul>
+    
+        <div class="text-center">
+            <button type="button" class="btn btn-outline-primary btn-agregar" (click)="cambiaAgregaMetaFlag()">Agregar nueva meta</button>
+        </div>
     </div>
 
 </ng-template>
@@ -96,7 +128,7 @@
 
                 <div class="container-login100-form-btn">
                     <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma.invalid">
-                        Listo
+                        Aceptar
                     </button>
                 </div>
 			</form>
@@ -119,7 +151,7 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">Has añadido una nueva meta de ahorro</p>
+                            <p class="texto-mensaje mt-2">Has añadido una nueva meta de ahorro.</p>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
@@ -248,7 +280,7 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">Tu meta ha sido actualizada</p>
+                            <p class="texto-mensaje mt-2">Tu meta de ahorro ha sido actualizada.</p>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
@@ -309,18 +341,7 @@
             <div class="titulo-nuevameta mb-4">Nuevo Monto</div>
 			<form [formGroup]="formaMonto" (ngSubmit)="crearMonto()">
 				<div class="login100-form validate-form text-center mt-3">
-					<!-- <div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select name="moneda" formControlName="moneda">
-                            <option value=" " selected>Moneda meta</option>
-                            <option value="1">ARS</option>
-                            <option value="2">USD</option>
-                        </select>
-                    </div><br>
-                    <small  class="texto-validacion text-center"
-                    *ngIf="forma.controls['moneda'].errors?.['required'] && forma.controls['moneda'].touched">
-                        Debe seleccionar una moneda.
-                    </small> -->
-
+				
                     <div class="wrap-input100 modal-celda2 my-2">
                         <input type="number" name="montoMonto" placeholder="Monto ahorrado" formControlName="montoMonto" >
                     </div>
@@ -340,7 +361,7 @@
 
                 <div class="container-login100-form-btn">
                     <button class="btn btn-light btn-lg action-button btngreen" [disabled]="formaMonto.invalid">
-                        Listo
+                        Aceptar
                     </button>
                 </div>
 			</form>
@@ -363,7 +384,7 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">Has añadido un nuevo monto a tu meta de ahorro</p>
+                            <p class="texto-mensaje mt-2">Has añadido un nuevo monto a tu meta de ahorro.</p>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
@@ -437,7 +458,7 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">¿Estás seguro que quieres eliminar esta monto?</p>
+                            <p class="texto-mensaje mt-2">¿Estás seguro que quieres eliminar este monto?</p>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
@@ -516,7 +537,7 @@
 
                 <div class="container-login100-form-btn">
                     <button class="btn btn-light btn-lg action-button btn-retirar-listo" [disabled]="formaMontoRet.invalid">
-                        Listo
+                        Aceptar
                     </button>
                 </div>
 			</form>

@@ -78,9 +78,10 @@
                             </small>
                             <br>
                             <div class="wrap-input100" >
-                                <select class="input100" name="residencia" formControlName="residencia">
-                                    <option value="" disabled>Lugar de Residencia</option>
-                                    <option value="1" [selected]>{{user.res_descripcion}}</option>
+                                <select class="input100" name="residencia" formControlName="residencia" >
+                                    <!-- <option value="" disabled>Lugar de Residencia</option> -->
+                                    <option value="{{pais.res_id}}" *ngFor="let pais of paises" [disabled]="pais.res_id != 13" [selected]="pais.res_id==13">{{pais.res_descripcion}}</option>
+                                    <!-- <option value="{{pais.res_id}}" *ngFor="let pais of paises" [disabled]="pais.res_id != 13"></option> -->
                                 </select>
                             </div>
                             <small  class="texto-validacion text-center"
@@ -106,65 +107,35 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <button class="btn-close mb-4"> </button> <br>
+                <button class="btn-close mb-4" (click)="volveraPerfil()"> </button> <br>
                 <form [formGroup]="forma2" class="login100-form" (ngSubmit)="guardaFormaDos()">
                     <div class="login100-form validate-form text-center">
 
                         <span class="titulo-editadatos mb-4"> Editar Perfil </span>
 
-                        <div>
-                            <div>
-                                <label class="texto-label mt-4 mb-1">Modos de Ingreso</label>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="1">
-                                    <label class="modIng mt-1"> Desempleado </label>
-                                </div>
-                               <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="2">
-                                    <label class="modIng mt-1"> Estudiante </label>
-                               </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="3">
-                                    <label class="modIng mt-1"> Emprendedor </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="4">
-                                    <label class="modIng mt-1"> Jubilado </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="5">
-                                    <label class="modIng mt-1"> Trabajo a tiempo completo </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="6">
-                                    <label class="modIng mt-1"> Trabajo por horas </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="6">
-                                    <label class="modIng mt-1"> Profesional independiente </label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="modoingreso" id="modoingreso" formControlName="modoing" value="8">
-                                    <label class="modIng mt-1"> Otro </label>
-                                </div>
-                            </div>
-
-                            <small  class="texto-validacion text-center"
-                            *ngIf="forma2.controls['modoing'].errors?.['required']">
-                                Debe seleccionar al menos un modo de ingreso.
-                            </small><br>
+                        <!-- <label class="texto-label mt-4 mb-1">Modos de Ingreso</label> -->
+                                
+                        <div class="wrap-input100 mt-4">
+                            <select class="input100"  name="modoingreso" formControlName="modoing">
+                                <option value="" selected [disabled]="1">Seleccione un modo de ingreso</option>
+                                <!-- <option value="{{ingreso.ming_id}}" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option> -->
+                                <option value="3">Trabajo por horas</option> 
+                            </select>
                         </div>
 
-                        <label class="texto-label mt-4">Profesión</label>
+                        <small  class="texto-validacion text-center"
+                        *ngIf="forma.controls['modoing'].errors?.['required'] && forma.controls['modoing'].touched">
+                             Debe seleccionar un modo de ingreso.
+                        </small><br>
+                        
+                        <!-- <label class="texto-label mt-4">Profesión</label> -->
 
-                        <div class="d-flex justify-content-center">
-                            <div class="wrap-input100" >
-                                <select class="input100"  name="profesion" formControlName="profesion">
-                                    <option value="" selected [disabled]="1">Seleccione una profesión</option>
-                                    <!-- <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option> -->
-                                    <option value="1" >Administrador</option>
-                                </select>
-                            </div>
+                        <div class="wrap-input100 mt-4">
+                            <select class="input100"  name="profesion" formControlName="profesion">
+                                <option value="" selected [disabled]="1">Seleccione una profesión</option>
+                                <!-- <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option> -->
+                                <option value="9">Derecho</option> 
+                            </select>
                         </div>
                         <small  class="texto-validacion text-center"
                         *ngIf="forma2.controls['profesion'].errors?.['required'] && forma2.controls['profesion'].touched">
@@ -199,7 +170,7 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">Se han actualizado los datos de tu perfil correctamente</p>
+                            <p class="texto-mensaje mt-2">Se han actualizado los datos de tu perfil correctamente.</p>
                         </div>
                     </div>
                     <div>
@@ -259,10 +230,10 @@
                 <form [formGroup]="forma" class="login100-form" (ngSubmit)="cambiarContrasena()">
                     <div class="login100-form validate-form text-center">
 
-                        <div class="titulo-cambiacontrasena mb-2"> Cambiar Contraseña </div>
+                        <div class="titulo-cambiacontrasena mb-3"> Cambiar Contraseña </div>
 
-                        <div class="wrap-input100">
-                            <input class="input100 input-margin" type="email" name="email" placeholder="Email" formControlName="email" readonly>
+                        <div class="wrap-input100 mt-2">
+                            <input class="input100 input-margin" type="email" name="email" placeholder="Email" formControlName="email" readonly [(ngModel)]="user.usu_email">
                         </div><br>
 
                         <div class="wrap-input100">
@@ -272,12 +243,8 @@
                         *ngIf="forma.controls['contrasenaNueva'].errors?.['required'] && forma.controls['contrasenaNueva'].touched">
                             La contraseña nueva es requerida.
                         </small><br>
-                        <!-- <small  class="texto-validacion text-center"
-                        *ngIf="forma.controls['contrasenaNueva'].errors?.['minLength']">
-                            La contraseña debe tener al menos 6 caracteres.
-                        </small><br> -->
 
-                        <div class="wrap-input100">
+                        <div class="wrap-input100 mt-1">
                             <input class="input100 input-margin" type="password" name="pwdconfirm" placeholder="Confirme nueva contraseña" formControlName="contrasenaConfirm">
                         </div>
                         <small  class="texto-validacion text-center"
@@ -317,7 +284,7 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">Se han modificado tu contraseña correctamente</p>
+                            <p class="texto-mensaje mt-2">Se ha modificado tu contraseña correctamente.</p>
                         </div>
                     </div>
                     <div>

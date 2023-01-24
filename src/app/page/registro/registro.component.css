@@ -92,7 +92,8 @@ iframe {
   
 .container-login100 {
     width: 100%;  
-    min-height: 89vh;
+    /*min-height: 89vh;*/
+    min-height: calc(100vh - 126px);
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -102,7 +103,7 @@ iframe {
     justify-content: center;
     align-items: center;
     padding: 15px;
-    background: #f2f2f2;  
+    background: #fbfafaa9; 
 }
   
 .wrap-login100 {
@@ -315,4 +316,8 @@ iframe {
 .txt-select{
     color: #adadad;
     padding-left: 0px;
+}
+
+.texto-mensaje{
+    font-size: 18px;
 }

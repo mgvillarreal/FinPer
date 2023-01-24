@@ -28,7 +28,7 @@
             <a class="nav-link active greentext" routerLink="comofunciona">¿Cómo funciona?</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link active greentext" routerLink="faqs">FAQ's</a>
+            <a class="nav-link active greentext" routerLink="faqs">FAQ</a>
           </li>
           <div *ngIf="auth.auth()" class="message-box">
 
@@ -80,7 +80,7 @@
             <li (click)="cierraMenu()" routerLink="/misdatos">Mis datos</li>
             <li (click)="cierraMenu()" routerLink="/miscuentas">Mis cuentas</li>
             <li (click)="cierraMenu()" routerLink="/metas">Mis metas</li>
-            <li (click)="cierraMenu()">Mis grupos</li>
+            <li (click)="cierraMenu()" routerLink="/graficosprincipal">Mis informes</li>
             <li class="border-top" (click)="logout()">Cerrar sesión</li>
           </ul>
         </div>

@@ -9,7 +9,6 @@ import { ComofuncionaComponent } from './page/comofunciona/comofunciona.componen
 import { DatosComponent } from './page/datos/datos.component';
 import { ErrorComponent } from './page/error/error.component';
 import { FaqsComponent } from './page/faqs/faqs.component';
-import { GraficoMiscuentasComponent } from './page/grafico-miscuentas/grafico-miscuentas.component';
 import { InformesComponent } from './page/informes/informes.component';
 import { IngresoComponent } from './page/ingreso/ingreso.component';
 import { InicioComponent } from './page/inicio/inicio.component';
@@ -21,6 +20,11 @@ import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-
 import { ValidaUsuarioComponent } from './page/valida-usuario/valida-usuario.component';
 import { AuthGuard } from './guardian/auth.guard';
 import { NoauthGuard } from './guardian/noauth.guard';
+import { GraficosprincipalComponent } from './page/graficosprincipal/graficosprincipal.component';
+import { GraficoscategoriasComponent } from './page/graficoscategorias/graficoscategorias.component';
+import { GraficosmovimientosmensualComponent } from './page/graficosmovimientosmensual/graficosmovimientosmensual.component';
+import { GraficosmovimientosanualComponent } from './page/graficosmovimientosanual/graficosmovimientosanual.component';
+import { RecuperaContrasenaComponent } from './page/recupera-contrasena/recupera-contrasena.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -39,8 +43,12 @@ const routes: Routes = [
   { path: 'validausuario/:id/:token', component: ValidaUsuarioComponent, canActivate: [AuthGuard]},
   { path: 'ultimosmovimientos', component: UltimosMovimientosComponent, canActivate: [AuthGuard]},
   { path: 'misdatos', component: DatosComponent, canActivate: [AuthGuard]},
-  { path: 'grafico-miscuentas', component: GraficoMiscuentasComponent, canActivate: [AuthGuard]},
   { path: 'notificaciones', component: NotificacionesComponent, canActivate: [AuthGuard]},
+  { path: 'graficosprincipal', component: GraficosprincipalComponent, canActivate: [AuthGuard]},
+  { path: 'graficoscategoriasmensual', component: GraficoscategoriasComponent, canActivate: [AuthGuard]},
+  { path: 'graficosmovimientosmensual', component: GraficosmovimientosmensualComponent, canActivate: [AuthGuard]},
+  { path: 'graficosmovimientosanual', component: GraficosmovimientosanualComponent, canActivate: [AuthGuard]},
+  { path: 'recuperacontrasena', component: RecuperaContrasenaComponent},
   { path: '**', component: ErrorComponent},
 ];
 

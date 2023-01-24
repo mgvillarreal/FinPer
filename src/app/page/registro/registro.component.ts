@@ -24,9 +24,12 @@ export class RegistroComponent implements OnInit {
   paises: PaisI[] = [];
   profesiones: ProfesionI[] = [];
   ingresos: IngresoI[] = [];
-  parteFormulario:number = 1;
+  parteFormulario:number = 0;
   formulario: FormGroup;
   arrayIngresos:any[] = [];
+
+  /*FLAGS*/
+  mensajeSolicitaValidacion: number = 0;
 
   constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private usuarioService: UsuariosService) { }
 
@@ -45,28 +48,18 @@ export class RegistroComponent implements OnInit {
 
   registrar(): void{
     this.usuario.profesion = this.forma.value['profesion'];
-    this.tomaModosIngreso();
-    //this.router.navigate(['ingreso']); //SE DEBE MOSTRAR EL MENSAJE QUE ENVIA PARA VALIDAR
-    console.log('Datos de Usuario: ', this.usuario);
+    this.usuario.modoIngreso = this.forma.value['modoing'];
+
+    //console.log('Datos de Usuario: ', this.usuario);
+
     this.authService.register(this.usuario).subscribe(resp => {
       if(resp.codigo == 200)
       {
-        this.router.navigateByUrl('validausuario/' + resp.id);
+        //this.router.navigateByUrl('validausuario/' + resp.id);
       }
     })
-    //this.registraUsuario();
-    //this.mostrarMensaje();
-  }
 
-  tomaModosIngreso():void{
-    let checks = document.querySelectorAll('#modoingreso');
-
-    checks.forEach((e)=>{
-      if((e as HTMLInputElement).checked){
-        this.arrayIngresos.push((e as HTMLInputElement).value);
-      }
-    });
-    this.usuario.modoIngreso = (this.arrayIngresos);
+    this.mostrarMensaje();
   }
 
   ngOnInit(): void {
@@ -104,22 +97,30 @@ export class RegistroComponent implements OnInit {
 
   muestraPaises(){
     this.usuarioService.traePaises().subscribe(res => {
-      this.paises = res
+      this.paises = res;
     })
   }
 
   muestraProfesiones(){
     this.usuarioService.traeProfesiones().subscribe(res => {
-      this.profesiones = res
+      this.profesiones = res;
     })
   }
 
   muestraIngresos(){
     this.usuarioService.traeIngresos().subscribe(res => {
-     this.ingresos = res
+     this.ingresos = res;
     })
   }
 
+  mostrarMensaje(){
+    if(this.mensajeSolicitaValidacion == 0){
+      this.mensajeSolicitaValidacion = 1;
+    }
+  }
 
+  volveraRegistro(){
+    this.router.navigate(['inicio']);
+  }
 
 }

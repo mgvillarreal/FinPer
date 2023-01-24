@@ -1,4 +1,4 @@
-<div class="limiter">
+<ng-template class="limiter" [ngIf]="muestraIngresoFlag == 1">
     <div class="container-login100">
         <div class="wrap-login100">
             <form [formGroup]="forma" class="login100-form validate-form text-center" (ngSubmit)="ingresar()">
@@ -10,15 +10,15 @@
                 </span>
 
                 <div class="wrap-input100 validate-input" >
-                    <input class="input100" type="email" name="email" placeholder="Email" formControlName="mail">
+                    <input class="input100" type="email" name="email" placeholder="Correo electrónico" formControlName="mail">
                 </div>
                 <small  class="texto-validacion text-center" 
                 *ngIf="forma.controls['mail'].errors?.['required'] && forma.controls['mail'].touched">
-                    El email es requerido.
+                    El correo electrónico es requerido.
                 </small>
                 <small  class="texto-validacion text-center" 
                 *ngIf="forma.controls['mail'].errors?.['mail']">
-                    Email inválido.
+                    El correo electrónico es inválido.
                 </small>
 
                 <div class="wrap-input100 validate-input">
@@ -38,17 +38,88 @@
                 <div class="mt-5">
                     <p class="txt1">
                         Olvidé mi contraseña.
-                        <a class="txt2" href="#"> Recuperar</a>
+                        <a class="txt2" (click)="muestraMensajeRecuperarContrasena()"> Recuperar</a>
                     </p>
                     
                 </div>
                 <div class="mt-3">
                     <p class="txt1">
                         No tengo cuenta.
-                        <a class="txt2" routerLink="/registro"> Registrar</a>
+                        <a class="txt2" routerLink="/registro">Registrar</a>
                     </p>
                 </div>
             </form>
         </div>
     </div>
-</div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="recuperaContrasenaFlag == 1">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <button class="btn-close mb-4" (click)="volveraIngreso()">x</button>
+            <form [formGroup]="forma2" class="login100-form validate-form text-center" (ngSubmit)="validarMail()">
+                <a routerLink="../inicio">
+                    <img src="./assets/img/icons/FinPerLogo.png" class="imagen-logo " alt="Logo FinPer" />
+                </a>
+                <span class="login100-form-title p-b-26 mt-3">
+                    Recuperar Contraseña
+                </span>
+
+                <span>
+                    <p>Por favor, ingresa tu correo electrónico:</p>
+                </span>
+
+                <div class="wrap-input100 validate-input" >
+                    <input class="input100" type="email" name="correoe" placeholder="Correo electrónico" formControlName="correoe">
+                </div>
+                <small  class="texto-validacion text-center" 
+                *ngIf="forma2.controls['correoe'].errors?.['required'] && forma2.controls['correoe'].touched">
+                    El correo electrónico es requerido.
+                </small>
+                <small  class="texto-validacion text-center" 
+                *ngIf="forma2.controls['correoe'].errors?.['correoe']">
+                    El correo electrónico es inválido.
+                </small>
+
+                <div class="container-login100-form-btn mt-4">
+                    <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma2.invalid">
+                        Recuperar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="msjRecuperaContrasenaFlag == 1">
+    <div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<div class="login100-form validate-form text-center mt-3">
+				<div class="text-center">
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-forward" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 18h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7.5" />
+                            <path d="M3 6l9 6l9 -6" />
+                            <path d="M15 18h6" />
+                            <path d="M18 15l3 3l-3 3" />
+                        </svg>
+                    </div>
+                    <div class="mb-4">
+                        <p class="texto-mensaje mt-2">Te hemos enviado un mail con los pasos para generar una nueva contraseña.</p>
+                    </div>
+                </div>
+                <div class="mt-4 mb-2">
+                    <!-- <button class="btn btn-light btn-lg action-button btn-msjlight">
+                        Aceptar
+                    </button> -->
+                    <button type="button" class="btn btn-light btn-lg action-button btngreen" (click)="volveraIngreso()">
+                        Aceptar
+                    </button>
+                </div><br>
+			</div>
+		</div>
+	</div>
+</ng-template>

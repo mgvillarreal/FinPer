@@ -13,92 +13,101 @@
     </div>
 
     <div class="text-center pt-4 pb-1">
-      <span class="balance-titulo">Balance Total: </span>
+      <span class="balance-titulo">Balance Mes: </span>
       <span class="balance-cantidad"> ARS {{ balance }} </span>
     </div>
     <div class="text-center pb-3">
-      <span class="subbalance-titulo">Balance Mes: </span>
+      <span class="subbalance-titulo">Balance Total: </span>
       <span class="subbalance-cantidad"> ARS {{ balance }} </span>
     </div>
 
-    <div class="text-center mb-2">
-      <div class="card">
-        <div class="card-titulo ingreso">Ingresos</div>
-        <div class="card-cantidad ingreso">ARS {{ ingreso }}</div>
-        <button
-          class="btn btn-outline-primary btn-detalleingreso"
-          (click)="seleccionaDetalleIng()"
-        >
-          Detalle de ingresos</button
-        ><br />
-        <button
-          class="btn btn-outline-primary btn-nuevoingreso"
-          (click)="seleccionaTipoMovimiento(1)"
-        >
-          Nuevo ingreso
-        </button>
-      </div>
+    <div class="container-cards mb-2">
 
-      <div class="card">
-        <div class="card-titulo egreso">Gastos</div>
-        <div class="card-cantidad egreso">ARS {{ egreso }}</div>
-        <div
-          class="btn btn-outline-primary btn-detalleegreso"
-          (click)="seleccionaDetalleEgr()"
-        >
-          Detalle de gastos
-        </div>
-        <br />
-        <button
-          class="btn btn-outline-primary btn-nuevoegreso"
-          (click)="seleccionaTipoMovimiento(2)"
-        >
-          Nuevo gasto
-        </button>
-      </div>
+      <div id="containercards-column1">
 
-      <div class="card">
-        <div class="card-titulo ahorro">Ahorros</div>
-        <div class="card-cantidad ahorro">ARS 5.000</div>
-        <button
-          class="btn btn-outline-primary btn-irahorro" routerLink="/metas"
-        >
-          Ir a metas de ahorro
-        </button>
-      </div>
-
-      <div class="card">
-        <div class="card-titulo ultmov">Movimientos</div>
-        <span *ngFor="let mes of arrMeses; let i = index; ">
-          <span *ngFor="let anio of arrAnios">
-            <div class="card-cantidad ultmov" *ngIf="i==mesActual && anio == anioActual">
-              {{mes}} {{anio}}
-              <div>
-                <button class="btn btn-outline-primary btn-irultmov" (click)="seleccionaUltMovimientos(mes, anio)">
-                  Ir a movimientos
-                </button>
+        <div class="containercard-item1">
+          <div class="card">
+            <div class="position-grafico">
+              <div class="chart-container">
+                <canvas class="text-center" id="grafico-miscuentas"> </canvas>
               </div>
             </div>
-          </span>
-        </span>
-
+          </div>
+        </div>
+  
+        <div class="containercard-item2">
+          <div class="card text-center aling-center">
+            <div class="card-titulo ahorro">Metas de Ahorros</div>
+            <div class="card-cantidad ahorro">ARS 5.000</div>
+            <div class="cardahorro-mensaje text">
+              <p style="margin: 0">Tienes 5 metas de ahorros pendientes.</p>
+            </div>
+            <button class="btn btn-outline-primary btn-irahorro" routerLink="/metas">
+              Ir a metas de ahorro
+            </button>
+          </div>
+        </div>
 
       </div>
 
-      <div class="card">
-        <div class="position-grafico">
-          <!-- <app-grafico-miscuentas [porcentajeIngreso]="porcentajeIngreso" [porcentajeEgreso]="porcentajeEgreso"> </app-grafico-miscuentas> -->
-          <div class="chart-container">
-            <canvas class="text-center" id="grafico-miscuentas"> </canvas>
+      <div id="containercards-column2">
+
+        <div class="containercard-item3">
+          <div class="card text-center">
+            <div class="card-titulo egreso">Gastos</div>
+            <div class="card-cantidad egreso">ARS {{ egreso }}</div>
+            <div
+            class="btn btn-outline-primary btn-detalleegreso"
+            (click)="seleccionaDetalleEgr()">
+              Detalle de gastos
+            </div><br/>
+            <button
+            class="btn btn-outline-primary btn-nuevoegreso"
+            (click)="seleccionaTipoMovimiento(2)">
+              Nuevo gasto
+            </button>
           </div>
         </div>
+  
+        <div class="containercard-item4">
+          <div class="card text-center">
+            <div class="card-titulo ingreso">Ingresos</div>
+            <div class="card-cantidad ingreso">ARS {{ ingreso }}</div>
+            <button
+            class="btn btn-outline-primary btn-detalleingreso"
+            (click)="seleccionaDetalleIng()">
+              Detalle de ingresos
+            </button><br/>
+            <button
+            class="btn btn-outline-primary btn-nuevoingreso"
+            (click)="seleccionaTipoMovimiento(1)">
+              Nuevo ingreso
+            </button>
+          </div>
+        </div>
+  
+        <div class="containercard-item5">
+          <div class="card text-center aling-center">
+            <div class="card-titulo ultmov">Movimientos</div>
+            <span *ngFor="let mes of arrMeses; let i = index; ">
+              <span *ngFor="let anio of arrAnios">
+                <div class="card-cantidad ultmov" *ngIf="i==mesActual && anio == anioActual">
+                  {{mes}} {{anio}}
+                  <div>
+                    <button class="btn btn-outline-primary btn-irultmov" (click)="seleccionaUltMovimientos(mes, anio)">
+                      Ir a movimientos
+                    </button>
+                  </div>
+                </div>
+              </span>
+            </span>
+          </div>
+        </div>
+
       </div>
 
     </div>
 
-    <!-- <div class="text-center mt-4 mb-4">
-      <a class="misultmov" routerLink="/ultimosmovimientos" >Mis Últimos Movimientos</a>
-    </div> -->
   </div>
 </div>
 
@@ -129,9 +138,8 @@
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
-            <option value=" ">Categoría</option>
-            <option value="2">Salario</option>
-            <option value="4">Horas Extras</option>
+            <option [selected]="true" [disabled]="true" value="0">Seleccione categoría</option>
+            <option *ngFor="let categoria of categoriasIngreso" value="{{categoria.cmov_id}}">{{categoria.cmov_descripcion}}</option>
           </select>
         </div><br>
         <small  class="texto-validacion text-center"
@@ -172,7 +180,7 @@
             class="btn btn-light btn-lg action-button btngreen btr-r"
             [disabled]="forma.invalid"
           >
-            Listo
+            Aceptar
           </button>
         </div>
       </form>
@@ -207,10 +215,8 @@
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
-            <option value=" " selected>Categoría</option>
-            <option value="1">Supermercado</option>
-            <option value="3">Recreacion</option>
-            <option value="5">Educacion</option>
+            <option [selected]="true" [disabled]="true" value="0">Seleccione categoría</option>
+            <option *ngFor="let categoria of categoriasEgreso" value="{{categoria.cmov_id}}">{{categoria.cmov_descripcion}}</option>
           </select>
         </div><br>
         <small  class="texto-validacion text-center"
@@ -251,7 +257,7 @@
             class="btn btn-light btn-lg action-button btnred"
             [disabled]="forma.invalid"
           >
-            Listo
+            Aceptar
           </button>
         </div>
       </form>
@@ -286,7 +292,7 @@
             </div>
             <div class="mb-4">
               <p class="texto-mensaje mt-2">
-                Has añadido un nuevo movimiento a tus cuentas
+                Has añadido un nuevo movimiento a tus cuentas.
               </p>
             </div>
           </div>
@@ -477,7 +483,7 @@
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
             <option
-            *ngFor="let categoria of categorias"
+            *ngFor="let categoria of categoriasIngreso"
             [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
               {{categoria.cmov_descripcion}}
             </option>
@@ -564,7 +570,7 @@
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
             <option
-            *ngFor="let categoria of categorias"
+            *ngFor="let categoria of categoriasEgreso"
             [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
               {{categoria.cmov_descripcion}}
             </option>
@@ -653,7 +659,7 @@
             </div>
             <div class="mb-4">
               <p class="texto-mensaje mt-2">
-                Tu movimiento ha sido actualizado
+                Tu movimiento ha sido actualizado.
               </p>
             </div>
           </div>

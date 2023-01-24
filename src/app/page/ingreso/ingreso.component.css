@@ -20,6 +20,7 @@ a:focus {
 a:hover {
     text-decoration: none;
     color: #419f3e;
+    cursor: pointer;
 }
   
 h1,h2,h3,h4,h5,h6 {
@@ -92,7 +93,8 @@ iframe {
   
 .container-login100 {
     width: 100%;  
-    min-height: 89vh;
+    /*min-height: 89vh;*/
+    min-height: calc(100vh - 126px);
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -102,7 +104,7 @@ iframe {
     justify-content: center;
     align-items: center;
     padding: 15px;
-    background: #f2f2f2;  
+    background: #fbfafaa9;  
 }
   
 .wrap-login100 {
@@ -304,4 +306,15 @@ iframe {
     padding: 10px;
     width:80%;
     margin-top: 10px;
+}
+
+.btn-close{
+    background-color: transparent;
+    color: white;
+    float: left;
+}
+
+.texto-mensaje{
+    font-size: 16px;
+    color: black;
 }
