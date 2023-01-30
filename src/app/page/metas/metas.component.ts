@@ -27,7 +27,7 @@ export class MetasComponent implements OnInit {
   muestraMensajeActMontoFlag: number = 0;
   retiraMontoFlag: number = 0;
   muestraMensajeMontoRetFlag: number = 0;
-  tieneMetasFlag: number = 1;
+  tieneMetasFlag: number = 0;
 
   estado = 1;
   metas = [];
@@ -206,10 +206,17 @@ export class MetasComponent implements OnInit {
   async traeMetaPorEstado(estado: number) {
     await this.metaServicio.traeMetasPorEstado(estado).subscribe((data) => {
       this.metas = data;
-      this.calculaMontos()
-      console.log(this.metas)
+      this.calculaMontos();
+      console.log("Metas", this.metas);
     });
 
+    if(this.metas != null){
+      this.tieneMetasFlag = 1;
+    }
+    else
+    {
+      this.tieneMetasFlag = 0;
+    }
 
   }
 

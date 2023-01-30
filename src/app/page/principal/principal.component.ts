@@ -218,12 +218,16 @@ export class PrincipalComponent implements OnInit {
     this.detalleIngFlag = 1;
     this.muestraPrincipalFlag = 0;
     this.editaIngFlag = 0;
+
+    this.calcula();
   }
 
   seleccionaDetalleEgr() {
     this.detalleEgrFlag = 1;
     this.muestraPrincipalFlag = 0;
     this.editaEgrFlag = 0;
+
+    this.calcula();
   }
 
   editarIngreso(movimiento) {

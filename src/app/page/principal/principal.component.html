@@ -175,10 +175,7 @@
         </small>
 
         <div class="container-login100-form-btn">
-          <button
-            class="btn btn-light btn-lg action-button btngreen btr-r"
-            [disabled]="forma.invalid"
-          >
+          <button class="btn btn-light btn-lg action-button btngreen btr-r" [disabled]="forma.invalid">
             Aceptar
           </button>
         </div>
@@ -320,15 +317,7 @@
       </div>
 
       <div *ngIf="muestraIngresosFlag==1">
-        <!-- <div class="flex text-center">
-          <select class="form-detalles form" name="mesDetalle">
-              <option *ngFor="let mes of arrMeses; let i = index" value="{{i+1}}" [selected]="i == mesActual">{{mes}}</option>
-            </select>
-          <select class="form-detalles form" name="anioDetalle">
-              <option *ngFor="let anio of arrAnios; let i = index" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
-          </select>
-        </div> -->
-
+       
         <div class="card-detalle ingreso mt-3">ARS {{ ingreso }}</div>
 
         <div>
@@ -341,13 +330,9 @@
               </tr>
             </thead> -->
             <tbody>
-              <tr
-                (click)="editarIngreso(movimiento)"
-                *ngFor="let movimiento of this.ingresos"
-              >
+              <tr (click)="editarIngreso(movimiento)" *ngFor="let movimiento of this.ingresos" >
                 <td scope="row">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
+                  <svg xmlns="http://www.w3.org/2000/svg"
                     class="icon icon-tabler icon-tabler-coin"
                     width="28"
                     height="28"
@@ -360,9 +345,7 @@
                   >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <circle cx="12" cy="12" r="9" />
-                    <path
-                      d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"
-                    />
+                    <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
                     <path d="M12 6v2m0 8v2" />
                   </svg>
                 </td>
@@ -392,13 +375,6 @@
       </div>
 
       <div *ngIf="muestraEgresosFlag==1">
-        <!-- <div class="wrap-input100 modal-celda1 my-2 select-finper-default text-center">
-          <select class="form" name="mes">
-            <option value=" " selected>Septiembre 2022</option>
-            <option value="1">Octubre 2022</option>
-            <option value="2">Noviembre 2022</option>
-          </select>
-        </div> -->
 
       <div class="card-detalle egreso mt-3">ARS {{ egreso }}</div>
 
