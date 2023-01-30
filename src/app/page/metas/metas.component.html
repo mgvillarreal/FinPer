@@ -136,7 +136,7 @@
 	</div>
 </ng-template>
 
-<ng-template class="limiter" [ngIf]="muestraMensajeFlag==1">
+<ng-template class="limiter" [ngIf]="muestraMensajeFlag==1 && muestraMensajeActFlag==0 && muestraMensajeActMontoFlag==0">
 	<div class="container-login100">
 		<div class="wrap-login100 text-center">
             <div class="titulo-nuevameta mb-4"> </div>
@@ -405,7 +405,7 @@
 		<div class="wrap-login100 text-center">
             <button class="btn-close mb-4" (click)="volveraMetas()"> </button> <br><br>
             <div class="titulo-nuevameta mb-4">Editar Monto</div>
-			<form [formGroup]="formaMonto" (ngSubmit)="crearMonto()">
+			<form [formGroup]="formaMonto" (ngSubmit)="actualizarMonto()">
 				<div class="login100-form validate-form text-center mt-3">
 
                     <div class="wrap-input100 modal-celda2 my-2">
@@ -494,11 +494,11 @@
                             </svg>
                         </div>
                         <div class="mb-4">
-                            <p class="texto-mensaje mt-2">Tu monto ha sido actualizado</p>
+                            <p class="texto-mensaje mt-2">Tu monto ha sido actualizado correctamente.</p>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
-                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="mostrarMontos(monto.mmet_idmeta)">
+                        <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="volveraMetas()">
                             Aceptar
                         </button>
                     </div>

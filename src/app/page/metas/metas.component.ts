@@ -119,11 +119,11 @@ export class MetasComponent implements OnInit {
   }
 
   muestraMensajeActOk() {
-    if (this.muestraMensajeActFlag == 0) {
-      this.muestraMensajeActFlag = 1;
-      this.muestraMetas = 0;
-      this.editaMetaFlag = 0;
-    }
+    this.muestraMensajeFlag = 0;
+    this.muestraMensajeActFlag = 1;
+    this.muestraMetas = 0;
+    this.editaMetaFlag = 0;
+    
     console.log(this.modificarId);
     this.modificaMeta();
   }
@@ -309,7 +309,12 @@ export class MetasComponent implements OnInit {
       this.muestraMetas = 0;
       this.muestraMontosFlag = 0;
     }
-    //this.muestraMensajeActMontoOk();
+  }
+
+  actualizarMonto(){
+
+
+    this.muestraMensajeActMontoOk();
   }
 
   preguntaEliminarMonto(){
@@ -339,6 +344,7 @@ export class MetasComponent implements OnInit {
       this.muestraMensajeActMontoFlag = 1;
       this.muestraMetas = 0;
       this.editaMontoFlag = 0;
+      this.muestraMensajeActFlag = 0;
     }
   }
 
