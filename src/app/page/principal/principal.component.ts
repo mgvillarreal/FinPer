@@ -27,7 +27,7 @@ export class PrincipalComponent implements OnInit {
   ingresos: any[] = [];
   egresos: any[] = [];
 
-  /*NUEVO*/
+  /*Flags*/
   public forma: FormGroup;
   movimiento = new Movimiento;
   muestraPrincipalFlag=1;
@@ -44,11 +44,13 @@ export class PrincipalComponent implements OnInit {
   muestraIngresosFlag: number = 0;
   muestraEgresosFlag: number = 0;
 
+  /* Grafico */
   porcentajeIngreso: number;
   porcentajeEgreso: number;
   porcentajeAhorro: number;
-
   porcentajes = 100;
+
+  descripcionMovimiento: string;
 
   arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   arrAnios:number[] = [2021, 2022, 2023];
@@ -102,7 +104,7 @@ export class PrincipalComponent implements OnInit {
     this.movimientoService
       .traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
       .subscribe((respuesta) => {
-        // console.log(respuesta);
+        console.log("Movimiento traido: ", respuesta);
         this.dataMovimientos = respuesta;
         for (let dat of this.dataMovimientos) {
           if (dat.tmov_descripcion == 'Ingreso') {
