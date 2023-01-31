@@ -69,7 +69,6 @@ export class MetasComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private metaServicio: MetasService
   ) {
     this.traeMetaPorEstado(1);
@@ -110,6 +109,7 @@ export class MetasComponent implements OnInit {
   }
 
   editarMeta(id: number) {
+    this.metaSeleccionada = id;
     if (this.editaMetaFlag == 0) {
       this.editaMetaFlag = 1;
       this.muestraMetas = 0;
@@ -137,6 +137,14 @@ export class MetasComponent implements OnInit {
   }
 
   eliminaMeta() {
+    this.metaServicio.eliminarMeta(this.metaSeleccionada).subscribe();
+
+    // this.metaServicio.eliminarMeta(this.meta).subscribe((data) => {
+    //   setTimeout(() => {
+    //     this.traeMetaPorEstado(1);
+    //   }, 1500);
+    // });
+
     this.muestraMetas = 1;
     this.editaMetaFlag = 0;
     this.preguntaEliminarFlag = 0;
