@@ -104,7 +104,7 @@ export class PrincipalComponent implements OnInit {
     this.movimientoService
       .traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
       .subscribe((respuesta) => {
-        console.log("Movimiento traido: ", respuesta);
+        //console.log("Movimiento traido: ", respuesta);
         this.dataMovimientos = respuesta;
         for (let dat of this.dataMovimientos) {
           if (dat.tmov_descripcion == 'Ingreso') {
@@ -120,8 +120,6 @@ export class PrincipalComponent implements OnInit {
             this.egresos.push(dat);
           }
         }
-        //console.info(this.ingreso)
-
           this.calculaPorcentajes();
         });
   }
