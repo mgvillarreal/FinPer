@@ -25,6 +25,7 @@ import { GraficoscategoriasComponent } from './page/graficoscategorias/graficosc
 import { GraficosmovimientosmensualComponent } from './page/graficosmovimientosmensual/graficosmovimientosmensual.component';
 import { GraficosmovimientosanualComponent } from './page/graficosmovimientosanual/graficosmovimientosanual.component';
 import { RecuperaContrasenaComponent } from './page/recupera-contrasena/recupera-contrasena.component';
+import { ContactoComponent } from './page/contacto/contacto.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'graficosmovimientosmensual', component: GraficosmovimientosmensualComponent, canActivate: [AuthGuard]},
   { path: 'graficosmovimientosanual', component: GraficosmovimientosanualComponent, canActivate: [AuthGuard]},
   { path: 'recuperacontrasena', component: RecuperaContrasenaComponent},
+  { path: 'contacto', component: ContactoComponent},
   { path: '**', component: ErrorComponent},
 ];
 
