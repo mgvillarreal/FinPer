@@ -37,8 +37,7 @@ export class DatosComponent implements OnInit {
   profesiones: ProfesionI[] = [];
 
   constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router, public auth: AuthService ) {
-    this.usuario.nombre = localStorage.getItem('name');
-    this.traeDatosUsuario();
+
   }
 
   /* MANEJO DE FLAGS */
@@ -80,18 +79,23 @@ export class DatosComponent implements OnInit {
   muestraPaises(){
     this.usuarioService.traePaises().subscribe(res => {
       this.paises = res;
+      console.log(this.paises)
     })
   }
 
   muestraProfesiones(){
     this.usuarioService.traeProfesiones().subscribe(res => {
       this.profesiones = res;
+      console.log(res)
+
     })
   }
 
   muestraIngresos(){
     this.usuarioService.traeIngresos().subscribe(res => {
+      console.log(res)
      this.ingresos = res;
+     console.log('Ingresos: ',this.ingresos)
     })
   }
 
@@ -103,6 +107,7 @@ export class DatosComponent implements OnInit {
   }
 
   guardaFormaDos(){
+    console.log(this.ingresos);
     this.usuario.profesion = this.forma2.value['profesion'];
     this.usuario.modoIngreso = this.forma2.value['modoing'];
     this.muestraMensajeFlag = 1;
@@ -135,10 +140,13 @@ export class DatosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usuario.nombre = localStorage.getItem('name');
+    this.traeDatosUsuario();
+
     this.forma1 = this.fb.group({
       'nombre': ['', [Validators.required]],
       'fnacimiento': ['', [Validators.required]],
-      'residencia': ['', [Validators.required]],
+      'residencia': [13, [Validators.required]],
     });
 
     this.forma2 = this.fb.group({
@@ -154,6 +162,7 @@ export class DatosComponent implements OnInit {
 
     this.muestraPaises();
     this.muestraProfesiones();
+    this.muestraIngresos();
   }
 
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -163,15 +172,15 @@ export class DatosComponent implements OnInit {
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
   };
 
-  traeDatosUsuario()
+  async traeDatosUsuario()
   {
-    this.usuarioService.traeDatosUsuario(Number(localStorage.getItem('id'))).subscribe(resp => {
+    await this.usuarioService.traeDatosUsuario(Number(localStorage.getItem('id'))).subscribe(resp => {
       this.user = resp[0];
       this.ageCalculator(resp[0].usu_fnacimiento);
       console.log('Datos del Usuario:', this.user);
     })
   }
-  
+
   ageCalculator(edad){
     if(edad){
       const convertAge = new Date(edad);

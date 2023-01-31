@@ -4,8 +4,6 @@
 }
 
 .header-blue {
-  /*background:linear-gradient(135deg, #172a74, #21a9af);
-  background-color:#184e8e;*/
   background-image: url('src\assets\img\fondo.png');
   padding: 10px;
   color: #419f3e;
@@ -22,4 +20,9 @@
   background-color: #5abb57d0;
   color: white;
   border-radius: 25px
+}
+
+.dispositivos{
+  height: 470px;
+  width: 650px;
 }

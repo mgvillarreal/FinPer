@@ -79,9 +79,7 @@
                             <br>
                             <div class="wrap-input100" >
                                 <select class="input100" name="residencia" formControlName="residencia" >
-                                    <!-- <option value="" disabled>Lugar de Residencia</option> -->
-                                    <option value="{{pais.res_id}}" *ngFor="let pais of paises" [disabled]="pais.res_id != 13" [selected]="pais.res_id==13">{{pais.res_descripcion}}</option>
-                                    <!-- <option value="{{pais.res_id}}" *ngFor="let pais of paises" [disabled]="pais.res_id != 13"></option> -->
+                                    <option *ngFor="let pais of paises" value="{{pais.res_id}}" [disabled]="pais.res_id != 13" [selected]="pais.res_id==13">{{pais.res_descripcion}}</option>
                                 </select>
                             </div>
                             <small  class="texto-validacion text-center"
@@ -114,27 +112,24 @@
                         <span class="titulo-editadatos mb-4"> Editar Perfil </span>
 
                         <!-- <label class="texto-label mt-4 mb-1">Modos de Ingreso</label> -->
-                                
-                        <div class="wrap-input100 mt-4">
-                            <select class="input100"  name="modoingreso" formControlName="modoing">
-                                <option value="" selected [disabled]="1">Seleccione un modo de ingreso</option>
-                                <!-- <option value="{{ingreso.ming_id}}" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option> -->
-                                <option value="3">Trabajo por horas</option> 
-                            </select>
-                        </div>
+
+                        <select class="input100" name="modoingreso" formControlName="modoing">
+                          <option value="0" [disabled]="true" [selected]="false">Seleccione un modo de ingreso</option>
+                          <option [value]="ingreso.ming_id" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option>
+                        </select>
 
                         <small  class="texto-validacion text-center"
                         *ngIf="forma.controls['modoing'].errors?.['required'] && forma.controls['modoing'].touched">
                              Debe seleccionar un modo de ingreso.
                         </small><br>
-                        
+
                         <!-- <label class="texto-label mt-4">Profesión</label> -->
 
                         <div class="wrap-input100 mt-4">
                             <select class="input100"  name="profesion" formControlName="profesion">
                                 <option value="" selected [disabled]="1">Seleccione una profesión</option>
                                 <!-- <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option> -->
-                                <option value="9">Derecho</option> 
+                                <option value="9">Derecho</option>
                             </select>
                         </div>
                         <small  class="texto-validacion text-center"

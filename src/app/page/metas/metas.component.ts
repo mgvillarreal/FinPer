@@ -27,7 +27,7 @@ export class MetasComponent implements OnInit {
   muestraMensajeActMontoFlag: number = 0;
   retiraMontoFlag: number = 0;
   muestraMensajeMontoRetFlag: number = 0;
-  tieneMetasFlag: number = 1;
+  tieneMetasFlag: number = 0;
 
   estado = 1;
   metas = [];
@@ -69,7 +69,6 @@ export class MetasComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private metaServicio: MetasService
   ) {
     this.traeMetaPorEstado(1);
@@ -110,6 +109,7 @@ export class MetasComponent implements OnInit {
   }
 
   editarMeta(id: number) {
+    this.metaSeleccionada = id;
     if (this.editaMetaFlag == 0) {
       this.editaMetaFlag = 1;
       this.muestraMetas = 0;
@@ -119,11 +119,11 @@ export class MetasComponent implements OnInit {
   }
 
   muestraMensajeActOk() {
-    if (this.muestraMensajeActFlag == 0) {
-      this.muestraMensajeActFlag = 1;
-      this.muestraMetas = 0;
-      this.editaMetaFlag = 0;
-    }
+    this.muestraMensajeFlag = 0;
+    this.muestraMensajeActFlag = 1;
+    this.muestraMetas = 0;
+    this.editaMetaFlag = 0;
+    
     console.log(this.modificarId);
     this.modificaMeta();
   }
@@ -137,6 +137,14 @@ export class MetasComponent implements OnInit {
   }
 
   eliminaMeta() {
+    this.metaServicio.eliminarMeta(this.metaSeleccionada).subscribe();
+
+    // this.metaServicio.eliminarMeta(this.meta).subscribe((data) => {
+    //   setTimeout(() => {
+    //     this.traeMetaPorEstado(1);
+    //   }, 1500);
+    // });
+
     this.muestraMetas = 1;
     this.editaMetaFlag = 0;
     this.preguntaEliminarFlag = 0;
@@ -206,10 +214,17 @@ export class MetasComponent implements OnInit {
   async traeMetaPorEstado(estado: number) {
     await this.metaServicio.traeMetasPorEstado(estado).subscribe((data) => {
       this.metas = data;
-      this.calculaMontos()
-      console.log(this.metas)
+      this.calculaMontos();
+      console.log("Metas", this.metas);
     });
 
+    if(this.metas != null){
+      this.tieneMetasFlag = 1;
+    }
+    else
+    {
+      this.tieneMetasFlag = 0;
+    }
 
   }
 
@@ -302,7 +317,12 @@ export class MetasComponent implements OnInit {
       this.muestraMetas = 0;
       this.muestraMontosFlag = 0;
     }
-    //this.muestraMensajeActMontoOk();
+  }
+
+  actualizarMonto(){
+
+
+    this.muestraMensajeActMontoOk();
   }
 
   preguntaEliminarMonto(){
@@ -332,6 +352,7 @@ export class MetasComponent implements OnInit {
       this.muestraMensajeActMontoFlag = 1;
       this.muestraMetas = 0;
       this.editaMontoFlag = 0;
+      this.muestraMensajeActFlag = 0;
     }
   }
 

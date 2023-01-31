@@ -45,6 +45,14 @@ export class MetasService {
     return this.http.put<ResponseI>(this.urlv4 + '/modificameta', metas);
   }
 
+  eliminarMeta(idMeta:any){
+    let meta = {
+      'id': idMeta
+    }
+    console.log("ID Meta en Service: ", meta);
+    return this.http.put<any>(this.urlv4 + 'eliminameta', meta);
+  }
+
   /*traeUnMetas(id: string){
     return this.http.get<Movimiento>(id);
   }*/

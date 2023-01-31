@@ -17,6 +17,7 @@ import { CategoriaI } from 'src/app/interfaces/categoria';
 export class PrincipalComponent implements OnInit {
   ingreso: number;
   egreso: number;
+  ahorro: number = 17800;
   balance: number = 0;
   monto: Number = 0;
   montoString: string;
@@ -27,7 +28,7 @@ export class PrincipalComponent implements OnInit {
   ingresos: any[] = [];
   egresos: any[] = [];
 
-  /*NUEVO*/
+  /*Flags*/
   public forma: FormGroup;
   movimiento = new Movimiento;
   muestraPrincipalFlag=1;
@@ -44,10 +45,13 @@ export class PrincipalComponent implements OnInit {
   muestraIngresosFlag: number = 0;
   muestraEgresosFlag: number = 0;
 
+  /* Grafico */
   porcentajeIngreso: number;
   porcentajeEgreso: number;
-
+  porcentajeAhorro: number;
   porcentajes = 100;
+
+  descripcionMovimiento: string;
 
   arrMeses:string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   arrAnios:number[] = [2021, 2022, 2023];
@@ -101,7 +105,7 @@ export class PrincipalComponent implements OnInit {
     this.movimientoService
       .traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
       .subscribe((respuesta) => {
-        // console.log(respuesta);
+        //console.log("Movimiento traido: ", respuesta);
         this.dataMovimientos = respuesta;
         for (let dat of this.dataMovimientos) {
           if (dat.tmov_descripcion == 'Ingreso') {
@@ -117,8 +121,6 @@ export class PrincipalComponent implements OnInit {
             this.egresos.push(dat);
           }
         }
-        //console.info(this.ingreso)
-
           this.calculaPorcentajes();
         });
   }
@@ -130,13 +132,14 @@ export class PrincipalComponent implements OnInit {
   }
 
   calculaPorcentajes(): void{
-    let total = this.ingreso + this.egreso;
+    let total = this.ingreso + this.egreso + this.ahorro;
     // console.log('ingreso: ', this.ingreso);
     // console.log('egreso: ', this.egreso);
     // console.log('total: ', total);
 
-    this.porcentajeIngreso = (7250.5/total)*100;
-    this.porcentajeEgreso = (2300/total)*100;
+    this.porcentajeIngreso = (this.ingreso/total)*100;
+    this.porcentajeEgreso = (this.egreso/total)*100;
+    this.porcentajeAhorro = (this.ahorro/total)*100;
 
     this.creaGrafico();
 
@@ -217,12 +220,16 @@ export class PrincipalComponent implements OnInit {
     this.detalleIngFlag = 1;
     this.muestraPrincipalFlag = 0;
     this.editaIngFlag = 0;
+
+    this.calcula();
   }
 
   seleccionaDetalleEgr() {
     this.detalleEgrFlag = 1;
     this.muestraPrincipalFlag = 0;
     this.editaEgrFlag = 0;
+
+    this.calcula();
   }
 
   editarIngreso(movimiento) {
@@ -334,7 +341,7 @@ export class PrincipalComponent implements OnInit {
       datasets: [{
         label: 'Mis Cuentas',
         //data: [76, 24],
-        data: [this.porcentajeIngreso, this.porcentajeEgreso],
+        data: [this.porcentajeIngreso, this.porcentajeEgreso, this.porcentajeAhorro],
         //data: [70, 20, 10],
         backgroundColor: [
           '#3fd22f',

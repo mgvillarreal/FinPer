@@ -15,8 +15,10 @@ export class NotificacionesComponent implements OnInit {
   muestraNotificacionFlag = 0;
   preguntaEliminNotifFlag = 0;
   tieneNotifFlag = 1;
-  notificaciones: NotificacionI[] = []
-  notificacionSeleccionada: NotificacionI
+
+  /* VARIABLES NOTIFICACIONES */
+  notificaciones: NotificacionI[] = [];
+  notificacionSeleccionada: NotificacionI;
 
   constructor(private loc: Location, public notService: NotificacionesService) { }
 
@@ -65,22 +67,36 @@ export class NotificacionesComponent implements OnInit {
   {
     this.notService.traeNotificaciones(localStorage.getItem('id')).subscribe(resp => {
       this.notificaciones = resp;
-      console.log(resp)
+
+      if(this.notificaciones != null){
+        this.tieneNotifFlag = 0;
+      }
+      else
+      {
+        this.tieneNotifFlag = 1;
+      }
+      //console.log('Notificaciones:', this.notificaciones);
     })
   }
 
   leeNotificacion()
   {
     this.notService.leeNotificacion(this.notificacionSeleccionada.not_id).subscribe(resp => {
+<<<<<<< HEAD
       console.log(resp)
       this.traeNotificaciones();
+=======
+      console.log(resp);
+
+        this.traeNotificaciones();
+>>>>>>> 55e32c0953d961c5f04cdc60c25c9d8b0f4bda0c
     })
   }
 
   borrarNotificacion()
   {
     this.notService.borrarNotificacion(this.notificacionSeleccionada.not_id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
 
         this.traeNotificaciones();
     })
@@ -88,7 +104,7 @@ export class NotificacionesComponent implements OnInit {
 
   seleccionaNotificacion(notificacion: NotificacionI)
   {
-    this.notificacionSeleccionada = notificacion
+    this.notificacionSeleccionada = notificacion;
   }
 
 }

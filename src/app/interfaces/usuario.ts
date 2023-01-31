@@ -11,5 +11,8 @@ export interface UsuarioI {
     usu_fnacimiento: Date;
     usu_residencia: number;
     res_descripcion: string;
+    res_id: number;
     pro_descripcion: string;
+    upro_idprofesion: number;
+    uming_idmingresos: number;
 }
