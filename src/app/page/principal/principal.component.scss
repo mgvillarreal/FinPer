@@ -365,7 +365,7 @@ input{
   grid-template-columns: auto auto;
 }
 
-.containercards-column1{
+.ccontainercards-column1{
   width: 50%;
 }
 
@@ -414,4 +414,59 @@ input{
   justify-content: center;
   align-items: center;
   font-size: 16px;
+}
+
+/* RESPONSIVE */
+@media (min-width: 480px) and (max-width: 768px) {
+  .container-cards {
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto;
+    justify-content: center;
+  }
+
+  .containercards-column1{
+    width: 90%;
+  }
+  
+  .containercards-column2{
+    width: 90%;
+  }
+
+  .cardahorro-mensaje{
+    //font-size: 14px;
+    display: none;
+  }
+
+  .chart-container{
+    position: relative;
+    right: 70px;
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container-cards {
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto auto;
+    justify-content: center;
+  }
+
+  .containercard-item1{
+    width: 100%;
+  }
+
+  .cardahorro-mensaje{
+    //font-size: 14px;
+    display: none;
+  }
+
+  .chart-container{
+    position: relative;
+    right: 70px;
+    width: 300px;
+    height: 300px;
+  }
 }

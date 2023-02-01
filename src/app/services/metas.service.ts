@@ -50,7 +50,7 @@ export class MetasService {
       'id': idMeta
     }
     console.log("ID Meta en Service: ", meta);
-    return this.http.put<any>(this.urlv4 + 'eliminameta', meta);
+    return this.http.put<any>(this.urlv4 + '/eliminameta', meta);
   }
 
   /*traeUnMetas(id: string){
