@@ -9,7 +9,13 @@ export interface UsuarioI {
     usu_nombre: string;
     usu_email: string;
     usu_fnacimiento: Date;
-    usu_residencia: number;
+    usu_idresidencia: number;
     res_descripcion: string;
+    res_id: number;
     pro_descripcion: string;
+    upro_idprofesion: number;
+    uming_idmingresos: number;
+    usu_idmoding: number;
+    usu_idprofesion: number;
+
 }

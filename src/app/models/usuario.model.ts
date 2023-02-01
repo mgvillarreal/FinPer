@@ -5,13 +5,13 @@ export class Usuario {
     contrasena?:string;
     fnacimiento?:Date;
     residencia:number;
-    modoIngreso:Number[];
-    profesion?:[];
+    modoIngreso:number;
+    profesion?:number;
     fcreacion?:Date;
     estado?:number;
     fultintento?:Date;
 
-    constructor(){  
+    constructor(){
 
     }
 
