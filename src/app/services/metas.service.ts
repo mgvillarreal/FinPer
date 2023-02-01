@@ -22,8 +22,9 @@ export class MetasService {
       estado: estado,
       id_usuario: Number(localStorage.getItem("id"))
     };
+    //estado["id_usuario"] = Number(localStorage.getItem("id"));
 
-    if(estado!=10){
+    if(estado["estado"]!=10){
       return this.http.post<any>(this.urlv4 + '/metasporestado', body);
     }
     else{

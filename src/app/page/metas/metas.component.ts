@@ -72,7 +72,7 @@ export class MetasComponent implements OnInit {
     private fb: FormBuilder,
     private metaServicio: MetasService
   ) {
-    this.traeMetaPorEstado(1);
+    this.traeMetaPorEstado(0);
   }
 
   cambiaAgregaMetaFlag() {
@@ -174,6 +174,8 @@ export class MetasComponent implements OnInit {
       montoRet: ['', [Validators.required]],
       fechaRet: ['', [Validators.required]],
     });
+
+    //this.traeMetaPorEstado(1);
   }
 
   fechaValidaValidator(): ValidatorFn {
@@ -213,34 +215,18 @@ export class MetasComponent implements OnInit {
   }
 
   async traeMetaPorEstado(estado: number) {
-
     this.metaServicio.traeMetasPorEstado(estado)
     .pipe(
       catchError((error: any) => {
-        console.log(error);
         this.tieneMetasFlag = 0;
         return throwError(error);
       })
     )
     .subscribe((data) => {
-      console.log(data);
       this.metas = data;
       this.calculaMontos();
       this.tieneMetasFlag = 1;
     });
-
-
-
-
-
-    // if(this.metas != null){
-    //   this.tieneMetasFlag = 1;
-    // }
-    // else
-    // {
-    //   this.tieneMetasFlag = 0;
-    // }
-
   }
 
   mostrarDatosEditar(id: number) {
