@@ -71,7 +71,7 @@ export class MetasComponent implements OnInit {
     private fb: FormBuilder,
     private metaServicio: MetasService
   ) {
-    this.traeMetaPorEstado(1);
+    this.traeMetaPorEstado(0);
   }
 
   cambiaAgregaMetaFlag() {
@@ -173,6 +173,8 @@ export class MetasComponent implements OnInit {
       montoRet: ['', [Validators.required]],
       fechaRet: ['', [Validators.required]],
     });
+
+    //this.traeMetaPorEstado(1);
   }
 
   fechaValidaValidator(): ValidatorFn {
@@ -214,8 +216,8 @@ export class MetasComponent implements OnInit {
   async traeMetaPorEstado(estado: number) {
     await this.metaServicio.traeMetasPorEstado(estado).subscribe((data) => {
       this.metas = data;
-      this.calculaMontos();
       console.log("Metas", this.metas);
+      this.calculaMontos();
     });
 
     if(this.metas != null){
