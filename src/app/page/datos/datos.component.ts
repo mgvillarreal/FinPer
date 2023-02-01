@@ -31,7 +31,6 @@ export class DatosComponent implements OnInit {
 
   /* EDITA DATOS */
   public forma1: FormGroup;
-  public forma2: FormGroup;
   paises: PaisI[] = [];
   ingresos: IngresoI[] = [];
   profesiones: ProfesionI[] = [];
@@ -103,13 +102,17 @@ export class DatosComponent implements OnInit {
     this.usuario.nombre = this.forma1.value['nombre'];
     this.usuario.fnacimiento = this.forma1.value['fnacimiento'];
     this.usuario.residencia = this.forma1.value['residencia'];
-    this.parteFormulario = 2;
+    this.usuario.modoIngreso = this.forma1.value['modoingreso'];
+    this.usuario.profesion = this.forma1.value['profesion'];
+    this.muestraMensajeFlag = 1;
+    this.parteFormulario = 0;
+    this.modificarDatos();
+
   }
 
   guardaFormaDos(){
     console.log(this.ingresos);
-    this.usuario.profesion = this.forma2.value['profesion'];
-    this.usuario.modoIngreso = this.forma2.value['modoing'];
+
     this.muestraMensajeFlag = 1;
     this.parteFormulario = 0;
     console.log('Datos Modificados del Usuario: ', this.usuario);
@@ -118,6 +121,7 @@ export class DatosComponent implements OnInit {
   }
 
   modificarDatos(){
+    console.log('Datos Modificados del Usuario: ', this.usuario);
     let idUser = localStorage.getItem('id');
     this.usuarioService.modificaUsuario(this.usuario, idUser).subscribe();
   }
@@ -139,19 +143,23 @@ export class DatosComponent implements OnInit {
     this.usuarioService.modificaContrasena(this.forma.value['contrasenaConfirm'], idUser).subscribe();
   }
 
-  ngOnInit(): void {
+
+
+  async ngOnInit() {
+    const creaForma1 = () => {
+
+    }
+
     this.usuario.nombre = localStorage.getItem('name');
-    this.traeDatosUsuario();
+    await this.traeDatosUsuario();
+    console.log(this.user.usu_idresidencia)
 
-    this.forma1 = this.fb.group({
-      'nombre': ['', [Validators.required]],
+     this.forma1 = this.fb.group({
+      'nombre': [this.user.usu_nombre, [Validators.required]],
       'fnacimiento': ['', [Validators.required]],
-      'residencia': [13, [Validators.required]],
-    });
-
-    this.forma2 = this.fb.group({
-      'modoing': ['', [Validators.required]],
-      'profesion': ['', [Validators.required]],
+      'residencia': [this.user.usu_idresidencia, [Validators.required]],
+      'modoingreso': [this.user.usu_idmoding, [Validators.required]],
+      'profesion': [this.user.usu_idprofesion, [Validators.required]],
     });
 
     this.forma = this.fb.group({
@@ -172,13 +180,11 @@ export class DatosComponent implements OnInit {
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
   };
 
-  async traeDatosUsuario()
-  {
-    await this.usuarioService.traeDatosUsuario(Number(localStorage.getItem('id'))).subscribe(resp => {
-      this.user = resp[0];
-      this.ageCalculator(resp[0].usu_fnacimiento);
-      console.log('Datos del Usuario:', this.user);
-    })
+  async traeDatosUsuario() {
+    const resp = await this.usuarioService.traeDatosUsuario(Number(localStorage.getItem('id'))).toPromise();
+    this.user = resp[0];
+    this.ageCalculator(resp[0].usu_fnacimiento);
+    console.log('Datos del Usuario:', this.user);
   }
 
   ageCalculator(edad){

@@ -66,12 +66,9 @@ export class UsuariosService {
   }
 
   modificaUsuario(usuarioModif, id){
-    let usuario = {
-      'id': id,
-      'usuModif': usuarioModif
-    }
-    console.log('Usuario a modificar en servicio: ', usuario);
-    return this.http.put<any>(this.url + 'modificausuario', usuario);
+    usuarioModif['id'] = id;
+    console.log('Usuario a modificar en servicio: ', usuarioModif);
+    return this.http.put<any>(this.url + 'modificausuario', usuarioModif);
   }
 
 }

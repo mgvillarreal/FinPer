@@ -1,4 +1,4 @@
-<ng-template [ngIf]="muestraPerfil == 1">
+<ng-template [ngIf]="muestraPerfil == 1 && user">
     <div class="nombre-usuario text-center">
         {{user.usu_nombre}}
     </div>
@@ -86,62 +86,36 @@
                             *ngIf="forma1.controls['residencia'].errors?.['required'] && forma1.controls['residencia'].touched">
                                 La residencia es requerida.
                             </small>
+                            <br>
 
+                            <div class="wrap-input100" >
+                              <select class="wrap-input100" name="modoingreso" formControlName="modoingreso">
+                                <option
+                                 value={{ingreso.ming_id}}
+                                 *ngFor="let ingreso of ingresos"
+                                 [selected]="ingreso.ming_id == user.usu_idmoding"
+                                 >
+                                  {{ingreso.ming_descripcion}}
+                                </option>
+                              </select>
+                            </div>
+                            <br>
+                            <div class="wrap-input100" >
+                              <select class="input100"  name="profesion" formControlName="profesion">
+                                <option
+                                value="{{profesion.pro_id}}"
+                                *ngFor="let profesion of profesiones"
+                                [selected]="profesion.pro_id == user.usu_idprofesion"
+                                >{{profesion.pro_descripcion}}</option>
+                              </select>
+                          </div>
+                          <br>
                             <div class="container-login100-form-btn">
                                 <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma1.invalid">
                                     Continuar
                                 </button>
                             </div>
 
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</ng-template>
-
-<ng-template [ngIf]="editaFlag == 1 && parteFormulario==2">
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <button class="btn-close mb-4" (click)="volveraPerfil()"> </button> <br>
-                <form [formGroup]="forma2" class="login100-form" (ngSubmit)="guardaFormaDos()">
-                    <div class="login100-form validate-form text-center">
-
-                        <span class="titulo-editadatos mb-4"> Editar Perfil </span>
-
-                        <!-- <label class="texto-label mt-4 mb-1">Modos de Ingreso</label> -->
-
-                        <select class="input100" name="modoingreso" formControlName="modoing">
-                          <option value="0" [disabled]="true" [selected]="false">Seleccione un modo de ingreso</option>
-                          <option [value]="ingreso.ming_id" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option>
-                        </select>
-
-                        <small  class="texto-validacion text-center"
-                        *ngIf="forma.controls['modoing'].errors?.['required'] && forma.controls['modoing'].touched">
-                             Debe seleccionar un modo de ingreso.
-                        </small><br>
-
-                        <!-- <label class="texto-label mt-4">Profesión</label> -->
-
-                        <div class="wrap-input100 mt-4">
-                            <select class="input100"  name="profesion" formControlName="profesion">
-                                <option value="" selected [disabled]="1">Seleccione una profesión</option>
-                                <!-- <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option> -->
-                                <option value="9">Derecho</option>
-                            </select>
-                        </div>
-                        <small  class="texto-validacion text-center"
-                        *ngIf="forma2.controls['profesion'].errors?.['required'] && forma2.controls['profesion'].touched">
-                            Debe seleccionar una profesion.
-                        </small>
-
-                        <div class="container-login100-form-btn">
-                            <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma2.invalid">
-                                Actualizar
-                            </button>
-                        </div>
 
                     </div>
                 </form>
