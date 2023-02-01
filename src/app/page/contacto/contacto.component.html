@@ -1,0 +1,82 @@
+<ng-template class="limiter" [ngIf]="muestraContacto == 1">
+    <div class="container-login100">
+        <div class="wrap-login100 formulario">
+            <form [formGroup]="forma" class="login100-form" (ngSubmit)="enviarMensaje()">
+                <div class="login100-form text-center">
+
+                    <span class="login100-form-title mt-2"> Contacto </span>
+
+                    <div class="wrap-input100">
+                        <input class="input100 input-margin" type="text" name="nombre" placeholder="Nombre" formControlName="nombre">
+                    </div>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['nombre'].errors?.['required'] && forma.controls['nombre'].touched">
+                        El nombre es requerido.
+                    </small>
+
+                    <div class="wrap-input100">
+                        <input class="input100 input-margin" type="email" name="email" placeholder="Email" formControlName="email">
+                    </div>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['email'].errors?.['required'] && forma.controls['email'].touched">
+                        El email es requerido.
+                    </small>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['email'].errors?.['email']">
+                        Email inválido.
+                    </small>
+
+                    <div class="wrap-input100">
+                        <input class="input100 input-margin" type="number" name="telefono" placeholder="Teléfono" formControlName="telefono">
+                    </div>
+
+                    <div class="wrap-input100">
+                        <!-- <input class="input100 input-margin" type="text" name="mensaje" placeholder="Mensaje" formControlName="mensaje"> -->
+                        <textarea class="input100 input-margin" type="text" rows="50" name="mensaje" placeholder="Mensaje" formControlName="mensaje"> </textarea>
+                    </div>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['mensaje'].errors?.['required'] && forma.controls['mensaje'].touched">
+                        El mensaje es requerido.
+                    </small>
+
+
+                    <div class="container-login100-form-btn">
+                        <button class="btn btn-light btn-lg action-button btngreen">
+                            Enviar
+                        </button>
+                    </div>                    
+
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="mensajeContactoEnviado == 1">
+    <div class="container-login100">
+		<div class="wrap-login100 mensaje">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<div class="login100-form validate-form text-center mt-3">
+				<div class="text-center">
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-forward" width="68" height="68" viewBox="0 0 24 24" stroke-width="1.5" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 18h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7.5" />
+                            <path d="M3 6l9 6l9 -6" />
+                            <path d="M15 18h6" />
+                            <path d="M18 15l3 3l-3 3" />
+                        </svg>
+                    </div>
+                    <div class="mb-4">
+                        <p class="texto-mensaje mt-2">Tu mensaje ha sido enviado. Pronto nos contactaremos contigo.</p>
+                    </div>
+                </div>
+                <div class="mt-4 mb-2">
+                    <button type="button" class="btn btn-light btn-lg action-button btngreen" (click)="volveraContacto()">
+                        Aceptar
+                    </button>
+                </div><br>
+			</div>
+		</div>
+	</div>
+</ng-template>
