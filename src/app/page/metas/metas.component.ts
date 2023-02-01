@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MetasService } from 'src/app/services/metas.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { Monto } from 'src/app/models/monto.model';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-metas',
@@ -123,7 +124,7 @@ export class MetasComponent implements OnInit {
     this.muestraMensajeActFlag = 1;
     this.muestraMetas = 0;
     this.editaMetaFlag = 0;
-    
+
     console.log(this.modificarId);
     this.modificaMeta();
   }
@@ -179,7 +180,7 @@ export class MetasComponent implements OnInit {
     return (control: AbstractControl): ValidationErrors | null => {
       const fechaIngresada = new Date(control.value);
       const factual = new Date();
-  
+
       return fechaIngresada < factual ? { fechaInvalida : true } : null;
     }
   }
@@ -212,19 +213,33 @@ export class MetasComponent implements OnInit {
   }
 
   async traeMetaPorEstado(estado: number) {
-    await this.metaServicio.traeMetasPorEstado(estado).subscribe((data) => {
+
+    this.metaServicio.traeMetasPorEstado(estado)
+    .pipe(
+      catchError((error: any) => {
+        console.log(error);
+        this.tieneMetasFlag = 0;
+        return throwError(error);
+      })
+    )
+    .subscribe((data) => {
+      console.log(data);
       this.metas = data;
       this.calculaMontos();
-      console.log("Metas", this.metas);
+      this.tieneMetasFlag = 1;
     });
 
-    if(this.metas != null){
-      this.tieneMetasFlag = 1;
-    }
-    else
-    {
-      this.tieneMetasFlag = 0;
-    }
+
+
+
+
+    // if(this.metas != null){
+    //   this.tieneMetasFlag = 1;
+    // }
+    // else
+    // {
+    //   this.tieneMetasFlag = 0;
+    // }
 
   }
 
@@ -374,7 +389,7 @@ export class MetasComponent implements OnInit {
   calculaUnAhorrado(id)
   {
     let ahorrado = 0;
-    
+
     this.metaServicio.traeMontos(id).subscribe(
     {
       next: resp => {
@@ -388,10 +403,10 @@ export class MetasComponent implements OnInit {
         // // ahorrado = 0;
         // this.arrMontosAhorrados.push(ahorrado)
       }
-    })    
+    })
     setTimeout(() => {
       console.log(this.arrMontosAhorrados)
-    }, 1000); 
+    }, 1000);
   }
 
   /* RETIRO MONTOS */

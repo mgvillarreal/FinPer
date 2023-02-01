@@ -29,7 +29,6 @@ export class MetasService {
     else{
       return this.http.post<any>(this.urlv4 + '/todaslasmetas', body);
     }
-    
   }
 
   guardaMetas(metas: Meta):Observable<ResponseI> {
