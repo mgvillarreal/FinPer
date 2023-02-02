@@ -50,113 +50,122 @@ input{
   float: left;
 }
 
-/*NUEVO DISENO*/
+/* DISENO TABLA*/
 
-  .container {
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+  small {
+    font-size: 0.5em;
+  }
+}
+
+.responsive-table {
+  margin-left: 3% !important;
+  margin-right: 3% !important;
+  padding: 0 !important;
+  li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
   }
 
-  h2 {
-    font-size: 26px;
-    margin: 20px 0;
-    text-align: center;
-    small {
-      font-size: 0.5em;
-    }
+  .table-header {
+    background-color: #5abb57d0;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: white;
   }
 
-  .responsive-table {
-    margin-left: 3% !important;
-    margin-right: 3% !important;
-    padding: 0 !important;
-    li {
-      border-radius: 3px;
-      padding: 25px 30px;
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 25px;
+  .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+  }
+
+  .col-1 {
+    flex-basis: 15.6%;
+  }
+
+  .col-2 {
+    flex-basis: 15.6%;
+  }
+
+  .col-3 {
+    flex-basis: 15.6%;
+  }
+
+  .col-4 {
+    flex-basis: 15.6%;
+  }
+
+  .col-5{
+    flex-basis: 15.6%;
+  }
+
+  .col-6{
+    flex-basis: 15.6%;
+  }
+
+  .col-7{
+    flex-basis: 6%;
+  }
+
+  .col{
+    display: flex;
+    align-items: center;
+  }
+
+  @media (min-width: 480px) and (max-width: 768px) {
+    .btn{
+      margin-bottom: 4px;
     }
+
     .table-header {
-      background-color: #5abb57d0;
-      font-size: 15px;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      color: white;
-    }
-    .table-row {
-      background-color: #ffffff;
-      box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
-    }
-    .col-1 {
-      flex-basis: 15.6%;
-    }
-    .col-2 {
-      flex-basis: 15.6%;
-    }
-    .col-3 {
-      flex-basis: 15.6%;
-    }
-    .col-4 {
-      flex-basis: 15.6%;
-    }
-    .col-5{
-      flex-basis: 15.6%;
-    }
-    .col-6{
-      flex-basis: 15.6%;
-    }
-    .col-7{
-      flex-basis: 6%;
+      display: none;
     }
 
-    .col{
+    li {
+      display: block;
+    }
+
+    .col {
+      flex-basis: 100%;
+    }
+
+    .col {
       display: flex;
-      align-items: center;
+      padding: 10px 0;
+      &:before {
+      color: #6C7A89;
+      padding-right: 10px;
+      content: attr(data-label);
+      flex-basis: 50%;
+      text-align: center;
+      }
     }
 
-    @media (min-width: 480px) and (max-width: 768px) {
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6{
+      width: 100%;
+    }
 
-      .btn{
-        margin-bottom: 4px;
-      }
-
-      .table-header {
-        display: none;
-      }
-
-      //.table-row{
-
-      //}
-
-      li {
-        display: block;
-      }
-
-      .col {
-        flex-basis: 100%;
-      }
-
-      .col {
-        display: flex;
-        padding: 10px 0;
-        &:before {
-          color: #6C7A89;
-          padding-right: 10px;
-          content: attr(data-label);
-          flex-basis: 50%;
-          text-align: center;
-        }
-      }
-
-      .col-1, .col-2, .col-3, .col-4, .col-5{
-        width: 100% ;
-      }
+    .col-7{
+      justify-content: center;
     }
   }
+}
+
 
 /* AGREGA META */
 .titulo-nuevameta{
@@ -213,12 +222,6 @@ input{
 
 .wrap-login100-form-btn:hover .login100-form-bgbtn {
   left: 0;
-}
-
-@media (max-width: 576px) {
-  .wrap-login100 {
-    padding: 77px 15px 33px 15px;
-  }
 }
 
 .container-login100-form-btn {
