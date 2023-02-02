@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
 import { Router, RouterLink } from '@angular/router';
 import { CategoriaI } from 'src/app/interfaces/categoria';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-principal',
@@ -44,6 +45,7 @@ export class PrincipalComponent implements OnInit {
   muestraErrorEgFlag: number = 0;
   muestraIngresosFlag: number = 0;
   muestraEgresosFlag: number = 0;
+  muestraGraficoFlag: number = 1;
 
   /* Grafico */
   porcentajeIngreso: number;
@@ -96,33 +98,61 @@ export class PrincipalComponent implements OnInit {
   }
 
   calcula(): void {
-    // console.log(this.mesActual)
     this.ingresos = [];
     this.egresos = [];
     this.ingreso = 0;
     this.egreso = 0;
     this.balance = 0;
-    this.movimientoService
-      .traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
-      .subscribe((respuesta) => {
-        //console.log("Movimiento traido: ", respuesta);
-        this.dataMovimientos = respuesta;
-        for (let dat of this.dataMovimientos) {
-          if (dat.tmov_descripcion == 'Ingreso') {
-            this.muestraIngresosFlag = 1;
-            this.fecha = dat.mov_fcreacion;
-            this.ingreso += Number(dat.mov_monto);
-            this.balance += Number(dat.mov_monto);
-            this.ingresos.push(dat);
-          } else { //dat.tmov_descripcion == 'Egreso'
-            this.muestraEgresosFlag = 1;
-            this.balance -= Number(dat.mov_monto);
-            this.egreso += Number(dat.mov_monto);
-            this.egresos.push(dat);
-          }
+    // this.movimientoService
+    //   .traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
+    //   .subscribe((respuesta) => {
+    //     //console.log("Movimiento traido: ", respuesta);
+    //     this.dataMovimientos = respuesta;
+    //     for (let dat of this.dataMovimientos) {
+    //       if (dat.tmov_descripcion == 'Ingreso') {
+    //         this.muestraIngresosFlag = 1;
+    //         this.fecha = dat.mov_fcreacion;
+    //         this.ingreso += Number(dat.mov_monto);
+    //         this.balance += Number(dat.mov_monto);
+    //         this.ingresos.push(dat);
+    //       } else { //dat.tmov_descripcion == 'Egreso'
+    //         this.muestraEgresosFlag = 1;
+    //         this.balance -= Number(dat.mov_monto);
+    //         this.egreso += Number(dat.mov_monto);
+    //         this.egresos.push(dat);
+    //       }
+    //     }
+    //       this.calculaPorcentajes();
+    //     });
+    this.traeMovimientos();
+  }
+
+  async traeMovimientos(){
+    this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
+    .pipe(
+      catchError((error: any) => {
+        this.muestraGraficoFlag = 0;
+        return throwError(error);
+      })
+    )
+    .subscribe((data) => {
+      this.dataMovimientos = data;
+      for (let dat of this.dataMovimientos) {
+        if (dat.tmov_descripcion == 'Ingreso') {
+          this.muestraIngresosFlag = 1;
+          this.fecha = dat.mov_fcreacion;
+          this.ingreso += Number(dat.mov_monto);
+          this.balance += Number(dat.mov_monto);
+          this.ingresos.push(dat);
+        } else { //dat.tmov_descripcion == 'Egreso'
+          this.muestraEgresosFlag = 1;
+          this.balance -= Number(dat.mov_monto);
+          this.egreso += Number(dat.mov_monto);
+          this.egresos.push(dat);
         }
-          this.calculaPorcentajes();
-        });
+      }
+      this.calculaPorcentajes();
+    });
   }
 
   traeBalance(){

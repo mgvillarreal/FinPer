@@ -24,26 +24,22 @@
     <div class="container-cards mb-2">
 
       <div id="containercards-column1">
-        <!-- <div class="containercard-item1" *ngIf="muestraIngresosFlag == 0 && muestraEgresosFlag == 0">
+        <div class="containercard-item1" *ngIf="muestraGraficoFlag==0">
           <div class="card">
             <div class="texto-grafico">
               Aún no existen movimientos registrados.
             </div>
           </div>
-        </div> -->
+        </div>
 
-        <!-- <div class="containercard-item1" *ngIf="muestraIngresosFlag != 0 && muestraEgresosFlag != 0"> -->
-        <div class="containercard-item1">
+        <div class="containercard-item1" *ngIf="muestraGraficoFlag==1">
+        <!-- <div class="containercard-item1"> -->
           <div class="card">
             <div class="position-grafico">
               <div class="chart-container">
                 <canvas class="text-center" id="grafico-miscuentas"> </canvas>
               </div>
             </div>
-
-            <!-- <div class="texto-grafico" *ngIf="muestraIngresosFlag == 0 && muestraEgresosFlag == 0">
-              Aún no existen movimientos registrados.
-            </div> -->
           </div>
         </div>
   

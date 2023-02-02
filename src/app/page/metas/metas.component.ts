@@ -168,8 +168,6 @@ export class MetasComponent implements OnInit {
       montoRet: ['', [Validators.required]],
       fechaRet: ['', [Validators.required]],
     });
-
-    //this.traeMetaPorEstado(1);
   }
 
   fechaValidaValidator(): ValidatorFn {
