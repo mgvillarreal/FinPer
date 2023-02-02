@@ -140,12 +140,6 @@ export class MetasComponent implements OnInit {
   eliminaMeta() {
     this.metaServicio.eliminarMeta(this.metaSeleccionada).subscribe();
 
-    // this.metaServicio.eliminarMeta(this.meta).subscribe((data) => {
-    //   setTimeout(() => {
-    //     this.traeMetaPorEstado(1);
-    //   }, 1500);
-    // });
-
     this.muestraMetas = 1;
     this.editaMetaFlag = 0;
     this.preguntaEliminarFlag = 0;
