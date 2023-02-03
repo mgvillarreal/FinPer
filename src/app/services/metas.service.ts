@@ -13,13 +13,11 @@ export class MetasService {
   urlv4 = 'https://hostinjor.com/apifinper/v5/metas'
   urlMontos = 'https://hostinjor.com/apifinper/v5/montos/'
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient) { }
 
-   }
-
-   traeMetasPorEstado(estado: number){
+  traeMetasPorEstado(estado: number){
     let body = {
-      estado: estado,
+       estado: estado,
       id_usuario: Number(localStorage.getItem("id"))
     };
     //estado["id_usuario"] = Number(localStorage.getItem("id"));
