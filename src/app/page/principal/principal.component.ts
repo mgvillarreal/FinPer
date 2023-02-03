@@ -9,6 +9,7 @@ import {Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/
 import { Router, RouterLink } from '@angular/router';
 import { CategoriaI } from 'src/app/interfaces/categoria';
 import { catchError, throwError } from 'rxjs';
+import { MetasService } from 'src/app/services/metas.service';
 
 @Component({
   selector: 'app-principal',
@@ -18,13 +19,14 @@ import { catchError, throwError } from 'rxjs';
 export class PrincipalComponent implements OnInit {
   ingreso: number;
   egreso: number;
-  ahorro: number = 17800;
+  //ahorro: number = 17800;
   balance: number = 0;
   monto: Number = 0;
   montoString: string;
   dataMovimientos: MovimientoI[];
   fecha: Date;
   fechaActual: Date;
+  sumaMontos: any;
 
   ingresos: any[] = [];
   egresos: any[] = [];
@@ -69,11 +71,13 @@ export class PrincipalComponent implements OnInit {
 
   constructor(
     private movimientoService: MovimientosService,
+    private metasService: MetasService,
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) {
     this.calcula();
+    this.traeSumaAhorros();
   }
 
   ngOnInit(): void {
@@ -103,27 +107,7 @@ export class PrincipalComponent implements OnInit {
     this.ingreso = 0;
     this.egreso = 0;
     this.balance = 0;
-    // this.movimientoService
-    //   .traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
-    //   .subscribe((respuesta) => {
-    //     //console.log("Movimiento traido: ", respuesta);
-    //     this.dataMovimientos = respuesta;
-    //     for (let dat of this.dataMovimientos) {
-    //       if (dat.tmov_descripcion == 'Ingreso') {
-    //         this.muestraIngresosFlag = 1;
-    //         this.fecha = dat.mov_fcreacion;
-    //         this.ingreso += Number(dat.mov_monto);
-    //         this.balance += Number(dat.mov_monto);
-    //         this.ingresos.push(dat);
-    //       } else { //dat.tmov_descripcion == 'Egreso'
-    //         this.muestraEgresosFlag = 1;
-    //         this.balance -= Number(dat.mov_monto);
-    //         this.egreso += Number(dat.mov_monto);
-    //         this.egresos.push(dat);
-    //       }
-    //     }
-    //       this.calculaPorcentajes();
-    //     });
+   
     this.traeMovimientos();
   }
 
@@ -162,18 +146,19 @@ export class PrincipalComponent implements OnInit {
   }
 
   calculaPorcentajes(): void{
-    let total = this.ingreso + this.egreso + this.ahorro;
-    // console.log('ingreso: ', this.ingreso);
-    // console.log('egreso: ', this.egreso);
-    // console.log('total: ', total);
+    let total = this.ingreso + this.egreso + Number(this.sumaMontos);
+    console.log('Ingresos: ', this.ingreso);
+    console.log('Gastos: ', this.egreso);
+    console.log('Ahorros: ', Number(this.sumaMontos));
+    console.log('Total: ', total);
 
     this.porcentajeIngreso = (this.ingreso/total)*100;
     this.porcentajeEgreso = (this.egreso/total)*100;
-    this.porcentajeAhorro = (this.ahorro/total)*100;
+    this.porcentajeAhorro = (this.sumaMontos/total)*100;
 
     this.creaGrafico();
 
-    // console.log('porcentajes: ', this.porcentajeIngreso, this.porcentajeEgreso);
+    console.log('porcentajes: ', this.porcentajeIngreso, this.porcentajeEgreso, this.porcentajeAhorro);
   }
 
   /*NUEVO*/
@@ -212,6 +197,7 @@ export class PrincipalComponent implements OnInit {
         this.calcula();
 
         // COLOCAR ACA LA FUNCIÓN PARA RENOVAR EL GRAFICO DE DONA
+        this.creaGrafico();
 
       });
     this.muestraMsjAltaOk();
@@ -356,6 +342,15 @@ export class PrincipalComponent implements OnInit {
   seleccionaUltMovimientos(mes, anio){
     console.log('Fecha para ultimos movimientos: ', mes, anio);
     this.router.navigate(['ultimosmovimientos']);
+  }
+
+  /* CARD AHORROS */
+  traeSumaAhorros(){
+    let idUsuario = localStorage.getItem('id');
+    this.metasService.traeSumaMontos(idUsuario).subscribe((respuesta) => {
+      this.sumaMontos = respuesta[0]['SUM(mmet_monto)'];
+      console.log("Suma Montos: ", this.sumaMontos);
+    })
   }
 
   /* GRAFICO */

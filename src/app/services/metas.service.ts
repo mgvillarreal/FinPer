@@ -68,4 +68,9 @@ export class MetasService {
   {
     return this.http.post<any>(this.urlMontos + "crear", monto)
   }
+
+  traeSumaMontos(idUsuario)
+  {
+    return this.http.get<any>(this.urlMontos + "traeSuma/" + idUsuario);
+  }
 }
