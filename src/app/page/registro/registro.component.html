@@ -83,32 +83,26 @@
                             Debes tener entre 15 y 99 años.
                         </small>
                         <br>
-                        <div class="wrap-input100" >
+                        <div class="wrap-input100 mb-2">
                             <select class="input100 txt-select" name="residencia" formControlName="residencia">
                                 <option value="" [selected]="1">Lugar de Residencia</option>
                                 <option value="{{pais.res_id}}" *ngFor="let pais of paises" [disabled]="pais.res_id != 13">{{pais.res_descripcion}}</option>
                             </select>
-                        </div>
+                        </div><br>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['residencia'].errors?.['required'] && forma.controls['residencia'].touched">
                             La residencia es requerida.
                         </small>
         
-                        <div class="container-login100-form-btn">
+                        <!-- <div class="container-login100-form-btn">
                             <button class="btn btn-light btn-lg action-button btngreen" (click)="pasarParteDos()">
                                 Continuar
                             </button>
-                        </div>
-                    </div>
+                        </div> -->
 
-                    <div *ngIf="parteFormulario==2">
-                        <span class="login100-form-title p-b-26"> Más sobre ti </span>
-
-                        <!-- <label class="texto-label mb-4">Modos de Ingreso</label> -->
-
-                        <div>
+                        <div class="mb-2">
                             <div class="wrap-input100" >
-                                <select class="input100"  name="modoingreso" formControlName="modoing">
+                                <select class="input100 txt-select" name="modoingreso" formControlName="modoing">
                                     <option value="" selected [disabled]="1">Seleccione un modo de ingreso</option>
                                     <option value="{{ingreso.ming_id}}" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option>
                                 </select>
@@ -122,7 +116,7 @@
                         
                         <div class="d-flex justify-content-center">
                             <div class="wrap-input100" >
-                                <select class="input100"  name="profesion" formControlName="profesion">
+                                <select class="input100 txt-select"  name="profesion" formControlName="profesion">
                                     <option value="" selected [disabled]="1">Seleccione una profesión</option>
                                     <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option>
                                 </select>
@@ -136,13 +130,18 @@
                         <div class="container-login100-form-btn">
                             <div class="wrap-login100-form-btn">
                                 <div class="login100-form-bgbtn"></div>
-                                <button class="btn btn-light btn-lg action-button btngreen" data-bs-toggle="modal" href="#exampleModalCenter">
+                                <button class="btn btn-light btn-lg action-button btngreen">
                                     Registrar
                                 </button> 
                             </div>
                         </div>
-
                     </div>
+
+                    <!-- <div *ngIf="parteFormulario==2">
+                        <span class="login100-form-title p-b-26"> Más sobre ti </span>
+                        
+
+                    </div> -->
                 </div>
             </form>
         </div>
