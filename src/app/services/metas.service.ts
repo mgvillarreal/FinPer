@@ -73,4 +73,16 @@ export class MetasService {
   {
     return this.http.get<any>(this.urlMontos + "traeSuma/" + idUsuario);
   }
+
+  modificaMonto(monto:any):Observable<ResponseI> {
+    return this.http.put<ResponseI>(this.urlMontos + 'modifica', monto);
+  }
+
+  eliminarMonto(idMonto:any){
+    console.log('Elimina monto en Service: ', idMonto);
+    let monto = {
+      'id': idMonto
+    }
+    return this.http.put<any>(this.urlMontos + 'elimina', monto);
+  }
 }

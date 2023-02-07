@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MetasI } from 'src/app/interfaces/metas';
+import { MontosI } from 'src/app/interfaces/montos';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Meta } from 'src/app/models/meta.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -41,9 +42,7 @@ export class MetasComponent implements OnInit {
   modificarDetalle: string;
   modificarMoneda: number;
   modificarFecha: Date;
-  //hasta datos a modificar
   modificarEstado: number;
-
   metaAModificar: MetasI;
 
   public forma: FormGroup;
@@ -54,10 +53,16 @@ export class MetasComponent implements OnInit {
   monto = new Monto();
 
   // Montos
-
   arrMontos = []
   arrMontosAhorrados = []
   arrDiferencia = []
+  //datos usados para pasar a moficacion con ngmodel
+  modificarIdMonto: number;
+  modificarMontoMonto: number;
+  modificarFechaMonto: Date;
+  modificarEstadoMonto: number;
+  montoAModificar: MontosI;
+  montoSeleccionado: any;
 
   //estados
   arrEstados = [
@@ -230,8 +235,6 @@ export class MetasComponent implements OnInit {
         this.modificarDetalle=this.metaAModificar.met_nombre;
         this.modificarFecha=this.metaAModificar.met_fcreacion;
         this.modificarMoneda=this.metaAModificar.met_idmoneda;
-        //console.log(meta);
-
       }
     });
   }
@@ -242,9 +245,9 @@ export class MetasComponent implements OnInit {
     this.meta.met_nombre = this.modificarDetalle;
     this.meta.met_flimite = this.modificarFecha;
     this.meta.met_idmoneda = this.modificarMoneda;
-    console.log('Meta creada: ', this.meta);
+    console.log('Meta a modificar: ', this.meta);
     this.muestraMensajeOk();
-    //this.metaServicio.guardaMetas(this.meta);
+    
     this.metaServicio.cambiaMetas(this.meta).subscribe((data) => {
       console.log(data);
       setTimeout(() => {
@@ -304,18 +307,41 @@ export class MetasComponent implements OnInit {
     }
   }
 
-  editarMonto(){
+  editarMonto(monto){
     if (this.editaMontoFlag == 0) {
       this.editaMontoFlag = 1;
       this.muestraMetas = 0;
       this.muestraMontosFlag = 0;
     }
+
+    this.mostrarDatosEditarMonto(monto);
+    this.montoSeleccionado = monto.mmet_id;
+  }
+
+  mostrarDatosEditarMonto(monto) {
+    this.montoAModificar = monto;
+
+    this.modificarIdMonto = this.montoAModificar.mmet_id;
+    this.modificarMontoMonto = this.montoAModificar.mmet_monto;
+    this.modificarFechaMonto = this.montoAModificar.mmet_fcreacion;
   }
 
   actualizarMonto(){
-
+    this.monto.mmet_id = this.modificarIdMonto;
+    this.monto.mmet_monto = this.modificarMontoMonto;
+    this.monto.mmet_fcreacion = this.modificarFechaMonto;
+    
+    console.log('Monto a modificar: ', this.monto);
 
     this.muestraMensajeActMontoOk();
+    
+    this.metaServicio.modificaMonto(this.monto).subscribe((data) => {
+      console.log(data);
+      // setTimeout(() => {
+      //   this.traeMetaPorEstado(1);
+      // }, 1500);
+    });
+
   }
 
   preguntaEliminarMonto(){
@@ -329,6 +355,8 @@ export class MetasComponent implements OnInit {
   }
 
   eliminaMonto(){
+    this.metaServicio.eliminarMonto(this.montoSeleccionado).subscribe();
+
     this.muestraMontosFlag = 1;
     this.editaMontoFlag = 0;
     this.preguntaEliminarMontoFlag = 0;

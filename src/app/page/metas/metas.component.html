@@ -293,6 +293,8 @@
 	</div>
 </ng-template>
 
+<!-- MONTOS -->
+
 <ng-template [ngIf]="muestraMontosFlag==1" class="limiter">
     <div class="container-login100">
       <div class="wrap-login100 text-center">
@@ -305,7 +307,7 @@
         <div>
           <table class="table table-hover mt-4">
             <tbody>
-              <tr *ngFor="let monto of arrMontos" (click)="editarMonto()">
+              <tr *ngFor="let monto of arrMontos" (click)="editarMonto(monto)">
                 <td scope="row">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wallet" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -406,7 +408,7 @@
 				<div class="login100-form validate-form text-center mt-3">
 
                     <div class="wrap-input100 modal-celda2 my-2">
-                        <input type="number" name="montoMonto" placeholder="Monto ahorrado" formControlName="montoMonto" >
+                        <input type="number" name="montoMonto" placeholder="Monto ahorrado" value="{{this.montoAModificar.mmet_monto}}" [(ngModel)]="modificarMontoMonto" formControlName="montoMonto" >
                     </div>
                     <small  class="texto-validacion text-center"
                     *ngIf="formaMonto.controls['montoMonto'].errors?.['required'] && formaMonto.controls['montoMonto'].touched">
@@ -414,7 +416,7 @@
                     </small>
 
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="text" name="fechaMonto" placeholder="Fecha del monto ahorrado" onfocus="(this.type='date')" formControlName="fechaMonto">
+                        <input type="text" name="fechaMonto" placeholder="Fecha del monto ahorrado" onfocus="(this.type='date')" value="{{this.montoAModificar.mmet_fcreacion}}" [(ngModel)]="modificarFechaMonto" formControlName="fechaMonto">
                     </div>
                     <small  class="texto-validacion text-center"
                     *ngIf="formaMonto.controls['fechaMonto'].errors?.['required'] && formaMonto.controls['fechaMonto'].touched">
