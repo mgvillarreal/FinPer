@@ -23,7 +23,7 @@ export class GraficoscategoriasComponent implements OnInit {
   porcentajesIngresos:number[] = [];
   porcentajesEgresos:number[] = [];
 
-  constructor( private movimientoService: MovimientosService)
+  constructor(private movimientoService: MovimientosService)
   {
     this.traeDatos();
   }
