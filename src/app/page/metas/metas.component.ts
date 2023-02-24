@@ -266,7 +266,7 @@ export class MetasComponent implements OnInit {
 
     await this.selMeta(meta);
 
-    this.traerMontos(this.metaSeleccionada.met_id)
+    this.traerMontos(this.metaSeleccionada.met_id);
 
     //console.log('ID de la meta selec', idMeta);
     // this.monto.mmet_idmeta = idMeta;
@@ -354,12 +354,18 @@ export class MetasComponent implements OnInit {
     }
   }
 
-  eliminaMonto(){
+  async eliminaMonto(){
     this.metaServicio.eliminarMonto(this.montoSeleccionado).subscribe();
 
     this.muestraMontosFlag = 1;
     this.editaMontoFlag = 0;
     this.preguntaEliminarMontoFlag = 0;
+
+    setTimeout(function () {
+      this.traerMontos(this.metaSeleccionada.met_id);
+    },3000)
+
+    //await this.traerMontos(this.metaSeleccionada.met_id);
   }
 
   cancelaMonto(){
