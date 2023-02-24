@@ -32,6 +32,7 @@
     "chart.js": "^3.9.1",
     "jquery": "^3.6.0",
     "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.28",
     "material-icons": "^1.11.2",
     "ng2-charts": "^4.0.1",
     "ngx-bootstrap": "^8.0.0",
