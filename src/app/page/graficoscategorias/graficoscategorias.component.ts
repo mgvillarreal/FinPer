@@ -169,7 +169,7 @@ export class GraficoscategoriasComponent implements OnInit {
       background: '#fff',
       pagesplit: true,
     };
-    var position = 15;
+    var position = 25;
     var width = pdf.internal.pageSize.width;
     var height = pdf.internal.pageSize.height;
     pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
@@ -197,7 +197,7 @@ export class GraficoscategoriasComponent implements OnInit {
       background: '#fff',
       pagesplit: true,
     };
-    var position = 15;
+    var position = 25;
     var width = pdf.internal.pageSize.width;
     var height = pdf.internal.pageSize.height;
 
@@ -214,9 +214,7 @@ export class GraficoscategoriasComponent implements OnInit {
     }
     pdf.save('Movimientos Categorias.pdf'); // Generated PDF
   });
-    /*pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight, options)
-    pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight, options);*/
- 
+  
     
   }
   
