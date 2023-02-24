@@ -111,7 +111,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
       pagesplit: true,
     };
     let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
-    pdf.text('Informe Movimientos Mensuales '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),40,10);
+    pdf.text('Informe Movimientos Mensuales '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
     var position = 15;
     var width = pdf.internal.pageSize.width;
     var height = pdf.internal.pageSize.height;

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartItem, registerables } from 'chart.js';
+import { jsPDF } from 'jspdf';
+import  html2canvas  from 'html2canvas'
 import { skip } from 'rxjs';
 
 @Component({
@@ -113,6 +115,42 @@ export class GraficosmovimientosanualComponent implements OnInit {
     const chartItem: ChartItem = document.getElementById('grafico-movimientosanual') as ChartItem;
 
     new Chart(chartItem, config);
+  }
+
+  descargaAnual(){
+    
+    var data = document.getElementById('grafico-movimientosanual');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 200;
+      var pageHeight = 190;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+      const contentDataURL = canvas.toDataURL('image/png', 10)
+      var options = {
+      size: '70px',
+      background: '#fff',
+      pagesplit: true,
+    };
+    let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
+    pdf.text('Informe Anual por Movimientos '+this.anioActual.toString(),50,10);
+    var position = 15;
+    var width = pdf.internal.pageSize.width;
+    var height = pdf.internal.pageSize.height;
+    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
+    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight);
+    /*pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight, options)
+    pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight, options);*/
+    heightLeft -= pageHeight;
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)//, options);
+      heightLeft -= pageHeight;
+    }
+    pdf.save('Movimientos Anuales.pdf'); // Generated PDF
+    });
+
+
   }
 
 }
