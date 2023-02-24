@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartItem, registerables } from 'chart.js';
 import { jsPDF } from 'jspdf';
 import  html2canvas  from 'html2canvas'
+import autotable from 'jspdf-autotable';
 
 
 @Component({
@@ -15,6 +16,21 @@ export class GraficosmovimientosmensualComponent implements OnInit {
   arrAnios:number[] = [2021, 2022, 2023];
   mesActual:number = Number(new Date().getMonth());
   anioActual:number =  Number(new Date().getFullYear());
+  categoria=[
+    'Sueldo',
+    'Horas Extras',
+    'Frelancee',
+    'Alquiler',
+    'Expensas',
+    'Servicios',
+    'Supermercado',
+    'Tarjeta de Crédito',
+    'Farmacia',
+    'Recargas',
+    'Suscripciones',
+    'Recreación'
+  ];
+  importe=[70000, 0, 15000, 32000, 8000, 8000, 24000, 16000, 16000, 8000, 8000, 40000];
 
   constructor() { }
 
@@ -97,7 +113,18 @@ export class GraficosmovimientosmensualComponent implements OnInit {
   }
 
   descargaMensual(){
+    let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
+    pdf.text('Informe Movimientos Mensuales '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
+    pdf.text('',1,20);
+    var columns = ['Categoria', 'Importe'];
+    var datosTabla = []
     
+    for (var key in this.categoria){
+      var temp = [this.categoria[key],this.importe[key]];
+      datosTabla.push(temp);
+    }
+    autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},});
+ 
     var data = document.getElementById('grafico-movimientosmensual');
     html2canvas(data).then(canvas => {
       var imgWidth = 200;
@@ -110,9 +137,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
       background: '#fff',
       pagesplit: true,
     };
-    let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
-    pdf.text('Informe Movimientos Mensuales '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
-    var position = 15;
+    var position = 135;
     var width = pdf.internal.pageSize.width;
     var height = pdf.internal.pageSize.height;
     pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
