@@ -85,4 +85,13 @@ export class MetasService {
     }
     return this.http.put<any>(this.urlMontos + 'elimina', monto);
   }
+
+  traeMontosPorAnio(id: string, anio: number){
+    let data = {
+      'id': id,
+      'anio': anio
+    }
+    return this.http.post<any>(this.urlMontos + 'traemontosporanio', data);
+  }
+
 }
