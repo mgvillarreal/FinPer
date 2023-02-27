@@ -4,11 +4,6 @@ import { jsPDF } from 'jspdf';
 import  html2canvas  from 'html2canvas';
 import autotable from 'jspdf-autotable';
 //import 'jspdf-autotable';
-<<<<<<< HEAD
-import { skip } from 'rxjs';
-=======
-//import { skip } from 'rxjs';
->>>>>>> e354c169ee797baba52c0898e2118edaafb78909
 import { catchError, skip, throwError } from 'rxjs';
 import { MetasService } from 'src/app/services/metas.service';
 import { MovimientosService } from 'src/app/services/movimientos.service';
