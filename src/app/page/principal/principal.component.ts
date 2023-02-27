@@ -19,7 +19,6 @@ import { MetasService } from 'src/app/services/metas.service';
 export class PrincipalComponent implements OnInit {
   ingreso: number;
   egreso: number;
-  //ahorro: number = 17800;
   balance: number = 0;
   monto: Number = 0;
   montoString: string;
@@ -326,10 +325,10 @@ export class PrincipalComponent implements OnInit {
   traeCategorias() {
     this.movimientoService.traeCategorias().subscribe((resp) => {
       this.categorias = resp;
-      console.info(this.categorias)
-      this.divisorCategoria()
-      console.log(this.categoriasIngreso)
-      console.log(this.categorias)
+      this.divisorCategoria();
+
+      console.log(this.categoriasIngreso);
+      console.log(this.categorias);
     });
   }
 

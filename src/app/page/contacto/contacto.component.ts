@@ -35,6 +35,7 @@ export class ContactoComponent implements OnInit {
   volveraContacto(){
     this.muestraContacto = 1;
     this.mensajeContactoEnviado = 0;
+    this.forma.reset();
   }
 
   ngOnInit(): void {

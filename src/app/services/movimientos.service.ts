@@ -38,8 +38,15 @@ export class MovimientosService {
       'mes': mes,
       'anio': anio
     }
-    console.log(data)
     return this.http.post<any>(this.urlv5 + 'traemovimientos', data)
+  }
+
+  traeMovimientosAnio(id: string, anio: number){
+    let data = {
+      'id': id,
+      'anio': anio
+    }
+    return this.http.post<any>(this.urlv5 + 'traemovimientosporanio', data)
   }
 
   borraUnMovimiento(id){
