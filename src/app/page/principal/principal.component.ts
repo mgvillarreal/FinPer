@@ -325,10 +325,10 @@ export class PrincipalComponent implements OnInit {
   traeCategorias() {
     this.movimientoService.traeCategorias().subscribe((resp) => {
       this.categorias = resp;
-      console.info(this.categorias)
-      this.divisorCategoria()
-      console.log(this.categoriasIngreso)
-      console.log(this.categorias)
+      this.divisorCategoria();
+
+      console.log(this.categoriasIngreso);
+      console.log(this.categorias);
     });
   }
 

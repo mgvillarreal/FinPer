@@ -165,8 +165,8 @@ export class MetasComponent implements OnInit {
     });
 
     this.formaMonto = this.fb.group({
-      montoMonto: ['', [Validators.required ]],
-      fechaMonto: ['', [Validators.required]],
+      montoMonto: ['', [Validators.required, this.montoAlcanzarValidator()]],
+      fechaMonto: ['', [Validators.required ]],
     });
 
     this.formaMontoRet = this.fb.group({
@@ -181,6 +181,19 @@ export class MetasComponent implements OnInit {
       const factual = new Date();
 
       return fechaIngresada < factual ? { fechaInvalida : true } : null;
+    }
+  }
+
+  montoAlcanzarValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const montoMonto = control.value;
+      const porAlcanzar = this.meta.met_monto - this.meta.sumaMonto;
+      console.log("met_monto: ", this.meta.met_monto);
+      console.log("sumaMonto: ", this.meta.sumaMonto);
+
+      //let years = (factual.getFullYear() - fnacimiento.getFullYear());
+  
+      return montoMonto > porAlcanzar  ? { montoInvalido : true } : null;
     }
   }
 
@@ -268,8 +281,8 @@ export class MetasComponent implements OnInit {
 
     this.traerMontos(this.metaSeleccionada.met_id);
 
-    //console.log('ID de la meta selec', idMeta);
-    // this.monto.mmet_idmeta = idMeta;
+    console.log("Dtos de la meta: ", this.meta.sumaMonto);
+    
   }
 
   selMeta(meta){
