@@ -164,7 +164,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     var datosTabla = []
     
     for (var key in this.categoria){
-      var temp = [this.categoria[key],this.importe[key]];
+      var temp = [this.categorias[key],this.montos[key]];
       datosTabla.push(temp);
     }
     autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},});
