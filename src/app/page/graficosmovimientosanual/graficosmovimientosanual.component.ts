@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartItem, registerables } from 'chart.js';
-<<<<<<< HEAD
 import { jsPDF } from 'jspdf';
 import  html2canvas  from 'html2canvas';
 import autotable from 'jspdf-autotable';
 //import 'jspdf-autotable';
-import { skip } from 'rxjs';
-=======
+//import { skip } from 'rxjs';
 import { catchError, skip, throwError } from 'rxjs';
 import { MetasService } from 'src/app/services/metas.service';
 import { MovimientosService } from 'src/app/services/movimientos.service';
->>>>>>> dev
 
 @Component({
   selector: 'app-graficosmovimientosanual',
