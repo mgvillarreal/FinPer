@@ -117,21 +117,23 @@
   text-transform: uppercase;
 }
 
-.btn-irahorro{
+.btn-irahorro:hover{
   border-color:#F7D501;
   color: #F7D501;
+  font-size: 15px;
+  text-transform: uppercase;
+  background-color: transparent;
+}
+
+.btn-irahorro{
+  background-color:#F7D501;
+  border-color:#F7D501;
+  color: white;
   font-size: 15px;
   text-transform: uppercase;
   border-radius: 25px;
   margin-bottom: 10px;
   margin-top: 1rem;
-}
-
-.btn-irahorro:hover{
-  background-color:#F7D501;
-  color: white;
-  font-size: 15px;
-  text-transform: uppercase;
 }
 
 .btn-irultmov{

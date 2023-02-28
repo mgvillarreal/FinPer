@@ -190,8 +190,7 @@ export class MetasComponent implements OnInit {
       const porAlcanzar = this.meta.met_monto - this.meta.sumaMonto;
       console.log("met_monto: ", this.meta.met_monto);
       console.log("sumaMonto: ", this.meta.sumaMonto);
-
-      //let years = (factual.getFullYear() - fnacimiento.getFullYear());
+      console.log("ID meta: ", this.monto.meta);
   
       return montoMonto > porAlcanzar  ? { montoInvalido : true } : null;
     }
@@ -281,7 +280,7 @@ export class MetasComponent implements OnInit {
 
     this.traerMontos(this.metaSeleccionada.met_id);
 
-    console.log("Dtos de la meta: ", this.meta.sumaMonto);
+    console.log("Dtos de la meta: ", this.meta);
     
   }
 
@@ -290,6 +289,7 @@ export class MetasComponent implements OnInit {
   }
 
   cambiaAgregaMontoFlag(){
+    console.log("idmeta", this.metaSeleccionada)
     if (this.agregaMontoFlag == 0) {
       this.agregaMontoFlag = 1;
       this.muestraMetas = 0;
