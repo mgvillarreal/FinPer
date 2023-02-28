@@ -40,6 +40,25 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     this.creaGraficoMovimientosMensual();
   }
 
+  cambiarMes(){
+    this.mesActual = Number(this.mesActual);
+    this.anioActual = Number(this.anioActual);
+
+    this.categoriasIngreso = [];
+    this.categoriasEgreso = [];
+    this.categorias = [];
+    this.montosIngresos = [];
+    this.montosEgresos = [];
+    this.montos = [];
+    this.countIngresos = 0;
+    this.countEgresos = 0;
+    this.coloresCatIngresos = [];
+    this.coloresCatEgresos = [];
+    this.colores = [];
+
+    this.traeDatos();
+  }
+
   traeDatos()
   {
     this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
@@ -86,12 +105,11 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     this.colores = this.coloresCatIngresos.concat(this.coloresCatEgresos);
   }
 
-  changeMes(){
-    this.mesActual = Number(this.mesActual);
-    this.anioActual = Number(this.anioActual);
-  }
-
   creaGraficoMovimientosMensual(): void {
+    if (this.myChart) {
+      this.myChart.destroy();
+    }
+
     Chart.register(...registerables);
 
     const data = {
@@ -130,10 +148,6 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     };
 
     const chartItem: ChartItem = document.getElementById('grafico-movimientosmensual') as ChartItem;
-
-    if (this.myChart) {
-      this.myChart.destroy();
-    }
 
     this.myChart = new Chart(chartItem, config);
   }

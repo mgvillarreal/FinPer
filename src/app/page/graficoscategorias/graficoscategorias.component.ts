@@ -3,6 +3,8 @@ import { Chart, ChartConfiguration, ChartItem, layouts, registerables } from 'ch
 import { catchError, throwError } from 'rxjs';
 import { MovimientosService } from 'src/app/services/movimientos.service';
 
+import 'chart.js/auto';
+
 @Component({
   selector: 'app-graficoscategorias',
   templateUrl: './graficoscategorias.component.html',
@@ -22,6 +24,8 @@ export class GraficoscategoriasComponent implements OnInit {
   totalEgresos:number = 0;
   porcentajesIngresos:number[] = [];
   porcentajesEgresos:number[] = [];
+
+  myChart;
 
   constructor(private movimientoService: MovimientosService)
   {
@@ -71,9 +75,11 @@ export class GraficoscategoriasComponent implements OnInit {
     });
   }
 
-  changeMes(){
+  cambiaMes(){
     this.mesActual = Number(this.mesActual);
     this.anioActual = Number(this.anioActual);
+
+    this.traeDatos();
   }
 
   creaGraficoIngresos(): void {
@@ -135,6 +141,10 @@ export class GraficoscategoriasComponent implements OnInit {
   }
 
   creaGraficoGastos(): void {
+    if (this.myChart) {
+      this.myChart.destroy();
+    }
+
     Chart.register(...registerables);
 
     const data = {
@@ -203,8 +213,9 @@ export class GraficoscategoriasComponent implements OnInit {
 
     const chartItem: ChartItem = document.getElementById('grafico-gastosmensual') as ChartItem;
 
-    let myChart = new Chart(chartItem, config);
-    myChart.clear();
+    
+    this.myChart = new Chart(chartItem, config);
+    
   }
 
 }
