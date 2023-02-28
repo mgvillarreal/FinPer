@@ -42,7 +42,6 @@ export class GraficosmovimientosanualComponent implements OnInit {
       for (let datos of this.dataMovimientos) {
         if (datos.mov_idtipo == 1) //MOVIMIENTOS DE INGRESO
         { 
-          //datos.mov_fcreacion.substr(5,2);
           switch(datos.mov_fcreacion.substr(5,2)){
             case '01':
               this.ingresosEne += Number(datos.mov_monto);
@@ -197,7 +196,6 @@ export class GraficosmovimientosanualComponent implements OnInit {
   }
 
   cambiaAnio(){
-    //this.mesActual = Number(this.mesActual);
     this.anioActual = Number(this.anioActual);
 
     this.dataMovimientos = [];

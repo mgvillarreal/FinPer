@@ -79,6 +79,14 @@ export class GraficoscategoriasComponent implements OnInit {
     this.mesActual = Number(this.mesActual);
     this.anioActual = Number(this.anioActual);
 
+    this.dataMovimientos = [];
+    this.categoriasIngreso = [];
+    this.categoriasEgreso = [];
+    this.totalIngresos = 0;
+    this.totalEgresos = 0;
+    this.porcentajesIngresos = [];
+    this.porcentajesEgresos = [];
+
     this.traeDatos();
   }
 

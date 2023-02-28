@@ -4,11 +4,11 @@
 
   <div class="mt-4 mb-4">
     <div class="text-center mt-4">
-      <select (click)="cambiarMes()" class="select-finper-default select-s" name="" id="" [(ngModel)]="mesActual">
+      <select (change)="cambiarMes()" class="select-finper-default select-s" name="" id="" [(ngModel)]="mesActual">
         <option *ngFor="let mes of arrMeses; let i = index" value="{{i}}" [selected]="i == mesActual" >{{mes}}</option>
      </select>
 
-      <select (click)="cambiarMes()" class="select-finper-default select-xs" name="" id="" [(ngModel)]="anioActual">
+      <select (change)="cambiarMes()" class="select-finper-default select-xs" name="" id="" [(ngModel)]="anioActual">
         <option *ngFor="let anio of arrAnios" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
       </select>
     </div>

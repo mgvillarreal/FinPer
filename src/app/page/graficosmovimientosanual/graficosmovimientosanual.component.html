@@ -4,7 +4,7 @@
 
   <div class="mt-4 mb-4">
     <div class="text-center mt-4">
-      <select (click)="cambiaAnio()" class="select-finper-default select-xs" name="" id="" [(ngModel)]="anioActual">
+      <select (change)="cambiaAnio()" class="select-finper-default select-xs" name="" id="" [(ngModel)]="anioActual">
         <option *ngFor="let anio of arrAnios" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
       </select>
     </div>

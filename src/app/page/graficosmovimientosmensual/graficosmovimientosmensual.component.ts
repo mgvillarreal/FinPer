@@ -37,7 +37,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.creaGraficoMovimientosMensual();
+    //this.creaGraficoMovimientosMensual();
   }
 
   cambiarMes(){
