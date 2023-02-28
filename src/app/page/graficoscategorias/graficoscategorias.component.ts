@@ -25,7 +25,8 @@ export class GraficoscategoriasComponent implements OnInit {
   porcentajesIngresos:number[] = [];
   porcentajesEgresos:number[] = [];
 
-  myChart;
+  myChartIngreso;
+  myChartEgreso;
 
   constructor(private movimientoService: MovimientosService)
   {
@@ -33,8 +34,7 @@ export class GraficoscategoriasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.creaGraficoIngresos();
-    // this.creaGraficoGastos();
+    
   }
 
   traeDatos()
@@ -83,6 +83,10 @@ export class GraficoscategoriasComponent implements OnInit {
   }
 
   creaGraficoIngresos(): void {
+    if (this.myChartIngreso) {
+      this.myChartIngreso.destroy();
+    }
+
     Chart.register(...registerables);
 
     const data = {
@@ -137,23 +141,21 @@ export class GraficoscategoriasComponent implements OnInit {
 
     const chartItem: ChartItem = document.getElementById('grafico-ingresosmensual') as ChartItem;
 
-    new Chart(chartItem, config);
+    this.myChartIngreso = new Chart(chartItem, config);
   }
 
   creaGraficoGastos(): void {
-    if (this.myChart) {
-      this.myChart.destroy();
+    if (this.myChartEgreso) {
+      this.myChartEgreso.destroy();
     }
 
     Chart.register(...registerables);
 
     const data = {
-      labels:
-        // [ '%Alquiler', '%Expensas', '%Servicios', '%Supermercado', '%Tarjeta de Crédito', '%Farmacia', '%Recargas', '%Suscripciones', '%Recreación'],
-        this.categoriasEgreso,
+      labels: this.categoriasEgreso,
       datasets: [{
         label: 'Mis Cuentas',
-        data: this.porcentajesEgresos, //[20, 5, 5],
+        data: this.porcentajesEgresos,
         backgroundColor: [
           '#F70101',
           '#FA2424',
@@ -212,9 +214,8 @@ export class GraficoscategoriasComponent implements OnInit {
     };
 
     const chartItem: ChartItem = document.getElementById('grafico-gastosmensual') as ChartItem;
-
     
-    this.myChart = new Chart(chartItem, config);
+    this.myChartEgreso = new Chart(chartItem, config);
     
   }
 
