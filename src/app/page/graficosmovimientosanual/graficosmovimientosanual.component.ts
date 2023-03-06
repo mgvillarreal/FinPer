@@ -19,9 +19,9 @@ export class GraficosmovimientosanualComponent implements OnInit {
   arrAnios:number[] = [2021, 2022, 2023];
   //mesActual:number = Number(new Date().getMonth());
   anioActual:number =  Number(new Date().getFullYear());
-  ingresos=[80000, 80000, 90000, 87000, 70000, 135000, 100000, 97000, 110000, 110000, 120000, 160000];
-  egresos=[70000, 60000, 80000, 85000, 65000, 100000, 90000, 90000, 100000, 90000, 100000, 160000];
-  ahorros=[10000, 15000, 5000, 7000, 8600, 13000, 18000, 8000, 0, 4500, 6000, 10000];
+  ingresos=[];//[80000, 80000, 90000, 87000, 70000, 135000, 100000, 97000, 110000, 110000, 120000, 160000];
+  egresos=[];//[70000, 60000, 80000, 85000, 65000, 100000, 90000, 90000, 100000, 90000, 100000, 160000];
+  ahorros=[];//[10000, 15000, 5000, 7000, 8600, 13000, 18000, 8000, 0, 4500, 6000, 10000];
 
   dataMovimientos:any[];
   ingresosEne:number = 0; ingresosFeb:number = 0; ingresosMar:number = 0; ingresosAbr:number = 0; ingresosMay:number = 0; ingresosJun:number = 0; ingresosJul:number = 0; ingresosAgo:number = 0; ingresosSep:number = 0; ingresosOct:number = 0; ingresosNov:number = 0; ingresosDic:number = 0;
@@ -47,7 +47,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
       for (let datos of this.dataMovimientos) {
         if (datos.mov_idtipo == 1) //MOVIMIENTOS DE INGRESO
         { 
-          this.ingresos = datos;
+          //this.ingresos[Number(datos.mov_fcreacion.substr(5,2))-1]+=Number(datos.mov_monto);
           //datos.mov_fcreacion.substr(5,2);
           switch(datos.mov_fcreacion.substr(5,2)){
             case '01':
@@ -92,7 +92,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
         }
         else //MOVIMIENTOS DE EGRESO
         { 
-          this.egresos = datos;
+          //this.egresos[Number(datos.mov_fcreacion.substr(5,2))-1]+=Number(datos.mov_monto);
           switch(datos.mov_fcreacion.substr(5,2)){
             case '01':
               this.egresosEne += Number(datos.mov_monto);
@@ -136,6 +136,8 @@ export class GraficosmovimientosanualComponent implements OnInit {
         }
         
       }
+    this.ingresos=[this.ingresosEne,this.ingresosFeb,this.ingresosMar,this.ingresosAbr,this.ingresosMay,this.ingresosJun,this.ingresosJul,this.ingresosAgo,this.ingresosSep,this.ingresosOct,this.ingresosNov,this.ingresosDic];
+    this.egresos=[this.egresosEne,this.egresosFeb,this.egresosMar,this.egresosAbr,this.egresosMay,this.egresosJun,this.egresosJul,this.egresosAgo,this.egresosSep,this.egresosOct,this.egresosNov,this.egresosDic];
 
       this.traeAhorros();
     });
@@ -153,7 +155,8 @@ export class GraficosmovimientosanualComponent implements OnInit {
       this.dataMontos = data;
 
       for (let datos of this.dataMontos) {
-        this.ahorros = datos;
+        
+        //this.ahorros[Number(datos.mmet_fcreacion.substr(5,2))-1]+=Number(datos.mmet_monto);
         switch(datos.mmet_fcreacion.substr(5,2)){
           case '01':
             this.ahorrosEne += Number(datos.mmet_monto);
@@ -193,9 +196,10 @@ export class GraficosmovimientosanualComponent implements OnInit {
             break;
           default:
             console.log("Error al extraer el mes del monto.");
-        }      
+        } 
       }
-      
+      this.ahorros[this.ahorrosEne,this.ahorrosFeb,this.ahorrosMar,this.ahorrosAbr,this.ahorrosMay,this.ahorrosJun,this.ahorrosJul,this.ahorrosAgo,this.ahorrosSep,this.ahorrosOct,this.ahorrosNov,this.ahorrosDic];     
+
       this.creaGraficoMovimientosAnual();
     });
   }
