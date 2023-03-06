@@ -47,6 +47,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
       for (let datos of this.dataMovimientos) {
         if (datos.mov_idtipo == 1) //MOVIMIENTOS DE INGRESO
         { 
+          this.ingresos = datos;
           //datos.mov_fcreacion.substr(5,2);
           switch(datos.mov_fcreacion.substr(5,2)){
             case '01':
@@ -91,6 +92,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
         }
         else //MOVIMIENTOS DE EGRESO
         { 
+          this.egresos = datos;
           switch(datos.mov_fcreacion.substr(5,2)){
             case '01':
               this.egresosEne += Number(datos.mov_monto);
@@ -151,6 +153,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
       this.dataMontos = data;
 
       for (let datos of this.dataMontos) {
+        this.ahorros = datos;
         switch(datos.mmet_fcreacion.substr(5,2)){
           case '01':
             this.ahorrosEne += Number(datos.mmet_monto);
@@ -288,10 +291,12 @@ export class GraficosmovimientosanualComponent implements OnInit {
     let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
     pdf.text('Informe Anual por Movimientos '+this.anioActual.toString(),50,10);
     pdf.text('', 40,20);
+    pdf.addImage('./assets/img/icons/FinPerLogo.png','png',15, 1,10,10);
     var columns = ['Mes', 'Ingresos', 'Egresos','Ahorros'];
     var datosTabla = []
-    
+    console.log('egresos',this.ingresos);
     for (var key in this.arrMeses){
+     
       var temp = [this.arrMeses[key],this.ingresos[key], this.egresos[key],this.ahorros[key]];
       datosTabla.push(temp);
     }

@@ -161,7 +161,11 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     pdf.text('Informe Movimientos Mensuales '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
     pdf.text('',1,20);
     var columns = ['Categoria', 'Importe'];
-    var datosTabla = []
+    var datosTabla = [];
+    //var logo = new Image();
+    //var logo = './assets/img/icons/FinPerLogo.jpf';
+    //logo.scr = './assets/img/icons/FinPerLogo.jpf';
+    pdf.addImage('./assets/img/icons/FinPerLogo.png','png',15, 1,10,10);
     
     for (var key in this.categoria){
       var temp = [this.categorias[key],this.montos[key]];

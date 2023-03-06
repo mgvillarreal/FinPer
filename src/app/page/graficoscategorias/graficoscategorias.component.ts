@@ -212,6 +212,7 @@ export class GraficoscategoriasComponent implements OnInit {
   descargaCategoria(){
     let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
     pdf.text('Informe Mensual Categorias '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
+    pdf.addImage('./assets/img/icons/FinPerLogo.png','png',15, 1,10,10);
 
     var data = document.getElementById('grafico-ingresosmensual');
     html2canvas(data).then(canvas => {
