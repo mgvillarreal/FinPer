@@ -6,7 +6,7 @@
   background-image: url('/assets/img/fondo.png');
   padding: 5px;
   background-repeat: no-repeat;
-  background-size: cover; //o cover
+  background-size: cover;
 }
 
 .titulo{
@@ -72,6 +72,7 @@
 
 .ahorro{
   color: #F7D501;
+  margin-top: 20px;
 }
 
 .ultmov{
@@ -405,6 +406,8 @@ input{
   font-size: large;
   background-color: #f3e8a366;
   margin-top: 15px;
+  margin-left: 15%;
+  margin-right: 15%;
   padding: 10px;
 }
 
@@ -434,15 +437,14 @@ input{
   }
 
   .cardahorro-mensaje{
-    //font-size: 14px;
-    display: none;
+    font-size: 16px;
   }
 
   .chart-container{
     position: relative;
     right: 70px;
     width: 300px;
-    height: 300px;
+    //height: 300px;
   }
 }
 
@@ -451,7 +453,7 @@ input{
     display: grid;
     height: 100%;
     grid-template-columns: auto auto;
-    justify-content: center;
+    //justify-content: center;
   }
 
   .containercard-item1{
@@ -459,8 +461,8 @@ input{
   }
 
   .cardahorro-mensaje{
-    //font-size: 14px;
-    display: none;
+    font-size: 16px;
+    //display: none;
   }
 
   .chart-container{
@@ -468,5 +470,9 @@ input{
     right: 70px;
     width: 300px;
     height: 300px;
+  }
+
+  .ultmov{
+    font-size: 22px;
   }
 }
