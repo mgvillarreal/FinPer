@@ -5,6 +5,8 @@
 .bg{
   background-image: url('/assets/img/fondo.png');
   padding: 5px;
+  background-repeat: no-repeat;
+  background-size: cover; //o cover
 }
 
 .titulo{
@@ -363,7 +365,7 @@ input{
   grid-template-columns: auto auto;
 }
 
-.ccontainercards-column1{
+.containercards-column1{
   width: 50%;
 }
 

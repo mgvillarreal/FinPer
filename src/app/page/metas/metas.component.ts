@@ -35,6 +35,8 @@ export class MetasComponent implements OnInit {
   metas = [];
 
   metaSeleccionada;
+  montoPorAlcanzar: number = 0;
+  mensajeValidaMonto: string = "";
 
   //datos usados para pasar a moficacion con ngmodel
   modificarId: number;
@@ -165,8 +167,8 @@ export class MetasComponent implements OnInit {
     });
 
     this.formaMonto = this.fb.group({
-      montoMonto: ['', [Validators.required, this.montoAlcanzarValidator()]],
-      fechaMonto: ['', [Validators.required ]],
+      montoMonto: ['', [Validators.required]],
+      fechaMonto: ['', [Validators.required]],
     });
 
     this.formaMontoRet = this.fb.group({
@@ -181,18 +183,6 @@ export class MetasComponent implements OnInit {
       const factual = new Date();
 
       return fechaIngresada < factual ? { fechaInvalida : true } : null;
-    }
-  }
-
-  montoAlcanzarValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const montoMonto = control.value;
-      const porAlcanzar = this.meta.met_monto - this.meta.sumaMonto;
-      console.log("met_monto: ", this.meta.met_monto);
-      console.log("sumaMonto: ", this.meta.sumaMonto);
-      console.log("ID meta: ", this.monto.meta);
-  
-      return montoMonto > porAlcanzar  ? { montoInvalido : true } : null;
     }
   }
 
@@ -278,10 +268,7 @@ export class MetasComponent implements OnInit {
 
     await this.selMeta(meta);
 
-    this.traerMontos(this.metaSeleccionada.met_id);
-
-    console.log("Dtos de la meta: ", this.meta);
-    
+    this.traerMontos(this.metaSeleccionada.met_id);    
   }
 
   selMeta(meta){
@@ -289,7 +276,6 @@ export class MetasComponent implements OnInit {
   }
 
   cambiaAgregaMontoFlag(){
-    console.log("idmeta", this.metaSeleccionada)
     if (this.agregaMontoFlag == 0) {
       this.agregaMontoFlag = 1;
       this.muestraMetas = 0;
@@ -297,20 +283,30 @@ export class MetasComponent implements OnInit {
     } else {
       this.agregaMontoFlag = 0;
     }
+
+    this.montoPorAlcanzar = this.metaSeleccionada.met_monto - this.metaSeleccionada.sumaMonto;
   }
 
   async crearMonto(){
     this.monto.meta = this.metaSeleccionada.met_id;
     this.monto.monto = this.formaMonto.value['montoMonto'];
     this.monto.fecha = this.formaMonto.value['fechaMonto'];
-    console.log('Monto creado: ', this.monto);
 
-    await this.metaServicio.agregaMonto(this.monto).subscribe(resp => {
-      console.log(resp)
-    })
+    if(this.montoPorAlcanzar > this.monto.monto){
+      await this.metaServicio.agregaMonto(this.monto).subscribe(resp => {
+        console.log(resp);
+      })
 
-    this.monto = new Monto();
-    this.muestraMensajeOkMonto();
+      this.monto = new Monto();
+      console.log('Monto creado: ', this.monto);
+      this.muestraMensajeOkMonto();
+    }
+    else{
+      this.mensajeValidaMonto = "El monto a ingresar no puede ser superior al monto por alcanzar de la meta.";
+    }
+
+
+    
   }
 
   muestraMensajeOkMonto() {
