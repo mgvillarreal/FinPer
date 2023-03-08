@@ -19,10 +19,7 @@ export class AuthService {
   public nombre: string;
   public usuario: Usuario;
 
-  constructor(
-    private httpCliente: HttpClient,
-    private route: Router
-    ) { }
+  constructor(private httpCliente: HttpClient, private route: Router) { }
 
   register(user): Observable<any> {
     return this.httpCliente.post<any>(this.auth_url2, user)
@@ -42,26 +39,26 @@ export class AuthService {
       (res: JwtResponseI) => {
         if(res){
           // guardar token
-          this.guardaToken(res['token'])
-          this.guardaUsuario(res)
+          this.guardaToken(res['token']);
+          this.guardaUsuario(res);
         }
       })
     )
   }
 
   logout(): void{
-    this.token = ''
-    localStorage.removeItem("TOKEN")
-    localStorage.removeItem("id")
-    localStorage.removeItem("name")
-    localStorage.removeItem("mail")
-    this.route.navigate([''])
+    this.token = '';
+    localStorage.removeItem("TOKEN");
+    localStorage.removeItem("id");
+    localStorage.removeItem("name");
+    localStorage.removeItem("mail");
+    this.route.navigate(['']);
   }
 
   public auth()
   {
-    this.getToken()
-    this.getNombre()
+    this.getToken();
+    this.getNombre();
     if(this.token){
       return this.token;
     }else{
@@ -71,23 +68,23 @@ export class AuthService {
 
   confirmaCuenta(form)
   {
-    return this.httpCliente.post<any>(this.auth_url2 + 'confirma', form)
+    return this.httpCliente.post<any>(this.auth_url2 + 'confirma', form);
   }
 
   private guardaToken(token: string): void{
-    localStorage.setItem("TOKEN", token)
-    this.token = token
+    localStorage.setItem("TOKEN", token);
+    this.token = token;
   }
 
   private guardaUsuario(data: JwtResponseI): void{
-    localStorage.setItem("id", String(data['id']))
-    localStorage.setItem("name", data['name'])
-    localStorage.setItem("mail", data['mail'])
+    localStorage.setItem("id", String(data['id']));
+    localStorage.setItem("name", data['name']);
+    localStorage.setItem("mail", data['mail']);
   }
 
   public getToken(): void{
     if(!this.token){
-      this.token = localStorage.getItem("TOKEN")
+      this.token = localStorage.getItem("TOKEN");
     }
   }
 

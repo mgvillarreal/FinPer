@@ -20,18 +20,14 @@ export class IngresoComponent implements OnInit {
   muestraIngresoFlag: number = 1;
   msjRecuperaContrasenaFlag: number = 0;
 
-  constructor(
-    private fb: FormBuilder, 
-    private usuariosService: UsuariosService,
-    private authService: AuthService,
-    private route: Router) { }
+  constructor(private fb: FormBuilder, private usuariosService: UsuariosService,private authService: AuthService, private route: Router) { }
 
   ingresar(){
     this.usuario.mail = this.forma.value['email'];
     this.usuario.contrasena = this.forma.value['contrasena'];
-    // console.log('El usuario ingresa. Credenciales: ', this.forma.value);
+   
     this.authService.login(this.forma.value).subscribe(res =>{
-      this.route.navigate(['/miscuentas'])
+      this.route.navigate(['/miscuentas']);
     })
   }
 
