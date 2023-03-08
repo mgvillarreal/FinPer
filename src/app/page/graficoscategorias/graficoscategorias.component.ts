@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartItem, layouts, registerables } from 'chart.js';
+import { jsPDF } from 'jspdf';
+import  html2canvas  from 'html2canvas'
 import { catchError, throwError } from 'rxjs';
 import { MovimientosService } from 'src/app/services/movimientos.service';
 
@@ -234,4 +236,69 @@ export class GraficoscategoriasComponent implements OnInit {
     
   }
 
+  descargaCategoria(){
+    let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
+    pdf.text('Informe Mensual Categorias '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
+
+    var data = document.getElementById('grafico-ingresosmensual');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 100;
+      var pageHeight = 190;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+      const contentDataURL = canvas.toDataURL('image/png', 10)
+      var options = {
+      size: '70px',
+      background: '#fff',
+      pagesplit: true,
+    };
+    var position = 25;
+    var width = pdf.internal.pageSize.width;
+    var height = pdf.internal.pageSize.height;
+    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
+    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)//, options);
+      //pdf.addImage(contentDataURL2, 'PNG', 50, position, imgWidth, imgHeight)//, options);
+      heightLeft -= pageHeight;
+    }
+    //pdf.save('Movimientos Ingreso Categorias.pdf'); // Generated PDF
+  });
+
+    var data1 = document.getElementById('grafico-gastosmensual');
+    html2canvas(data1).then(canvas => {
+      var imgWidth = 100;
+      var pageHeight = 190;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+      const contentDataURL2 = canvas.toDataURL('image/png', 10)
+      var options = {
+      size: '70px',
+      background: '#fff',
+      pagesplit: true,
+    };
+    var position = 25;
+    var width = pdf.internal.pageSize.width;
+    var height = pdf.internal.pageSize.height;
+
+  
+    pdf.addImage(contentDataURL2, 'PNG', 105,  position, imgWidth, imgHeight)
+    pdf.addImage(contentDataURL2, 'PNG', 105,  position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      //pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)//, options);
+      pdf.addImage(contentDataURL2, 'PNG', 105, position, imgWidth, imgHeight)//, options);
+      heightLeft -= pageHeight;
+    }
+    pdf.save('Movimientos Categorias.pdf'); // Generated PDF
+  });
+  
+    
+  }
+  
 }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartItem, registerables } from 'chart.js';
+import { jsPDF } from 'jspdf';
+import  html2canvas  from 'html2canvas';
+import autotable from 'jspdf-autotable';
+//import 'jspdf-autotable';
 import { catchError, skip, throwError } from 'rxjs';
 import { MetasService } from 'src/app/services/metas.service';
 import { MovimientosService } from 'src/app/services/movimientos.service';
@@ -15,6 +19,9 @@ export class GraficosmovimientosanualComponent implements OnInit {
   arrAnios:number[] = [2021, 2022, 2023];
   //mesActual:number = Number(new Date().getMonth());
   anioActual:number =  Number(new Date().getFullYear());
+  ingresos=[80000, 80000, 90000, 87000, 70000, 135000, 100000, 97000, 110000, 110000, 120000, 160000];
+  egresos=[70000, 60000, 80000, 85000, 65000, 100000, 90000, 90000, 100000, 90000, 100000, 160000];
+  ahorros=[10000, 15000, 5000, 7000, 8600, 13000, 18000, 8000, 0, 4500, 6000, 10000];
 
   dataMovimientos:any[];
   ingresosEne:number = 0; ingresosFeb:number = 0; ingresosMar:number = 0; ingresosAbr:number = 0; ingresosMay:number = 0; ingresosJun:number = 0; ingresosJul:number = 0; ingresosAgo:number = 0; ingresosSep:number = 0; ingresosOct:number = 0; ingresosNov:number = 0; ingresosDic:number = 0;
@@ -286,6 +293,54 @@ export class GraficosmovimientosanualComponent implements OnInit {
     const chartItem: ChartItem = document.getElementById('grafico-movimientosanual') as ChartItem;
 
     this.myChart = new Chart(chartItem, config);
+  }
+
+  descargaAnual(){
+    let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
+    pdf.text('Informe Anual por Movimientos '+this.anioActual.toString(),50,10);
+    pdf.text('', 40,20);
+    var columns = ['Mes', 'Ingresos', 'Egresos','Ahorros'];
+    var datosTabla = []
+    
+    for (var key in this.arrMeses){
+      var temp = [this.arrMeses[key],this.ingresos[key], this.egresos[key],this.ahorros[key]];
+      datosTabla.push(temp);
+    }
+    autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},});
+    
+    var data = document.getElementById('grafico-movimientosanual');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 200;
+      var pageHeight = 190;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+      const contentDataURL = canvas.toDataURL('image/png', 10)
+      var options = {
+      size: '70px',
+      background: '#fff',
+      pagesplit: true,
+    };
+    
+    var position = 120;
+    var width = pdf.internal.pageSize.width;
+    var height = pdf.internal.pageSize.height;
+    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
+    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight);
+ 
+    heightLeft -= pageHeight;
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)//, options);
+      heightLeft -= pageHeight;
+    }
+    pdf.save('Movimientos Anuales.pdf'); // Generated PDF
+    });
+
+    
+    //pdf.save('Movimientos Anuales.pdf'); // Generated PDF
+
+
   }
 
 }

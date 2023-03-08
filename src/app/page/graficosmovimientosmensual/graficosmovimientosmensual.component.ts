@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartItem, registerables } from 'chart.js';
+import { jsPDF } from 'jspdf';
+import  html2canvas  from 'html2canvas'
+import autotable from 'jspdf-autotable';
 import { catchError, throwError } from 'rxjs';
 import { MovimientosService } from 'src/app/services/movimientos.service';
 
@@ -14,6 +17,21 @@ export class GraficosmovimientosmensualComponent implements OnInit {
   arrAnios:number[] = [2021, 2022, 2023, 2024];
   mesActual:number = Number(new Date().getMonth());
   anioActual:number =  Number(new Date().getFullYear());
+  categoria=[
+    'Sueldo',
+    'Horas Extras',
+    'Frelancee',
+    'Alquiler',
+    'Expensas',
+    'Servicios',
+    'Supermercado',
+    'Tarjeta de Crédito',
+    'Farmacia',
+    'Recargas',
+    'Suscripciones',
+    'Recreación'
+  ];
+  importe=[70000, 0, 15000, 32000, 8000, 8000, 24000, 16000, 16000, 8000, 8000, 40000];
 
   dataMovimientos:any[];
   categoriasIngreso:string[] = [];
@@ -152,4 +170,48 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     this.myChart = new Chart(chartItem, config);
   }
 
+  descargaMensual(){
+    let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
+    pdf.text('Informe Movimientos Mensuales '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
+    pdf.text('',1,20);
+    var columns = ['Categoria', 'Importe'];
+    var datosTabla = []
+    
+    for (var key in this.categoria){
+      var temp = [this.categorias[key],this.montos[key]];
+      datosTabla.push(temp);
+    }
+    autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},});
+ 
+    var data = document.getElementById('grafico-movimientosmensual');
+    html2canvas(data).then(canvas => {
+      var imgWidth = 200;
+      var pageHeight = 190;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+      const contentDataURL = canvas.toDataURL('image/png', 10)
+      var options = {
+      size: '70px',
+      background: '#fff',
+      pagesplit: true,
+    };
+    var position = 135;
+    var width = pdf.internal.pageSize.width;
+    var height = pdf.internal.pageSize.height;
+    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
+    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight);
+    /*pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight, options)
+    pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight, options);*/
+    heightLeft -= pageHeight;
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)//, options);
+      heightLeft -= pageHeight;
+    }
+    pdf.save('Movimientos Mensuales.pdf'); // Generated PDF
+    });
+
+
+  }
 }
