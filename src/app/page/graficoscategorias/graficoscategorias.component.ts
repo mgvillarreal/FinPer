@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration, ChartItem, layouts, registerables } from 'chart.js';
 import { jsPDF } from 'jspdf';
-import  html2canvas  from 'html2canvas'
+import  html2canvas  from 'html2canvas';
+import autotable from 'jspdf-autotable';
 import { catchError, throwError } from 'rxjs';
 import { MovimientosService } from 'src/app/services/movimientos.service';
 
@@ -239,6 +240,30 @@ export class GraficoscategoriasComponent implements OnInit {
   descargaCategoria(){
     let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
     pdf.text('Informe Mensual Categorias '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
+    pdf.addImage('./assets/img/icons/FinPerLogo.png','png',15, 1,10,10);
+    
+    pdf.text('Ingresos ',75,145);
+
+    var columns = ['Categoria', 'Porcentaje'];
+    var datosTabla = [];
+    for (var key in this.categoriasIngreso){
+      var temp = [this.categoriasIngreso[key],this.porcentajesIngresos[key]];
+      datosTabla.push(temp);
+    }
+    autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
+
+    
+    let finalY = (pdf as any).lastAutoTable.finalY;
+    pdf.text("Egresos", 75, finalY + 10 );
+
+    var columns2 = ['Categoria', 'Porcentaje'];
+    var datosTabla2 = [];
+    for (var key in this.categoriasEgreso){
+      var temp2 = [this.categoriasIngreso[key],this.porcentajesEgresos[key]];
+      datosTabla2.push(temp2);
+    }
+    autotable(pdf,{columns: columns2,body: datosTabla2, didDrawCell: (datosTabla2)=>{ margin:{100}},startY: finalY + 15,});
+
 
     var data = document.getElementById('grafico-ingresosmensual');
     html2canvas(data).then(canvas => {
@@ -252,7 +277,7 @@ export class GraficoscategoriasComponent implements OnInit {
       background: '#fff',
       pagesplit: true,
     };
-    var position = 25;
+    var position = 20;
     var width = pdf.internal.pageSize.width;
     var height = pdf.internal.pageSize.height;
     pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
@@ -280,7 +305,7 @@ export class GraficoscategoriasComponent implements OnInit {
       background: '#fff',
       pagesplit: true,
     };
-    var position = 25;
+    var position = 20;
     var width = pdf.internal.pageSize.width;
     var height = pdf.internal.pageSize.height;
 
