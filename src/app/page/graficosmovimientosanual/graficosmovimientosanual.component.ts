@@ -293,7 +293,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
 
   descargaAnual(){
     let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
-    pdf.text('Informe Anual por Movimientos '+this.anioActual.toString(),50,10);
+    pdf.text('Informe Anual por Movimientos '+this.anioActual.toString(),60,10);
     pdf.text('', 40,20);
     pdf.addImage('./assets/img/icons/FinPerLogo.png','png',15, 1,10,10);
     var columns = ['Mes', 'Ingresos', 'Egresos','Ahorros'];
@@ -304,7 +304,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
       var temp = [this.arrMeses[key],this.ingresos[key], this.egresos[key],this.ahorros[key]];
       datosTabla.push(temp);
     }
-    autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},});
+    autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
     
     var data = document.getElementById('grafico-movimientosanual');
     html2canvas(data).then(canvas => {
@@ -319,7 +319,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
       pagesplit: true,
     };
     
-    var position = 120;
+    var position = 17;
     var width = pdf.internal.pageSize.width;
     var height = pdf.internal.pageSize.height;
     pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
