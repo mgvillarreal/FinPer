@@ -259,7 +259,7 @@ export class GraficoscategoriasComponent implements OnInit {
     var columns2 = ['Categoria', 'Porcentaje'];
     var datosTabla2 = [];
     for (var key in this.categoriasEgreso){
-      var temp2 = [this.categoriasIngreso[key],this.porcentajesEgresos[key]];
+      var temp2 = [this.categoriasEgreso[key],this.porcentajesEgresos[key]];
       datosTabla2.push(temp2);
     }
     autotable(pdf,{columns: columns2,body: datosTabla2, didDrawCell: (datosTabla2)=>{ margin:{100}},startY: finalY + 15,});

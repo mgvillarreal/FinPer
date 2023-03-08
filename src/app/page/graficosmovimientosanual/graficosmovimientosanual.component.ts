@@ -200,7 +200,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
             console.log("Error al extraer el mes del monto.");
         }
       }
-      this.ahorros[this.ahorrosEne,this.ahorrosFeb,this.ahorrosMar,this.ahorrosAbr,this.ahorrosMay,this.ahorrosJun,this.ahorrosJul,this.ahorrosAgo,this.ahorrosSep,this.ahorrosOct,this.ahorrosNov,this.ahorrosDic];
+      this.ahorros=[this.ahorrosEne,this.ahorrosFeb,this.ahorrosMar,this.ahorrosAbr,this.ahorrosMay,this.ahorrosJun,this.ahorrosJul,this.ahorrosAgo,this.ahorrosSep,this.ahorrosOct,this.ahorrosNov,this.ahorrosDic];
 
       this.creaGraficoMovimientosAnual();
     });
