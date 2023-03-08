@@ -167,7 +167,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     //logo.scr = './assets/img/icons/FinPerLogo.jpf';
     pdf.addImage('./assets/img/icons/FinPerLogo.png','png',15, 1,10,10);
 
-    for (var key in this.categoria){
+    for (var key in this.categorias){
       var temp = [this.categorias[key],this.montos[key]];
       datosTabla.push(temp);
     }
