@@ -48,12 +48,9 @@ export class GraficosmovimientosanualComponent implements OnInit {
 
       for (let datos of this.dataMovimientos) {
         if (datos.mov_idtipo == 1) //MOVIMIENTOS DE INGRESO
-        { 
-<<<<<<< HEAD
-=======
+        {
           //this.ingresos[Number(datos.mov_fcreacion.substr(5,2))-1]+=Number(datos.mov_monto);
           //datos.mov_fcreacion.substr(5,2);
->>>>>>> ccb9592d48f883edfa872ae31bb4c6627bbf65cc
           switch(datos.mov_fcreacion.substr(5,2)){
             case '01':
               this.ingresosEne += Number(datos.mov_monto);
@@ -96,7 +93,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
           }
         }
         else //MOVIMIENTOS DE EGRESO
-        { 
+        {
           //this.egresos[Number(datos.mov_fcreacion.substr(5,2))-1]+=Number(datos.mov_monto);
           switch(datos.mov_fcreacion.substr(5,2)){
             case '01':
@@ -139,7 +136,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
               console.log("Error al extraer el mes del movimiento.");
           }
         }
-        
+
       }
     this.ingresos=[this.ingresosEne,this.ingresosFeb,this.ingresosMar,this.ingresosAbr,this.ingresosMay,this.ingresosJun,this.ingresosJul,this.ingresosAgo,this.ingresosSep,this.ingresosOct,this.ingresosNov,this.ingresosDic];
     this.egresos=[this.egresosEne,this.egresosFeb,this.egresosMar,this.egresosAbr,this.egresosMay,this.egresosJun,this.egresosJul,this.egresosAgo,this.egresosSep,this.egresosOct,this.egresosNov,this.egresosDic];
@@ -160,7 +157,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
       this.dataMontos = data;
 
       for (let datos of this.dataMontos) {
-        
+
         //this.ahorros[Number(datos.mmet_fcreacion.substr(5,2))-1]+=Number(datos.mmet_monto);
         switch(datos.mmet_fcreacion.substr(5,2)){
           case '01':
@@ -201,16 +198,16 @@ export class GraficosmovimientosanualComponent implements OnInit {
             break;
           default:
             console.log("Error al extraer el mes del monto.");
-        } 
+        }
       }
-      this.ahorros[this.ahorrosEne,this.ahorrosFeb,this.ahorrosMar,this.ahorrosAbr,this.ahorrosMay,this.ahorrosJun,this.ahorrosJul,this.ahorrosAgo,this.ahorrosSep,this.ahorrosOct,this.ahorrosNov,this.ahorrosDic];     
+      this.ahorros[this.ahorrosEne,this.ahorrosFeb,this.ahorrosMar,this.ahorrosAbr,this.ahorrosMay,this.ahorrosJun,this.ahorrosJul,this.ahorrosAgo,this.ahorrosSep,this.ahorrosOct,this.ahorrosNov,this.ahorrosDic];
 
       this.creaGraficoMovimientosAnual();
     });
   }
-  
+
   ngOnInit(): void {
-    
+
   }
 
   cambiaAnio(){
@@ -221,7 +218,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
     this.egresosEne = 0; this.egresosFeb = 0; this.egresosMar = 0; this.egresosAbr = 0; this.egresosMay = 0; this.egresosJun = 0; this.egresosJul = 0; this.egresosAgo = 0; this.egresosSep = 0; this.egresosOct = 0; this.egresosNov = 0; this.egresosDic = 0;
     this.dataMontos = [];
     this.ahorrosEne = 0; this.ahorrosFeb = 0; this.ahorrosMar = 0; this.ahorrosAbr = 0; this.ahorrosMay = 0; this.ahorrosJun = 0; this.ahorrosJul = 0; this.ahorrosAgo = 0; this.ahorrosSep = 0; this.ahorrosOct = 0; this.ahorrosNov = 0; this.ahorrosDic = 0;
-  
+
     this.traeMovimientos();
   }
 
@@ -315,12 +312,12 @@ export class GraficosmovimientosanualComponent implements OnInit {
     var datosTabla = []
     console.log('egresos',this.ingresos);
     for (var key in this.arrMeses){
-     
+
       var temp = [this.arrMeses[key],this.ingresos[key], this.egresos[key],this.ahorros[key]];
       datosTabla.push(temp);
     }
     autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
-    
+
     var data = document.getElementById('grafico-movimientosanual');
     html2canvas(data).then(canvas => {
       var imgWidth = 200;
@@ -333,13 +330,13 @@ export class GraficosmovimientosanualComponent implements OnInit {
       background: '#fff',
       pagesplit: true,
     };
-    
+
     var position = 17;
     var width = pdf.internal.pageSize.width;
     var height = pdf.internal.pageSize.height;
     pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
     pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight);
- 
+
     heightLeft -= pageHeight;
     while (heightLeft >= 0) {
       position = heightLeft - imgHeight;
@@ -350,7 +347,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
     pdf.save('Movimientos Anuales.pdf'); // Generated PDF
     });
 
-    
+
     //pdf.save('Movimientos Anuales.pdf'); // Generated PDF
 
 
