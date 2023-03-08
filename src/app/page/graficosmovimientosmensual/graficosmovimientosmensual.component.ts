@@ -61,7 +61,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
 
   traeDatos()
   {
-    this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
+    this.movimientoService.traeMovimientosGraficoCategorias(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
     .pipe(
       catchError((error: any) => {
         //this.muestraGraficoFlag = 0;
@@ -73,11 +73,11 @@ export class GraficosmovimientosmensualComponent implements OnInit {
       for (let datos of this.dataMovimientos) {
         if (datos.tmov_descripcion == 'Ingreso') {
           this.categoriasIngreso.push(datos.cmov_descripcion);
-          this.montosIngresos.push(datos.mov_monto);
+          this.montosIngresos.push(datos.Total_Categoria);
           this.countIngresos += 1;
         } else { //datos.tmov_descripcion == 'Egreso'
           this.categoriasEgreso.push(datos.cmov_descripcion);
-          this.montosEgresos.push(datos.mov_monto);
+          this.montosEgresos.push(datos.Total_Categoria);
           this.countEgresos += 1;
         }
         this.categorias = this.categoriasIngreso.concat(this.categoriasEgreso);
