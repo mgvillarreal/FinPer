@@ -27,6 +27,8 @@ export class GraficoscategoriasComponent implements OnInit {
   totalEgresos:number = 0;
   porcentajesIngresos:number[] = [];
   porcentajesEgresos:number[] = [];
+  ingresosMes:number[]=[];
+  egresosMes:number[]=[];
 
   tempIngresos:any[] = [];
   tempEgresos:any[] = [];
@@ -60,10 +62,12 @@ export class GraficoscategoriasComponent implements OnInit {
         if (datos.tmov_descripcion == 'Ingreso') {
           this.categoriasIngreso.push(datos.cmov_descripcion);
           this.totalIngresos += Number(datos.Total_Categoria);
+          this.ingresosMes.push(Number(datos.Total_Categoria));
         }
         else{ //datos.tmov_descripcion == 'Egreso'
           this.categoriasEgreso.push(datos.cmov_descripcion);
           this.totalEgresos += Number(datos.Total_Categoria);
+          this.egresosMes.push(Number(datos.Total_Categoria));
         }
       }
 
@@ -244,10 +248,10 @@ export class GraficoscategoriasComponent implements OnInit {
     
     pdf.text('Ingresos ',75,145);
 
-    var columns = ['Categoria', 'Porcentaje'];
+    var columns = ['Categoria', 'Porcentaje','Monto'];
     var datosTabla = [];
     for (var key in this.categoriasIngreso){
-      var temp = [this.categoriasIngreso[key],this.porcentajesIngresos[key]];
+      var temp = [this.categoriasIngreso[key],this.porcentajesIngresos[key],this.ingresosMes[key]];
       datosTabla.push(temp);
     }
     autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
@@ -256,10 +260,10 @@ export class GraficoscategoriasComponent implements OnInit {
     let finalY = (pdf as any).lastAutoTable.finalY;
     pdf.text("Egresos", 75, finalY + 10 );
 
-    var columns2 = ['Categoria', 'Porcentaje'];
+    var columns2 = ['Categoria', 'Porcentaje','Monto'];
     var datosTabla2 = [];
     for (var key in this.categoriasEgreso){
-      var temp2 = [this.categoriasEgreso[key],this.porcentajesEgresos[key]];
+      var temp2 = [this.categoriasEgreso[key],this.porcentajesEgresos[key],this.egresosMes[key]];
       datosTabla2.push(temp2);
     }
     autotable(pdf,{columns: columns2,body: datosTabla2, didDrawCell: (datosTabla2)=>{ margin:{100}},startY: finalY + 15,});
