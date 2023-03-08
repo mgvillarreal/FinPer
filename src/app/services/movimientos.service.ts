@@ -38,7 +38,7 @@ export class MovimientosService {
       'mes': mes,
       'anio': anio
     }
-    return this.http.post<any>(this.urlv5 + 'traemovimientos', data)
+    return this.http.post<any>(this.urlv5 + 'traemovimientos', data);
   }
 
   traeMovimientosAnio(id: string, anio: number){
@@ -46,21 +46,30 @@ export class MovimientosService {
       'id': id,
       'anio': anio
     }
-    return this.http.post<any>(this.urlv5 + 'traemovimientosporanio', data)
+    return this.http.post<any>(this.urlv5 + 'traemovimientosporanio', data);
   }
 
   borraUnMovimiento(id){
-    return this.http.put<any>(this.urlv4 + 'borramovimiento', id)
+    return this.http.put<any>(this.urlv4 + 'borramovimiento', id);
   }
 
   editaUnMovimiento(movimiento)
   {
-    return this.http.put<any>(this.urlv5 + 'modificamovimiento', movimiento)
+    return this.http.put<any>(this.urlv5 + 'modificamovimiento', movimiento);
   }
 
   traeCategorias()
   {
-    return this.http.get<CategoriaI[]>(this.urlv5)
+    return this.http.get<CategoriaI[]>(this.urlv5);
+  }
+
+  traeMovimientosGraficoCategorias(id: string, mes: number, anio: number){
+    let data = {
+      'id': id,
+      'mes': mes,
+      'anio': anio
+    }
+    return this.http.post<any>(this.urlv5 + 'traemovimientosgraficocategorias', data);
   }
 
 }

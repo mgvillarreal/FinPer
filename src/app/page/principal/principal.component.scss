@@ -5,6 +5,8 @@
 .bg{
   background-image: url('/assets/img/fondo.png');
   padding: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .titulo{
@@ -70,6 +72,7 @@
 
 .ahorro{
   color: #F7D501;
+  margin-top: 20px;
 }
 
 .ultmov{
@@ -117,21 +120,23 @@
   text-transform: uppercase;
 }
 
-.btn-irahorro{
+.btn-irahorro:hover{
   border-color:#F7D501;
   color: #F7D501;
+  font-size: 15px;
+  text-transform: uppercase;
+  background-color: transparent;
+}
+
+.btn-irahorro{
+  background-color:#F7D501;
+  border-color:#F7D501;
+  color: white;
   font-size: 15px;
   text-transform: uppercase;
   border-radius: 25px;
   margin-bottom: 10px;
   margin-top: 1rem;
-}
-
-.btn-irahorro:hover{
-  background-color:#F7D501;
-  color: white;
-  font-size: 15px;
-  text-transform: uppercase;
 }
 
 .btn-irultmov{
@@ -358,10 +363,11 @@ input{
 .container-cards{
   display: grid;
   height: 100%;
+  width: 100%;
   grid-template-columns: auto auto;
 }
 
-.ccontainercards-column1{
+.containercards-column1{
   width: 50%;
 }
 
@@ -401,6 +407,8 @@ input{
   font-size: large;
   background-color: #f3e8a366;
   margin-top: 15px;
+  margin-left: 15%;
+  margin-right: 15%;
   padding: 10px;
 }
 
@@ -430,15 +438,14 @@ input{
   }
 
   .cardahorro-mensaje{
-    //font-size: 14px;
-    display: none;
+    font-size: 16px;
   }
 
   .chart-container{
     position: relative;
     right: 70px;
     width: 300px;
-    height: 300px;
+    //height: 300px;
   }
 }
 
@@ -447,7 +454,7 @@ input{
     display: grid;
     height: 100%;
     grid-template-columns: auto auto;
-    justify-content: center;
+    //justify-content: center;
   }
 
   .containercard-item1{
@@ -455,8 +462,8 @@ input{
   }
 
   .cardahorro-mensaje{
-    //font-size: 14px;
-    display: none;
+    font-size: 16px;
+    //display: none;
   }
 
   .chart-container{
@@ -464,5 +471,9 @@ input{
     right: 70px;
     width: 300px;
     height: 300px;
+  }
+
+  .ultmov{
+    font-size: 22px;
   }
 }

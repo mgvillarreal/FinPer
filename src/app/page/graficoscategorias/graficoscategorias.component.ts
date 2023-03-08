@@ -6,6 +6,8 @@ import autotable from 'jspdf-autotable';
 import { catchError, throwError } from 'rxjs';
 import { MovimientosService } from 'src/app/services/movimientos.service';
 
+import 'chart.js/auto';
+
 @Component({
   selector: 'app-graficoscategorias',
   templateUrl: './graficoscategorias.component.html',
@@ -26,19 +28,24 @@ export class GraficoscategoriasComponent implements OnInit {
   porcentajesIngresos:number[] = [];
   porcentajesEgresos:number[] = [];
 
+  tempIngresos:any[] = [];
+  tempEgresos:any[] = [];
+
+  myChartIngreso;
+  myChartEgreso;
+
   constructor(private movimientoService: MovimientosService)
   {
     this.traeDatos();
   }
 
   ngOnInit(): void {
-    // this.creaGraficoIngresos();
-    // this.creaGraficoGastos();
+    
   }
 
   traeDatos()
   {
-    this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
+    this.movimientoService.traeMovimientosGraficoCategorias(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
     .pipe(
       catchError((error: any) => {
         //this.muestraGraficoFlag = 0;
@@ -47,39 +54,57 @@ export class GraficoscategoriasComponent implements OnInit {
     )
     .subscribe((data) => {
       this.dataMovimientos = data;
+      console.log("Movimientos: ", this.dataMovimientos);
+
       for (let datos of this.dataMovimientos) {
         if (datos.tmov_descripcion == 'Ingreso') {
-          this.totalIngresos += Number(datos.mov_monto);
           this.categoriasIngreso.push(datos.cmov_descripcion);
-        } else { //datos.tmov_descripcion == 'Egreso'
-          this.totalEgresos += Number(datos.mov_monto);
-          this.categoriasEgreso.push(datos.cmov_descripcion);
+          this.totalIngresos += Number(datos.Total_Categoria);
         }
-        console.log("Datos Gráfico: ", datos);
+        else{ //datos.tmov_descripcion == 'Egreso'
+          this.categoriasEgreso.push(datos.cmov_descripcion);
+          this.totalEgresos += Number(datos.Total_Categoria);
+        }
       }
 
       for(let datos of this.dataMovimientos){
-       let porcentaje = 0;
-        if(datos.tmov_descripcion == 'Ingreso'){
-          porcentaje = Number((Number(Number(datos.mov_monto)/this.totalIngresos)*100).toFixed(2));
+        let porcentaje = 0;
+         if(datos.tmov_descripcion == 'Ingreso'){
+          porcentaje = Number((Number(Number(datos.Total_Categoria)/this.totalIngresos)*100).toFixed(2));
           this.porcentajesIngresos.push(porcentaje);
-        } else {
-          porcentaje = Number((Number(Number(datos.mov_monto)/this.totalEgresos)*100).toFixed(2));
+        }
+        else {
+          porcentaje = Number((Number(Number(datos.Total_Categoria)/this.totalEgresos)*100).toFixed(2));
           this.porcentajesEgresos.push(porcentaje);
         }
       }
-
+     
       this.creaGraficoIngresos();
       this.creaGraficoGastos();
+
     });
   }
 
-  changeMes(){
+  cambiaMes(){
     this.mesActual = Number(this.mesActual);
     this.anioActual = Number(this.anioActual);
+
+    this.dataMovimientos = [];
+    this.categoriasIngreso = [];
+    this.categoriasEgreso = [];
+    this.totalIngresos = 0;
+    this.totalEgresos = 0;
+    this.porcentajesIngresos = [];
+    this.porcentajesEgresos = [];
+
+    this.traeDatos();
   }
 
   creaGraficoIngresos(): void {
+    if (this.myChartIngreso) {
+      this.myChartIngreso.destroy();
+    }
+
     Chart.register(...registerables);
 
     const data = {
@@ -134,19 +159,21 @@ export class GraficoscategoriasComponent implements OnInit {
 
     const chartItem: ChartItem = document.getElementById('grafico-ingresosmensual') as ChartItem;
 
-    new Chart(chartItem, config);
+    this.myChartIngreso = new Chart(chartItem, config);
   }
 
   creaGraficoGastos(): void {
+    if (this.myChartEgreso) {
+      this.myChartEgreso.destroy();
+    }
+
     Chart.register(...registerables);
 
     const data = {
-      labels:
-        // [ '%Alquiler', '%Expensas', '%Servicios', '%Supermercado', '%Tarjeta de Crédito', '%Farmacia', '%Recargas', '%Suscripciones', '%Recreación'],
-        this.categoriasEgreso,
+      labels: this.categoriasEgreso,
       datasets: [{
         label: 'Mis Cuentas',
-        data: this.porcentajesEgresos, //[20, 5, 5],
+        data: this.porcentajesEgresos,
         backgroundColor: [
           '#F70101',
           '#FA2424',
@@ -205,9 +232,9 @@ export class GraficoscategoriasComponent implements OnInit {
     };
 
     const chartItem: ChartItem = document.getElementById('grafico-gastosmensual') as ChartItem;
-
-    let myChart = new Chart(chartItem, config);
-    myChart.clear();
+    
+    this.myChartEgreso = new Chart(chartItem, config);
+    
   }
 
   descargaCategoria(){

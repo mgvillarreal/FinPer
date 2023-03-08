@@ -55,12 +55,31 @@ export class GraficosmovimientosmensualComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.creaGraficoMovimientosMensual();
+    //this.creaGraficoMovimientosMensual();
+  }
+
+  cambiarMes(){
+    this.mesActual = Number(this.mesActual);
+    this.anioActual = Number(this.anioActual);
+
+    this.categoriasIngreso = [];
+    this.categoriasEgreso = [];
+    this.categorias = [];
+    this.montosIngresos = [];
+    this.montosEgresos = [];
+    this.montos = [];
+    this.countIngresos = 0;
+    this.countEgresos = 0;
+    this.coloresCatIngresos = [];
+    this.coloresCatEgresos = [];
+    this.colores = [];
+
+    this.traeDatos();
   }
 
   traeDatos()
   {
-    this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
+    this.movimientoService.traeMovimientosGraficoCategorias(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
     .pipe(
       catchError((error: any) => {
         //this.muestraGraficoFlag = 0;
@@ -72,11 +91,11 @@ export class GraficosmovimientosmensualComponent implements OnInit {
       for (let datos of this.dataMovimientos) {
         if (datos.tmov_descripcion == 'Ingreso') {
           this.categoriasIngreso.push(datos.cmov_descripcion);
-          this.montosIngresos.push(datos.mov_monto);
+          this.montosIngresos.push(datos.Total_Categoria);
           this.countIngresos += 1;
         } else { //datos.tmov_descripcion == 'Egreso'
           this.categoriasEgreso.push(datos.cmov_descripcion);
-          this.montosEgresos.push(datos.mov_monto);
+          this.montosEgresos.push(datos.Total_Categoria);
           this.countEgresos += 1;
         }
         this.categorias = this.categoriasIngreso.concat(this.categoriasEgreso);
@@ -104,12 +123,11 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     this.colores = this.coloresCatIngresos.concat(this.coloresCatEgresos);
   }
 
-  changeMes(){
-    this.mesActual = Number(this.mesActual);
-    this.anioActual = Number(this.anioActual);
-  }
-
   creaGraficoMovimientosMensual(): void {
+    if (this.myChart) {
+      this.myChart.destroy();
+    }
+
     Chart.register(...registerables);
 
     const data = {
@@ -148,10 +166,6 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     };
 
     const chartItem: ChartItem = document.getElementById('grafico-movimientosmensual') as ChartItem;
-
-    if (this.myChart) {
-      this.myChart.destroy();
-    }
 
     this.myChart = new Chart(chartItem, config);
   }

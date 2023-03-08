@@ -29,6 +29,8 @@ export class GraficosmovimientosanualComponent implements OnInit {
   dataMontos:any[];
   ahorrosEne:number = 0; ahorrosFeb:number = 0; ahorrosMar:number = 0; ahorrosAbr:number = 0; ahorrosMay:number = 0; ahorrosJun:number = 0; ahorrosJul:number = 0; ahorrosAgo:number = 0; ahorrosSep:number = 0; ahorrosOct:number = 0; ahorrosNov:number = 0; ahorrosDic:number = 0;
 
+  myChart;
+
   constructor(private movimientoService: MovimientosService, private metasService: MetasService) {
     this.traeMovimientos();
   }
@@ -47,8 +49,11 @@ export class GraficosmovimientosanualComponent implements OnInit {
       for (let datos of this.dataMovimientos) {
         if (datos.mov_idtipo == 1) //MOVIMIENTOS DE INGRESO
         { 
+<<<<<<< HEAD
+=======
           //this.ingresos[Number(datos.mov_fcreacion.substr(5,2))-1]+=Number(datos.mov_monto);
           //datos.mov_fcreacion.substr(5,2);
+>>>>>>> ccb9592d48f883edfa872ae31bb4c6627bbf65cc
           switch(datos.mov_fcreacion.substr(5,2)){
             case '01':
               this.ingresosEne += Number(datos.mov_monto);
@@ -204,17 +209,27 @@ export class GraficosmovimientosanualComponent implements OnInit {
     });
   }
   
-
   ngOnInit(): void {
-    //this.creaGraficoMovimientosAnual();
+    
   }
 
-  changeMes(){
-    //this.mesActual = Number(this.mesActual);
+  cambiaAnio(){
     this.anioActual = Number(this.anioActual);
+
+    this.dataMovimientos = [];
+    this.ingresosEne = 0; this.ingresosFeb = 0; this.ingresosMar = 0; this.ingresosAbr = 0; this.ingresosMay = 0; this.ingresosJun = 0; this.ingresosJul = 0; this.ingresosAgo = 0; this.ingresosSep = 0; this.ingresosOct = 0; this.ingresosNov = 0; this.ingresosDic = 0;
+    this.egresosEne = 0; this.egresosFeb = 0; this.egresosMar = 0; this.egresosAbr = 0; this.egresosMay = 0; this.egresosJun = 0; this.egresosJul = 0; this.egresosAgo = 0; this.egresosSep = 0; this.egresosOct = 0; this.egresosNov = 0; this.egresosDic = 0;
+    this.dataMontos = [];
+    this.ahorrosEne = 0; this.ahorrosFeb = 0; this.ahorrosMar = 0; this.ahorrosAbr = 0; this.ahorrosMay = 0; this.ahorrosJun = 0; this.ahorrosJul = 0; this.ahorrosAgo = 0; this.ahorrosSep = 0; this.ahorrosOct = 0; this.ahorrosNov = 0; this.ahorrosDic = 0;
+  
+    this.traeMovimientos();
   }
 
   creaGraficoMovimientosAnual(): void {
+    if (this.myChart) {
+      this.myChart.destroy();
+    }
+
     Chart.register(...registerables);
 
     const data = {
@@ -288,7 +303,7 @@ export class GraficosmovimientosanualComponent implements OnInit {
 
     const chartItem: ChartItem = document.getElementById('grafico-movimientosanual') as ChartItem;
 
-    new Chart(chartItem, config);
+    this.myChart = new Chart(chartItem, config);
   }
 
   descargaAnual(){

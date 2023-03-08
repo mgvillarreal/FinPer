@@ -348,9 +348,8 @@
                     *ngIf="formaMonto.controls['montoMonto'].errors?.['required'] && formaMonto.controls['montoMonto'].touched">
                         El monto es requerido.
                     </small>
-                    <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['montoMonto'].errors?.['montoInvalido']">
-                            El monto a ingresar no debe ser mayor al monto por alcanzar de la meta.
+                    <small  class="texto-validacion text-center" *ngIf="mensajeValidaMonto != ''">
+                        {{mensajeValidaMonto}}
                     </small>
 
                     <div class="wrap-input100 modal-celda4 my-2">
