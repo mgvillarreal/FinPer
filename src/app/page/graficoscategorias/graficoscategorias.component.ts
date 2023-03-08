@@ -25,6 +25,9 @@ export class GraficoscategoriasComponent implements OnInit {
   porcentajesIngresos:number[] = [];
   porcentajesEgresos:number[] = [];
 
+  tempIngresos:any[] = [];
+  tempEgresos:any[] = [];
+
   myChartIngreso;
   myChartEgreso;
 
@@ -37,99 +40,124 @@ export class GraficoscategoriasComponent implements OnInit {
     
   }
 
-  // traeDatos()
-  // {
-  //   this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
-  //   .pipe(
-  //     catchError((error: any) => {
-  //       //this.muestraGraficoFlag = 0;
-  //       return throwError(error);
-  //     })
-  //   )
-  //   .subscribe((data) => {
-  //     this.dataMovimientos = data;
-  //     for (let datos of this.dataMovimientos) {
-  //       if (datos.tmov_descripcion == 'Ingreso') {
-  //         this.totalIngresos += Number(datos.mov_monto);
-  //         this.categoriasIngreso.push(datos.cmov_descripcion);
-  //       } else { //datos.tmov_descripcion == 'Egreso'
-  //         this.totalEgresos += Number(datos.mov_monto);
-  //         this.categoriasEgreso.push(datos.cmov_descripcion);
-  //       }
-  //       console.log("Datos Gráfico: ", datos);
-  //     }
-
-  //     for(let datos of this.dataMovimientos){
-  //      let porcentaje = 0;
-  //       if(datos.tmov_descripcion == 'Ingreso'){
-  //         porcentaje = Number((Number(Number(datos.mov_monto)/this.totalIngresos)*100).toFixed(2));
-  //         this.porcentajesIngresos.push(porcentaje);
-  //       } else {
-  //         porcentaje = Number((Number(Number(datos.mov_monto)/this.totalEgresos)*100).toFixed(2));
-  //         this.porcentajesEgresos.push(porcentaje);
-  //       }
-  //     }
-
-  //     this.creaGraficoIngresos();
-  //     this.creaGraficoGastos();
-  //   });
-  // }
-
-  traeDatos() {
+  traeDatos()
+  {
     this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
-      .pipe(
-        catchError((error: any) => {
-          return throwError(error);
-        })
-      )
-      .subscribe((data) => {
-        this.dataMovimientos = data;
-  
-        // Objeto temporal para almacenar los montos de ingresos por categoría
-        let tempIngresos = {};
-  
-        for (let datos of this.dataMovimientos) {
-          if (datos.tmov_descripcion == 'Ingreso') {
-            // Agrega el monto al objeto temporal correspondiente a la categoría
-            if (!tempIngresos[datos.cmov_descripcion]) {
-              tempIngresos[datos.cmov_descripcion] = Number(datos.mov_monto);
-            } else {
-              tempIngresos[datos.cmov_descripcion] += Number(datos.mov_monto);
-            }
-          } else { //datos.tmov_descripcion == 'Egreso'
-            this.totalEgresos += Number(datos.mov_monto);
-            this.categoriasEgreso.push(datos.cmov_descripcion);
-          }
-        }
-  
-        // Array de ingresos que contiene objetos con la propiedad "Tipo" y "Monto"
-        let ingresos = [];
-  
-        // Agrega cada categoría y monto al array de ingresos
-        for (let categoria in tempIngresos) {
-          ingresos.push({
-            Tipo: categoria,
-            Monto: tempIngresos[categoria]
-          });
-        }
+    .pipe(
+      catchError((error: any) => {
+        //this.muestraGraficoFlag = 0;
+        return throwError(error);
+      })
+    )
+    .subscribe((data) => {
+      this.dataMovimientos = data;
+      console.log("Movimientos: ", this.dataMovimientos);
 
-        console.log("Array de Ingresos: ", ingresos);
-  
-        // Limpia los arrays de categorías y porcentajes de ingresos
-        this.categoriasIngreso = [];
-        this.porcentajesIngresos = [];
-  
-        // Itera el array de ingresos para agregar cada categoría al array de categorías y cada porcentaje al array de porcentajes
-        for (let i = 0; i < ingresos.length; i++) {
-          this.categoriasIngreso.push(ingresos[i].Tipo);
-          let porcentaje = Number((Number(ingresos[i].Monto/this.totalIngresos)*100).toFixed(2));
-          this.porcentajesIngresos.push(porcentaje);
+      for (let datos of this.dataMovimientos) {
+        if (datos.tmov_descripcion == 'Ingreso') {
+
+          this.tempIngresos.push(datos);
+          
+          for(let i=0; i < this.tempIngresos.length ; i++)
+          {
+            if(this.tempIngresos[i].mov_idcategoria != datos.mov_idcategoria){
+              this.categoriasIngreso.push(datos.cmov_descripcion);
+            }
+          }
+          this.totalIngresos += Number(datos.mov_monto);
+
+        } else { //datos.tmov_descripcion == 'Egreso'
+          this.tempEgresos.push(datos);
+
+          for(let i=0; i < this.tempEgresos.length ; i++)
+          {
+            if(this.tempEgresos[i].mov_idcategoria != datos.mov_idcategoria){
+              this.categoriasEgreso.push(datos.cmov_descripcion);
+            }
+          }
+
+          this.totalEgresos += Number(datos.mov_monto);
         }
-  
-        this.creaGraficoIngresos();
-        this.creaGraficoGastos();
-      });
+        
+      }
+      
+      console.log("Temporal ingresos:", this.tempIngresos);
+      console.log("Final ingresos:", this.categoriasIngreso);
+      console.log("Temporal egresos:", this.tempEgresos);
+      console.log("Final egresos:", this.categoriasEgreso);
+
+
+      for(let datos of this.dataMovimientos){
+       let porcentaje = 0;
+        if(datos.tmov_descripcion == 'Ingreso'){
+          porcentaje = Number((Number(Number(datos.mov_monto)/this.totalIngresos)*100).toFixed(2));
+          this.porcentajesIngresos.push(porcentaje);
+        } else {
+          porcentaje = Number((Number(Number(datos.mov_monto)/this.totalEgresos)*100).toFixed(2));
+          this.porcentajesEgresos.push(porcentaje);
+        }
+      }
+
+      this.creaGraficoIngresos();
+      this.creaGraficoGastos();
+    });
   }
+
+  // traeDatos() {
+  //   this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
+  //     .pipe(
+  //       catchError((error: any) => {
+  //         return throwError(error);
+  //       })
+  //     )
+  //     .subscribe((data) => {
+  //       this.dataMovimientos = data;
+  
+  //       // Objeto temporal para almacenar los montos de ingresos por categoría
+  //       let tempIngresos = {};
+  
+  //       for (let datos of this.dataMovimientos) {
+  //         if (datos.tmov_descripcion == 'Ingreso') {
+  //           // Agrega el monto al objeto temporal correspondiente a la categoría
+  //           if (!tempIngresos[datos.cmov_descripcion]) {
+  //             tempIngresos[datos.cmov_descripcion] = Number(datos.mov_monto);
+  //           } else {
+  //             tempIngresos[datos.cmov_descripcion] += Number(datos.mov_monto);
+  //           }
+  //         } else { //datos.tmov_descripcion == 'Egreso'
+  //           this.totalEgresos += Number(datos.mov_monto);
+  //           this.categoriasEgreso.push(datos.cmov_descripcion);
+  //         }
+  //       }
+  
+  //       // Array de ingresos que contiene objetos con la propiedad "Tipo" y "Monto"
+  //       let ingresos = [];
+  
+  //       // Agrega cada categoría y monto al array de ingresos
+  //       for (let categoria in tempIngresos) {
+  //         ingresos.push({
+  //           Tipo: categoria,
+  //           Monto: tempIngresos[categoria]
+  //         });
+  //       }
+
+  //       console.log("Array de Ingresos: ", ingresos);
+  
+  //       // Limpia los arrays de categorías y porcentajes de ingresos
+  //       this.categoriasIngreso = [];
+  //       this.porcentajesIngresos = [];
+  
+  //       // Itera el array de ingresos para agregar cada categoría al array de categorías y cada porcentaje al array de porcentajes
+  //       for (let i = 0; i < ingresos.length; i++) {
+  //         this.categoriasIngreso.push(ingresos[i].Tipo);
+  //         let porcentaje = Number((Number(ingresos[i].Monto/this.totalIngresos)*100).toFixed(2));
+  //         this.porcentajesIngresos.push(porcentaje);
+  //       }
+  
+  //       this.creaGraficoIngresos();
+  //       this.creaGraficoGastos();
+  //     });
+  // }
 
   cambiaMes(){
     this.mesActual = Number(this.mesActual);
