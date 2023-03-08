@@ -173,16 +173,21 @@ export class GraficosmovimientosmensualComponent implements OnInit {
   descargaMensual(){
     let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
     pdf.text('Informe Movimientos Mensuales '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
-    pdf.text('',1,20);
+    pdf.text('',3,20);
     var columns = ['Categoria', 'Importe'];
-    var datosTabla = []
-    
+    var datosTabla = [];
+    //var logo = new Image();
+    //var logo = './assets/img/icons/FinPerLogo.jpf';
+    //logo.scr = './assets/img/icons/FinPerLogo.jpf';
+    pdf.addImage('./assets/img/icons/FinPerLogo.png','png',15, 1,10,10);
+
     for (var key in this.categoria){
       var temp = [this.categorias[key],this.montos[key]];
       datosTabla.push(temp);
     }
-    autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},});
+    autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
  
+    
     var data = document.getElementById('grafico-movimientosmensual');
     html2canvas(data).then(canvas => {
       var imgWidth = 200;
@@ -195,7 +200,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
       background: '#fff',
       pagesplit: true,
     };
-    var position = 135;
+    var position = 17;
     var width = pdf.internal.pageSize.width;
     var height = pdf.internal.pageSize.height;
     pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
@@ -212,6 +217,8 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     pdf.save('Movimientos Mensuales.pdf'); // Generated PDF
     });
 
+
+    
 
   }
 }
