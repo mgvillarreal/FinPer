@@ -37,6 +37,44 @@ export class GraficoscategoriasComponent implements OnInit {
     
   }
 
+  // traeDatos()
+  // {
+  //   this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
+  //   .pipe(
+  //     catchError((error: any) => {
+  //       //this.muestraGraficoFlag = 0;
+  //       return throwError(error);
+  //     })
+  //   )
+  //   .subscribe((data) => {
+  //     this.dataMovimientos = data;
+  //     for (let datos of this.dataMovimientos) {
+  //       if (datos.tmov_descripcion == 'Ingreso') {
+  //         this.totalIngresos += Number(datos.mov_monto);
+  //         this.categoriasIngreso.push(datos.cmov_descripcion);
+  //       } else { //datos.tmov_descripcion == 'Egreso'
+  //         this.totalEgresos += Number(datos.mov_monto);
+  //         this.categoriasEgreso.push(datos.cmov_descripcion);
+  //       }
+  //       console.log("Datos Gráfico: ", datos);
+  //     }
+
+  //     for(let datos of this.dataMovimientos){
+  //      let porcentaje = 0;
+  //       if(datos.tmov_descripcion == 'Ingreso'){
+  //         porcentaje = Number((Number(Number(datos.mov_monto)/this.totalIngresos)*100).toFixed(2));
+  //         this.porcentajesIngresos.push(porcentaje);
+  //       } else {
+  //         porcentaje = Number((Number(Number(datos.mov_monto)/this.totalEgresos)*100).toFixed(2));
+  //         this.porcentajesEgresos.push(porcentaje);
+  //       }
+  //     }
+
+  //     this.creaGraficoIngresos();
+  //     this.creaGraficoGastos();
+  //   });
+  // }
+
   traeDatos() {
     this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
       .pipe(
@@ -74,6 +112,8 @@ export class GraficoscategoriasComponent implements OnInit {
             Monto: tempIngresos[categoria]
           });
         }
+
+        console.log("Array de Ingresos: ", ingresos);
   
         // Limpia los arrays de categorías y porcentajes de ingresos
         this.categoriasIngreso = [];

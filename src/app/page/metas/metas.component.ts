@@ -35,6 +35,8 @@ export class MetasComponent implements OnInit {
   metas = [];
 
   metaSeleccionada;
+  montoPorAlcanzar: number = 0;
+  mensajeValidaMonto: string = "";
 
   //datos usados para pasar a moficacion con ngmodel
   modificarId: number;
@@ -71,7 +73,7 @@ export class MetasComponent implements OnInit {
     { value: 2, name: "Canceladas" },
     { value: 10, name: "Todas" }
   ];
-  estadoMeta:any;
+  estadoMeta:any = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -121,7 +123,6 @@ export class MetasComponent implements OnInit {
       this.muestraMetas = 0;
     }
     this.mostrarDatosEditar(id);
-    //console.log(id);
   }
 
   muestraMensajeActOk() {
@@ -130,7 +131,6 @@ export class MetasComponent implements OnInit {
     this.muestraMetas = 0;
     this.editaMetaFlag = 0;
 
-    console.log(this.modificarId);
     this.modificaMeta();
   }
 
@@ -142,9 +142,9 @@ export class MetasComponent implements OnInit {
     }
   }
 
-  eliminaMeta() {
-    this.metaServicio.eliminarMeta(this.metaSeleccionada).subscribe();
-
+  async eliminaMeta() {
+    await this.metaServicio.eliminarMeta(this.metaSeleccionada).toPromise();;
+    this.traeMetaPorEstado(this.estadoMeta);
     this.muestraMetas = 1;
     this.editaMetaFlag = 0;
     this.preguntaEliminarFlag = 0;
@@ -165,8 +165,8 @@ export class MetasComponent implements OnInit {
     });
 
     this.formaMonto = this.fb.group({
-      montoMonto: ['', [Validators.required, this.montoAlcanzarValidator()]],
-      fechaMonto: ['', [Validators.required ]],
+      montoMonto: ['', [Validators.required]],
+      fechaMonto: ['', [Validators.required]],
     });
 
     this.formaMontoRet = this.fb.group({
@@ -184,43 +184,19 @@ export class MetasComponent implements OnInit {
     }
   }
 
-  montoAlcanzarValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const montoMonto = control.value;
-      const porAlcanzar = this.meta.met_monto - this.meta.sumaMonto;
-      console.log("met_monto: ", this.meta.met_monto);
-      console.log("sumaMonto: ", this.meta.sumaMonto);
-      console.log("ID meta: ", this.monto.meta);
-  
-      return montoMonto > porAlcanzar  ? { montoInvalido : true } : null;
-    }
-  }
-
   crearMeta() {
     this.meta.met_idusuario = Number(localStorage.getItem('id'));
     this.meta.met_idmoneda = this.forma.value['moneda'];
     this.meta.met_monto = this.forma.value['monto'];
     this.meta.met_nombre = this.forma.value['detalle'];
     this.meta.met_flimite = this.forma.value['fechaLimite'];
-    console.log('Meta creada: ', this.meta);
     this.muestraMensajeOk();
     //this.metaServicio.guardaMetas(this.meta);
     this.metaServicio.guardaMetas(this.meta).subscribe((data) => {
-      // console.log(data);
       setTimeout(() => {
-        this.traeMetaPorEstado(1);
+        this.traeMetaPorEstado(0);
       }, 1500);
     });
-  }
-
-  cambiaEstado() {
-    // if (this.estado == 1) {
-    //   this.estado = 2;
-    // } else {
-    //   this.estado = 1;
-    // }
-    console.log('Estado meta: ', this.estadoMeta);
-    this.traeMetaPorEstado(this.estadoMeta);
   }
 
   async traeMetaPorEstado(estado: number) {
@@ -251,21 +227,16 @@ export class MetasComponent implements OnInit {
     });
   }
 
-  modificaMeta() {
+  async modificaMeta() {
     this.meta.met_id=this.modificarId;
     this.meta.met_monto = this.modificarMonto;
     this.meta.met_nombre = this.modificarDetalle;
     this.meta.met_flimite = this.modificarFecha;
     this.meta.met_idmoneda = this.modificarMoneda;
-    console.log('Meta a modificar: ', this.meta);
     this.muestraMensajeOk();
     
-    this.metaServicio.cambiaMetas(this.meta).subscribe((data) => {
-      console.log(data);
-      setTimeout(() => {
-        this.traeMetaPorEstado(1);
-      }, 1500);
-    });
+    await this.metaServicio.cambiaMetas(this.meta).toPromise();
+    this.traeMetaPorEstado(this.estadoMeta);
   }
 
   /*MONTOS DE LAS METAS*/
@@ -275,13 +246,9 @@ export class MetasComponent implements OnInit {
       this.muestraMetas = 0;
       this.agregaMontoFlag = 0;
     }
-
     await this.selMeta(meta);
-
-    this.traerMontos(this.metaSeleccionada.met_id);
-
-    console.log("Dtos de la meta: ", this.meta);
     
+    await this.traerMontos(this.metaSeleccionada.met_id);    
   }
 
   selMeta(meta){
@@ -289,7 +256,6 @@ export class MetasComponent implements OnInit {
   }
 
   cambiaAgregaMontoFlag(){
-    console.log("idmeta", this.metaSeleccionada)
     if (this.agregaMontoFlag == 0) {
       this.agregaMontoFlag = 1;
       this.muestraMetas = 0;
@@ -297,20 +263,28 @@ export class MetasComponent implements OnInit {
     } else {
       this.agregaMontoFlag = 0;
     }
+
+    this.montoPorAlcanzar = this.metaSeleccionada.met_monto - this.metaSeleccionada.sumaMonto;
   }
 
   async crearMonto(){
     this.monto.meta = this.metaSeleccionada.met_id;
     this.monto.monto = this.formaMonto.value['montoMonto'];
     this.monto.fecha = this.formaMonto.value['fechaMonto'];
-    console.log('Monto creado: ', this.monto);
 
-    await this.metaServicio.agregaMonto(this.monto).subscribe(resp => {
-      console.log(resp)
-    })
+    if(this.montoPorAlcanzar > this.monto.monto){
+      await this.metaServicio.agregaMonto(this.monto).subscribe(resp => {
+      })
 
-    this.monto = new Monto();
-    this.muestraMensajeOkMonto();
+      this.monto = new Monto();
+      this.muestraMensajeOkMonto();
+    }
+    else{
+      this.mensajeValidaMonto = "El monto a ingresar no puede ser superior al monto por alcanzar de la meta.";
+    }
+
+
+    
   }
 
   muestraMensajeOkMonto() {
@@ -339,21 +313,17 @@ export class MetasComponent implements OnInit {
     this.modificarFechaMonto = this.montoAModificar.mmet_fcreacion;
   }
 
-  actualizarMonto(){
+  async actualizarMonto(){
     this.monto.mmet_id = this.modificarIdMonto;
     this.monto.mmet_monto = this.modificarMontoMonto;
     this.monto.mmet_fcreacion = this.modificarFechaMonto;
     
-    console.log('Monto a modificar: ', this.monto);
 
     this.muestraMensajeActMontoOk();
     
-    this.metaServicio.modificaMonto(this.monto).subscribe((data) => {
-      console.log(data);
-      // setTimeout(() => {
-      //   this.traeMetaPorEstado(1);
-      // }, 1500);
-    });
+    await this.metaServicio.modificaMonto(this.monto).toPromise();
+
+    this.traeMetaPorEstado(this.estadoMeta);
 
   }
 
@@ -368,17 +338,22 @@ export class MetasComponent implements OnInit {
   }
 
   async eliminaMonto(){
-    this.metaServicio.eliminarMonto(this.montoSeleccionado).subscribe();
+    console.log('Estado meta: ', this.estadoMeta);
+    await this.metaServicio.eliminarMonto(this.montoSeleccionado).toPromise();
+    let metid = this.metaSeleccionada.met_id
+    this.traerMontos(metid);
 
     this.muestraMontosFlag = 1;
     this.editaMontoFlag = 0;
     this.preguntaEliminarMontoFlag = 0;
 
-    setTimeout(function () {
-      this.traerMontos(this.metaSeleccionada.met_id);
-    },3000)
+    console.log(this.metaSeleccionada.met_id)
+    this.mostrarDatosEditar(metid)
+    this.traeMetaPorEstado(this.estadoMeta);
+  }
 
-    //await this.traerMontos(this.metaSeleccionada.met_id);
+  cambiaEstado() {
+    this.traeMetaPorEstado(this.estadoMeta);
   }
 
   cancelaMonto(){
@@ -397,7 +372,7 @@ export class MetasComponent implements OnInit {
   }
 
   async traerMontos(id){
-    this.metaServicio.traeMontos(id).subscribe(resp => {
+    await this.metaServicio.traeMontos(id).toPromise().then(resp => {
       this.arrMontos = resp;
     })
   }
@@ -424,14 +399,10 @@ export class MetasComponent implements OnInit {
         this.arrMontosAhorrados.push(ahorrado)
       },
       error: err => {
-        // console.log(err)
-        // // ahorrado = 0;
-        // this.arrMontosAhorrados.push(ahorrado)
+
       }
     })
-    setTimeout(() => {
-      console.log(this.arrMontosAhorrados)
-    }, 1000);
+
   }
 
   /* RETIRO MONTOS */
@@ -447,13 +418,7 @@ export class MetasComponent implements OnInit {
     this.monto.meta = this.metaSeleccionada.met_id;
     this.monto.monto = this.formaMontoRet.value['montoRet'];
     this.monto.fecha = this.formaMontoRet.value['fechaRet'];
-    console.log('Monto retirado: ', this.monto);
 
-    // await this.metaServicio.agregaMonto(this.monto).subscribe(resp => {
-    //   console.log(resp)
-    // })
-
-    // this.monto = new Monto();
     this.muestraMensajeOkMontoRet();
   }
 

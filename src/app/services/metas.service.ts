@@ -16,6 +16,7 @@ export class MetasService {
   constructor(public http: HttpClient) { }
 
   traeMetasPorEstado(estado: number){
+    console.log(estado)
     let body = {
        estado: estado,
       id_usuario: Number(localStorage.getItem("id"))
