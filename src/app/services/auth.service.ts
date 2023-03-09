@@ -13,6 +13,7 @@ export class AuthService {
 
   auth_url: string = 'https://hostinjor.com/apifinper/v1/usuarios/'
   auth_url2: string = 'https://finper.com.ar/apifinper/v5/usuarios/'
+
   authSubject = new BehaviorSubject(false)
   private token: string;
   public id: Number;
@@ -22,15 +23,7 @@ export class AuthService {
   constructor(private httpCliente: HttpClient, private route: Router) { }
 
   register(user): Observable<any> {
-    return this.httpCliente.post<any>(this.auth_url2, user)
-    // .pipe(tap(
-    //   (res: JwtResponseI) => {
-    //     if(res){
-    //       // guardar token
-    //       this.guardaUsuario(res)
-    //     }
-    //   })
-    // )
+    return this.httpCliente.post<any>(this.auth_url2, user);
   }
 
   login(user: UsuarioI): Observable<any> {

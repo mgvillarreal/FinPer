@@ -19,6 +19,10 @@
                         *ngIf="forma.controls['email'].errors?.['email']">
                             Email inválido.
                         </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="textoValidacion != ''">
+                            {{textoValidacion}}
+                        </small>
 
                         <div class="wrap-input100">
                             <input class="input100 input-margin" type="password" name="pwd" placeholder="Contraseña" formControlName="contrasena">
@@ -45,7 +49,7 @@
                         </small>
 
                         <div class="container-login100-form-btn">
-                            <button class="btn btn-light btn-lg action-button btngreen" (click)="pasarParteUno()">
+                            <button class="btn btn-light btn-lg action-button btngreen" (click)="validarMail()">
                                 Continuar
                             </button>
                         </div>
@@ -148,8 +152,8 @@
     </div>
 </ng-template>
 
-<ng-template class="limiter" [ngIf]="mensajeSolicitaValidacion == 1">
-    <div class="container-login100">
+<ng-template class="limiter" [ngIf]="mensajeSolicitaValidacion == 1 && parteFormulario == 2">
+    <div class="container-login100"> 
 		<div class="wrap-login100 text-center">
             <div class="titulo-nuevameta mb-4"> </div>
 			<div class="login100-form validate-form text-center mt-3">

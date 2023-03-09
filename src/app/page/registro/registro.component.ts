@@ -27,17 +27,34 @@ export class RegistroComponent implements OnInit {
   parteFormulario:number = 0;
   formulario: FormGroup;
   arrayIngresos:any[] = [];
+  textoValidacion:string = '';
 
   /*FLAGS*/
   mensajeSolicitaValidacion: number = 0;
 
   constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private usuarioService: UsuariosService) { }
 
-  pasarParteUno(): void {
+  validarMail(){
     this.usuario.mail = this.forma.value['email'];
     this.usuario.contrasena= this.forma.value['contrasena'];
-    this.parteFormulario = 1;
+
+    this.usuarioService.validaMail(this.usuario.mail).subscribe(
+      resp => {
+        this.mensajeSolicitaValidacion = 0;
+        this.parteFormulario = 1;
+      },
+      err => {
+        this.mensajeSolicitaValidacion = 0;
+        this.textoValidacion = 'El correo electrónico ya existe. Intente iniciar sesión.';
+      }
+    );
+    
   }
+
+  // pasarParteUno(): void {
+    
+  //   this.parteFormulario = 1;
+  // }
 
   pasarParteDos(): void{
     this.usuario.nombre = this.forma.value['nombre'];
