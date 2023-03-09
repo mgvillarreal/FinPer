@@ -127,12 +127,7 @@
 
       <form [formGroup]="forma" (ngSubmit)="crearNuevoMovimiento()">
         <div class="wrap-input100 modal-celda2 my-2">
-          <input
-            type="number"
-            name="monto"
-            placeholder="Monto del ingreso"
-            formControlName="monto"
-          />
+          <input type="number" name="monto" placeholder="Monto del ingreso" formControlName="monto" />
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
@@ -155,12 +150,7 @@
         </small>
 
         <div class="wrap-input100 modal-celda3 my-2">
-          <input
-            type="text"
-            name="detalleIngreso"
-            placeholder="Detalle del ingreso"
-            formControlName="detalle"
-          />
+          <input type="text" name="detalleIngreso" placeholder="Detalle del ingreso" formControlName="detalle" />
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
@@ -174,7 +164,7 @@
             placeholder="Fecha del ingreso"
             onfocus="(this.type='datetime-local')"
             formControlName="fecha"
-            [ngModel]="fechaActual | date:'yyyy-MM-dd HH:mm:ss'"
+            [ngModel]="fechaActual | date:'dd/MM/yyyy HH:mm:ss'"
           />
         </div>
         <small  class="texto-validacion text-center"
@@ -201,12 +191,7 @@
 
       <form [formGroup]="forma" (ngSubmit)="crearNuevoMovimiento()">
         <div class="wrap-input100 modal-celda2 my-2">
-          <input
-            type="number"
-            name="monto"
-            placeholder="Monto del gasto"
-            formControlName="monto"
-          />
+          <input type="number" name="monto" placeholder="Monto del gasto" formControlName="monto" />
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
@@ -229,12 +214,7 @@
         </small>
 
         <div class="wrap-input100 modal-celda3 my-2">
-          <input
-            type="text"
-            name="detalleIngreso"
-            placeholder="Detalle del gasto"
-            formControlName="detalle"
-          />
+          <input type="text" name="detalleIngreso" placeholder="Detalle del gasto" formControlName="detalle" />
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
@@ -248,7 +228,7 @@
             placeholder="Fecha del gasto"
             onfocus="(this.type='datetime-local')"
             formControlName="fecha"
-            [ngModel]="fechaActual | date:'yyyy-MM-dd HH:mm:ss'"
+            [ngModel]="fechaActual | date:'dd/MM/yyyy HH:mm:ss'"
           />
         </div>
         <small  class="texto-validacion text-center"

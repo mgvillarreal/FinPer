@@ -53,6 +53,7 @@ export class PrincipalComponent implements OnInit {
   porcentajeEgreso: number;
   porcentajeAhorro: number;
   porcentajes = 100;
+  myChart;
 
   descripcionMovimiento: string;
 
@@ -74,7 +75,8 @@ export class PrincipalComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) {
+  )
+  {
     this.calcula();
     this.traeSumaAhorros();
   }
@@ -156,8 +158,6 @@ export class PrincipalComponent implements OnInit {
     this.porcentajeAhorro = (this.sumaMontos/total)*100;
 
     this.creaGrafico();
-
-    console.log('porcentajes: ', this.porcentajeIngreso, this.porcentajeEgreso, this.porcentajeAhorro);
   }
 
   /*NUEVO*/
@@ -333,9 +333,10 @@ export class PrincipalComponent implements OnInit {
   }
 
   changeMes(){
-    this.mesActual = Number(this.mesActual)
-    this.anioActual = Number(this.anioActual)
-    this.calcula()
+    this.mesActual = Number(this.mesActual);
+    this.anioActual = Number(this.anioActual);
+    this.calcula();
+    this.creaGrafico();
   }
 
   seleccionaUltMovimientos(mes, anio){
@@ -354,6 +355,10 @@ export class PrincipalComponent implements OnInit {
 
   /* GRAFICO */
   creaGrafico(): void {
+    if (this.myChart) {
+      this.myChart.destroy();
+    }
+
     Chart.register(...registerables);
 
     const data = {
