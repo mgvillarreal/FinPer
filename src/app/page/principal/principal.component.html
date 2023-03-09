@@ -14,11 +14,11 @@
 
     <div class="text-center pt-4 pb-1">
       <span class="balance-titulo">Balance Mes: </span>
-      <span class="balance-cantidad"> ARS {{ balance - sumaMontos }} </span>
+      <span class="balance-cantidad"> ARS {{ balance - sumaMontos | number: '3.2-2' }} </span>
     </div>
     <div class="text-center pb-3">
       <span class="subbalance-titulo">Balance Total: </span>
-      <span class="subbalance-cantidad"> ARS {{ balance }} </span>
+      <span class="subbalance-cantidad"> ARS {{ balance | number: '3.2-2' }} </span>
     </div>
 
     <div class="container-cards mb-2">
@@ -45,7 +45,7 @@
         <div class="containercard-item2">
           <div class="card text-center">
             <div class="card-titulo ahorro">Metas de Ahorro</div>
-            <div class="card-cantidad ahorro">ARS {{ sumaMontos }}</div>
+            <div class="card-cantidad ahorro">ARS {{ sumaMontos | number: '3.2-2' }}</div>
             <div class="cardahorro-mensaje text">
               <p style="margin: 0">Tienes 5 metas de ahorros pendientes.</p>
             </div>
@@ -62,7 +62,7 @@
         <div class="containercard-item3">
           <div class="card text-center">
             <div class="card-titulo egreso">Gastos</div>
-            <div class="card-cantidad egreso">ARS {{ egreso }}</div>
+            <div class="card-cantidad egreso">ARS {{ egreso | number: '3.2-2' }}</div>
             <div
             class="btn btn-outline-primary btn-detalleegreso"
             (click)="seleccionaDetalleEgr()">
@@ -79,7 +79,7 @@
         <div class="containercard-item4">
           <div class="card text-center">
             <div class="card-titulo ingreso">Ingresos</div>
-            <div class="card-cantidad ingreso">ARS {{ ingreso }}</div>
+            <div class="card-cantidad ingreso">ARS {{ ingreso | number: '3.2-2' }}</div>
             <button
             class="btn btn-outline-primary btn-detalleingreso"
             (click)="seleccionaDetalleIng()">
@@ -324,7 +324,7 @@
 
       <div *ngIf="muestraIngresosFlag==1">
        
-        <div class="card-detalle ingreso mt-3">ARS {{ ingreso }}</div>
+        <div class="card-detalle ingreso mt-3">ARS {{ ingreso | number: '3.2-2' }}</div>
 
         <div>
           <table class="table table-hover">
@@ -356,7 +356,7 @@
                   </svg>
                 </td>
                 <td>{{ movimiento.mov_detalle }}</td>
-                <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto }}</td>
+                <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto | number: '3.2-2' }}</td>
                 <td>{{ movimiento.mov_fcreacion | date: 'EEEE d HH:mm'}} </td>
               </tr>
             </tbody>
@@ -382,7 +382,7 @@
 
       <div *ngIf="muestraEgresosFlag==1">
 
-      <div class="card-detalle egreso mt-3">ARS {{ egreso }}</div>
+      <div class="card-detalle egreso mt-3">ARS {{ egreso | number: '3.2-2' }}</div>
 
       <div>
         <table class="table table-hover">
@@ -420,7 +420,7 @@
                   </svg>
                 </td>
                 <td>{{ datose.mov_detalle }}</td>
-                <td>{{ datose.mon_simbolo }} {{ datose.mov_monto }}</td>
+                <td>{{ datose.mon_simbolo }} {{ datose.mov_monto | number: '3.2-2' }}</td>
                 <td>{{ datose.mov_fcreacion | date: 'EEEE d HH:mm'}} </td>
               </tr>
               <tr>
