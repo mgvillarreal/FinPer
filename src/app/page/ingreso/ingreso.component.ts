@@ -19,16 +19,22 @@ export class IngresoComponent implements OnInit {
   recuperaContrasenaFlag: number = 0;
   muestraIngresoFlag: number = 1;
   msjRecuperaContrasenaFlag: number = 0;
+  textoValidacion: string = '';
 
   constructor(private fb: FormBuilder, private usuariosService: UsuariosService,private authService: AuthService, private route: Router) { }
 
-  ingresar(){
+  ingresar() {
     this.usuario.mail = this.forma.value['email'];
     this.usuario.contrasena = this.forma.value['contrasena'];
-   
-    this.authService.login(this.forma.value).subscribe(res =>{
-      this.route.navigate(['/miscuentas']);
-    })
+  
+    this.authService.login(this.forma.value).subscribe(
+      res => {
+        this.route.navigate(['/miscuentas']);
+      },
+      err => {
+        this.textoValidacion = 'La contraseña ingresada es incorrecta. Intente nuevamente.';
+      }
+    );
   }
 
   muestraMensajeRecuperarContrasena(){

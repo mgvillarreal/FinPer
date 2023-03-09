@@ -28,6 +28,10 @@
                 *ngIf="forma.controls['contrasena'].errors?.['required'] && forma.controls['contrasena'].touched">
                     La contraseña es requerida.
                 </small>
+                <small  class="texto-validacion text-center" 
+                *ngIf="textoValidacion != '' ">
+                    {{textoValidacion}}
+                </small>
 
                 <div class="container-login100-form-btn mt-4">
                     <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma.invalid">
