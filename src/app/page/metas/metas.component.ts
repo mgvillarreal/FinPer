@@ -75,6 +75,9 @@ export class MetasComponent implements OnInit {
   ];
   estadoMeta:any = 0;
 
+  //valor del dolar oficial del dia anterior -- harcodeado
+  valorDolarOficial: number = 214.5;
+
   constructor(
     private fb: FormBuilder,
     private metaServicio: MetasService

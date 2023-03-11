@@ -140,9 +140,9 @@ export class PrincipalComponent implements OnInit {
     });
   }
 
-  traeBalance(){
+ traeBalance(){
     this.movimientoService.traeBalance(localStorage.getItem('id')).subscribe(resp => {
-      console.log(resp);
+      console.log('balance'+resp);
     })
   }
 
