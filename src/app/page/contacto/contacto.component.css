@@ -81,6 +81,7 @@
     font-weight: 300;
     font-size: small;
     text-align: center !important;
+    font-weight: 400;
 }
 
 .container-login100-form-btn {
@@ -108,4 +109,9 @@
 
 .texto-mensaje{
     font-size: 18px;
+}
+
+.texto-info{
+    font-size: 12px;
+    color: #555555;
 }

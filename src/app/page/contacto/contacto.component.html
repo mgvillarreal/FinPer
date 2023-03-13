@@ -13,6 +13,10 @@
                     *ngIf="forma.controls['nombre'].errors?.['required'] && forma.controls['nombre'].touched">
                         El nombre es requerido.
                     </small>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['nombre'].errors?.['pattern']" >
+                        El nombre no debe contener caracteres numéricos o especiales.
+                    </small>
 
                     <div class="wrap-input100">
                         <input class="input100 input-margin" type="email" name="email" placeholder="Email" formControlName="email">
@@ -23,12 +27,20 @@
                     </small>
                     <small  class="texto-validacion text-center" 
                     *ngIf="forma.controls['email'].errors?.['email']">
-                        Email inválido.
+                        El email es inválido.
                     </small>
 
                     <div class="wrap-input100">
                         <input class="input100 input-margin" type="number" name="telefono" placeholder="Teléfono" formControlName="telefono">
                     </div>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['telefono'].errors?.['required'] && forma.controls['telefono'].touched">
+                        El teléfono es requerido.
+                    </small>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['telefono'].errors?.['pattern']" >
+                        El teléfono no debe contener letras o caracteres especiales.
+                    </small>
 
                     <div class="wrap-input100">
                         <textarea class="input100 input-margin" type="text" rows="50" name="mensaje" placeholder="Mensaje" formControlName="mensaje" style="height: 150px"> </textarea>
@@ -38,9 +50,13 @@
                         El mensaje es requerido.
                     </small>
 
+                    <small class="texto-info">
+                       <br> * Todos los campos son requeridos.
+                    </small>
+
 
                     <div class="container-login100-form-btn">
-                        <button class="btn btn-light btn-lg action-button btngreen">
+                        <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma.invalid">
                             Enviar
                         </button>
                     </div>                    

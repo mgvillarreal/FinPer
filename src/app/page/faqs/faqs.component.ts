@@ -10,19 +10,18 @@ import { FaqsService } from 'src/app/services/faqs.service';
 export class FaqsComponent implements OnInit {
 
   pregUnoFlag: number = 0;
-  faqs: FaqI[]
+  faqs: FaqI[];
 
   constructor(private faqService: FaqsService) { }
 
   ngOnInit(): void {
-    this.traeFaqs()
+    this.traeFaqs();
   }
-
 
   traeFaqs(){
     this.faqService.traeFaqs().subscribe(resp => {
-      this.faqs = resp
-      console.log(resp)
+      this.faqs = resp;
+      console.log(resp);
     })
   }
 
