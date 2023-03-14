@@ -81,7 +81,7 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     this.forma = this.fb.group({ //se toma del constructor que tiene inyectado el servicio que esta importado
       'email': ['', [Validators.required, Validators.email]],
-      'contrasena': ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9]).*$') ]], //Validators.minLength(8)
+      'contrasena': ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9]).*$'), Validators.minLength(8) ]],
       'pwdConfirm': ['', Validators.required],
     }, {validators: this.contrasenasIgualesValidator, validator: this.contrasenaLongitudValidator});
     
@@ -101,7 +101,7 @@ export class RegistroComponent implements OnInit {
   contrasenaLongitudValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const pwd = control.value('contrasena').lenght;
 
-    return pwd.lenght < 8 ? {contrasenaInvalida: true} : null;
+    return pwd >= 8 ? {contrasenaValida: true} : null;
   }
 
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
