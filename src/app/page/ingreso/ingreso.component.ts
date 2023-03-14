@@ -32,7 +32,7 @@ export class IngresoComponent implements OnInit {
         this.route.navigate(['/miscuentas']);
       },
       err => {
-        this.textoValidacion = 'La contraseña ingresada es incorrecta. Intente nuevamente.';
+        this.textoValidacion = 'El correo electrónico y/o contraseña ingresados son incorrectos. Intente nuevamente.';
       }
     );
   }
@@ -55,6 +55,10 @@ export class IngresoComponent implements OnInit {
     this.muestraIngresoFlag = 1;
     this.recuperaContrasenaFlag = 0;
     this.msjRecuperaContrasenaFlag = 0;
+  }
+
+  limpiarMensaje(){
+    this.textoValidacion = '';
   }
 
   ngOnInit(): void {
