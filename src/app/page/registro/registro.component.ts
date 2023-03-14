@@ -20,6 +20,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegistroComponent implements OnInit {
 
   public forma: FormGroup;
+  public forma2: FormGroup;
   usuario = new Usuario;
   paises: PaisI[] = [];
   profesiones: ProfesionI[] = [];
@@ -32,42 +33,40 @@ export class RegistroComponent implements OnInit {
   /*FLAGS*/
   mensajeSolicitaValidacion: number = 0;
 
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private usuarioService: UsuariosService) { }
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService, private usuarioService: UsuariosService) {  }
 
   validarMail(){
     this.usuario.mail = this.forma.value['email'];
     this.usuario.contrasena= this.forma.value['contrasena'];
 
-    this.usuarioService.validaMail(this.usuario.mail).subscribe(
-      resp => {
-        this.mensajeSolicitaValidacion = 0;
-        this.parteFormulario = 1;
-      },
-      err => {
+    let correoValido: boolean;
+
+    this.usuarioService.validaMail(this.usuario.mail).subscribe(result => {
+      correoValido = !result; // El correo electrónico es válido si el resultado es falso (es decir, no existe en la base de datos)
+      if (!correoValido) {
         this.mensajeSolicitaValidacion = 0;
         this.textoValidacion = 'El correo electrónico ya existe. Intente iniciar sesión.';
       }
-    );
+      else{
+        this.parteFormulario = 1;
+        this.textoValidacion = '';
+      }
+    });
     
   }
 
-  // pasarParteUno(): void {
-    
-  //   this.parteFormulario = 1;
-  // }
-
-  pasarParteDos(): void{
-    this.usuario.nombre = this.forma.value['nombre'];
-    this.usuario.fnacimiento = this.forma.value['fnacimiento'];
-    this.usuario.residencia = this.forma.value['residencia'];
-    this.parteFormulario = 2;
+  limpiarMensaje(){
+    this.textoValidacion = '';
   }
 
   registrar(): void{
-    this.usuario.profesion = this.forma.value['profesion'];
-    this.usuario.modoIngreso = this.forma.value['modoing'];
+    this.usuario.nombre = this.forma2.value['nombre'];
+    this.usuario.fnacimiento = this.forma2.value['fnacimiento'];
+    this.usuario.residencia = this.forma2.value['residencia'];
+    this.usuario.profesion = this.forma2.value['profesion'];
+    this.usuario.modoIngreso = this.forma2.value['modoing'];
 
-    //console.log('Datos de Usuario: ', this.usuario);
+    console.log('Datos de Usuario: ', this.usuario);
 
     this.authService.register(this.usuario).subscribe(resp => {
       if(resp.codigo == 200)
@@ -82,17 +81,27 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     this.forma = this.fb.group({ //se toma del constructor que tiene inyectado el servicio que esta importado
       'email': ['', [Validators.required, Validators.email]],
-      'contrasena': ['', [Validators.required, Validators.minLength(6)]],
+      'contrasena': ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9]).*$') ]], //Validators.minLength(8)
       'pwdConfirm': ['', Validators.required],
-      'nombre': ['', [Validators.required]],
+    }, {validators: this.contrasenasIgualesValidator, validator: this.contrasenaLongitudValidator});
+    
+    this.forma2 = this.fb.group({
+      'nombre': ['', [Validators.required, Validators.pattern(/^[A-Za-z\s\xF1\xD1]+$/)]],
       'fnacimiento': ['', [Validators.required, this.fechaMayorA15Validator() ]],
       'residencia': [13, [Validators.required]],
       'modoing': ['', [Validators.required]],
-      'profesion': ['', [Validators.required]],
-    }, { validators: this.contrasenasIgualesValidator});
+      'profesion': ['', [Validators.required]]
+    });
+
     this.muestraPaises();
     this.muestraProfesiones();
     this.muestraIngresos();
+  }
+
+  contrasenaLongitudValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const pwd = control.value('contrasena').lenght;
+
+    return pwd.lenght < 8 ? {contrasenaInvalida: true} : null;
   }
 
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -133,6 +142,7 @@ export class RegistroComponent implements OnInit {
   mostrarMensaje(){
     if(this.mensajeSolicitaValidacion == 0){
       this.mensajeSolicitaValidacion = 1;
+      this.parteFormulario = 2;
     }
   }
 

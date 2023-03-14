@@ -70,7 +70,7 @@ export class UsuariosService {
 
   validaMail(mail: string)
   {
-    return this.http.get<UsuarioI>(this.url + 'validaMail/' + mail);
+    return this.http.get<boolean>(this.url + 'validaMail/' + mail);
   }
 
 }
