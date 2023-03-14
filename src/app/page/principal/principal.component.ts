@@ -200,6 +200,7 @@ export class PrincipalComponent implements OnInit {
 
       });
     this.muestraMsjAltaOk();
+    this.forma.reset();
 
     setTimeout(() => {
       this.calculaPorcentajes();
@@ -222,6 +223,8 @@ export class PrincipalComponent implements OnInit {
 
     this.muestraIngresosFlag = 0;
     this.muestraEgresosFlag = 0;
+
+    this.forma.reset();
   }
 
   muestraMsjAltaOk() {
@@ -270,6 +273,7 @@ export class PrincipalComponent implements OnInit {
   actualizarMovimiento() {
     this.movimientoService.editaUnMovimiento(this.movimientoSeleccionado).subscribe()
     this.muestraMensajeActOk();
+    this.forma.reset();
   }
 
   muestraMensajeActOk() {

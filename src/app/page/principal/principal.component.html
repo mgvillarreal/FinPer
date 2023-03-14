@@ -135,7 +135,7 @@
         </small>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
-            No pueden ingresar montos negativos.
+            El monto no puede ser negativo.
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -199,7 +199,7 @@
         </small>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
-            No pueden ingresar montos negativos.
+           El monto no puede ser negativo.
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -308,13 +308,6 @@
 
         <div>
           <table class="table table-hover">
-            <!-- <thead>
-              <tr>
-                <th scope="col"> </th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Monto</th>
-              </tr>
-            </thead> -->
             <tbody>
               <tr (click)="editarIngreso(movimiento)" *ngFor="let movimiento of this.ingresos" >
                 <td scope="row">
@@ -366,13 +359,6 @@
 
       <div>
         <table class="table table-hover">
-          <!-- <thead>
-              <tr>
-                <th scope="col"> </th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Monto</th>
-              </tr>
-          </thead> -->
             <tbody>
               <tr
                 (click)="editarEgreso(datose)"
@@ -437,7 +423,7 @@
         </small>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
-            No pueden ingresar montos negativos.
+            El monto no puede ser negativo.
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -480,20 +466,14 @@
         </small>
 
         <div class="container-login100-form-btn">
-          <button
-            class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act"
-            [disabled]="forma.invalid"
-          >
+          <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" [disabled]="forma.invalid">
             Actualizar
           </button>
         </div>
       </form>
 
       <div class="container-login100-form-btn">
-        <button
-          class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act"
-          (click)="preguntaEliminar()"
-        >
+        <button class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act" (click)="preguntaEliminar()" >
           Eliminar
         </button>
       </div>
