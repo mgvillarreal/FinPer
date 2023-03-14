@@ -113,7 +113,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   async traeMovimientos(){
-    this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
+    this.movimientoService.traeMovimientosMesAnio(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
     .pipe(
       catchError((error: any) => {
         this.muestraGraficoFlag = 0;
@@ -344,7 +344,10 @@ export class PrincipalComponent implements OnInit {
   }
 
   seleccionaUltMovimientos(mes, anio){
-    console.log('Fecha para ultimos movimientos: ', mes, anio);
+    this.movimientoService.anioUltMov = anio;
+    this.movimientoService.mesUltMov = mes+1;
+    this.movimientoService.usuUltMov = localStorage.getItem('id');
+
     this.router.navigate(['ultimosmovimientos']);
   }
 
