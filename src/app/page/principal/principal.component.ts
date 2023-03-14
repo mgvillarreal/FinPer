@@ -88,7 +88,7 @@ export class PrincipalComponent implements OnInit {
     this.forma = this.fb.group({
       monto: ['', [Validators.required, Validators.min(1)]],
       categoria: ['0', [Validators.required, Validators.min(1)]],
-      detalle: ['', [Validators.required]],
+      detalle: ['', [Validators.required, Validators.maxLength(20)]],
       fecha: ['', [Validators.required]],
     });
 

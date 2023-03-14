@@ -134,7 +134,7 @@
             El monto es requerido.
         </small>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
+        *ngIf="forma.controls['monto'].errors?.['min']">
             El monto no puede ser negativo.
         </small>
 
@@ -155,6 +155,10 @@
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
             El detalle es requerido.
+        </small>
+        <small  class="texto-validacion text-center"
+        *ngIf="forma.controls['detalle'].errors?.['maxLength']">
+            El detalle no debe superar 20 caracteres.
         </small>
 
         <div class="wrap-input100 modal-celda4 my-2">
@@ -320,8 +324,7 @@
                     stroke="#3fd22f"
                     fill="none"
                     stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
+                    stroke-linejoin="round" >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <circle cx="12" cy="12" r="9" />
                     <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
@@ -360,10 +363,7 @@
       <div>
         <table class="table table-hover">
             <tbody>
-              <tr
-                (click)="editarEgreso(datose)"
-                *ngFor="let datose of this.egresos"
-              >
+              <tr (click)="editarEgreso(datose)" *ngFor="let datose of this.egresos">
                 <td scope="row">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -375,13 +375,10 @@
                     stroke="#ff2825"
                     fill="none"
                     stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
+                    stroke-linejoin="round" >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <circle cx="12" cy="12" r="9" />
-                    <path
-                      d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"
-                    />
+                    <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"/>
                     <path d="M12 6v2m0 8v2" />
                   </svg>
                 </td>
