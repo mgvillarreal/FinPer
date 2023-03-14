@@ -74,7 +74,7 @@
                 </span>
 
                 <div class="wrap-input100 validate-input" >
-                    <input class="input100" type="email" name="correoe" placeholder="Correo electrónico" formControlName="correoe">
+                    <input class="input100" type="email" name="correoe" placeholder="Correo electrónico" formControlName="correoe" (click)="limpiarMensaje()">
                 </div>
                 <small  class="texto-validacion text-center" 
                 *ngIf="forma2.controls['correoe'].errors?.['required'] && forma2.controls['correoe'].touched">
@@ -83,6 +83,10 @@
                 <small  class="texto-validacion text-center" 
                 *ngIf="forma2.controls['correoe'].errors?.['correoe']">
                     El correo electrónico es inválido.
+                </small>
+                <small  class="texto-validacion text-center" 
+                *ngIf="textoValidacion != '' ">
+                    {{textoValidacion}}
                 </small>
 
                 <div class="container-login100-form-btn mt-4">

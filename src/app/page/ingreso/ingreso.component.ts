@@ -44,11 +44,19 @@ export class IngresoComponent implements OnInit {
     }
   }
 
-  validarMail(){
-    console.log('Correo electrónico a validar: ', this.forma2.value['correoe']);
-    this.muestraIngresoFlag = 0;
-    this.recuperaContrasenaFlag = 0;
-    this.msjRecuperaContrasenaFlag = 1;
+  validarMail(){    
+    let correoValido: boolean;
+    this.usuariosService.validaMail(this.forma2.value['correoe']).subscribe(result => {
+      correoValido = !result; 
+      if (!correoValido) {
+        this.muestraIngresoFlag = 0;
+        this.recuperaContrasenaFlag = 0;
+        this.msjRecuperaContrasenaFlag = 1;
+      }
+      else{
+        this.textoValidacion = 'El correo electrónico no existe. Intente nuevamente.';
+      }
+    });
   }
 
   volveraIngreso(){
