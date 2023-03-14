@@ -20,14 +20,12 @@ export class UltimosMovimientosComponent implements OnInit {
     this.mesUltMov = this.MovimientoServ.mesUltMov;
     this.anioUltiMov = this.MovimientoServ.anioUltMov;
     this.usuUltMov = this.MovimientoServ.usuUltMov;
-
-    console.log("datos en ultimos mov: ", this.mesUltMov, this.anioUltiMov, this.usuUltMov);
     
     this.MovimientoServ.traeMovimientosMesAnio(this.usuUltMov, this.mesUltMov, this.anioUltiMov).subscribe(
       resp => {
                 this.listadoMovimientos = resp;
               });
-      console.log("Listado Ultimos movimientos: ", this.listadoMovimientos);
+
   }
 
   ngOnInit(): void {

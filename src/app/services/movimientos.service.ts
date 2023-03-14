@@ -40,7 +40,6 @@ export class MovimientosService {
       'mes': mes,
       'anio': anio
     }
-    console.log("data en service: ", data);
     return this.http.post<any>(this.urlv5 + 'traemovimientos', data);
   }
 

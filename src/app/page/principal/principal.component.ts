@@ -188,7 +188,42 @@ export class PrincipalComponent implements OnInit {
     this.movimiento.monto = this.forma.value['monto'];
     this.movimiento.categoria = this.forma.value['categoria'];
     this.movimiento.detalle = this.forma.value['detalle'];
-    this.movimiento.fecha = this.forma.value['fecha'];
+
+    let fechaEv = new Date(this.forma.value['fecha']);
+
+    if (isNaN(fechaEv.getTime())) {
+      console.log('Fecha no válida');
+
+      const dateString = this.forma.value['fecha'];
+      const dateParts = dateString.split(' ');
+
+      const dateArr = dateParts[0].split('/');
+      const timeArr = dateParts[1].split(':');
+
+      const year = +dateArr[2];
+      const month = +dateArr[1] - 1;
+      const day = +dateArr[0];
+      const hours = +timeArr[0];
+      const minutes = +timeArr[1];
+
+      const newDate = new Date(year, month, day, hours, minutes);
+
+      const newYear = newDate.getFullYear();
+      const newMonth = ('0' + (newDate.getMonth() + 1)).slice(-2);
+      const newDay = ('0' + newDate.getDate()).slice(-2);
+      const newHours = ('0' + newDate.getHours()).slice(-2);
+      const newMinutes = ('0' + newDate.getMinutes()).slice(-2);
+
+      const formattedDate = `${newYear}-${newMonth}-${newDay}T${newHours}:${newMinutes}`;
+
+      this.movimiento.fecha = formattedDate;
+    } else {
+      console.log('Fecha válida'); 
+      this.movimiento.fecha = this.forma.value['fecha'];
+    }
+
+    console.log("crear movimiento: ", this.movimiento);
+
     this.movimientoService
       .guardaMovimiento(this.movimiento)
       .subscribe((data) => {
