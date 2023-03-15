@@ -32,6 +32,7 @@ export class PrincipalComponent implements OnInit {
 
   /*Flags*/
   public forma: FormGroup;
+  public forma2: FormGroup;
   movimiento = new Movimiento;
   muestraPrincipalFlag=1;
   nuevoIngFlag:number = 0;
@@ -53,6 +54,7 @@ export class PrincipalComponent implements OnInit {
   porcentajeEgreso: number;
   porcentajeAhorro: number;
   porcentajes = 100;
+  myChart;
 
   descripcionMovimiento: string;
 
@@ -68,27 +70,38 @@ export class PrincipalComponent implements OnInit {
 
   balanceTotal
 
+  metasPendientes: number;
+
   constructor(
     private movimientoService: MovimientosService,
     private metasService: MetasService,
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) {
+  )
+  {
     this.calcula();
     this.traeSumaAhorros();
+    this.traeCantidadMetasPend();
   }
 
   ngOnInit(): void {
     this.fecha = new Date();
 
-    /*NUEVO*/
     this.forma = this.fb.group({
       monto: ['', [Validators.required, Validators.min(1)]],
-      categoria: ['0', [Validators.required, Validators.min(1)]],
+      categoria: ['', [Validators.required, Validators.min(1)]],
       detalle: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
     });
+
+    this.forma2 = this.fb.group({
+      monto: ['', [Validators.required, Validators.min(1)]],
+      categoria: [''], //[Validators.required, Validators.min(1)]
+      detalle: ['', [Validators.required]],
+      fecha: ['', [Validators.required]],
+    });
+
 
     this.traeCategorias();
     this.traeBalance();
@@ -111,7 +124,7 @@ export class PrincipalComponent implements OnInit {
   }
 
   async traeMovimientos(){
-    this.movimientoService.traeMovimientosMes(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
+    this.movimientoService.traeMovimientosMesAnio(localStorage.getItem('id'), this.mesActual+1, this.anioActual)
     .pipe(
       catchError((error: any) => {
         this.muestraGraficoFlag = 0;
@@ -138,9 +151,9 @@ export class PrincipalComponent implements OnInit {
     });
   }
 
-  traeBalance(){
+ traeBalance(){
     this.movimientoService.traeBalance(localStorage.getItem('id')).subscribe(resp => {
-      console.log(resp);
+      console.log('balance'+resp);
     })
   }
 
@@ -156,8 +169,6 @@ export class PrincipalComponent implements OnInit {
     this.porcentajeAhorro = (this.sumaMontos/total)*100;
 
     this.creaGrafico();
-
-    console.log('porcentajes: ', this.porcentajeIngreso, this.porcentajeEgreso, this.porcentajeAhorro);
   }
 
   /*NUEVO*/
@@ -188,7 +199,42 @@ export class PrincipalComponent implements OnInit {
     this.movimiento.monto = this.forma.value['monto'];
     this.movimiento.categoria = this.forma.value['categoria'];
     this.movimiento.detalle = this.forma.value['detalle'];
-    this.movimiento.fecha = this.forma.value['fecha'];
+
+    let fechaEv = new Date(this.forma.value['fecha']);
+
+    if (isNaN(fechaEv.getTime())) {
+      console.log('Fecha no válida');
+
+      const dateString = this.forma.value['fecha'];
+      const dateParts = dateString.split(' ');
+
+      const dateArr = dateParts[0].split('/');
+      const timeArr = dateParts[1].split(':');
+
+      const year = +dateArr[2];
+      const month = +dateArr[1] - 1;
+      const day = +dateArr[0];
+      const hours = +timeArr[0];
+      const minutes = +timeArr[1];
+
+      const newDate = new Date(year, month, day, hours, minutes);
+
+      const newYear = newDate.getFullYear();
+      const newMonth = ('0' + (newDate.getMonth() + 1)).slice(-2);
+      const newDay = ('0' + newDate.getDate()).slice(-2);
+      const newHours = ('0' + newDate.getHours()).slice(-2);
+      const newMinutes = ('0' + newDate.getMinutes()).slice(-2);
+
+      const formattedDate = `${newYear}-${newMonth}-${newDay}T${newHours}:${newMinutes}`;
+
+      this.movimiento.fecha = formattedDate;
+    } else {
+      console.log('Fecha válida'); 
+      this.movimiento.fecha = this.forma.value['fecha'];
+    }
+
+    console.log("crear movimiento: ", this.movimiento);
+
     this.movimientoService
       .guardaMovimiento(this.movimiento)
       .subscribe((data) => {
@@ -200,6 +246,7 @@ export class PrincipalComponent implements OnInit {
 
       });
     this.muestraMsjAltaOk();
+    this.forma.reset();
 
     setTimeout(() => {
       this.calculaPorcentajes();
@@ -301,24 +348,33 @@ export class PrincipalComponent implements OnInit {
   }
 
   eliminaMovimiento() {
-    this.detalleIngFlag = 1;
-    this.editaIngFlag = 0;
+
+    if(this.movimientoSeleccionado.mov_idtipo==1){ //Si es un ingreso
+      this.detalleIngFlag = 1;
+      this.editaIngFlag = 0;
+    }else{ //Si es un egreso
+      this.detalleEgrFlag = 1;
+      this.editaEgrFlag = 0;
+    }
     this.preguntaEliminarFlag = 0;
 
     let data = {
       id: this.movimientoSeleccionado.mov_id
     }
-
     this.movimientoService.borraUnMovimiento(data).subscribe(resp => {
-      this.calcula()
+      this.calcula();
     })
 
     console.log('Eliminar: ', this.movimientoSeleccionado.mov_id);
   }
 
   cancelaEliminar() {
+    if(this.movimientoSeleccionado.mov_idtipo==1){ //Si es un ingreso
+      this.editaIngFlag = 1;
+    }else{ //Si es un egreso
+      this.editaEgrFlag = 1;
+    }
     this.muestraPrincipalFlag = 0;
-    this.editaIngFlag = 1;
     this.preguntaEliminarFlag = 0;
   }
 
@@ -333,13 +389,17 @@ export class PrincipalComponent implements OnInit {
   }
 
   changeMes(){
-    this.mesActual = Number(this.mesActual)
-    this.anioActual = Number(this.anioActual)
-    this.calcula()
+    this.mesActual = Number(this.mesActual);
+    this.anioActual = Number(this.anioActual);
+    this.calcula();
+    this.creaGrafico();
   }
 
   seleccionaUltMovimientos(mes, anio){
-    console.log('Fecha para ultimos movimientos: ', mes, anio);
+    this.movimientoService.anioUltMov = anio;
+    this.movimientoService.mesUltMov = mes+1;
+    this.movimientoService.usuUltMov = localStorage.getItem('id');
+
     this.router.navigate(['ultimosmovimientos']);
   }
 
@@ -349,11 +409,23 @@ export class PrincipalComponent implements OnInit {
     this.metasService.traeSumaMontos(idUsuario).subscribe((respuesta) => {
       this.sumaMontos = respuesta[0]['SUM(mmet_monto)'];
       console.log("Suma Montos: ", this.sumaMontos);
-    })
+    });
+  }
+
+  traeCantidadMetasPend(){
+    let idUsuario = localStorage.getItem('id');
+    this.metasService.traeCantMetasPend(idUsuario, this.mesActual+1, this.anioActual).subscribe((respuesta => {
+      this.metasPendientes = respuesta[0]['COUNT(met_id)'];
+      console.log("cantidad de metas: ", this.metasPendientes);
+    }));
   }
 
   /* GRAFICO */
   creaGrafico(): void {
+    if (this.myChart) {
+      this.myChart.destroy();
+    }
+
     Chart.register(...registerables);
 
     const data = {

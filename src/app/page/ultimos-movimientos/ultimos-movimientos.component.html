@@ -14,8 +14,8 @@
             <div class="col col-1">{{movimiento.tmov_descripcion}}</div>
             <div class="col col-2">{{movimiento.cmov_descripcion}}</div>
             <div class="col col-3">{{movimiento.mov_detalle}}</div>
-            <div class="col col-4">{{movimiento.mon_simbolo + " " + movimiento.mov_monto}}</div>
-            <div class="col col-5">{{movimiento.mov_fcreacion|date: 'dd/MM/YYYY H:mm'}}</div>
+            <div class="col col-4">{{movimiento.mon_simbolo}} {{movimiento.mov_monto | number: '3.2-2'}}</div>
+            <div class="col col-5">{{movimiento.mov_fcreacion | date: 'dd/MM/YYYY HH:mm'}}</div>
         </li>
         
       </ul>

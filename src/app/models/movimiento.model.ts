@@ -1,5 +1,5 @@
 export class Movimiento{
-  fecha: string;
+  fecha: any;
   monto: number;
   categoria: number;
   detalle: string;

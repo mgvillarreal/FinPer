@@ -14,7 +14,7 @@
                 <span>{{user.res_descripcion}}</span>
             </div>
             <div>
-                <span class="titulo-campos">Profesión</span><br>
+                <span class="titulo-campos">Área de profesión</span><br>
                 <span>{{user.pro_descripcion}}</span>
             </div>
             <div>
@@ -67,18 +67,27 @@
                             *ngIf="forma1.controls['nombre'].errors?.['required'] && forma1.controls['nombre'].touched">
                                 El nombre es requerido.
                             </small>
+                            <small  class="texto-validacion text-center"
+                            *ngIf="forma1.controls['nombre'].errors?.['pattern']">
+                                El nombre no debe contener caracteres numéricos o especiales.
+                            </small>
 
                             <div class="wrap-input100" >
                                 <label for="fnacimiento"></label>
-                                <input class="input100" type="text" name="fnacimiento" placeholder="Fecha de Nacimiento" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="fnacimiento" [(ngModel)]="user.usu_fnacimiento">
+                                <input class="input100" type="text" name="fnacimiento" placeholder="Fecha de Nacimiento" onfocus="(this.type='date')"  formControlName="fnacimiento" [ngModel]="user.usu_fnacimiento | date:'dd/MM/yyyy'">
                             </div>
                             <small  class="texto-validacion text-center"
                             *ngIf="forma1.controls['fnacimiento'].errors?.['required'] && forma1.controls['fnacimiento'].touched">
                                 La fecha de nacimiento es requerida.
                             </small>
+                            <small  class="texto-validacion text-center" 
+                            *ngIf="forma1.controls['fnacimiento'].errors?.['fechaInvalida']">
+                                Debes tener entre 15 y 99 años.
+                            </small>
                             <br>
                             <div class="wrap-input100" >
                                 <select class="input100" name="residencia" formControlName="residencia" >
+                                    <option value="">Lugar de Residencia</option>
                                     <option *ngFor="let pais of paises" value="{{pais.res_id}}" [disabled]="pais.res_id != 13" [selected]="pais.res_id==13">{{pais.res_descripcion}}</option>
                                 </select>
                             </div>
@@ -90,25 +99,28 @@
 
                             <div class="wrap-input100" >
                               <select class="wrap-input100" name="modoingreso" formControlName="modoingreso">
-                                <option
-                                 value={{ingreso.ming_id}}
-                                 *ngFor="let ingreso of ingresos"
-                                 [selected]="ingreso.ming_id == user.usu_idmoding"
-                                 >
+                                <option value="">Modo de ingresos</option>
+                                <option value={{ingreso.ming_id}} *ngFor="let ingreso of ingresos" [selected]="ingreso.ming_id == user.usu_idmoding" >
                                   {{ingreso.ming_descripcion}}
                                 </option>
                               </select>
                             </div>
+                            <small  class="texto-validacion text-center"
+                            *ngIf="forma1.controls['modoingreso'].errors?.['required'] && forma1.controls['modoingreso'].touched">
+                                Debe seleccionar un modo de ingreso.
+                            </small>
                             <br>
                             <div class="wrap-input100" >
                               <select class="input100"  name="profesion" formControlName="profesion">
-                                <option
-                                value="{{profesion.pro_id}}"
-                                *ngFor="let profesion of profesiones"
-                                [selected]="profesion.pro_id == user.usu_idprofesion"
-                                >{{profesion.pro_descripcion}}</option>
+                                <option value="">Área de Profesión</option>
+                                <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones" [selected]="profesion.pro_id == user.usu_idprofesion">
+                                    {{profesion.pro_descripcion}}</option>
                               </select>
                           </div>
+                          <small  class="texto-validacion text-center" 
+                            *ngIf="forma1.controls['profesion'].errors?.['required'] && forma1.controls['profesion'].touched">
+                                Debe seleccionar una profesion.
+                            </small>
                           <br>
                             <div class="container-login100-form-btn">
                                 <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma1.invalid">
@@ -172,7 +184,7 @@
                         </div>
                         <div class="mb-4">
                             <p class="texto-mensaje texto-label mt-2">Estás por eliminar tu cuenta</p>
-                            <p class="texto-mensaje">Ten en cuenta que perderás el acceso a tu perfil y se eliminarán todos los datos.</p>
+                            <p class="texto-mensaje">Considera que perderás el acceso a tu perfil y se eliminarán todos los datos.</p>
                         </div>
                     </div>
                     <div>
@@ -212,6 +224,14 @@
                         *ngIf="forma.controls['contrasenaNueva'].errors?.['required'] && forma.controls['contrasenaNueva'].touched">
                             La contraseña nueva es requerida.
                         </small><br>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['contrasenaNueva'].errors?.['pattern']">
+                            La contraseña debe tener al menos una mayúscula y un número.
+                        </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['contrasenaNueva'].errors?.['minLength(8)']">
+                            La contraseña debe tener al menos 8 caracteres.
+                        </small>
 
                         <div class="wrap-input100 mt-1">
                             <input class="input100 input-margin" type="password" name="pwdconfirm" placeholder="Confirme nueva contraseña" formControlName="contrasenaConfirm">

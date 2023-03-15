@@ -17,34 +17,31 @@ export class UsuariosService {
   usuario: Usuario
   url = 'https://hostinjor.com/apifinper/v5/usuarios/';
 
-  constructor(
-    public http: HttpClient,
-    public auth: AuthService
-  ) {}
+  constructor(public http: HttpClient, public auth: AuthService) {}
 
   datosUsuario(){
     let data: any = {
       "token": this.auth.auth()
     }
 
-   return this.http.post<Usuario>(this.url + 'id/token', data)
+   return this.http.post<Usuario>(this.url + 'id/token', data);
   }
 
   traePaises(): Observable<PaisI[]> {
-    return this.http.get<PaisI[]>(this.url + 'paises')
+    return this.http.get<PaisI[]>(this.url + 'paises');
   }
 
   traeProfesiones(): Observable<ProfesionI[]> {
-    return this.http.get<ProfesionI[]>(this.url + 'profesiones')
+    return this.http.get<ProfesionI[]>(this.url + 'profesiones');
   }
 
   traeIngresos(): Observable<IngresoI[]> {
-    return this.http.get<IngresoI[]>(this.url + 'modosingresos')
+    return this.http.get<IngresoI[]>(this.url + 'modosingresos');
   }
 
   traeDatosUsuario(id: number)
   {
-    return this.http.get<UsuarioI>(this.url + 'datos/' + id)
+    return this.http.get<UsuarioI>(this.url + 'datos/' + id);
   }
 
   modificaContrasena(contrasenaNueva, id)
@@ -67,8 +64,12 @@ export class UsuariosService {
 
   modificaUsuario(usuarioModif, id){
     usuarioModif['id'] = id;
-    console.log('Usuario a modificar en servicio: ', usuarioModif);
     return this.http.put<any>(this.url + 'modificausuario', usuarioModif);
+  }
+
+  validaMail(mail: string)
+  {
+    return this.http.get<boolean>(this.url + 'validaMail/' + mail);
   }
 
 }

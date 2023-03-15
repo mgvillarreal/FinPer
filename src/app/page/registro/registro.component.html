@@ -1,15 +1,16 @@
 <ng-template class="limiter" [ngIf]="mensajeSolicitaValidacion == 0">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form [formGroup]="forma" class="login100-form" (ngSubmit)="registrar()">
-                <div class="login100-form validate-form text-center">
-                    <a> <img src="./assets/img/icons/FinPerLogo.png" class="imagen-logo mb-2" alt="Logo FinPer"/> </a>
+            <div class="login100-form validate-form text-center">
+                <a> <img src="./assets/img/icons/FinPerLogo.png" class="imagen-logo mb-2" alt="Logo FinPer"/> </a>
+
+                <form [formGroup]="forma" class="login100-form" (ngSubmit)="validarMail()">
 
                     <div *ngIf="parteFormulario==0">
                         <span class="login100-form-title mt-2"> Registro </span>
 
                         <div class="wrap-input100">
-                            <input class="input100 input-margin" type="email" name="email" placeholder="Email" formControlName="email">
+                            <input class="input100 input-margin" type="email" name="email" placeholder="Email" formControlName="email" (click)="limpiarMensaje()">
                         </div>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['email'].errors?.['required'] && forma.controls['email'].touched">
@@ -17,7 +18,11 @@
                         </small>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['email'].errors?.['email']">
-                            Email inválido.
+                            El email es inválido.
+                        </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="textoValidacion != ''">
+                            {{textoValidacion}}
                         </small>
 
                         <div class="wrap-input100">
@@ -29,7 +34,11 @@
                         </small>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['contrasena'].errors?.['minLength']">
-                            La contraseña debe tener al menos 6 caracteres.
+                            La contraseña debe tener al menos 8 caracteres.
+                        </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma.controls['contrasena'].errors?.['pattern']">
+                            La contraseña debe tener al menos una mayúscula y un número.
                         </small>
 
                         <div class="wrap-input100">
@@ -45,7 +54,7 @@
                         </small>
 
                         <div class="container-login100-form-btn">
-                            <button class="btn btn-light btn-lg action-button btngreen" (click)="pasarParteUno()">
+                            <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma.invalid">
                                 Continuar
                             </button>
                         </div>
@@ -56,8 +65,11 @@
                                 <a class="txt2" routerLink="/ingreso"> Ingresar</a>
                             </p>
                         </div>
-
                     </div>
+
+                </form>
+
+                <form [formGroup]="forma2" class="login100-form" (ngSubmit)="registrar()">
 
                     <div *ngIf="parteFormulario==1">
                         <span class="login100-form-title p-b-26"> Más sobre ti </span>
@@ -66,8 +78,12 @@
                             <input class="input100" type="text" name="nombre" placeholder="Nombre" formControlName="nombre">
                         </div>
                         <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['nombre'].errors?.['required'] && forma.controls['nombre'].touched">
+                        *ngIf="forma2.controls['nombre'].errors?.['required'] && forma2.controls['nombre'].touched">
                             El nombre es requerido.
+                        </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma2.controls['nombre'].errors?.['pattern']" >
+                            El nombre no debe contener caracteres numéricos o especiales.
                         </small>
         
                         <div class="wrap-input100" >
@@ -75,11 +91,11 @@
                             <input class="input100" type="text" name="fnacimiento" placeholder="Fecha de Nacimiento" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="fnacimiento">
                         </div>
                         <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['fnacimiento'].errors?.['required'] && forma.controls['fnacimiento'].touched">
+                        *ngIf="forma2.controls['fnacimiento'].errors?.['required'] && forma2.controls['fnacimiento'].touched">
                             La fecha de nacimiento es requerida.
                         </small>
                         <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['fnacimiento'].errors?.['fechaInvalida']">
+                        *ngIf="forma2.controls['fnacimiento'].errors?.['fechaInvalida']">
                             Debes tener entre 15 y 99 años.
                         </small>
                         <br>
@@ -90,26 +106,20 @@
                             </select>
                         </div><br>
                         <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['residencia'].errors?.['required'] && forma.controls['residencia'].touched">
+                        *ngIf="forma2.controls['residencia'].errors?.['required'] && forma2.controls['residencia'].touched">
                             La residencia es requerida.
                         </small>
-        
-                        <!-- <div class="container-login100-form-btn">
-                            <button class="btn btn-light btn-lg action-button btngreen" (click)="pasarParteDos()">
-                                Continuar
-                            </button>
-                        </div> -->
 
                         <div class="mb-2">
                             <div class="wrap-input100" >
                                 <select class="input100 txt-select" name="modoingreso" formControlName="modoing">
-                                    <option value="" selected [disabled]="1">Seleccione un modo de ingreso</option>
+                                    <option value="" selected [disabled]="1">Modo de ingresos</option>
                                     <option value="{{ingreso.ming_id}}" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option>
                                 </select>
                             </div>
                             
                             <small  class="texto-validacion text-center"
-                            *ngIf="forma.controls['modoing'].errors?.['required'] && forma.controls['modoing'].touched">
+                            *ngIf="forma2.controls['modoing'].errors?.['required'] && forma2.controls['modoing'].touched">
                                 Debe seleccionar un modo de ingreso.
                             </small><br>
                         </div>
@@ -117,39 +127,34 @@
                         <div class="d-flex justify-content-center">
                             <div class="wrap-input100" >
                                 <select class="input100 txt-select"  name="profesion" formControlName="profesion">
-                                    <option value="" selected [disabled]="1">Seleccione una profesión</option>
+                                    <option value="" selected [disabled]="1">Área de profesión</option>
                                     <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option>
                                 </select>
                             </div>
                         </div>
                         <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['profesion'].errors?.['required'] && forma.controls['profesion'].touched">
+                        *ngIf="forma2.controls['profesion'].errors?.['required'] && forma2.controls['profesion'].touched">
                             Debe seleccionar una profesion.
                         </small>
     
                         <div class="container-login100-form-btn">
                             <div class="wrap-login100-form-btn">
                                 <div class="login100-form-bgbtn"></div>
-                                <button class="btn btn-light btn-lg action-button btngreen">
+                                <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma2.invalid">
                                     Registrar
                                 </button> 
                             </div>
                         </div>
                     </div>
 
-                    <!-- <div *ngIf="parteFormulario==2">
-                        <span class="login100-form-title p-b-26"> Más sobre ti </span>
-                        
-
-                    </div> -->
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </ng-template>
 
-<ng-template class="limiter" [ngIf]="mensajeSolicitaValidacion == 1">
-    <div class="container-login100">
+<ng-template class="limiter" [ngIf]="mensajeSolicitaValidacion == 1 && parteFormulario == 2">
+    <div class="container-login100"> 
 		<div class="wrap-login100 text-center">
             <div class="titulo-nuevameta mb-4"> </div>
 			<div class="login100-form validate-form text-center mt-3">

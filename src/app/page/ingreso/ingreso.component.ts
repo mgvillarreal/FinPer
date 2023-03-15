@@ -19,20 +19,22 @@ export class IngresoComponent implements OnInit {
   recuperaContrasenaFlag: number = 0;
   muestraIngresoFlag: number = 1;
   msjRecuperaContrasenaFlag: number = 0;
+  textoValidacion: string = '';
 
-  constructor(
-    private fb: FormBuilder, 
-    private usuariosService: UsuariosService,
-    private authService: AuthService,
-    private route: Router) { }
+  constructor(private fb: FormBuilder, private usuariosService: UsuariosService,private authService: AuthService, private route: Router) { }
 
-  ingresar(){
+  ingresar() {
     this.usuario.mail = this.forma.value['email'];
     this.usuario.contrasena = this.forma.value['contrasena'];
-    // console.log('El usuario ingresa. Credenciales: ', this.forma.value);
-    this.authService.login(this.forma.value).subscribe(res =>{
-      this.route.navigate(['/miscuentas'])
-    })
+  
+    this.authService.login(this.forma.value).subscribe(
+      res => {
+        this.route.navigate(['/miscuentas']);
+      },
+      err => {
+        this.textoValidacion = 'El correo electrónico y/o contraseña ingresados son incorrectos. Intente nuevamente.';
+      }
+    );
   }
 
   muestraMensajeRecuperarContrasena(){
@@ -42,17 +44,29 @@ export class IngresoComponent implements OnInit {
     }
   }
 
-  validarMail(){
-    console.log('Correo electrónico a validar: ', this.forma2.value['correoe']);
-    this.muestraIngresoFlag = 0;
-    this.recuperaContrasenaFlag = 0;
-    this.msjRecuperaContrasenaFlag = 1;
+  validarMail(){    
+    let correoValido: boolean;
+    this.usuariosService.validaMail(this.forma2.value['correoe']).subscribe(result => {
+      correoValido = !result; 
+      if (!correoValido) {
+        this.muestraIngresoFlag = 0;
+        this.recuperaContrasenaFlag = 0;
+        this.msjRecuperaContrasenaFlag = 1;
+      }
+      else{
+        this.textoValidacion = 'El correo electrónico no existe. Intente nuevamente.';
+      }
+    });
   }
 
   volveraIngreso(){
     this.muestraIngresoFlag = 1;
     this.recuperaContrasenaFlag = 0;
     this.msjRecuperaContrasenaFlag = 0;
+  }
+
+  limpiarMensaje(){
+    this.textoValidacion = '';
   }
 
   ngOnInit(): void {

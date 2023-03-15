@@ -169,6 +169,7 @@ span{
 
 .texto-validacion{
     color: red;
+    font-weight: 400;
 }
 
 .container-login100-form-btn {
