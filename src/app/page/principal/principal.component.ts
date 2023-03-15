@@ -70,6 +70,8 @@ export class PrincipalComponent implements OnInit {
 
   balanceTotal
 
+  metasPendientes: number;
+
   constructor(
     private movimientoService: MovimientosService,
     private metasService: MetasService,
@@ -80,6 +82,7 @@ export class PrincipalComponent implements OnInit {
   {
     this.calcula();
     this.traeSumaAhorros();
+    this.traeCantidadMetasPend();
   }
 
   ngOnInit(): void {
@@ -406,7 +409,16 @@ export class PrincipalComponent implements OnInit {
     this.metasService.traeSumaMontos(idUsuario).subscribe((respuesta) => {
       this.sumaMontos = respuesta[0]['SUM(mmet_monto)'];
       console.log("Suma Montos: ", this.sumaMontos);
-    })
+    });
+  }
+
+  traeCantidadMetasPend(){
+    let idUsuario = localStorage.getItem('id');
+    this.metasService.traeCantMetasPend(idUsuario, this.mesActual+1, this.anioActual).subscribe((respuesta => {
+      this.metasPendientes = respuesta[0]['COUNT(met_id)'];
+      console.log("cantidad de metas: ", this.metasPendientes);
+    }))
+
   }
 
   /* GRAFICO */

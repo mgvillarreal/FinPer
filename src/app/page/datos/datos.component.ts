@@ -102,8 +102,6 @@ export class DatosComponent implements OnInit {
     let fechaEv = new Date(this.forma1.value['fnacimiento']);
 
     if (isNaN(fechaEv.getTime())) {
-      console.log('Fecha no válida');
-
       const dateString = this.forma1.value['fnacimiento'];
       const dateParts = dateString.split(' ');
 
