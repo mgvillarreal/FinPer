@@ -417,8 +417,7 @@ export class PrincipalComponent implements OnInit {
     this.metasService.traeCantMetasPend(idUsuario, this.mesActual+1, this.anioActual).subscribe((respuesta => {
       this.metasPendientes = respuesta[0]['COUNT(met_id)'];
       console.log("cantidad de metas: ", this.metasPendientes);
-    }))
-
+    }));
   }
 
   /* GRAFICO */
