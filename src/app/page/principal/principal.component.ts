@@ -32,6 +32,7 @@ export class PrincipalComponent implements OnInit {
 
   /*Flags*/
   public forma: FormGroup;
+  public forma2: FormGroup;
   movimiento = new Movimiento;
   muestraPrincipalFlag=1;
   nuevoIngFlag:number = 0;
@@ -84,13 +85,20 @@ export class PrincipalComponent implements OnInit {
   ngOnInit(): void {
     this.fecha = new Date();
 
-    /*NUEVO*/
     this.forma = this.fb.group({
       monto: ['', [Validators.required, Validators.min(1)]],
-      categoria: ['0', [Validators.required, Validators.min(1)]],
-      detalle: ['', [Validators.required, Validators.maxLength(20)]],
+      categoria: ['', [Validators.required, Validators.min(1)]],
+      detalle: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
     });
+
+    this.forma2 = this.fb.group({
+      monto: ['', [Validators.required, Validators.min(1)]],
+      categoria: [''], //[Validators.required, Validators.min(1)]
+      detalle: ['', [Validators.required]],
+      fecha: ['', [Validators.required]],
+    });
+
 
     this.traeCategorias();
     this.traeBalance();
@@ -258,8 +266,6 @@ export class PrincipalComponent implements OnInit {
 
     this.muestraIngresosFlag = 0;
     this.muestraEgresosFlag = 0;
-
-    this.forma.reset();
   }
 
   muestraMsjAltaOk() {
@@ -308,7 +314,6 @@ export class PrincipalComponent implements OnInit {
   actualizarMovimiento() {
     this.movimientoService.editaUnMovimiento(this.movimientoSeleccionado).subscribe()
     this.muestraMensajeActOk();
-    this.forma.reset();
   }
 
   muestraMensajeActOk() {

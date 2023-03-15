@@ -228,7 +228,7 @@
 }
 
 .wrap-login100 {
-  width: 390px;
+  //width: 390px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -290,10 +290,38 @@ input{
   margin-top: 10px;
 }
 
+.btngreendelete{
+  background-color: transparent;
+  border-color: #3fd22f;
+  color: #3fd22f;
+  font-size: 15px;
+  border-radius: 25px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  padding: 10px;
+  width: 40%;
+  position: relative;
+  margin-top: 10px;
+}
+
 .btnred{
   background-color: rgba(255, 0, 0, 0.903) !important;
   border-color: rgba(255, 0, 0, 0.903) !important;
   color: white !important;
+  font-size: 15px;
+  border-radius: 25px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  padding: 10px;
+  width: 40%;
+  position: relative !important;
+  margin-top: 10px !important;
+}
+
+.btnreddelete{
+  background-color: transparent !important;
+  border-color: rgba(255, 0, 0, 0.903) !important;
+  color: rgba(255, 0, 0, 0.903) !important;
   font-size: 15px;
   border-radius: 25px;
   line-height: 1.2;

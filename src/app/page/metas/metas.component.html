@@ -51,8 +51,8 @@
             <li class="table-row" *ngFor="let meta of metas; let i = index" (click)="mostrarMontos(meta)">
               <div class="col col-1" data-label="Meta">{{meta.met_nombre}}</div>
               <div class="col col-2" data-label="Monto">{{meta.mon_simbolo}} {{meta.met_monto | number: '2.2-2' }}</div>
-              <div class="col col-3" data-label="Ahorrado">{{meta.mon_simbolo}} {{meta.sumaMonto | number: '3.2-2' }}</div>
-              <div class="col col-4" data-label="Por alcanzar">{{meta.mon_simbolo}} {{meta.met_monto - meta.sumaMonto | number: '3.2-2' }} (U$S {{(meta.met_monto - meta.sumaMonto)/this.valorDolarOficial | number: '3.2-2'}})</div>
+              <div class="col col-3" data-label="Ahorrado">{{meta.mon_simbolo}} {{meta.sumaMonto | number: '2.2-2' }}</div>
+              <div class="col col-4" data-label="Por alcanzar">{{meta.mon_simbolo}} {{meta.met_monto - meta.sumaMonto | number: '2.2-2' }} (U$S {{(meta.met_monto - meta.sumaMonto)/this.valorDolarOficial | number: '3.2-2'}})</div>
               <div class="col col-5" data-label="Fecha Límite">{{meta.met_flimite | date: 'dd/MM/YYYY'}}</div>
               <div class="col col-6" data-label="Estado">{{meta.metest_descripcion}}</div>
               <div class="col col-7">

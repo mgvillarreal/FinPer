@@ -63,14 +63,10 @@
           <div class="card text-center">
             <div class="card-titulo egreso">Gastos</div>
             <div class="card-cantidad egreso">ARS {{ egreso | number: '3.2-2' }}</div>
-            <div
-            class="btn btn-outline-primary btn-detalleegreso"
-            (click)="seleccionaDetalleEgr()">
+            <div class="btn btn-outline-primary btn-detalleegreso" (click)="seleccionaDetalleEgr()">
               Detalle de gastos
             </div><br/>
-            <button
-            class="btn btn-outline-primary btn-nuevoegreso"
-            (click)="seleccionaTipoMovimiento(2)">
+            <button class="btn btn-outline-primary btn-nuevoegreso" (click)="seleccionaTipoMovimiento(2)">
               Nuevo gasto
             </button>
           </div>
@@ -80,14 +76,10 @@
           <div class="card text-center">
             <div class="card-titulo ingreso">Ingresos</div>
             <div class="card-cantidad ingreso">ARS {{ ingreso | number: '3.2-2' }}</div>
-            <button
-            class="btn btn-outline-primary btn-detalleingreso"
-            (click)="seleccionaDetalleIng()">
+            <button class="btn btn-outline-primary btn-detalleingreso" (click)="seleccionaDetalleIng()">
               Detalle de ingresos
             </button><br/>
-            <button
-            class="btn btn-outline-primary btn-nuevoingreso"
-            (click)="seleccionaTipoMovimiento(1)">
+            <button class="btn btn-outline-primary btn-nuevoingreso" (click)="seleccionaTipoMovimiento(1)">
               Nuevo ingreso
             </button>
           </div>
@@ -131,11 +123,11 @@
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
-            El monto es requerido.
+            El monto es requerido.<br>
         </small>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['min']">
-            El monto no puede ser negativo.
+            El monto no puede ser negativo.<br>
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -199,11 +191,11 @@
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
-            El monto es requerido.
+            El monto es requerido.<br>
         </small>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
-           El monto no puede ser negativo.
+           El monto no puede ser negativo.<br>
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -404,23 +396,17 @@
       <br />
       <div class="card-titulo ingreso mb-4">Editar Ingreso</div>
 
-      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento()">
+      <form [formGroup]="forma2" (ngSubmit)="actualizarMovimiento()">
         <div class="wrap-input100 modal-celda2 my-2">
-          <input
-            type="number"
-            name="monto"
-            placeholder="Monto del ingreso"
-            formControlName="monto"
-            [(ngModel)]="movimientoSeleccionado.mov_monto"
-          />
+          <input type="number" name="monto" placeholder="Monto del ingreso" formControlName="monto" [(ngModel)]="movimientoSeleccionado.mov_monto" />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
-            El monto es requerido.
+        *ngIf="forma2.controls['monto'].errors?.['required'] && forma2.controls['monto'].touched">
+            El monto es requerido.<br>
         </small>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
-            El monto no puede ser negativo.
+        *ngIf="forma2.controls['monto'].errors?.['min'] && forma2.controls['monto'].touched">
+            El monto no puede ser negativo.<br>
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -434,16 +420,10 @@
         </div><br>
 
         <div class="wrap-input100 modal-celda3 my-2">
-          <input
-            type="text"
-            name="detalleIngreso"
-            placeholder="Detalle del ingreso"
-            formControlName="detalle"
-            [(ngModel)]="movimientoSeleccionado.mov_detalle"
-          />
+          <input type="text" name="detalleIngreso" placeholder="Detalle del ingreso" formControlName="detalle" [(ngModel)]="movimientoSeleccionado.mov_detalle" />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+        *ngIf="forma2.controls['detalle'].errors?.['required'] && forma2.controls['detalle'].touched">
             El detalle es requerido.
         </small>
 
@@ -458,19 +438,19 @@
           />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+        *ngIf="forma2.controls['fecha'].errors?.['required'] && forma2.controls['fecha'].touched">
             La fecha es requerida.
         </small>
 
         <div class="container-login100-form-btn">
-          <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" [disabled]="forma.invalid">
+          <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" [disabled]="forma2.invalid">
             Actualizar
           </button>
         </div>
       </form>
 
       <div class="container-login100-form-btn">
-        <button class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act" (click)="preguntaEliminar()" >
+        <button class="btn btn-light btn-lg action-button btngreendelete btn-msjlight btn-act" (click)="preguntaEliminar()" >
           Eliminar
         </button>
       </div>
@@ -485,26 +465,20 @@
       <br />
       <div class="card-titulo egreso mb-4">Editar Gasto</div>
 
-      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento()">
+      <form [formGroup]="forma2" (ngSubmit)="actualizarMovimiento()">
         <div class="wrap-input100 modal-celda2 my-2">
-          <input
-            type="number"
-            name="monto"
-            placeholder="Monto del gasto"
-            formControlName="monto"
-            [(ngModel)]="movimientoSeleccionado.mov_monto"
-          />
+          <input type="number" name="monto" placeholder="Monto del gasto" formControlName="monto" [(ngModel)]="movimientoSeleccionado.mov_monto" />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
-            El monto es requerido.
+        *ngIf="forma2.controls['monto'].errors?.['required'] && forma2.controls['monto'].touched">
+            El monto es requerido.<br>
         </small>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
-            No pueden ingresar montos negativos.
+        *ngIf="forma2.controls['monto'].errors?.['min']">
+            No pueden ingresar montos negativos.<br>
         </small>
 
-        <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
+        <div class="wrap-input100 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
             <option
             *ngFor="let categoria of categoriasEgreso"
@@ -514,54 +488,35 @@
           </select>
         </div><br>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['categoria'].errors?.['required'] && forma.controls['categoria'].touched">
+        *ngIf="forma2.controls['categoria'].errors?.['required'] && forma2.controls['categoria'].touched">
             Debe seleccionar una categoría.
         </small>
 
-        <div class="wrap-input100 modal-celda3 my-2">
-          <input
-            type="text"
-            name="detalleGasto"
-            placeholder="Detalle del gasto"
-            formControlName="detalle"
-            [(ngModel)]="movimientoSeleccionado.mov_detalle"
-          />
+        <div class="wrap-input100 my-2">
+          <input type="text" name="detalleGasto" placeholder="Detalle del gasto" formControlName="detalle" [(ngModel)]="movimientoSeleccionado.mov_detalle" />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+        *ngIf="forma2.controls['detalle'].errors?.['required'] && forma2.controls['detalle'].touched">
             El detalle es requerido.
         </small>
 
         <div class="wrap-input100 modal-celda4 my-2">
-          <input
-            type="text"
-            name="fechaLimite"
-            placeholder="Fecha del gasto"
-            onfocus="(this.type='datetime-local')"
-            formControlName="fecha"
-            [(ngModel)]="movimientoSeleccionado.mov_fcreacion"
-          />
+          <input type="text" name="fechaLimite" placeholder="Fecha del gasto" onfocus="(this.type='datetime-local')" formControlName="fecha" [(ngModel)]="movimientoSeleccionado.mov_fcreacion" />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+        *ngIf="forma2.controls['fecha'].errors?.['required'] && forma2.controls['fecha'].touched">
             La fecha es requerida.
         </small>
 
         <div class="container-login100-form-btn">
-          <button
-            class="btn btn-light btn-lg action-button btnred btn-msjdark btn-act"
-            [disabled]="forma.invalid"
-          >
+          <button class="btn btn-light btn-lg action-button btnred btn-msjdark btn-act" [disabled]="forma2.invalid">
             Actualizar
           </button>
         </div>
       </form>
 
       <div class="container-login100-form-btn">
-        <button
-          class="btn btn-light btn-lg action-button btnred btn-msjlight btn-act"
-          (click)="preguntaEliminar()"
-        >
+        <button class="btn btn-light btn-lg action-button btnreddelete btn-msjlight btn-act" (click)="preguntaEliminar()" >
           Eliminar
         </button>
       </div>
@@ -587,8 +542,7 @@
                 stroke="#419f3e"
                 fill="none"
                 stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+                stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <circle cx="12" cy="12" r="9" />
                 <path d="M9 12l2 2l4 -4" />
@@ -601,10 +555,7 @@
             </div>
           </div>
           <div class="mt-4 mb-2">
-            <button
-              class="btn btn-light btn-lg action-button btn-msjdark"
-              (click)="volveraPrincipal()"
-            >
+            <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="volveraPrincipal()" >
               Aceptar
             </button>
           </div>
