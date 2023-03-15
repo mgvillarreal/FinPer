@@ -95,7 +95,7 @@ export class MetasService {
 
   traeCantMetasPend(usuario, mes, anio){
     let data = {
-      'id': usuario,
+      'id_usuario': usuario,
       'mes': mes,
       'anio': anio
     }
