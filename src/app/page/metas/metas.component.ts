@@ -30,6 +30,7 @@ export class MetasComponent implements OnInit {
   retiraMontoFlag: number = 0;
   muestraMensajeMontoRetFlag: number = 0;
   tieneMetasFlag: number = 0;
+  tieneMontosFlag: number = 0;
 
   estado = 1;
   metas = [];
@@ -382,9 +383,14 @@ export class MetasComponent implements OnInit {
   }
 
   async traerMontos(id){
-    await this.metaServicio.traeMontos(id).toPromise().then(resp => {
-      this.arrMontos = resp;
-    })
+    await this.metaServicio.traeMontos(id).toPromise().then(
+      resp => {
+        this.tieneMontosFlag = 1;
+        this.arrMontos = resp;
+    }).catch((error) => { 
+        this.tieneMontosFlag = 0; //No tiene montos.
+    });
+    
   }
 
  calculaMontos()

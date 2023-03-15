@@ -375,3 +375,28 @@ h2 {
   color: #7d7c7c;
   padding-left: 0px;
 }
+
+.texto-mensaje-montos{
+  font-size: 14px;
+}
+
+.btn-volverMisCuentas{
+  border-bottom-color:#419f3e;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  color: #419f3e;
+  font-size: 15px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  margin-top: 1rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 0px;
+}
+
+.btn-volverMisCuentas:hover{
+  font-weight: 500;
+  background-color: transparent;
+  cursor: pointer;
+}

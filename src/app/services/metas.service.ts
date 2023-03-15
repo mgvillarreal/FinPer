@@ -60,7 +60,7 @@ export class MetasService {
 
   traeMontos(id)
   {
-    return this.http.get<any>(this.urlMontos + id)
+    return this.http.get<any>(this.urlMontos + id);
   }
 
   agregaMonto(monto)
