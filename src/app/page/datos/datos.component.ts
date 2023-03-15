@@ -98,18 +98,37 @@ export class DatosComponent implements OnInit {
     this.usuario.profesion = this.forma1.value['profesion'];
     this.muestraMensajeFlag = 1;
     this.parteFormulario = 0;
-    this.modificarDatos();
-  }
 
-  guardaFormaDos(){
-    this.muestraMensajeFlag = 1;
-    this.parteFormulario = 0;
+    let fechaEv = new Date(this.forma1.value['fnacimiento']);
 
+    if (isNaN(fechaEv.getTime())) {
+      console.log('Fecha no válida');
+
+      const dateString = this.forma1.value['fnacimiento'];
+      const dateParts = dateString.split(' ');
+
+      const dateArr = dateParts[0].split('/');
+
+      const year = +dateArr[2];
+      const month = +dateArr[1] - 1;
+      const day = +dateArr[0];
+      
+      const newDate = new Date(year, month, day);
+
+      const newYear = newDate.getFullYear();
+      const newMonth = ('0' + (newDate.getMonth() + 1)).slice(-2);
+      const newDay = ('0' + newDate.getDate()).slice(-2);
+
+      const formattedDate = `${newYear}-${newMonth}-${newDay}`;
+
+      this.usuario.fnacimiento = formattedDate;
+    } 
     this.modificarDatos();
   }
 
   modificarDatos(){
     let idUser = localStorage.getItem('id');
+    
     this.usuarioService.modificaUsuario(this.usuario, idUser).subscribe();
   }
 

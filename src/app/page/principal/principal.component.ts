@@ -345,24 +345,33 @@ export class PrincipalComponent implements OnInit {
   }
 
   eliminaMovimiento() {
-    this.detalleIngFlag = 1;
-    this.editaIngFlag = 0;
+
+    if(this.movimientoSeleccionado.mov_idtipo==1){ //Si es un ingreso
+      this.detalleIngFlag = 1;
+      this.editaIngFlag = 0;
+    }else{ //Si es un egreso
+      this.detalleEgrFlag = 1;
+      this.editaEgrFlag = 0;
+    }
     this.preguntaEliminarFlag = 0;
 
     let data = {
       id: this.movimientoSeleccionado.mov_id
     }
-
     this.movimientoService.borraUnMovimiento(data).subscribe(resp => {
-      this.calcula()
+      this.calcula();
     })
 
     console.log('Eliminar: ', this.movimientoSeleccionado.mov_id);
   }
 
   cancelaEliminar() {
+    if(this.movimientoSeleccionado.mov_idtipo==1){ //Si es un ingreso
+      this.editaIngFlag = 1;
+    }else{ //Si es un egreso
+      this.editaEgrFlag = 1;
+    }
     this.muestraPrincipalFlag = 0;
-    this.editaIngFlag = 1;
     this.preguntaEliminarFlag = 0;
   }
 
