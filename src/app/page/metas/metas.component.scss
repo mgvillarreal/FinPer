@@ -299,6 +299,8 @@ h2 {
 
 .texto-validacion{
   color: red;
+  font-size: small;
+  font-weight: 400;
 }
 
 .table-row:hover{
@@ -367,4 +369,9 @@ h2 {
   background: transparent;
   color: #5c5c5c;
   margin-bottom: 10px;
+}
+
+.txt-select{
+  color: #7d7c7c;
+  padding-left: 0px;
 }
