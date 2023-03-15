@@ -16,12 +16,10 @@ export class MetasService {
   constructor(public http: HttpClient) { }
 
   traeMetasPorEstado(estado: number){
-    console.log(estado)
     let body = {
        estado: estado,
       id_usuario: Number(localStorage.getItem("id"))
     };
-    //estado["id_usuario"] = Number(localStorage.getItem("id"));
 
     if(estado["estado"]!=10){
       return this.http.post<any>(this.urlv4 + '/metasporestado', body);

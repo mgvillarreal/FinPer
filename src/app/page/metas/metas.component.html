@@ -315,8 +315,8 @@
                         <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
                     </svg>
                 </td>
-                <td>ARS {{monto.mmet_monto | number: '3.2-2' }} </td>
-                <td>{{monto.mmet_fcreacion}}</td>
+                <td>{{monto.mon_simbolo}} {{monto.mmet_monto | number: '3.2-2' }} </td>
+                <td>{{monto.mmet_fcreacion | date: 'dd/MM/YYYY'}}</td>
               </tr>
           </table>
         </div>
