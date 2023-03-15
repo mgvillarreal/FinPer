@@ -113,7 +113,7 @@
                         <div class="mb-2">
                             <div class="wrap-input100" >
                                 <select class="input100 txt-select" name="modoingreso" formControlName="modoing">
-                                    <option value="" selected [disabled]="1">Seleccione un modo de ingreso</option>
+                                    <option value="" selected [disabled]="1">Modo de ingresos</option>
                                     <option value="{{ingreso.ming_id}}" *ngFor="let ingreso of ingresos">{{ingreso.ming_descripcion}}</option>
                                 </select>
                             </div>
@@ -127,7 +127,7 @@
                         <div class="d-flex justify-content-center">
                             <div class="wrap-input100" >
                                 <select class="input100 txt-select"  name="profesion" formControlName="profesion">
-                                    <option value="" selected [disabled]="1">Seleccione una profesión</option>
+                                    <option value="" selected [disabled]="1">Área de profesión</option>
                                     <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones">{{profesion.pro_descripcion}}</option>
                                 </select>
                             </div>

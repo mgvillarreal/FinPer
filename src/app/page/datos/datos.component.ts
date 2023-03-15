@@ -35,9 +35,7 @@ export class DatosComponent implements OnInit {
   ingresos: IngresoI[] = [];
   profesiones: ProfesionI[] = [];
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router, public auth: AuthService ) {
-
-  }
+  constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private router: Router, public auth: AuthService ) { }
 
   /* MANEJO DE FLAGS */
 
@@ -45,7 +43,6 @@ export class DatosComponent implements OnInit {
     if(this.editaFlag == 0){
       this.editaFlag = 1;
       this.muestraPerfil = 0;
-      console.log("Usuario a editar: ", this.user);
     }
   }
 
@@ -78,24 +75,19 @@ export class DatosComponent implements OnInit {
   muestraPaises(){
     this.usuarioService.traePaises().subscribe(res => {
       this.paises = res;
-      console.log(this.paises)
-    })
+    });
   }
 
   muestraProfesiones(){
     this.usuarioService.traeProfesiones().subscribe(res => {
       this.profesiones = res;
-      console.log(res)
-
-    })
+    });
   }
 
   muestraIngresos(){
     this.usuarioService.traeIngresos().subscribe(res => {
-      console.log(res)
      this.ingresos = res;
-     console.log('Ingresos: ',this.ingresos)
-    })
+    });
   }
 
   guardaFormaUno(){
@@ -107,28 +99,23 @@ export class DatosComponent implements OnInit {
     this.muestraMensajeFlag = 1;
     this.parteFormulario = 0;
     this.modificarDatos();
-
   }
 
   guardaFormaDos(){
-    console.log(this.ingresos);
-
     this.muestraMensajeFlag = 1;
     this.parteFormulario = 0;
-    console.log('Datos Modificados del Usuario: ', this.usuario);
 
     this.modificarDatos();
   }
 
   modificarDatos(){
-    console.log('Datos Modificados del Usuario: ', this.usuario);
     let idUser = localStorage.getItem('id');
     this.usuarioService.modificaUsuario(this.usuario, idUser).subscribe();
   }
 
   eliminarPerfil(){
     let idUser = localStorage.getItem('id');
-    console.log("user id", idUser);
+    
     this.usuarioService.eliminaUsuario(idUser).subscribe();
     this.router.navigate(['inicio']);
     this.auth.logout();
@@ -143,20 +130,13 @@ export class DatosComponent implements OnInit {
     this.usuarioService.modificaContrasena(this.forma.value['contrasenaConfirm'], idUser).subscribe();
   }
 
-
-
   async ngOnInit() {
-    const creaForma1 = () => {
-
-    }
-
     this.usuario.nombre = localStorage.getItem('name');
     await this.traeDatosUsuario();
-    console.log(this.user.usu_idresidencia)
 
-     this.forma1 = this.fb.group({
-      'nombre': [this.user.usu_nombre, [Validators.required]],
-      'fnacimiento': ['', [Validators.required]],
+    this.forma1 = this.fb.group({
+      'nombre': [this.user.usu_nombre, [Validators.required, Validators.pattern(/^([a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s?)+([a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s)*[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/u)]],
+      'fnacimiento': ['', [Validators.required, this.fechaMayorA15Validator()]],
       'residencia': [this.user.usu_idresidencia, [Validators.required]],
       'modoingreso': [this.user.usu_idmoding, [Validators.required]],
       'profesion': [this.user.usu_idprofesion, [Validators.required]],
@@ -164,7 +144,7 @@ export class DatosComponent implements OnInit {
 
     this.forma = this.fb.group({
       'email': ['', [Validators.required]],
-      'contrasenaNueva': ['', [Validators.required]],
+      'contrasenaNueva': ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9]).*$'), Validators.minLength(8)]],
       'contrasenaConfirm': ['', [Validators.required]],
     }, { validators: this.contrasenasIgualesValidator });
 
@@ -180,11 +160,20 @@ export class DatosComponent implements OnInit {
     return pwd && pwdConfirm && pwd.value !== pwdConfirm.value ? { contrasenasIguales: true } : null;
   };
 
+  fechaMayorA15Validator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fnacimiento = new Date(control.value);
+      const factual = new Date();
+      let years = (factual.getFullYear() - fnacimiento.getFullYear());
+  
+      return years < 15  || years > 99 ? { fechaInvalida : true } : null;
+    }
+  }
+
   async traeDatosUsuario() {
     const resp = await this.usuarioService.traeDatosUsuario(Number(localStorage.getItem('id'))).toPromise();
     this.user = resp[0];
     this.ageCalculator(resp[0].usu_fnacimiento);
-    console.log('Datos del Usuario:', this.user);
   }
 
   ageCalculator(edad){

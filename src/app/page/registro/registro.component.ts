@@ -86,7 +86,7 @@ export class RegistroComponent implements OnInit {
     }, {validators: this.contrasenasIgualesValidator, validator: this.contrasenaLongitudValidator});
     
     this.forma2 = this.fb.group({
-      'nombre': ['', [Validators.required, Validators.pattern(/^[A-Za-z\s\xF1\xD1]+$/)]],
+      'nombre': ['', [Validators.required, Validators.pattern(/^([a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s?)+([a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s)*[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/u)]],
       'fnacimiento': ['', [Validators.required, this.fechaMayorA15Validator() ]],
       'residencia': [13, [Validators.required]],
       'modoing': ['', [Validators.required]],
