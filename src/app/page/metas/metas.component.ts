@@ -30,6 +30,7 @@ export class MetasComponent implements OnInit {
   retiraMontoFlag: number = 0;
   muestraMensajeMontoRetFlag: number = 0;
   tieneMetasFlag: number = 0;
+  tieneMontosFlag: number = 0;
 
   estado = 1;
   metas = [];
@@ -112,6 +113,9 @@ export class MetasComponent implements OnInit {
     this.retiraMontoFlag = 0;
     this.editaMontoFlag = 0;
     this.muestraMensajeMontoRetFlag = 0;
+    this.muestraMensajeActMontoFlag = 0;
+
+    this.forma.reset();
   }
 
   crearOtraMeta() {
@@ -162,9 +166,9 @@ export class MetasComponent implements OnInit {
   ngOnInit(): void {
     this.forma = this.fb.group({
       moneda: ['', [Validators.required]],
-      monto: ['', [Validators.required]],
+      monto: ['', [Validators.required, Validators.min(1)]],
       detalle: ['', [Validators.required]],
-      fechaLimite: ['', [Validators.required, this.fechaValidaValidator() ]]
+      fechaLimite: ['', [Validators.required, Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-([0-2][1-9]|3[0-1])$/), this.fechaValidaValidator() ]]
     });
 
     this.formaMonto = this.fb.group({
@@ -200,6 +204,7 @@ export class MetasComponent implements OnInit {
         this.traeMetaPorEstado(0);
       }, 1500);
     });
+    this.forma.reset();
   }
 
   async traeMetaPorEstado(estado: number) {
@@ -215,6 +220,7 @@ export class MetasComponent implements OnInit {
       this.calculaMontos();
       this.tieneMetasFlag = 1;
     });
+    console.log("Metas:", this.metas);
   }
 
   mostrarDatosEditar(id: number) {
@@ -271,6 +277,8 @@ export class MetasComponent implements OnInit {
   }
 
   async crearMonto(){
+    this.forma.reset();
+    
     this.monto.meta = this.metaSeleccionada.met_id;
     this.monto.monto = this.formaMonto.value['montoMonto'];
     this.monto.fecha = this.formaMonto.value['fechaMonto'];
@@ -375,9 +383,14 @@ export class MetasComponent implements OnInit {
   }
 
   async traerMontos(id){
-    await this.metaServicio.traeMontos(id).toPromise().then(resp => {
-      this.arrMontos = resp;
-    })
+    await this.metaServicio.traeMontos(id).toPromise().then(
+      resp => {
+        this.tieneMontosFlag = 1;
+        this.arrMontos = resp;
+    }).catch((error) => { 
+        this.tieneMontosFlag = 0; //No tiene montos.
+    });
+    
   }
 
  calculaMontos()

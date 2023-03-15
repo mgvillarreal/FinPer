@@ -40,9 +40,9 @@ export class ContactoComponent implements OnInit {
 
   ngOnInit(): void {
     this.forma = this.fb.group({ 
-      'nombre': ['', [Validators.required]],
+      'nombre': ['', [Validators.required, Validators.pattern(/^[A-Za-z\s\xF1\xD1]+$/)]],
       'email': ['', [Validators.required, Validators.email]],
-      'telefono': [''],
+      'telefono': ['', [Validators.required, Validators.pattern(/^([0-9])*$/)]],
       'mensaje': ['', [Validators.required]]
     })
   }

@@ -14,11 +14,11 @@
 
     <div class="text-center pt-4 pb-1">
       <span class="balance-titulo">Balance Mes: </span>
-      <span class="balance-cantidad"> ARS {{ balance - sumaMontos | number: '3.2-2' }} </span>
+      <span class="balance-cantidad"> ARS {{ balance - sumaMontos | number: '1.2-2' }} </span>
     </div>
     <div class="text-center pb-3">
       <span class="subbalance-titulo">Balance Total: </span>
-      <span class="subbalance-cantidad"> ARS {{ balance | number: '3.2-2' }} </span>
+      <span class="subbalance-cantidad"> ARS {{ balance | number: '1.2-2' }} </span>
     </div>
 
     <div class="container-cards mb-2">
@@ -45,7 +45,7 @@
         <div class="containercard-item2">
           <div class="card text-center">
             <div class="card-titulo ahorro">Metas de Ahorro</div>
-            <div class="card-cantidad ahorro">ARS {{ sumaMontos | number: '3.2-2' }}</div>
+            <div class="card-cantidad ahorro">ARS {{ sumaMontos | number: '1.2-2' }}</div>
             <div class="cardahorro-mensaje text">
               <p style="margin: 0">Tienes 5 metas de ahorros pendientes.</p>
             </div>
@@ -62,15 +62,11 @@
         <div class="containercard-item3">
           <div class="card text-center">
             <div class="card-titulo egreso">Gastos</div>
-            <div class="card-cantidad egreso">ARS {{ egreso | number: '3.2-2' }}</div>
-            <div
-            class="btn btn-outline-primary btn-detalleegreso"
-            (click)="seleccionaDetalleEgr()">
+            <div class="card-cantidad egreso">ARS {{ egreso | number: '1.2-2' }}</div>
+            <div class="btn btn-outline-primary btn-detalleegreso" (click)="seleccionaDetalleEgr()">
               Detalle de gastos
             </div><br/>
-            <button
-            class="btn btn-outline-primary btn-nuevoegreso"
-            (click)="seleccionaTipoMovimiento(2)">
+            <button class="btn btn-outline-primary btn-nuevoegreso" (click)="seleccionaTipoMovimiento(2)">
               Nuevo gasto
             </button>
           </div>
@@ -79,15 +75,11 @@
         <div class="containercard-item4">
           <div class="card text-center">
             <div class="card-titulo ingreso">Ingresos</div>
-            <div class="card-cantidad ingreso">ARS {{ ingreso | number: '3.2-2' }}</div>
-            <button
-            class="btn btn-outline-primary btn-detalleingreso"
-            (click)="seleccionaDetalleIng()">
+            <div class="card-cantidad ingreso">ARS {{ ingreso | number: '1.2-2' }}</div>
+            <button class="btn btn-outline-primary btn-detalleingreso" (click)="seleccionaDetalleIng()">
               Detalle de ingresos
             </button><br/>
-            <button
-            class="btn btn-outline-primary btn-nuevoingreso"
-            (click)="seleccionaTipoMovimiento(1)">
+            <button class="btn btn-outline-primary btn-nuevoingreso" (click)="seleccionaTipoMovimiento(1)">
               Nuevo ingreso
             </button>
           </div>
@@ -101,7 +93,7 @@
                 <div class="card-cantidad ultmov" *ngIf="i==mesActual && anio == anioActual">
                   {{mes}} {{anio}}
                   <div>
-                    <button class="btn btn-outline-primary btn-irultmov" (click)="seleccionaUltMovimientos(mes, anio)">
+                    <button class="btn btn-outline-primary btn-irultmov" (click)="seleccionaUltMovimientos(i, anio)">
                       Ir a movimientos
                     </button>
                   </div>
@@ -131,11 +123,11 @@
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
-            El monto es requerido.
+            El monto es requerido.<br>
         </small>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
-            No pueden ingresar montos negativos.
+        *ngIf="forma.controls['monto'].errors?.['min']">
+            El monto no puede ser negativo.<br>
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -155,6 +147,10 @@
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
             El detalle es requerido.
+        </small>
+        <small  class="texto-validacion text-center"
+        *ngIf="forma.controls['detalle'].errors?.['maxLength']">
+            El detalle no debe superar 20 caracteres.
         </small>
 
         <div class="wrap-input100 modal-celda4 my-2">
@@ -195,11 +191,11 @@
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
-            El monto es requerido.
+            El monto es requerido.<br>
         </small>
         <small  class="texto-validacion text-center"
         *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
-            No pueden ingresar montos negativos.
+           El monto no puede ser negativo.<br>
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -304,17 +300,10 @@
 
       <div *ngIf="muestraIngresosFlag==1">
        
-        <div class="card-detalle ingreso mt-3">ARS {{ ingreso | number: '3.2-2' }}</div>
+        <div class="card-detalle ingreso mt-3">ARS {{ ingreso | number: '1.2-2' }}</div>
 
         <div>
           <table class="table table-hover">
-            <!-- <thead>
-              <tr>
-                <th scope="col"> </th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Monto</th>
-              </tr>
-            </thead> -->
             <tbody>
               <tr (click)="editarIngreso(movimiento)" *ngFor="let movimiento of this.ingresos" >
                 <td scope="row">
@@ -327,8 +316,7 @@
                     stroke="#3fd22f"
                     fill="none"
                     stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
+                    stroke-linejoin="round" >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <circle cx="12" cy="12" r="9" />
                     <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1" />
@@ -336,8 +324,8 @@
                   </svg>
                 </td>
                 <td>{{ movimiento.mov_detalle }}</td>
-                <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto | number: '3.2-2' }}</td>
-                <td>{{ movimiento.mov_fcreacion | date: 'EEEE d HH:mm'}} </td>
+                <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto | number: '1.2-2' }}</td>
+                <td>{{ movimiento.mov_fcreacion | date: 'dd/MM/YYYY HH:mm'}} </td>
               </tr>
             </tbody>
           </table>
@@ -362,22 +350,12 @@
 
       <div *ngIf="muestraEgresosFlag==1">
 
-      <div class="card-detalle egreso mt-3">ARS {{ egreso | number: '3.2-2' }}</div>
+      <div class="card-detalle egreso mt-3">ARS {{ egreso | number: '1.2-2' }}</div>
 
       <div>
         <table class="table table-hover">
-          <!-- <thead>
-              <tr>
-                <th scope="col"> </th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Monto</th>
-              </tr>
-          </thead> -->
             <tbody>
-              <tr
-                (click)="editarEgreso(datose)"
-                *ngFor="let datose of this.egresos"
-              >
+              <tr (click)="editarEgreso(datose)" *ngFor="let datose of this.egresos">
                 <td scope="row">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -389,19 +367,16 @@
                     stroke="#ff2825"
                     fill="none"
                     stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
+                    stroke-linejoin="round" >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <circle cx="12" cy="12" r="9" />
-                    <path
-                      d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"
-                    />
+                    <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"/>
                     <path d="M12 6v2m0 8v2" />
                   </svg>
                 </td>
                 <td>{{ datose.mov_detalle }}</td>
-                <td>{{ datose.mon_simbolo }} {{ datose.mov_monto | number: '3.2-2' }}</td>
-                <td>{{ datose.mov_fcreacion | date: 'EEEE d HH:mm'}} </td>
+                <td>{{ datose.mon_simbolo }} {{ datose.mov_monto | number: '1.2-2' }}</td>
+                <td>{{ datose.mov_fcreacion | date: 'dd/MM/YYYY HH:mm'}} </td>
               </tr>
               <tr>
               </tr>
@@ -421,23 +396,17 @@
       <br />
       <div class="card-titulo ingreso mb-4">Editar Ingreso</div>
 
-      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento()">
+      <form [formGroup]="forma2" (ngSubmit)="actualizarMovimiento()">
         <div class="wrap-input100 modal-celda2 my-2">
-          <input
-            type="number"
-            name="monto"
-            placeholder="Monto del ingreso"
-            formControlName="monto"
-            [(ngModel)]="movimientoSeleccionado.mov_monto"
-          />
+          <input type="number" name="monto" placeholder="Monto del ingreso" formControlName="monto" [(ngModel)]="movimientoSeleccionado.mov_monto" />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
-            El monto es requerido.
+        *ngIf="forma2.controls['monto'].errors?.['required'] && forma2.controls['monto'].touched">
+            El monto es requerido.<br>
         </small>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
-            No pueden ingresar montos negativos.
+        *ngIf="forma2.controls['monto'].errors?.['min'] && forma2.controls['monto'].touched">
+            El monto no puede ser negativo.<br>
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
@@ -451,16 +420,10 @@
         </div><br>
 
         <div class="wrap-input100 modal-celda3 my-2">
-          <input
-            type="text"
-            name="detalleIngreso"
-            placeholder="Detalle del ingreso"
-            formControlName="detalle"
-            [(ngModel)]="movimientoSeleccionado.mov_detalle"
-          />
+          <input type="text" name="detalleIngreso" placeholder="Detalle del ingreso" formControlName="detalle" [(ngModel)]="movimientoSeleccionado.mov_detalle" />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+        *ngIf="forma2.controls['detalle'].errors?.['required'] && forma2.controls['detalle'].touched">
             El detalle es requerido.
         </small>
 
@@ -475,25 +438,19 @@
           />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+        *ngIf="forma2.controls['fecha'].errors?.['required'] && forma2.controls['fecha'].touched">
             La fecha es requerida.
         </small>
 
         <div class="container-login100-form-btn">
-          <button
-            class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act"
-            [disabled]="forma.invalid"
-          >
+          <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" [disabled]="forma2.invalid">
             Actualizar
           </button>
         </div>
       </form>
 
       <div class="container-login100-form-btn">
-        <button
-          class="btn btn-light btn-lg action-button btngreen btn-msjlight btn-act"
-          (click)="preguntaEliminar()"
-        >
+        <button class="btn btn-light btn-lg action-button btngreendelete btn-msjlight btn-act" (click)="preguntaEliminar()" >
           Eliminar
         </button>
       </div>
@@ -508,26 +465,20 @@
       <br />
       <div class="card-titulo egreso mb-4">Editar Gasto</div>
 
-      <form [formGroup]="forma" (ngSubmit)="actualizarMovimiento()">
+      <form [formGroup]="forma2" (ngSubmit)="actualizarMovimiento()">
         <div class="wrap-input100 modal-celda2 my-2">
-          <input
-            type="number"
-            name="monto"
-            placeholder="Monto del gasto"
-            formControlName="monto"
-            [(ngModel)]="movimientoSeleccionado.mov_monto"
-          />
+          <input type="number" name="monto" placeholder="Monto del gasto" formControlName="monto" [(ngModel)]="movimientoSeleccionado.mov_monto" />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
-            El monto es requerido.
+        *ngIf="forma2.controls['monto'].errors?.['required'] && forma2.controls['monto'].touched">
+            El monto es requerido.<br>
         </small>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['monto'].errors?.['min'] && forma.controls['monto'].touched">
-            No pueden ingresar montos negativos.
+        *ngIf="forma2.controls['monto'].errors?.['min']">
+            No pueden ingresar montos negativos.<br>
         </small>
 
-        <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
+        <div class="wrap-input100 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
             <option
             *ngFor="let categoria of categoriasEgreso"
@@ -537,54 +488,35 @@
           </select>
         </div><br>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['categoria'].errors?.['required'] && forma.controls['categoria'].touched">
+        *ngIf="forma2.controls['categoria'].errors?.['required'] && forma2.controls['categoria'].touched">
             Debe seleccionar una categoría.
         </small>
 
-        <div class="wrap-input100 modal-celda3 my-2">
-          <input
-            type="text"
-            name="detalleGasto"
-            placeholder="Detalle del gasto"
-            formControlName="detalle"
-            [(ngModel)]="movimientoSeleccionado.mov_detalle"
-          />
+        <div class="wrap-input100 my-2">
+          <input type="text" name="detalleGasto" placeholder="Detalle del gasto" formControlName="detalle" [(ngModel)]="movimientoSeleccionado.mov_detalle" />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
+        *ngIf="forma2.controls['detalle'].errors?.['required'] && forma2.controls['detalle'].touched">
             El detalle es requerido.
         </small>
 
         <div class="wrap-input100 modal-celda4 my-2">
-          <input
-            type="text"
-            name="fechaLimite"
-            placeholder="Fecha del gasto"
-            onfocus="(this.type='datetime-local')"
-            formControlName="fecha"
-            [(ngModel)]="movimientoSeleccionado.mov_fcreacion"
-          />
+          <input type="text" name="fechaLimite" placeholder="Fecha del gasto" onfocus="(this.type='datetime-local')" formControlName="fecha" [(ngModel)]="movimientoSeleccionado.mov_fcreacion" />
         </div>
         <small  class="texto-validacion text-center"
-        *ngIf="forma.controls['fecha'].errors?.['required'] && forma.controls['fecha'].touched">
+        *ngIf="forma2.controls['fecha'].errors?.['required'] && forma2.controls['fecha'].touched">
             La fecha es requerida.
         </small>
 
         <div class="container-login100-form-btn">
-          <button
-            class="btn btn-light btn-lg action-button btnred btn-msjdark btn-act"
-            [disabled]="forma.invalid"
-          >
+          <button class="btn btn-light btn-lg action-button btnred btn-msjdark btn-act" [disabled]="forma2.invalid">
             Actualizar
           </button>
         </div>
       </form>
 
       <div class="container-login100-form-btn">
-        <button
-          class="btn btn-light btn-lg action-button btnred btn-msjlight btn-act"
-          (click)="preguntaEliminar()"
-        >
+        <button class="btn btn-light btn-lg action-button btnreddelete btn-msjlight btn-act" (click)="preguntaEliminar()" >
           Eliminar
         </button>
       </div>
@@ -610,8 +542,7 @@
                 stroke="#419f3e"
                 fill="none"
                 stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+                stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <circle cx="12" cy="12" r="9" />
                 <path d="M9 12l2 2l4 -4" />
@@ -624,10 +555,7 @@
             </div>
           </div>
           <div class="mt-4 mb-2">
-            <button
-              class="btn btn-light btn-lg action-button btn-msjdark"
-              (click)="volveraPrincipal()"
-            >
+            <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="volveraPrincipal()" >
               Aceptar
             </button>
           </div>
@@ -672,19 +600,13 @@
             </div>
           </div>
           <div class="mt-4 mb-2">
-            <button
-              class="btn btn-light btn-lg action-button btn-msjlight"
-              (click)="eliminaMovimiento()"
-            >
+            <button class="btn btn-light btn-lg action-button btn-msjlight" (click)="eliminaMovimiento()">
               Eliminar
             </button>
           </div>
           <br />
           <div>
-            <button
-              class="btn btn-light btn-lg action-button btn-msjdark"
-              (click)="cancelaEliminar()"
-            >
+            <button class="btn btn-light btn-lg action-button btn-msjdark" (click)="cancelaEliminar()">
               Cancelar
             </button>
           </div>

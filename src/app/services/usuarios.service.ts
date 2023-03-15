@@ -64,13 +64,12 @@ export class UsuariosService {
 
   modificaUsuario(usuarioModif, id){
     usuarioModif['id'] = id;
-    console.log('Usuario a modificar en servicio: ', usuarioModif);
     return this.http.put<any>(this.url + 'modificausuario', usuarioModif);
   }
 
   validaMail(mail: string)
   {
-    return this.http.get<UsuarioI>(this.url + 'validaMail/' + mail);
+    return this.http.get<boolean>(this.url + 'validaMail/' + mail);
   }
 
 }

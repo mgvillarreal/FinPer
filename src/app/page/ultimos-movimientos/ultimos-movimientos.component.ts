@@ -10,13 +10,22 @@ import { MovimientosService } from 'src/app/services/movimientos.service';
 export class UltimosMovimientosComponent implements OnInit {
 
   listadoMovimientos:MovimientoI[];
+  mesUltMov:any;
+  anioUltiMov: any;
+  usuUltMov: any;
 
   constructor(private MovimientoServ: MovimientosService) { }
 
   muestraMovimientos():void{
-    this.MovimientoServ.traeMovimientos(localStorage.getItem("id")).subscribe(resp => {
-                                                                                          this.listadoMovimientos = resp;
-                                                                                        })
+    this.mesUltMov = this.MovimientoServ.mesUltMov;
+    this.anioUltiMov = this.MovimientoServ.anioUltMov;
+    this.usuUltMov = this.MovimientoServ.usuUltMov;
+    
+    this.MovimientoServ.traeMovimientosMesAnio(this.usuUltMov, this.mesUltMov, this.anioUltiMov).subscribe(
+      resp => {
+                this.listadoMovimientos = resp;
+              });
+
   }
 
   ngOnInit(): void {

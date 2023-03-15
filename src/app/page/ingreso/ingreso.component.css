@@ -291,7 +291,7 @@ iframe {
 .texto-validacion{
     font-family:'Poppins', sans-serif;
     color: red;
-    font-weight: 300;
+    font-weight: 400;
     font-size: small;
     text-align: center !important;
 }

@@ -16,9 +16,11 @@ export class MovimientosService {
   urlv4 = 'https://hostinjor.com/apifinper/v4/movimientos/'
   urlv5 = 'https://hostinjor.com/apifinper/v5/movimientos/'
 
-  constructor(
-    public http: HttpClient
-  ) { }
+  anioUltMov:any;
+  mesUltMov:any;
+  usuUltMov:any;
+
+  constructor(public http: HttpClient) { }
 
   guardaMovimiento(movimiento: Movimiento){
     return this.http.post(this.urlv5 + 'cargamovimiento', movimiento)
@@ -33,7 +35,7 @@ export class MovimientosService {
     return this.http.get<any>(this.urlv5+'balancetotal/'+Number(id));
   }
 
-  traeMovimientosMes(id: string, mes: number, anio: number){
+  traeMovimientosMesAnio(id: string, mes: number, anio: number){
     let data = {
       'id': id,
       'mes': mes,

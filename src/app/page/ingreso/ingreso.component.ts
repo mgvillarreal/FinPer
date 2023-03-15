@@ -32,7 +32,7 @@ export class IngresoComponent implements OnInit {
         this.route.navigate(['/miscuentas']);
       },
       err => {
-        this.textoValidacion = 'La contraseña ingresada es incorrecta. Intente nuevamente.';
+        this.textoValidacion = 'El correo electrónico y/o contraseña ingresados son incorrectos. Intente nuevamente.';
       }
     );
   }
@@ -44,17 +44,29 @@ export class IngresoComponent implements OnInit {
     }
   }
 
-  validarMail(){
-    console.log('Correo electrónico a validar: ', this.forma2.value['correoe']);
-    this.muestraIngresoFlag = 0;
-    this.recuperaContrasenaFlag = 0;
-    this.msjRecuperaContrasenaFlag = 1;
+  validarMail(){    
+    let correoValido: boolean;
+    this.usuariosService.validaMail(this.forma2.value['correoe']).subscribe(result => {
+      correoValido = !result; 
+      if (!correoValido) {
+        this.muestraIngresoFlag = 0;
+        this.recuperaContrasenaFlag = 0;
+        this.msjRecuperaContrasenaFlag = 1;
+      }
+      else{
+        this.textoValidacion = 'El correo electrónico no existe. Intente nuevamente.';
+      }
+    });
   }
 
   volveraIngreso(){
     this.muestraIngresoFlag = 1;
     this.recuperaContrasenaFlag = 0;
     this.msjRecuperaContrasenaFlag = 0;
+  }
+
+  limpiarMensaje(){
+    this.textoValidacion = '';
   }
 
   ngOnInit(): void {

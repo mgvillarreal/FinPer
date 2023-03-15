@@ -1,6 +1,6 @@
 <ng-template [ngIf]="muestraMetas==1">
 
-    <div class="titulo text-center mt-5 mb-5">Metas de Ahorro</div>
+    <div class="titulo text-center mt-5 mb-5">Mis Metas de Ahorro</div>
 
     <div class="container-login100" *ngIf="tieneMetasFlag==0">
 		<div class="wrap-login100 text-center">
@@ -50,10 +50,10 @@
             </li>
             <li class="table-row" *ngFor="let meta of metas; let i = index" (click)="mostrarMontos(meta)">
               <div class="col col-1" data-label="Meta">{{meta.met_nombre}}</div>
-              <div class="col col-2" data-label="Monto">ARS {{meta.met_monto | number: '3.2-2' }}</div>
-              <div class="col col-3" data-label="Ahorrado">ARS {{meta.sumaMonto | number: '3.2-2' }}</div>
-              <div class="col col-4" data-label="Por alcanzar">ARS {{meta.met_monto - meta.sumaMonto | number: '3.2-2' }} (U$S {{(meta.met_monto - meta.sumaMonto)/this.valorDolarOficial | number: '3.2-2'}})</div>
-              <div class="col col-5" data-label="Fecha Límite">{{meta.met_flimite|date: 'dd/MM/YYYY'}}</div>
+              <div class="col col-2" data-label="Monto">{{meta.mon_simbolo}} {{meta.met_monto | number: '1.2-2' }}</div>
+              <div class="col col-3" data-label="Ahorrado">{{meta.mon_simbolo}} {{meta.sumaMonto | number: '1.2-2' }}</div>
+              <div class="col col-4" data-label="Por alcanzar">{{meta.mon_simbolo}} {{meta.met_monto - meta.sumaMonto | number: '1.2-2' }} (U$S {{(meta.met_monto - meta.sumaMonto)/this.valorDolarOficial | number: '3.2-2'}})</div>
+              <div class="col col-5" data-label="Fecha Límite">{{meta.met_flimite | date: 'dd/MM/YYYY'}}</div>
               <div class="col col-6" data-label="Estado">{{meta.metest_descripcion}}</div>
               <div class="col col-7">
                 <div (click)="editarMeta(meta.met_id)" class="btn-editar">
@@ -73,6 +73,10 @@
         </div>
     </div>
 
+    <div class="btn-volverMisCuentas text-center" routerLink="/miscuentas">
+        Ir a Mis Cuentas
+    </div>
+
 </ng-template>
 
 <ng-template class="limiter" [ngIf]="agregaMetaFlag==1 && muestraMensajeFlag==0">
@@ -83,8 +87,8 @@
 			<form [formGroup]="forma" (ngSubmit)="crearMeta()">
 				<div class="login100-form validate-form text-center mt-3">
 					<div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select name="moneda" formControlName="moneda">
-                            <option value=" " selected>Moneda meta</option>
+                        <select class="input100 txt-select" name="moneda" formControlName="moneda">
+                            <option value="" selected [disabled]>Moneda de la meta</option>
                             <option value="1">ARS</option>
                             <option value="2">USD</option>
                         </select>
@@ -100,6 +104,10 @@
                     <small  class="texto-validacion text-center"
                     *ngIf="forma.controls['monto'].errors?.['required'] && forma.controls['monto'].touched">
                         El monto es requerido.
+                    </small>
+                    <small  class="texto-validacion text-center"
+                    *ngIf="forma.controls['monto'].errors?.['min']">
+                        El monto no puede ser negativo.
                     </small>
 
                     <div class="wrap-input100 modal-celda3 my-2">
@@ -120,6 +128,10 @@
                     <small  class="texto-validacion text-center"
                     *ngIf="forma.controls['fechaLimite'].errors?.['fechaInvalida']">
                         La fecha debe ser mayor a la fecha de hoy.
+                    </small>
+                    <small  class="texto-validacion text-center"
+                    *ngIf="forma.controls['fechaLimite'].errors?.['pattern']">
+                        El formato de la fecha es inválido.
                     </small>
 				</div>
 
@@ -304,7 +316,11 @@
         <div class="card-titulo mt-4">ARS {{metaSeleccionada.met_monto | number: '3.2-2' }}</div>
         <div class="txt-green mb-4">Ahorros de Meta</div>
 
-        <div>
+        <div class="mb-4" *ngIf="tieneMontosFlag==0">
+            <p class="texto-mensaje-montos mt-2">Aún no tienes montos registrados para esta meta.</p>
+        </div>
+
+        <div *ngIf="tieneMontosFlag==1">
           <table class="table table-hover mt-4">
             <tbody>
               <tr *ngFor="let monto of arrMontos" (click)="editarMonto(monto)">
@@ -315,8 +331,8 @@
                         <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
                     </svg>
                 </td>
-                <td>ARS {{monto.mmet_monto | number: '3.2-2' }} </td>
-                <td>{{monto.mmet_fcreacion}}</td>
+                <td>{{monto.mon_simbolo}} {{monto.mmet_monto | number: '3.2-2' }} </td>
+                <td>{{monto.mmet_fcreacion | date: 'dd/MM/YYYY'}}</td>
               </tr>
           </table>
         </div>

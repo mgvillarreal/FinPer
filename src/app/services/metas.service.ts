@@ -16,12 +16,10 @@ export class MetasService {
   constructor(public http: HttpClient) { }
 
   traeMetasPorEstado(estado: number){
-    console.log(estado)
     let body = {
        estado: estado,
       id_usuario: Number(localStorage.getItem("id"))
     };
-    //estado["id_usuario"] = Number(localStorage.getItem("id"));
 
     if(estado["estado"]!=10){
       return this.http.post<any>(this.urlv4 + '/metasporestado', body);
@@ -62,7 +60,7 @@ export class MetasService {
 
   traeMontos(id)
   {
-    return this.http.get<any>(this.urlMontos + id)
+    return this.http.get<any>(this.urlMontos + id);
   }
 
   agregaMonto(monto)
@@ -95,4 +93,13 @@ export class MetasService {
     return this.http.post<any>(this.urlMontos + 'traemontosporanio', data);
   }
 
+  traeCantMetasPend(usuario, mes, anio){
+    let data = {
+      'id': usuario,
+      'mes': mes,
+      'anio': anio
+    }
+    console.log("data en el servicio: ", data);
+    return this.http.post<any>(this.urlv4 + '/traeCantidadMetasPend', data);
+  }
 }
