@@ -29,7 +29,8 @@ export class MovimientosService {
   }
   
   traeBalance(id: string){
-    return this.http.get<any>(this.urlv5+'balancetotal/'+Number(id))
+  
+    return this.http.get<any>(this.urlv5+'balancetotal/'+Number(id));
   }
 
   traeMovimientosMes(id: string, mes: number, anio: number){
