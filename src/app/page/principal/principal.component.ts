@@ -68,7 +68,11 @@ export class PrincipalComponent implements OnInit {
   categoriasIngreso: CategoriaI[];
   categoriasEgreso: CategoriaI[];
 
-  balanceTotal
+  balanceTotal: number = 0;
+
+  traeBalanceTotal={
+    Balance:0,
+  };
 
   metasPendientes: number;
 
@@ -151,9 +155,11 @@ export class PrincipalComponent implements OnInit {
     });
   }
 
- traeBalance(){
-    this.movimientoService.traeBalance(localStorage.getItem('id')).subscribe(resp => {
-      console.log('balance'+resp);
+  traeBalance(){
+    this.movimientoService.traeBalance(localStorage.getItem('id')).subscribe(respuesta => {
+      
+      this.balanceTotal = respuesta['balance']['Balance'];
+      
     })
   }
 
