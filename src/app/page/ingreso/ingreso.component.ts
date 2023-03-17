@@ -38,6 +38,7 @@ export class IngresoComponent implements OnInit {
   }
 
   muestraMensajeRecuperarContrasena(){
+    this.forma2.reset();
     if(this.recuperaContrasenaFlag == 0){
       this.recuperaContrasenaFlag = 1;
       this.muestraIngresoFlag = 0;
@@ -57,12 +58,14 @@ export class IngresoComponent implements OnInit {
         this.textoValidacion = 'El correo electrónico no existe. Intente nuevamente.';
       }
     });
+    this.forma2.reset();
   }
 
   volveraIngreso(){
     this.muestraIngresoFlag = 1;
     this.recuperaContrasenaFlag = 0;
     this.msjRecuperaContrasenaFlag = 0;
+    this.forma.reset();
   }
 
   limpiarMensaje(){
@@ -71,12 +74,12 @@ export class IngresoComponent implements OnInit {
 
   ngOnInit(): void {
     this.forma = this.fb.group({
-      'mail': ['', [Validators.required, Validators.email]],
-      'contrasena': ['', [Validators.required]]
+      'mail': ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\.com$')]],
+      'contrasena': ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9]).*$'), Validators.minLength(8)]]
     });
 
     this.forma2 = this.fb.group({
-      'correoe': ['', [Validators.required, Validators.email]],
+      'correoe': ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\.com$')]],
     });
   }
 

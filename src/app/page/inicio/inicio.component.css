@@ -22,6 +22,11 @@
   border-radius: 25px
 }
 
+.btngreen:hover{
+  background-color: #419f3e;
+  font-size: 17px;
+}
+
 .dispositivos{
   height: 470px;
   width: 650px;
