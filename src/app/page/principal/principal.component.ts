@@ -177,7 +177,6 @@ export class PrincipalComponent implements OnInit {
     this.creaGrafico();
   }
 
-  /*NUEVO*/
   seleccionaTipoMovimiento(tipoMovimiento: number) {
     this.fechaActual = new Date();
     if (tipoMovimiento == 1) {
@@ -189,6 +188,7 @@ export class PrincipalComponent implements OnInit {
       this.nuevoEgrFlag = 1;
       this.muestraPrincipalFlag = 0;
     }
+    this.forma.reset();
   }
 
   crearNuevoMovimiento() {
@@ -275,6 +275,8 @@ export class PrincipalComponent implements OnInit {
 
     this.muestraIngresosFlag = 0;
     this.muestraEgresosFlag = 0;
+
+    this.forma.reset();
   }
 
   muestraMsjAltaOk() {
