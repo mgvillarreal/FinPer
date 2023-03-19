@@ -67,6 +67,11 @@ export class MetasComponent implements OnInit {
   montoAModificar: MontosI;
   montoSeleccionado: any;
 
+  monedas = [
+              { mon_id: "2", mon_simbolo: "USD", mon_descripcion: "Dolares Americanos" },
+              { mon_id: "1", mon_simbolo: "ARS", mon_descripcion: "Pesos Argentinos" }
+            ]
+
   //estados
   arrEstados = [
     { value: 0, name: "Pendientes" },
@@ -74,10 +79,8 @@ export class MetasComponent implements OnInit {
     { value: 2, name: "Canceladas" },
     { value: 10, name: "Todas" }
   ];
-  estadoMeta:any = 0;
 
-  //valor del dolar oficial del dia anterior -- harcodeado
-  valorDolarOficial: number = 214.5;
+  estadoMeta:any = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -227,22 +230,29 @@ export class MetasComponent implements OnInit {
     this.metas.forEach((meta) => {
       if (id == meta.met_id) {
         this.metaAModificar = meta;
-        this.modificarId=this.metaAModificar.met_id;
-        this.modificarMonto=this.metaAModificar.met_monto;
-        this.modificarDetalle=this.metaAModificar.met_nombre;
-        this.modificarFecha=this.metaAModificar.met_fcreacion;
-        this.modificarMoneda=this.metaAModificar.met_idmoneda;
+        this.modificarId = this.metaAModificar.met_id;
+        this.modificarMonto = this.metaAModificar.met_monto;
+        this.modificarDetalle = this.metaAModificar.met_nombre;
+        this.modificarFecha = this.metaAModificar.met_fcreacion;
+        this.modificarMoneda = this.metaAModificar.met_idmoneda;
       }
     });
   }
 
+  cambiarMonedaMeta(){
+    this.modificarMoneda = this.modificarMoneda;
+    console.log("Cambia moneda: ", this.modificarMoneda);
+  }
+
   async modificaMeta() {
-    this.meta.met_id=this.modificarId;
+    this.meta.met_id = this.modificarId;
     this.meta.met_monto = this.modificarMonto;
     this.meta.met_nombre = this.modificarDetalle;
     this.meta.met_flimite = this.modificarFecha;
     this.meta.met_idmoneda = this.modificarMoneda;
     this.muestraMensajeOk();
+
+    console.log("Meta a modificar: ", this.meta);
     
     await this.metaServicio.cambiaMetas(this.meta).toPromise();
     this.traeMetaPorEstado(this.estadoMeta);
