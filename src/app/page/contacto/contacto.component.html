@@ -26,7 +26,7 @@
                         El email es requerido.
                     </small>
                     <small  class="texto-validacion text-center" 
-                    *ngIf="forma.controls['email'].errors?.['email']">
+                    *ngIf="forma.controls['email'].errors?.['email'] || forma.controls['email'].errors?.['pattern']">
                         El email es inválido.
                     </small>
 
@@ -40,6 +40,10 @@
                     <small  class="texto-validacion text-center" 
                     *ngIf="forma.controls['telefono'].errors?.['pattern']" >
                         El teléfono no debe contener letras o caracteres especiales.
+                    </small>
+                    <small  class="texto-validacion text-center" 
+                    *ngIf="forma.controls['telefono'].errors?.['maxlength'] || forma.controls['telefono'].errors?.['minlength']" >
+                        El teléfono debe tener 10 y 15 dígitos.
                     </small>
 
                     <div class="wrap-input100">

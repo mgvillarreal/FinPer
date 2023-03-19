@@ -68,7 +68,11 @@ export class PrincipalComponent implements OnInit {
   categoriasIngreso: CategoriaI[];
   categoriasEgreso: CategoriaI[];
 
-  balanceTotal
+  balanceTotal: number = 0;
+
+  traeBalanceTotal={
+    Balance:0,
+  };
 
   metasPendientes: number;
 
@@ -151,9 +155,11 @@ export class PrincipalComponent implements OnInit {
     });
   }
 
- traeBalance(){
-    this.movimientoService.traeBalance(localStorage.getItem('id')).subscribe(resp => {
-      console.log('balance'+resp);
+  traeBalance(){
+    this.movimientoService.traeBalance(localStorage.getItem('id')).subscribe(respuesta => {
+      
+      this.balanceTotal = respuesta['balance']['Balance'];
+      
     })
   }
 
@@ -171,7 +177,6 @@ export class PrincipalComponent implements OnInit {
     this.creaGrafico();
   }
 
-  /*NUEVO*/
   seleccionaTipoMovimiento(tipoMovimiento: number) {
     this.fechaActual = new Date();
     if (tipoMovimiento == 1) {
@@ -183,6 +188,7 @@ export class PrincipalComponent implements OnInit {
       this.nuevoEgrFlag = 1;
       this.muestraPrincipalFlag = 0;
     }
+    this.forma.reset();
   }
 
   crearNuevoMovimiento() {
@@ -269,6 +275,8 @@ export class PrincipalComponent implements OnInit {
 
     this.muestraIngresosFlag = 0;
     this.muestraEgresosFlag = 0;
+
+    this.forma.reset();
   }
 
   muestraMsjAltaOk() {

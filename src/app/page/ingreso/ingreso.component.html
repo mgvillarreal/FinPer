@@ -17,7 +17,7 @@
                     El correo electrónico es requerido.
                 </small>
                 <small  class="texto-validacion text-center" 
-                *ngIf="forma.controls['mail'].errors?.['mail']">
+                *ngIf="forma.controls['mail'].errors?.['mail'] || forma.controls['mail'].errors?.['pattern']">
                     El correo electrónico es inválido.
                 </small>
 
@@ -27,6 +27,14 @@
                 <small  class="texto-validacion text-center" 
                 *ngIf="forma.controls['contrasena'].errors?.['required'] && forma.controls['contrasena'].touched">
                     La contraseña es requerida.
+                </small>
+                <small  class="texto-validacion text-center" 
+                *ngIf="forma.controls['contrasena'].errors?.['minlength']">
+                    La contraseña debe tener al menos 8 caracteres.<br>
+                </small>
+                <small  class="texto-validacion text-center" 
+                *ngIf="forma.controls['contrasena'].errors?.['pattern']">
+                    La contraseña debe tener al menos una mayúscula y un número.
                 </small>
                 <small  class="texto-validacion text-center" 
                 *ngIf="textoValidacion != '' ">
@@ -81,7 +89,7 @@
                     El correo electrónico es requerido.
                 </small>
                 <small  class="texto-validacion text-center" 
-                *ngIf="forma2.controls['correoe'].errors?.['correoe']">
+                *ngIf="forma2.controls['correoe'].errors?.['email'] || forma2.controls['correoe'].errors?.['pattern']">
                     El correo electrónico es inválido.
                 </small>
                 <small  class="texto-validacion text-center" 
@@ -93,7 +101,11 @@
                     <button class="btn btn-light btn-lg action-button btngreen" [disabled]="forma2.invalid">
                         Recuperar
                     </button>
-                </div>
+                </div><br>
+
+                <a class="txt2 mt-2" (click)="volveraIngreso()">
+                    Volver a Ingreso
+                </a>
 
             </form>
         </div>

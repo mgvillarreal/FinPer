@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { IngresoI } from '../interfaces/ingreso';
 import { JwtResponseI } from '../interfaces/jwt-response';
+import { MonedaI } from '../interfaces/moneda';
 import { PaisI } from '../interfaces/pais';
 import { ProfesionI } from '../interfaces/profesion';
 import { UsuarioI } from '../interfaces/usuario';
@@ -39,7 +40,11 @@ export class UsuariosService {
     return this.http.get<IngresoI[]>(this.url + 'modosingresos');
   }
 
-  traeDatosUsuario(id: number)
+  traeMonedas(): Observable<MonedaI[]> {
+    return this.http.get<MonedaI[]>(this.url + 'monedas');
+  }
+
+  traeDatosUsuario(id: number): Observable<UsuarioI>
   {
     return this.http.get<UsuarioI>(this.url + 'datos/' + id);
   }

@@ -14,10 +14,10 @@
                         </div>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['email'].errors?.['required'] && forma.controls['email'].touched">
-                            El email es requerido.
+                            El email es requerido.<br>
                         </small>
                         <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['email'].errors?.['email']">
+                        *ngIf="forma.controls['email'].errors?.['email'] || forma.controls['email'].errors?.['pattern']">
                             El email es inválido.
                         </small>
                         <small  class="texto-validacion text-center" 
@@ -30,11 +30,11 @@
                         </div>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['contrasena'].errors?.['required'] && forma.controls['contrasena'].touched">
-                            La contraseña es requerida.
+                            La contraseña es requerida.<br>
                         </small>
                         <small  class="texto-validacion text-center" 
-                        *ngIf="forma.get('contrasena').hasError('minlength') && forma.get('contrasena').touched">
-                           La contraseña debe tener al menos 8 caracteres.
+                        *ngIf="forma.controls['contrasena'].errors?.['minlength']">
+                            La contraseña debe tener al menos 8 caracteres.<br>
                         </small>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['contrasena'].errors?.['pattern']">
@@ -46,7 +46,7 @@
                         </div>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['pwdConfirm'].errors?.['required'] && forma.controls['pwdConfirm'].touched">
-                            La confirmación de contraseña es requerida.
+                            La confirmación de contraseña es requerida.<br>
                         </small>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.errors?.['contrasenasIguales']">
@@ -79,7 +79,7 @@
                         </div>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma2.controls['nombre'].errors?.['required'] && forma2.controls['nombre'].touched">
-                            El nombre es requerido.
+                            El nombre es requerido.<br>
                         </small>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma2.controls['nombre'].errors?.['pattern']" >
@@ -92,11 +92,15 @@
                         </div>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma2.controls['fnacimiento'].errors?.['required'] && forma2.controls['fnacimiento'].touched">
-                            La fecha de nacimiento es requerida.
+                            La fecha de nacimiento es requerida.<br>
                         </small>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma2.controls['fnacimiento'].errors?.['fechaInvalida']">
-                            Debes tener entre 15 y 99 años.
+                            Debes tener entre 15 y 99 años.<br>
+                        </small>
+                        <small  class="texto-validacion text-center" 
+                        *ngIf="forma2.controls['fnacimiento'].errors?.['pattern'] || forma2.controls['fnacimiento'].errors?.['maxlength']">
+                            La fecha es inválida.<br>
                         </small>
                         <br>
                         <div class="wrap-input100 mb-2">

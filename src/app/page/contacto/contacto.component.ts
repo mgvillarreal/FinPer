@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Mensaje } from 'src/app/models/mensaje.model';
 import { ContactoService } from 'src/app/services/contacto.service';
 
@@ -17,14 +18,13 @@ export class ContactoComponent implements OnInit {
   muestraContacto: number = 1;
   mensajeContactoEnviado: number = 0;
 
-  constructor(private fb: FormBuilder, private contactoServicio: ContactoService) { }
+  constructor(private fb: FormBuilder, private contactoServicio: ContactoService, private router: Router) { }
 
   enviarMensaje(){
     this.mensaje.nombre = this.forma.value['nombre'];
     this.mensaje.mail = this.forma.value['email'];
     this.mensaje.telefono = this.forma.value['telefono'];
     this.mensaje.mensaje = this.forma.value['mensaje'];
-    console.log('Mensaje contacto: ', this.mensaje);
 
     this.contactoServicio.enviarMensaje(this.mensaje).subscribe();
 
@@ -33,16 +33,15 @@ export class ContactoComponent implements OnInit {
   }
 
   volveraContacto(){
-    this.muestraContacto = 1;
-    this.mensajeContactoEnviado = 0;
     this.forma.reset();
+    this.router.navigate(['inicio']);
   }
 
   ngOnInit(): void {
     this.forma = this.fb.group({ 
-      'nombre': ['', [Validators.required, Validators.pattern(/^[A-Za-z\s\xF1\xD1]+$/)]],
-      'email': ['', [Validators.required, Validators.email]],
-      'telefono': ['', [Validators.required, Validators.pattern(/^([0-9])*$/)]],
+      'nombre': ['', [Validators.required, Validators.pattern(/^([a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s?)+([a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s)*[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/u)]],
+      'email': ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\.com$')]],
+      'telefono': ['', [Validators.required, Validators.pattern(/^([0-9])*$/), Validators.maxLength(15), Validators.minLength(10)]],
       'mensaje': ['', [Validators.required]]
     })
   }

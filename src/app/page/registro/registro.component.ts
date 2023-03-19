@@ -80,14 +80,14 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit(): void {
     this.forma = this.fb.group({ //se toma del constructor que tiene inyectado el servicio que esta importado
-      'email': ['', [Validators.required, Validators.email]],
+      'email': ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\.com$')]],
       'contrasena': ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9]).*$'), Validators.minLength(8) ]],
       'pwdConfirm': ['', Validators.required],
-    }, {validators: this.contrasenasIgualesValidator, validator: this.contrasenaLongitudValidator});
+    }, {validators: this.contrasenasIgualesValidator});
     
     this.forma2 = this.fb.group({
       'nombre': ['', [Validators.required, Validators.pattern(/^([a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s?)+([a-zA-ZáéíóúÁÉÍÓÚñÑ]+\s)*[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/u)]],
-      'fnacimiento': ['', [Validators.required, this.fechaMayorA15Validator() ]],
+      'fnacimiento': ['', [Validators.required, this.fechaMayorA15Validator(), Validators.maxLength(10), Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-([0-2][1-9]|3[0-1])$/) ]],
       'residencia': [13, [Validators.required]],
       'modoing': ['', [Validators.required]],
       'profesion': ['', [Validators.required]]
@@ -96,12 +96,6 @@ export class RegistroComponent implements OnInit {
     this.muestraPaises();
     this.muestraProfesiones();
     this.muestraIngresos();
-  }
-
-  contrasenaLongitudValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    const pwd = control.value('contrasena').lenght;
-
-    return pwd >= 8 ? {contrasenaValida: true} : null;
   }
 
   contrasenasIgualesValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {

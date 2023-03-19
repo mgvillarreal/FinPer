@@ -18,7 +18,7 @@
     </div>
     <div class="text-center pb-3">
       <span class="subbalance-titulo">Balance Total: </span>
-      <span class="subbalance-cantidad"> ARS {{ balance | number: '1.2-2' }} </span>
+      <span class="subbalance-cantidad"> ARS {{ this.balanceTotal | number: '1.2-2' }} </span>
     </div>
 
     <div class="container-cards mb-2">
@@ -289,7 +289,7 @@
 
 <ng-template [ngIf]="detalleIngFlag == 1" class="limiter">
   <div class="container-login100">
-    <div class="wrap-login100 text-center">
+    <div class="wrap-login100">
       <button class="btn-close mb-4" (click)="volveraPrincipal()"></button>
       <br />
       <div class="card-detalle ingreso mb-4">Detalle de Ingresos</div>
@@ -324,7 +324,7 @@
                   </svg>
                 </td>
                 <td>{{ movimiento.mov_detalle }}</td>
-                <td>{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto | number: '1.2-2' }}</td>
+                <td class="postleft">{{ movimiento.mon_simbolo }} {{ movimiento.mov_monto | number: '1.2-2' }}</td>
                 <td>{{ movimiento.mov_fcreacion | date: 'dd/MM/YYYY HH:mm'}} </td>
               </tr>
             </tbody>
