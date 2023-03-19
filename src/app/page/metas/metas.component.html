@@ -190,15 +190,15 @@
 				<div class="login100-form validate-form text-center mt-3">
 					<div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
                         
-                        <select name="moneda" *ngIf="this.metaAModificar.met_idmoneda==1" >
+                        <select (change)="cambiarMonedaMeta()" name="moneda" [(ngModel)]="modificarMoneda" *ngIf="this.metaAModificar.met_idmoneda==1" class="black-text" >
                             <option value="" disabled>Moneda de la meta </option>
                             <option value="1" selected>ARS</option>
                             <option value="2">USD</option>
                         </select>
-                        <select name="moneda" [(ngModel)]="modificarMoneda" *ngIf="this.metaAModificar.met_idmoneda==2">
+                        <select (change)="cambiarMonedaMeta()" name="moneda" [(ngModel)]="modificarMoneda" *ngIf="this.metaAModificar.met_idmoneda==2" class="black-text">
                             <option value="" disabled>Moneda de la meta </option>
                             <option value="1">ARS</option>
-                            <option value="2"  selected>USD</option>
+                            <option value="2" selected>USD</option>
                         </select>
                     </div>
 
@@ -209,9 +209,9 @@
                     <div class="wrap-input100 modal-celda3 my-2">
                         <input type="text" name="detalleMeta" placeholder="Detalle de la meta" value="{{this.metaAModificar.met_nombre}}" [(ngModel)]="modificarDetalle">
                     </div>
-                    
+
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" value="{{this.metaAModificar.met_flimite}}" [(ngModel)]="modificarFecha">
+                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" value="{{this.metaAModificar.met_flimite | date: 'DD/MM/YYYY' }}" [(ngModel)]="modificarFecha">
                     </div>
 				</div>
                 <input type="hidden" name="id" value="{{this.metaAModificar.met_id}}" [(ngModel)]="modificarId">

@@ -49,6 +49,7 @@ export class MetasComponent implements OnInit {
   metaAModificar: MetasI;
 
   public forma: FormGroup;
+  public forma2: FormGroup;
   public editaForma: FormGroup;
   public formaMonto: FormGroup;
   public formaMontoRet: FormGroup;
@@ -171,6 +172,13 @@ export class MetasComponent implements OnInit {
       fechaLimite: ['', [Validators.required, Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-([0-2][1-9]|3[0-1])$/), this.fechaValidaValidator() ]]
     });
 
+    this.forma2 = this.fb.group({
+      monedaEdit: ['', [Validators.required]],
+      monto: ['', [Validators.required, Validators.min(1)]],
+      detalle: ['', [Validators.required]],
+      fechaLimite: ['', [Validators.required, Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-([0-2][1-9]|3[0-1])$/), this.fechaValidaValidator() ]]
+    });
+
     this.formaMonto = this.fb.group({
       montoMonto: ['', [Validators.required]],
       fechaMonto: ['', [Validators.required]],
@@ -236,6 +244,11 @@ export class MetasComponent implements OnInit {
     });
   }
 
+  cambiarMonedaMeta(){
+    this.modificarMoneda = this.modificarMoneda;
+    console.log("Cambia moneda: ", this.modificarMoneda);
+  }
+
   async modificaMeta() {
     this.meta.met_id=this.modificarId;
     this.meta.met_monto = this.modificarMonto;
@@ -293,9 +306,6 @@ export class MetasComponent implements OnInit {
     else{
       this.mensajeValidaMonto = "El monto a ingresar no puede ser superior al monto por alcanzar de la meta.";
     }
-
-
-    
   }
 
   muestraMensajeOkMonto() {
