@@ -33,8 +33,8 @@
                             La contraseña es requerida.
                         </small>
                         <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['contrasena'].errors?.['minLength']">
-                            La contraseña debe tener al menos 8 caracteres.
+                        *ngIf="forma.get('contrasena').hasError('minlength') && forma.get('contrasena').touched">
+                           La contraseña debe tener al menos 8 caracteres.
                         </small>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['contrasena'].errors?.['pattern']">

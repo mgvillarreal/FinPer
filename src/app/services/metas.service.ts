@@ -95,9 +95,9 @@ export class MetasService {
 
   traeCantMetasPend(usuario, mes, anio){
     let data = {
-      'id': usuario,
-      'mes': mes,
-      'anio': anio
+      'id_usuario': usuario,
+      'mes': 11,
+      'anio': 2023
     }
     console.log("data en el servicio: ", data);
     return this.http.post<any>(this.urlv4 + '/traeCantidadMetasPend', data);

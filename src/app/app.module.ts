@@ -28,6 +28,7 @@ import { UltimosMovimientosComponent } from './page/ultimos-movimientos/ultimos-
 import { DatosComponent } from './page/datos/datos.component';
 import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
 import { GraficosprincipalComponent } from './page/graficosprincipal/graficosprincipal.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import {LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
@@ -79,7 +80,8 @@ registerLocaleData(localeEs, 'es'); //Esto no es un import, pero va justo despue
     ReactiveFormsModule,
     HttpClientModule,
     ModalModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [
     ModalService,

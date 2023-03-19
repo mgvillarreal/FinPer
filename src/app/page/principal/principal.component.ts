@@ -414,7 +414,7 @@ export class PrincipalComponent implements OnInit {
 
   traeCantidadMetasPend(){
     let idUsuario = localStorage.getItem('id');
-    this.metasService.traeCantMetasPend(idUsuario, this.mesActual+1, this.anioActual).subscribe((respuesta => {
+    this.metasService.traeCantMetasPend(idUsuario, this.mesActual, this.anioActual).subscribe((respuesta => {
       this.metasPendientes = respuesta[0]['COUNT(met_id)'];
       console.log("cantidad de metas: ", this.metasPendientes);
     }));
