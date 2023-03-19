@@ -31,7 +31,7 @@
 
     <div *ngIf="tieneMetasFlag==1">
         <div class="mt-2 text-center">
-            <select class="select-finper-default select-s" name="estado" [(ngModel)]="estadoMeta" (ngModelChange)="cambiaEstado()">
+            <select class="select-finper-default select-s pstleft" name="estado" [(ngModel)]="estadoMeta" (ngModelChange)="cambiaEstado()">
                 <option *ngFor="let estado of arrEstados" [value]="estado.value">
                   {{estado.name}}
                 </option>
@@ -56,7 +56,7 @@
               <div class="col col-5" data-label="Fecha Límite">{{meta.met_flimite | date: 'dd/MM/YYYY'}}</div>
               <div class="col col-6" data-label="Estado">{{meta.metest_descripcion}}</div>
               <div class="col col-7">
-                <div (click)="editarMeta(meta.met_id)" class="btn-editar">
+                <div (click)="editarMeta(meta)" class="btn-editar">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="32" height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
@@ -87,7 +87,7 @@
 			<form [formGroup]="forma" (ngSubmit)="crearMeta()">
 				<div class="login100-form validate-form text-center mt-3">
 					<div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select class="input100 txt-select" name="moneda" formControlName="moneda">
+                        <select class="input100 txt-select pstleft" name="moneda" formControlName="moneda">
                             <option value="" selected [disabled]>Moneda de la meta</option>
                             <option value="1">ARS</option>
                             <option value="2">USD</option>
@@ -116,6 +116,10 @@
                     <small  class="texto-validacion text-center"
                     *ngIf="forma.controls['detalle'].errors?.['required'] && forma.controls['detalle'].touched">
                         El detalle es requerido.
+                    </small>
+                    <small  class="texto-validacion text-center"
+                    *ngIf="forma.controls['detalle'].errors?.['maxlength']">
+                        El detalle no debe tener más de 20 caracteres.
                     </small>
 
                     <div class="wrap-input100 modal-celda4 my-2">
@@ -186,37 +190,50 @@
 		<div class="wrap-login100 text-center">
             <button class="btn-close mb-4" (click)="volveraMetas()"> </button> <br><br>
             <div class="titulo-nuevameta mb-4">Editar Meta</div>
-			<form>
+			<form [formGroup]="forma2" (ngSubmit)="muestraMensajeActOk()">
 				<div class="login100-form validate-form text-center mt-3">
+
 					<div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select (change)="cambiarMonedaMeta()" name="moneda"  *ngIf="this.metaAModificar.met_idmoneda==1" [(ngModel)]="modificarMoneda">
-                            <option value=""  disabled>Moneda de la meta</option>
-                            <option value="1" selected>ARS</option>
-                            <option value="2" >USD</option>
-                        </select>
-                        <select (change)="cambiarMonedaMeta()" name="moneda" [(ngModel)]="modificarMoneda" *ngIf="this.metaAModificar.met_idmoneda==2" [(ngModel)]="modificarMoneda">
-                            <option value=""  disabled>Moneda de la meta</option>
-                            <option value="1" >ARS</option>
-                            <option value="2" selected>USD</option>
+                        <select name="moneda" class="txt-select-negro">
+                            <option value="">Moneda de la Meta</option>
+                            <option value={{metaSeleccionada.met_idmoneda}} *ngFor="let moneda of monedas" [selected]="metaSeleccionada.met_idmoneda == moneda.mon_id">
+                                {{metaSeleccionada.mon_simbolo}}
+                            </option>
                         </select>
                     </div>
 
                     <div class="wrap-input100 modal-celda2 my-2">
-                        <input type="number" name="monto" placeholder="Monto de la meta" value="{{this.metaAModificar.met_monto}}" [(ngModel)]="modificarMonto">
+                        <input type="number" name="monto" placeholder="Monto de la meta" formControlName="montoEdit" [(ngModel)]="metaSeleccionada.met_monto">
                     </div>
+                    <small  class="texto-validacion text-center"
+                    *ngIf="forma2.controls['montoEdit'].errors?.['required'] && forma2.controls['montoEdit'].touched">
+                        El monto es requerido.
+                    </small>
+                    <small  class="texto-validacion text-center"
+                    *ngIf="forma2.controls['montoEdit'].errors?.['min']">
+                        El monto no puede ser negativo.
+                    </small>
 
                     <div class="wrap-input100 modal-celda3 my-2">
-                        <input type="text" name="detalleMeta" placeholder="Detalle de la meta" value="{{this.metaAModificar.met_nombre}}" [(ngModel)]="modificarDetalle">
+                        <input type="text" name="detalleMeta" placeholder="Detalle de la meta" formControlName="detalleEdit" [(ngModel)]="metaSeleccionada.met_nombre">
                     </div>
 
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" value="{{this.metaAModificar.met_flimite}}" [(ngModel)]="modificarFecha">
+                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" formControlName="fechaLimiteEdit" [ngModel]="metaSeleccionada.met_flimite | date:'dd/MM/yyyy'">
                     </div>
+                    <small  class="texto-validacion text-center"
+                    *ngIf="forma2.controls['fechaLimiteEdit'].errors?.['required'] && forma2.controls['fechaLimiteEdit'].touched">
+                        La fecha límite es requerida.
+                    </small>
+                    <!-- <small  class="texto-validacion text-center"
+                    *ngIf="forma2.controls['fechaLimiteEdit'].errors?.['fechaInvalida']">
+                        La fecha debe ser mayor a la fecha de hoy.
+                    </small> -->
+                    
 				</div>
-                <input type="hidden" name="id" value="{{this.metaAModificar.met_id}}" [(ngModel)]="modificarId">
 
                 <div class="container-login100-form-btn">
-                    <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" (click)="muestraMensajeActOk()">
+                    <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act">
                         Actualizar
                     </button>
                 </div>
