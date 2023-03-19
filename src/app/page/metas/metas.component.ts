@@ -73,11 +73,6 @@ export class MetasComponent implements OnInit {
   montoAModificar: MontosI;
   montoSeleccionado: any;
 
-  monedas = [
-              { mon_id: "2", mon_simbolo: "USD", mon_descripcion: "Dolares Americanos" },
-              { mon_id: "1", mon_simbolo: "ARS", mon_descripcion: "Pesos Argentinos" }
-            ]
-
   //estados
   arrEstados = [
     { value: 0, name: "Pendientes" },
