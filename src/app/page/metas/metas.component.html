@@ -52,7 +52,7 @@
               <div class="col col-1" data-label="Meta">{{meta.met_nombre}}</div>
               <div class="col col-2" data-label="Monto">{{meta.mon_simbolo}} {{meta.met_monto | number: '1.2-2' }}</div>
               <div class="col col-3" data-label="Ahorrado">{{meta.mon_simbolo}} {{meta.sumaMonto | number: '1.2-2' }}</div>
-              <div class="col col-4" data-label="Por alcanzar">{{meta.mon_simbolo}} {{meta.met_monto - meta.sumaMonto | number: '1.2-2' }} (U$S {{(meta.met_monto - meta.sumaMonto)/this.valorDolarOficial | number: '3.2-2'}})</div>
+              <div class="col col-4" data-label="Por alcanzar">{{meta.mon_simbolo}} {{meta.met_monto - meta.sumaMonto | number: '1.2-2' }} </div>
               <div class="col col-5" data-label="Fecha Límite">{{meta.met_flimite | date: 'dd/MM/YYYY'}}</div>
               <div class="col col-6" data-label="Estado">{{meta.metest_descripcion}}</div>
               <div class="col col-7">
@@ -189,31 +189,27 @@
 			<form>
 				<div class="login100-form validate-form text-center mt-3">
 					<div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <div *ngIf="this.metaAModificar.met_idmoneda==1">
-                            <select name="moneda" >
-                                <option value="1" selected>ARS</option>
-                                <option value="2">USD</option>
-                            </select>
-                        </div>
-                        <div *ngIf="this.metaAModificar.met_idmoneda==2">
-                            <select name="moneda" [(ngModel)]="modificarMoneda">
-                                <option value="1">ARS</option>
-                                <option value="2"  selected>USD</option>
-                            </select>
-                        </div>
-
-                        <!--select name="moneda" >
-                            <option value=" " selected>Moneda Meta</option>
-                            <option value="1">ARS</option>
+                        
+                        <select name="moneda" *ngIf="this.metaAModificar.met_idmoneda==1" >
+                            <option value="" disabled>Moneda de la meta </option>
+                            <option value="1" selected>ARS</option>
                             <option value="2">USD</option>
-                        </select-->
+                        </select>
+                        <select name="moneda" [(ngModel)]="modificarMoneda" *ngIf="this.metaAModificar.met_idmoneda==2">
+                            <option value="" disabled>Moneda de la meta </option>
+                            <option value="1">ARS</option>
+                            <option value="2"  selected>USD</option>
+                        </select>
                     </div>
+
                     <div class="wrap-input100 modal-celda2 my-2">
                         <input type="number" name="monto" placeholder="Monto de la meta" value="{{this.metaAModificar.met_monto}}" [(ngModel)]="modificarMonto">
                     </div>
+
                     <div class="wrap-input100 modal-celda3 my-2">
                         <input type="text" name="detalleMeta" placeholder="Detalle de la meta" value="{{this.metaAModificar.met_nombre}}" [(ngModel)]="modificarDetalle">
                     </div>
+                    
                     <div class="wrap-input100 modal-celda4 my-2">
                         <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" value="{{this.metaAModificar.met_flimite}}" [(ngModel)]="modificarFecha">
                     </div>
