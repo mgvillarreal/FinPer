@@ -194,34 +194,30 @@
             <div class="titulo-nuevameta mb-4">Editar Meta</div>
 			<form [formGroup]="forma2" (ngSubmit)="muestraMensajeActOk()">
 				<div class="login100-form validate-form text-center mt-3">
-
 					<div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select name="moneda" class="txt-select-negro">
-                            <option value="">Moneda de la Meta</option>
-                            <option value={{metaSeleccionada.met_idmoneda}} *ngFor="let moneda of monedas" [selected]="metaSeleccionada.met_idmoneda == moneda.mon_id">
-                                {{metaSeleccionada.mon_simbolo}}
-                            </option>
+                        
+                        <select (change)="cambiarMonedaMeta()" name="moneda" [(ngModel)]="modificarMoneda" *ngIf="this.metaAModificar.met_idmoneda==1" class="black-text" >
+                            <option value="" disabled>Moneda de la meta </option>
+                            <option value="1" selected>ARS</option>
+                            <option value="2">USD</option>
+                        </select>
+                        <select (change)="cambiarMonedaMeta()" name="moneda" [(ngModel)]="modificarMoneda" *ngIf="this.metaAModificar.met_idmoneda==2" class="black-text">
+                            <option value="" disabled>Moneda de la meta </option>
+                            <option value="1">ARS</option>
+                            <option value="2" selected>USD</option>
                         </select>
                     </div>
 
                     <div class="wrap-input100 modal-celda2 my-2">
                         <input type="number" name="monto" placeholder="Monto de la meta" formControlName="montoEdit" [(ngModel)]="metaSeleccionada.met_monto">
                     </div>
-                    <small  class="texto-validacion text-center"
-                    *ngIf="forma2.controls['montoEdit'].errors?.['required'] && forma2.controls['montoEdit'].touched">
-                        El monto es requerido.
-                    </small>
-                    <small  class="texto-validacion text-center"
-                    *ngIf="forma2.controls['montoEdit'].errors?.['min']">
-                        El monto no puede ser negativo.
-                    </small>
 
                     <div class="wrap-input100 modal-celda3 my-2">
                         <input type="text" name="detalleMeta" placeholder="Detalle de la meta" formControlName="detalleEdit" [(ngModel)]="metaSeleccionada.met_nombre">
                     </div>
 
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" formControlName="fechaLimiteEdit" [ngModel]="metaSeleccionada.met_flimite | date:'dd/MM/yyyy'">
+                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" value="{{this.metaAModificar.met_flimite | date: 'DD/MM/YYYY' }}" [(ngModel)]="modificarFecha">
                     </div>
                     <small  class="texto-validacion text-center"
                     *ngIf="forma2.controls['fechaLimiteEdit'].errors?.['required'] && forma2.controls['fechaLimiteEdit'].touched">
