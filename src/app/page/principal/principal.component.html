@@ -305,7 +305,7 @@
         <div>
           <table class="table table-hover">
             <tbody>
-              <tr (click)="editarIngreso(movimiento)" *ngFor="let movimiento of this.ingresos" >
+              <tr (click)="editarIngreso(movimiento)" *ngFor="let movimiento of this.ingresos | paginate: { itemsPerPage: movimientosPorPagina, currentPage: paginaActual }" >
                 <td scope="row">
                   <svg xmlns="http://www.w3.org/2000/svg"
                     class="icon icon-tabler icon-tabler-coin"
@@ -329,6 +329,8 @@
               </tr>
             </tbody>
           </table>
+          <pagination-controls (pageChange)="paginaActual = $event" class="text-center" *ngIf="this.ingresos.length > movimientosPorPagina">
+          </pagination-controls>
         </div>
 
       </div>
@@ -355,7 +357,7 @@
       <div>
         <table class="table table-hover">
             <tbody>
-              <tr (click)="editarEgreso(datose)" *ngFor="let datose of this.egresos">
+              <tr (click)="editarEgreso(datose)" *ngFor="let datose of this.egresos | paginate: { itemsPerPage: movimientosPorPagina, currentPage: paginaActual }">
                 <td scope="row">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -382,6 +384,8 @@
               </tr>
             </tbody>
           </table>
+          <pagination-controls (pageChange)="paginaActual = $event" class="text-center" *ngIf="this.egresos.length > movimientosPorPagina">
+          </pagination-controls>
         </div>
       </div>
 

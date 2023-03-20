@@ -1,27 +1,28 @@
 <div>
-    <div class="titulo text-center mt-5 mb-5"> Últimos Movimientos </div>
+  <div class="titulo text-center mt-5 mb-5"> Últimos Movimientos </div>
 
-    <ul class="responsive-table text-center mt-3">
-        <li class="table-header">
-          <div class="col col-1">Tipo</div>
-          <div class="col col-2">Categoría</div>
-          <div class="col col-3">Descripción</div>
-          <div class="col col-4">Monto</div>
-          <div class="col col-5">Fecha</div>
-        </li>
-        <li  class="table-row"  *ngFor="let movimiento of listadoMovimientos"
-        [ngClass]="(movimiento.tmov_descripcion=='Ingreso')? 'Ingreso' : 'Egreso' ">
-            <div class="col col-1">{{movimiento.tmov_descripcion}}</div>
-            <div class="col col-2">{{movimiento.cmov_descripcion}}</div>
-            <div class="col col-3">{{movimiento.mov_detalle}}</div>
-            <div class="col col-4">{{movimiento.mon_simbolo}} {{movimiento.mov_monto | number: '3.2-2'}}</div>
-            <div class="col col-5">{{movimiento.mov_fcreacion | date: 'dd/MM/YYYY HH:mm'}}</div>
-        </li>
-        
-      </ul>
+  <ul class="responsive-table text-center mt-3">
+    <li class="table-header">
+      <div class="col col-1">Tipo</div>
+      <div class="col col-2">Categoría</div>
+      <div class="col col-3">Descripción</div>
+      <div class="col col-4">Monto</div>
+      <div class="col col-5">Fecha</div>
+    </li>
+    <li class="table-row" *ngFor="let movimiento of listadoMovimientos | paginate: { itemsPerPage: movimientosPorPagina, currentPage: paginaActual }"
+      [ngClass]="(movimiento.tmov_descripcion=='Ingreso')? 'Ingreso' : 'Egreso' ">
+      <div class="col col-1">{{movimiento.tmov_descripcion}}</div>
+      <div class="col col-2">{{movimiento.cmov_descripcion}}</div>
+      <div class="col col-3">{{movimiento.mov_detalle}}</div>
+      <div class="col col-4">{{movimiento.mon_simbolo}} {{movimiento.mov_monto | number: '3.2-2'}}</div>
+      <div class="col col-5">{{movimiento.mov_fcreacion | date: 'dd/MM/YYYY HH:mm'}}</div>
+    </li>
+  </ul>
 
-    <div class="text-center mb-4">
-        <a routerLink="/miscuentas">Volver</a>
-    </div>
+  <pagination-controls (pageChange)="paginaActual = $event" class="text-center" *ngIf="listadoMovimientos.length > movimientosPorPagina">
+  </pagination-controls>
 
+  <div class="text-center mb-4">
+    <a routerLink="/miscuentas">Volver</a>
+  </div>
 </div>

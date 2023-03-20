@@ -75,23 +75,28 @@ export class MetasComponent implements OnInit {
 
   //estados
   arrEstados = [
-    { value: 0, name: "Pendientes" },
-    { value: 1, name: "Alcanzadas" },
-    { value: 2, name: "Canceladas" },
+    { value: 1, name: "Pendientes" },
+    { value: 2, name: "Alcanzadas" },
+    { value: 3, name: "Canceladas" },
     { value: 10, name: "Todas" }
   ];
 
-  estadoMeta:any = 0;
+  estadoMeta:any = 1;
 
   //valor del dolar oficial del dia anterior -- harcodeado
   valorDolarOficial: number = 214.5;
+
+  /*Paginador*/
+  paginaActual = 1;
+  metasPorPagina = 5;
+  
 
   constructor(
     private fb: FormBuilder,
     private metaServicio: MetasService,
     private usuarioService: UsuariosService
   ) {
-    this.traeMetaPorEstado(0);
+    this.traeMetaPorEstado(this.estadoMeta);
   }
 
   // obtieneMonedas(){
@@ -223,7 +228,7 @@ export class MetasComponent implements OnInit {
     //this.metaServicio.guardaMetas(this.meta);
     this.metaServicio.guardaMetas(this.meta).subscribe((data) => {
       setTimeout(() => {
-        this.traeMetaPorEstado(0);
+        this.traeMetaPorEstado(this.estadoMeta);
       }, 1500);
     });
     this.forma.reset();
@@ -468,5 +473,19 @@ export class MetasComponent implements OnInit {
       this.agregaMontoFlag = 0;
       this.muestraMensajeMontoRetFlag = 1;
     }
+  }
+
+  getPage(page: number): void {
+    this.paginaActual = page;
+  }
+
+  get totalPaginas(): number {
+    return Math.ceil(this.metas.length / this.metasPorPagina);
+  }
+
+  get metasEnPagina(): MetasI[] {
+    const startIndex = (this.paginaActual - 1) * this.metasPorPagina;
+    const endIndex = startIndex + this.metasPorPagina;
+    return this.metas.slice(startIndex, endIndex);
   }
 }

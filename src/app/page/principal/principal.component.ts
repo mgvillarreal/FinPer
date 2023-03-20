@@ -30,6 +30,10 @@ export class PrincipalComponent implements OnInit {
   ingresos: any[] = [];
   egresos: any[] = [];
 
+  /*Paginador*/
+  paginaActual = 1;
+  movimientosPorPagina = 10;
+
   /*Flags*/
   public forma: FormGroup;
   public forma2: FormGroup;
@@ -469,5 +473,29 @@ export class PrincipalComponent implements OnInit {
   divisorCategoria(){
     this.categoriasIngreso = this.categorias.filter(categoria => categoria.cmov_tipo == 1)
     this.categoriasEgreso = this.categorias.filter(categoria => categoria.cmov_tipo == 2)
+  }
+
+  getPage(page: number): void {
+    this.paginaActual = page;
+  }
+
+  get totalPaginasIngresos(): number {
+    return Math.ceil(this.ingresos.length / this.movimientosPorPagina);
+  }
+
+  get movimientosEnPaginaIngresos(): MovimientoI[] {
+    const startIndex = (this.paginaActual - 1) * this.movimientosPorPagina;
+    const endIndex = startIndex + this.movimientosPorPagina;
+    return this.ingresos.slice(startIndex, endIndex);
+  }
+
+  get totalPaginasEgresos(): number {
+    return Math.ceil(this.egresos.length / this.movimientosPorPagina);
+  }
+
+  get movimientosEnPaginaEgresos(): MovimientoI[] {
+    const startIndex = (this.paginaActual - 1) * this.movimientosPorPagina;
+    const endIndex = startIndex + this.movimientosPorPagina;
+    return this.egresos.slice(startIndex, endIndex);
   }
 }
