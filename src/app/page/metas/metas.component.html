@@ -2,9 +2,16 @@
 
     <div class="titulo text-center mt-5 mb-5">Mis Metas de Ahorro</div>
 
+    <div class="mt-2 text-center">
+        <select class="select-finper-default select-s pstleft" name="estado" [(ngModel)]="estadoMeta" (ngModelChange)="cambiaEstado()">
+            <option *ngFor="let estado of arrEstados" [value]="estado.value">
+              {{estado.name}}
+            </option>
+        </select>
+    </div>
+
     <div class="container-login100" *ngIf="tieneMetasFlag==0">
 		<div class="wrap-login100 text-center">
-            <div class="titulo-nuevameta mb-4"> </div>
 			<div class="login100-form validate-form text-center mt-3">
 				<div class="wrap-input100">
                     <div class="mb-4">
@@ -30,14 +37,6 @@
 	</div>
 
     <div *ngIf="tieneMetasFlag==1">
-        <div class="mt-2 text-center">
-            <select class="select-finper-default select-s pstleft" name="estado" [(ngModel)]="estadoMeta" (ngModelChange)="cambiaEstado()">
-                <option *ngFor="let estado of arrEstados" [value]="estado.value">
-                  {{estado.name}}
-                </option>
-            </select>
-        </div>
-    
         <ul class="responsive-table text-center mt-3">
             <li class="table-header">
               <div class="col col-1">Meta</div>
@@ -89,7 +88,7 @@
 			<form [formGroup]="forma" (ngSubmit)="crearMeta()">
 				<div class="login100-form validate-form text-center mt-3">
 					<div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select class="input100 txt-select pstleft" name="moneda" formControlName="moneda">
+                        <select class="input100 txt-select black-text" name="moneda" formControlName="moneda">
                             <option value="" selected [disabled]>Moneda de la meta</option>
                             <option value="1">ARS</option>
                             <option value="2">USD</option>

@@ -225,7 +225,7 @@ export class MetasComponent implements OnInit {
     this.meta.met_nombre = this.forma.value['detalle'];
     this.meta.met_flimite = this.forma.value['fechaLimite'];
     this.muestraMensajeOk();
-    //this.metaServicio.guardaMetas(this.meta);
+    
     this.metaServicio.guardaMetas(this.meta).subscribe((data) => {
       setTimeout(() => {
         this.traeMetaPorEstado(this.estadoMeta);
