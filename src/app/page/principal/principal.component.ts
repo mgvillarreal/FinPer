@@ -71,6 +71,7 @@ export class PrincipalComponent implements OnInit {
   categorias: CategoriaI[];
   categoriasIngreso: CategoriaI[];
   categoriasEgreso: CategoriaI[];
+  categoriaSeleccionada = 0;
 
   balanceTotal: number = 0;
 
@@ -98,7 +99,7 @@ export class PrincipalComponent implements OnInit {
 
     this.forma = this.fb.group({
       monto: ['', [Validators.required, Validators.min(1)]],
-      categoria: ['', [Validators.required, Validators.min(1)]],
+      categoria: ['0', [Validators.required, Validators.min(1)]],
       detalle: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
     });
@@ -183,6 +184,7 @@ export class PrincipalComponent implements OnInit {
 
   seleccionaTipoMovimiento(tipoMovimiento: number) {
     this.fechaActual = new Date();
+    this.categoriaSeleccionada = 0;
     if (tipoMovimiento == 1) {
       this.movimiento.tipo = 1;
       this.nuevoIngFlag = 1;

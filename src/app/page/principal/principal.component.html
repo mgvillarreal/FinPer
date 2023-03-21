@@ -131,7 +131,7 @@
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
-          <select class="form" name="categoria" formControlName="categoria">
+          <select class="form" name="categoria" formControlName="categoria" [(ngModel)]="categoriaSeleccionada">
             <option [selected]="true" [disabled]="true" value="0">Seleccione categoría</option>
             <option *ngFor="let categoria of categoriasIngreso" value="{{categoria.cmov_id}}">{{categoria.cmov_descripcion}}</option>
           </select>
@@ -199,7 +199,7 @@
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
-          <select class="form" name="categoria" formControlName="categoria">
+          <select class="form" name="categoria" formControlName="categoria" [(ngModel)]="categoriaSeleccionada">
             <option [selected]="true" [disabled]="true" value="0">Seleccione categoría</option>
             <option *ngFor="let categoria of categoriasEgreso" value="{{categoria.cmov_id}}">{{categoria.cmov_descripcion}}</option>
           </select>
