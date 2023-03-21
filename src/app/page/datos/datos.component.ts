@@ -124,10 +124,11 @@ export class DatosComponent implements OnInit {
     this.modificarDatos();
   }
 
-  modificarDatos(){
+  async modificarDatos(){
     let idUser = localStorage.getItem('id');
     
-    this.usuarioService.modificaUsuario(this.usuario, idUser).subscribe();
+    await this.usuarioService.modificaUsuario(this.usuario, idUser).toPromise();
+    await this.traeDatosUsuario();
   }
 
   eliminarPerfil(){
