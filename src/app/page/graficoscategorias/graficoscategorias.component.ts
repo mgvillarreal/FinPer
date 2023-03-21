@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart, ChartConfiguration, ChartItem, layouts, registerables } from 'chart.js';
+import { Chart, ChartConfiguration, ChartItem, Color, layouts, registerables } from 'chart.js';
 import { jsPDF } from 'jspdf';
 import  html2canvas  from 'html2canvas';
-import autotable from 'jspdf-autotable';
+import autotable, { ThemeType } from 'jspdf-autotable';
 import { catchError, throwError } from 'rxjs';
 import { MovimientosService } from 'src/app/services/movimientos.service';
 
@@ -41,9 +41,7 @@ export class GraficoscategoriasComponent implements OnInit {
     this.traeDatos();
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void { }
 
   traeDatos()
   {
@@ -242,91 +240,119 @@ export class GraficoscategoriasComponent implements OnInit {
   }
 
   descargaCategoria(){
-    let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
-    pdf.text('Informe Mensual Categorias '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
-    pdf.addImage('./assets/img/icons/FinPerLogo.png','png',15, 1,10,10);
-    
-    pdf.text('Ingresos ',75,145);
+    let pdf = new jsPDF();
+    // pdf.text('Informe Mensual Categorías '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
+    // pdf.addImage('./assets/img/icons/FinPerLogo.png','png', 15, 1, 10, 10);
 
-    var columns = ['Categoria', 'Porcentaje','Monto'];
+    pdf.addImage('./assets/img/icons/FinPerLogo.png','png', 10, 7, 13, 13);
+    pdf.setFont('arial', 'bold'); pdf.setFontSize(25);
+    pdf.text('FinPer App', 25, 17);
+    pdf.setFont('arial', 'normal'); pdf.setFontSize(12);
+    pdf.text('Consulta: Informe Mensual Categorías', 10, 27);
+    pdf.text('Período: '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(), 10, 33);
+    pdf.text('Nombre: '+localStorage.getItem('name'), 10, 39);
+    
+    pdf.setFont('arial', 'bold'); pdf.setFontSize(14);
+    pdf.text('Ingresos ', 90, 145);
+    var columns = ['Categoría', 'Monto', 'Pocentaje'];
     var datosTabla = [];
     for (var key in this.categoriasIngreso){
-      var temp = [this.categoriasIngreso[key],this.porcentajesIngresos[key],this.ingresosMes[key]];
+      var temp = [this.categoriasIngreso[key], this.ingresosMes[key], this.porcentajesIngresos[key]];
       datosTabla.push(temp);
     }
     autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
-
-    
     let finalY = (pdf as any).lastAutoTable.finalY;
-    pdf.text("Egresos", 75, finalY + 10 );
 
-    var columns2 = ['Categoria', 'Porcentaje','Monto'];
+    pdf.text("Egresos", 90, finalY + 10 );
+    var columns2 = ['Categoría', 'Monto (ARS)', 'Porcentaje (%)'];
     var datosTabla2 = [];
     for (var key in this.categoriasEgreso){
-      var temp2 = [this.categoriasEgreso[key],this.porcentajesEgresos[key],this.egresosMes[key]];
+      var temp2 = [this.categoriasEgreso[key], this.egresosMes[key], this.porcentajesEgresos[key]];
       datosTabla2.push(temp2);
     }
-    autotable(pdf,{columns: columns2,body: datosTabla2, didDrawCell: (datosTabla2)=>{ margin:{100}},startY: finalY + 15,});
 
+
+    //autotable(pdf,{columns: columns2,body: datosTabla2, didDrawCell: (datosTabla2)=>{ margin:{100}},startY: finalY + 15,});
+    
+    autotable(pdf, {
+      columns: columns2,
+      body: datosTabla2,
+      headStyles: {
+        fillColor: "#419f3e",
+        textColor: "#FFFFFF",
+        font: 'arial',
+        fontSize: 13,
+        fontStyle: 'bold'
+      },
+      bodyStyles: {
+        fillColor: "#FFFFFF",
+        textColor: 0,
+        fontSize: 10,
+        font: 'arial',
+        cellPadding: 2,
+        cellWidth: 'auto'
+      },
+      didDrawCell: (datosTabla2) =>{
+        
+      },
+      startY: finalY + 15
+    });
 
     var data = document.getElementById('grafico-ingresosmensual');
     html2canvas(data).then(canvas => {
-      var imgWidth = 100;
-      var pageHeight = 190;
+      var imgWidth = 90; //100
+      var pageHeight = 190; //190
       var imgHeight = canvas.height * imgWidth / canvas.width;
       var heightLeft = imgHeight;
       const contentDataURL = canvas.toDataURL('image/png', 10)
       var options = {
-      size: '70px',
-      background: '#fff',
-      pagesplit: true,
-    };
-    var position = 20;
-    var width = pdf.internal.pageSize.width;
-    var height = pdf.internal.pageSize.height;
-    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
-    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)//, options);
-      //pdf.addImage(contentDataURL2, 'PNG', 50, position, imgWidth, imgHeight)//, options);
+        size: '70px',
+        background: '#fff',
+        pagesplit: true,
+      };
+      var position = 45; //20;
+      var width = pdf.internal.pageSize.width;
+      var height = pdf.internal.pageSize.height;
+      pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
+      pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
-    }
-    //pdf.save('Movimientos Ingreso Categorias.pdf'); // Generated PDF
-  });
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(contentDataURL, 'PNG', 10, position, imgWidth, imgHeight)//, options);
+        heightLeft -= pageHeight;
+      }
+      //pdf.save('Movimientos Ingreso Categorias.pdf'); // Generated PDF
+    });
 
     var data1 = document.getElementById('grafico-gastosmensual');
     html2canvas(data1).then(canvas => {
-      var imgWidth = 100;
+      var imgWidth = 90;
       var pageHeight = 190;
       var imgHeight = canvas.height * imgWidth / canvas.width;
       var heightLeft = imgHeight;
       const contentDataURL2 = canvas.toDataURL('image/png', 10)
       var options = {
-      size: '70px',
-      background: '#fff',
-      pagesplit: true,
-    };
-    var position = 20;
-    var width = pdf.internal.pageSize.width;
-    var height = pdf.internal.pageSize.height;
+        size: '70px',
+        background: '#fff',
+        pagesplit: true,
+      };
+      var position = 45;
+      var width = pdf.internal.pageSize.width;
+      var height = pdf.internal.pageSize.height;
 
   
-    pdf.addImage(contentDataURL2, 'PNG', 105,  position, imgWidth, imgHeight)
-    pdf.addImage(contentDataURL2, 'PNG', 105,  position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      //pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)//, options);
-      pdf.addImage(contentDataURL2, 'PNG', 105, position, imgWidth, imgHeight)//, options);
+      pdf.addImage(contentDataURL2, 'PNG', 105,  position, imgWidth, imgHeight)
+      pdf.addImage(contentDataURL2, 'PNG', 105,  position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
-    }
-    pdf.save('Movimientos Categorias.pdf'); // Generated PDF
-  });
-  
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(contentDataURL2, 'PNG', 105, position, imgWidth, imgHeight)//, options);
+        heightLeft -= pageHeight;
+      }
+      pdf.save('Movimientos Categorias.pdf'); // Generated PDF
+    });  
     
   }
   
