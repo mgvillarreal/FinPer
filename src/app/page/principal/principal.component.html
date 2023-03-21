@@ -131,9 +131,9 @@
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
-          <select class="form" name="categoria" formControlName="categoria" [(ngModel)]="categoriaSeleccionada">
+          <select class="form" name="categoria" formControlName="categoria" [(ngModel)]="categoriaSeleccionada" [style.color]="categoriaSeleccionada == 0 ? 'gray' : 'black'">
             <option [selected]="true" [disabled]="true" value="0">Seleccione categoría</option>
-            <option *ngFor="let categoria of categoriasIngreso" value="{{categoria.cmov_id}}">{{categoria.cmov_descripcion}}</option>
+            <option *ngFor="let categoria of categoriasIngreso" value="{{categoria.cmov_id}}" style="color:black">{{categoria.cmov_descripcion}}</option>
           </select>
         </div><br>
         <small  class="texto-validacion text-center"
@@ -199,9 +199,9 @@
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
-          <select class="form" name="categoria" formControlName="categoria" [(ngModel)]="categoriaSeleccionada">
+          <select class="form" name="categoria" formControlName="categoria" [(ngModel)]="categoriaSeleccionada" [style.color]="categoriaSeleccionada == 0 ? 'gray' : 'black'">
             <option [selected]="true" [disabled]="true" value="0">Seleccione categoría</option>
-            <option *ngFor="let categoria of categoriasEgreso" value="{{categoria.cmov_id}}">{{categoria.cmov_descripcion}}</option>
+            <option *ngFor="let categoria of categoriasEgreso" value="{{categoria.cmov_id}}" style="color:black">{{categoria.cmov_descripcion}}</option>
           </select>
         </div><br>
         <small  class="texto-validacion text-center"

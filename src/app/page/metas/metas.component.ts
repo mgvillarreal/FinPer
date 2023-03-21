@@ -144,8 +144,10 @@ export class MetasComponent implements OnInit {
   }
 
   editarMeta(meta: any) {
+    console.log(meta)
     //this.obtieneMonedas();
     this.metaSeleccionada = meta;
+    console.log(this.metaSeleccionada)
     if (this.editaMetaFlag == 0) {
       this.editaMetaFlag = 1;
       this.muestraMetas = 0;
