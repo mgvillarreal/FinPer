@@ -245,56 +245,89 @@ export class GraficoscategoriasComponent implements OnInit {
     // pdf.addImage('./assets/img/icons/FinPerLogo.png','png', 15, 1, 10, 10);
 
     pdf.addImage('./assets/img/icons/FinPerLogo.png','png', 10, 7, 13, 13);
-    pdf.setFont('arial', 'bold'); pdf.setFontSize(25);
+    pdf.setFont('helvetica', 'bold'); pdf.setFontSize(25); pdf.setTextColor(65,159,62);
     pdf.text('FinPer App', 25, 17);
-    pdf.setFont('arial', 'normal'); pdf.setFontSize(12);
-    pdf.text('Consulta: Informe Mensual Categorías', 10, 27);
-    pdf.text('Período: '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(), 10, 33);
-    pdf.text('Nombre: '+localStorage.getItem('name'), 10, 39);
+    pdf.setFont('helvetica', 'bold'); pdf.setFontSize(12); pdf.setTextColor(0);
+    pdf.text('Consulta:', 10, 27); 
+    pdf.setFont('helvetica', 'normal');
+    pdf.text('Informe Mensual de Categorías', 31, 27);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Período: ', 10, 33);
+    pdf.setFont('helvetica', 'normal');
+    pdf.text(this.arrMeses[this.mesActual]+' '+this.anioActual.toString(), 29, 33);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Nombre: ', 10, 39);
+    pdf.setFont('helvetica', 'normal');
+    pdf.text(localStorage.getItem('name'), 29, 39);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Fecha: ', 10, 45);
+    pdf.setFont('helvetica', 'normal');
+    const date = new Date();
+    const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString()}`;
+    pdf.text(formattedDate, 25, 45);
     
-    pdf.setFont('arial', 'bold'); pdf.setFontSize(14);
+    pdf.setFont('helvetica', 'bold'); pdf.setFontSize(14);
     pdf.text('Ingresos ', 90, 145);
-    var columns = ['Categoría', 'Monto', 'Pocentaje'];
+    var columns = ['Categoría', 'Monto (ARS)', 'Pocentaje (%)'];
     var datosTabla = [];
     for (var key in this.categoriasIngreso){
-      var temp = [this.categoriasIngreso[key], this.ingresosMes[key], this.porcentajesIngresos[key]];
+      var temp = [this.categoriasIngreso[key], this.ingresosMes[key].toLocaleString(), this.porcentajesIngresos[key].toLocaleString()];
       datosTabla.push(temp);
     }
-    autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
-    let finalY = (pdf as any).lastAutoTable.finalY;
-
-    pdf.text("Egresos", 90, finalY + 10 );
-    var columns2 = ['Categoría', 'Monto (ARS)', 'Porcentaje (%)'];
-    var datosTabla2 = [];
-    for (var key in this.categoriasEgreso){
-      var temp2 = [this.categoriasEgreso[key], this.egresosMes[key], this.porcentajesEgresos[key]];
-      datosTabla2.push(temp2);
-    }
-
-
-    //autotable(pdf,{columns: columns2,body: datosTabla2, didDrawCell: (datosTabla2)=>{ margin:{100}},startY: finalY + 15,});
-    
+    //autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
     autotable(pdf, {
-      columns: columns2,
-      body: datosTabla2,
+      columns: columns,
+      body: datosTabla,
       headStyles: {
-        fillColor: "#419f3e",
+        fillColor: '#92EA8F',
         textColor: "#FFFFFF",
-        font: 'arial',
-        fontSize: 13,
+        font: 'helvetica',
+        fontSize: 12,
         fontStyle: 'bold'
       },
       bodyStyles: {
         fillColor: "#FFFFFF",
         textColor: 0,
         fontSize: 10,
-        font: 'arial',
+        font: 'helvetica',
         cellPadding: 2,
         cellWidth: 'auto'
       },
-      didDrawCell: (datosTabla2) =>{
-        
+      didDrawCell: (datosTabla) =>{
+        margin:{100}
       },
+      startY: 150,
+    });
+    let finalY = (pdf as any).lastAutoTable.finalY;
+
+    pdf.text("Egresos", 90, finalY + 10 );
+    var columns2 = ['Categoría', 'Monto (ARS)', 'Porcentaje (%)'];
+    var datosTabla2 = [];
+    for (var key in this.categoriasEgreso){
+      var temp2 = [this.categoriasEgreso[key], this.egresosMes[key].toLocaleString(), this.porcentajesEgresos[key].toLocaleString()];
+      datosTabla2.push(temp2);
+    }
+
+    //autotable(pdf,{columns: columns2,body: datosTabla2, didDrawCell: (datosTabla2)=>{ margin:{100}},startY: finalY + 15,});
+    autotable(pdf, {
+      columns: columns2,
+      body: datosTabla2,
+      headStyles: {
+        fillColor: "#F68576",
+        textColor: "#FFFFFF",
+        font: 'helvetica',
+        fontSize: 12,
+        fontStyle: 'bold'
+      },
+      bodyStyles: {
+        fillColor: "#FFFFFF",
+        textColor: 0,
+        fontSize: 10,
+        font: 'helvetica',
+        cellPadding: 2,
+        cellWidth: 'auto'
+      },
+      didDrawCell: (datosTabla2) =>{ },
       startY: finalY + 15
     });
 
@@ -310,7 +343,7 @@ export class GraficoscategoriasComponent implements OnInit {
         background: '#fff',
         pagesplit: true,
       };
-      var position = 45; //20;
+      var position = 47; //20;
       var width = pdf.internal.pageSize.width;
       var height = pdf.internal.pageSize.height;
       pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
@@ -319,10 +352,10 @@ export class GraficoscategoriasComponent implements OnInit {
       while (heightLeft >= 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(contentDataURL, 'PNG', 10, position, imgWidth, imgHeight)//, options);
+        pdf.addImage(contentDataURL, 'PNG', 10, position, imgWidth, imgHeight)
         heightLeft -= pageHeight;
       }
-      //pdf.save('Movimientos Ingreso Categorias.pdf'); // Generated PDF
+      //pdf.save('Movimientos Ingreso Categorias.pdf');
     });
 
     var data1 = document.getElementById('grafico-gastosmensual');
@@ -337,7 +370,7 @@ export class GraficoscategoriasComponent implements OnInit {
         background: '#fff',
         pagesplit: true,
       };
-      var position = 45;
+      var position = 47;
       var width = pdf.internal.pageSize.width;
       var height = pdf.internal.pageSize.height;
 
@@ -348,10 +381,11 @@ export class GraficoscategoriasComponent implements OnInit {
       while (heightLeft >= 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(contentDataURL2, 'PNG', 105, position, imgWidth, imgHeight)//, options);
+        pdf.addImage(contentDataURL2, 'PNG', 105, position, imgWidth, imgHeight)
         heightLeft -= pageHeight;
       }
-      pdf.save('Movimientos Categorias.pdf'); // Generated PDF
+      const formattedDate2 = `${date.getDate().toString().padStart(2, '0')}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getFullYear().toString()}`;
+      pdf.save('FinPerApp_InformeMensualCategorias_'+formattedDate2+'.pdf'); 
     });  
     
   }
