@@ -162,9 +162,7 @@ export class PrincipalComponent implements OnInit {
 
   traeBalance(){
     this.movimientoService.traeBalance(localStorage.getItem('id')).subscribe(respuesta => {
-      
       this.balanceTotal = respuesta['balance']['Balance'];
-      
     })
   }
 
@@ -215,8 +213,6 @@ export class PrincipalComponent implements OnInit {
     let fechaEv = new Date(this.forma.value['fecha']);
 
     if (isNaN(fechaEv.getTime())) {
-      console.log('Fecha no válida');
-
       const dateString = this.forma.value['fecha'];
       const dateParts = dateString.split(' ');
 
@@ -240,23 +236,15 @@ export class PrincipalComponent implements OnInit {
       const formattedDate = `${newYear}-${newMonth}-${newDay}T${newHours}:${newMinutes}`;
 
       this.movimiento.fecha = formattedDate;
-    } else {
-      console.log('Fecha válida'); 
+    } else { 
       this.movimiento.fecha = this.forma.value['fecha'];
     }
 
-    console.log("crear movimiento: ", this.movimiento);
+    this.movimientoService.guardaMovimiento(this.movimiento).subscribe((data) => {
+      this.calcula();
+      this.creaGrafico();
+    });
 
-    this.movimientoService
-      .guardaMovimiento(this.movimiento)
-      .subscribe((data) => {
-        console.log(data);
-        this.calcula();
-
-        // COLOCAR ACA LA FUNCIÓN PARA RENOVAR EL GRAFICO DE DONA
-        this.creaGrafico();
-
-      });
     this.muestraMsjAltaOk();
     this.forma.reset();
 
@@ -375,11 +363,11 @@ export class PrincipalComponent implements OnInit {
     let data = {
       id: this.movimientoSeleccionado.mov_id
     }
+
     this.movimientoService.borraUnMovimiento(data).subscribe(resp => {
       this.calcula();
     })
 
-    console.log('Eliminar: ', this.movimientoSeleccionado.mov_id);
   }
 
   cancelaEliminar() {
@@ -396,9 +384,6 @@ export class PrincipalComponent implements OnInit {
     this.movimientoService.traeCategorias().subscribe((resp) => {
       this.categorias = resp;
       this.divisorCategoria();
-
-      console.log(this.categoriasIngreso);
-      console.log(this.categorias);
     });
   }
 
@@ -450,9 +435,7 @@ export class PrincipalComponent implements OnInit {
       ],
       datasets: [{
         label: 'Mis Cuentas',
-        //data: [76, 24],
         data: [this.porcentajeIngreso, this.porcentajeEgreso, this.porcentajeAhorro],
-        //data: [70, 20, 10],
         backgroundColor: [
           '#3fd22f',
           'rgba(255, 0, 0, 0.903)',
@@ -469,7 +452,7 @@ export class PrincipalComponent implements OnInit {
 
     const chartItem: ChartItem = document.getElementById('grafico-miscuentas') as ChartItem;
 
-    new Chart(chartItem, config);
+    this.myChart = new Chart(chartItem, config);
   }
 
   divisorCategoria(){

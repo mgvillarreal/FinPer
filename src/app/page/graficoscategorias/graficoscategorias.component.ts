@@ -54,7 +54,6 @@ export class GraficoscategoriasComponent implements OnInit {
     )
     .subscribe((data) => {
       this.dataMovimientos = data;
-      console.log("Movimientos: ", this.dataMovimientos);
 
       for (let datos of this.dataMovimientos) {
         if (datos.tmov_descripcion == 'Ingreso') {
