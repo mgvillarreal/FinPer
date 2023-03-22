@@ -22,8 +22,8 @@
                 <span>{{this.user.edad}}</span>
             </div>
             <div>
-                <span class="titulo-campos">Email</span><br>
-                <span>{{user.usu_email}}</span>
+                <span class="titulo-campos">Modo de Ingreso</span><br>
+                <span>{{user.ming_descripcion}}</span>
             </div>
         </div>
 
@@ -87,7 +87,7 @@
                             <br>
                             <div class="wrap-input100" >
                                 <select class="input100" name="residencia" formControlName="residencia" >
-                                    <option value="">Lugar de Residencia</option>
+                                    <option value="" disabled>Lugar de Residencia</option>
                                     <option *ngFor="let pais of paises" value="{{pais.res_id}}" [disabled]="pais.res_id != 13" [selected]="pais.res_id==13">{{pais.res_descripcion}}</option>
                                 </select>
                             </div>
@@ -99,7 +99,7 @@
 
                             <div class="wrap-input100" >
                               <select class="wrap-input100" name="modoingreso" formControlName="modoingreso">
-                                <option value="">Modo de ingresos</option>
+                                <option value="" disabled>Modo de ingresos</option>
                                 <option value={{ingreso.ming_id}} *ngFor="let ingreso of ingresos" [selected]="ingreso.ming_id == user.usu_idmoding" >
                                   {{ingreso.ming_descripcion}}
                                 </option>
@@ -112,7 +112,7 @@
                             <br>
                             <div class="wrap-input100" >
                               <select class="input100"  name="profesion" formControlName="profesion">
-                                <option value="">Área de Profesión</option>
+                                <option value="" disabled>Área de Profesión</option>
                                 <option value="{{profesion.pro_id}}" *ngFor="let profesion of profesiones" [selected]="profesion.pro_id == user.usu_idprofesion">
                                     {{profesion.pro_descripcion}}</option>
                               </select>
@@ -229,7 +229,7 @@
                             La contraseña debe tener al menos una mayúscula y un número.
                         </small>
                         <small  class="texto-validacion text-center" 
-                        *ngIf="forma.controls['contrasenaNueva'].errors?.['minLength(8)']">
+                        *ngIf="forma.controls['contrasenaNueva'].errors?.['minlength']">
                             La contraseña debe tener al menos 8 caracteres.
                         </small>
 

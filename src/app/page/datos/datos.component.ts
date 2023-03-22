@@ -192,6 +192,8 @@ export class DatosComponent implements OnInit {
     const resp = await this.usuarioService.traeDatosUsuario(Number(localStorage.getItem('id'))).toPromise();
     this.user = resp[0];
     this.ageCalculator(resp[0].usu_fnacimiento);
+    localStorage.setItem("name", this.user.usu_nombre);
+    this.auth.nombre = this.user.usu_nombre;
   }
 
   ageCalculator(edad){

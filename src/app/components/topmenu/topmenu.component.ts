@@ -22,14 +22,10 @@ export class TopmenuComponent implements OnInit {
   @Input() menuDesplegado
   @Output() eventoDesplegar: EventEmitter<any> = new EventEmitter()
 
-  constructor(
-    public auth: AuthService,
-    public usuarioService: UsuariosService,
-    public notificacionesService: NotificacionesService
-    ) {
-      //verifica si hay mensajes
-
-     }
+  constructor( public auth: AuthService, public usuarioService: UsuariosService, public notificacionesService: NotificacionesService )
+  {
+    //verifica si hay mensajes
+  }
 
   cambiaEstadoMenu(): void{
     if(this.menu === 'abierto')
@@ -40,7 +36,6 @@ export class TopmenuComponent implements OnInit {
     {
       this.menu = 'abierto';
     }
-
   }
 
   logout(){

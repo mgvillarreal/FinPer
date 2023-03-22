@@ -16,6 +16,7 @@ export interface UsuarioI {
     upro_idprofesion: number;
     uming_idmingresos: number;
     usu_idmoding: number;
+    ming_descripcion: string;
     usu_idprofesion: number;
 
 }
