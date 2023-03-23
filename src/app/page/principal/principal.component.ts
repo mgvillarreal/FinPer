@@ -32,7 +32,7 @@ export class PrincipalComponent implements OnInit {
 
   /*Paginador*/
   paginaActual = 1;
-  movimientosPorPagina = 10;
+  movimientosPorPagina = 5;
 
   /*Flags*/
   public forma: FormGroup;
@@ -114,6 +114,7 @@ export class PrincipalComponent implements OnInit {
 
     this.traeCategorias();
     this.traeBalance();
+    
   }
 
   agregaNumero(numero: number) {

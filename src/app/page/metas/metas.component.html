@@ -216,7 +216,7 @@
                     </div>
 
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="text" name="fechaLimite" placeholder="Fecha límite de la meta"  value="{{metaSeleccionada.met_flimite}}" onfocus="(this.type='date')" [(ngModel)]="modificarFecha">
+                        <input type="date" name="fechaLimite" placeholder="Fecha límite de la meta"  value="{{metaSeleccionada.met_flimite}}" onfocus="(this.type='date')" [(ngModel)]="modificarFecha">
                     </div>
                     <small  class="texto-validacion text-center"
                     *ngIf="forma2.controls['fechaLimiteEdit'].errors?.['required'] && forma2.controls['fechaLimiteEdit'].touched">
