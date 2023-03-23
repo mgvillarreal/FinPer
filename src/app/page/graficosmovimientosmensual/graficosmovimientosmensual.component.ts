@@ -179,7 +179,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     pdf.setFont('helvetica', 'bold'); pdf.setFontSize(12); pdf.setTextColor(0);
     pdf.text('Consulta:', 10, 27); 
     pdf.setFont('helvetica', 'normal');
-    pdf.text('Informe de Movimientos Mensuales ', 31, 27);
+    pdf.text('Informe Mensual de Movimientos', 31, 27);
     pdf.setFont('helvetica', 'bold');
     pdf.text('Período: ', 10, 33);
     pdf.setFont('helvetica', 'normal');
@@ -195,7 +195,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString()}`;
     pdf.text(formattedDate, 25, 45);
     
-    var columns = ['Categoría', 'Importe'];
+    var columns = ['Categoría', 'Importe (ARS)'];
     var datosTabla = [];
     for (var key in this.categorias){
       var temp = [this.categorias[key], Number(this.montos[key]).toLocaleString()];
@@ -253,7 +253,7 @@ export class GraficosmovimientosmensualComponent implements OnInit {
         heightLeft -= pageHeight;
       }
     const formattedDate2 = `${date.getDate().toString().padStart(2, '0')}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getFullYear().toString()}`;
-    pdf.save('FinPerApp_InformeMensual_'+formattedDate2+'.pdf');
+    pdf.save('FinPerApp_InformeMensualMovimientos_'+formattedDate2+'.pdf');
     });
 
 
