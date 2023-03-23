@@ -171,50 +171,89 @@ export class GraficosmovimientosmensualComponent implements OnInit {
   }
 
   descargaMensual(){
-    let pdf = new jsPDF()//('p', 'mm', 'a4',1); // A4 size page of PDF
-    pdf.text('Informe Movimientos Mensuales '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
-    pdf.text('',3,20);
-    var columns = ['Categoria', 'Importe'];
-    var datosTabla = [];
-    //var logo = new Image();
-    //var logo = './assets/img/icons/FinPerLogo.jpf';
-    //logo.scr = './assets/img/icons/FinPerLogo.jpf';
-    pdf.addImage('./assets/img/icons/FinPerLogo.png','png',15, 1,10,10);
+    let pdf = new jsPDF();
 
+    pdf.addImage('./assets/img/icons/FinPerLogo.png','png', 10, 7, 13, 13);
+    pdf.setFont('helvetica', 'bold'); pdf.setFontSize(25); pdf.setTextColor(65,159,62);
+    pdf.text('FinPer App', 25, 17);
+    pdf.setFont('helvetica', 'bold'); pdf.setFontSize(12); pdf.setTextColor(0);
+    pdf.text('Consulta:', 10, 27); 
+    pdf.setFont('helvetica', 'normal');
+    pdf.text('Informe Mensual de Movimientos', 31, 27);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Período: ', 10, 33);
+    pdf.setFont('helvetica', 'normal');
+    pdf.text(this.arrMeses[this.mesActual]+' '+this.anioActual.toString(), 29, 33);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Nombre: ', 10, 39);
+    pdf.setFont('helvetica', 'normal');
+    pdf.text(localStorage.getItem('name'), 29, 39);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Fecha: ', 10, 45);
+    pdf.setFont('helvetica', 'normal');
+    const date = new Date();
+    const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString()}`;
+    pdf.text(formattedDate, 25, 45);
+    
+    var columns = ['Categoría', 'Importe (ARS)'];
+    var datosTabla = [];
     for (var key in this.categorias){
-      var temp = [this.categorias[key],this.montos[key]];
+      var temp = [this.categorias[key], Number(this.montos[key]).toLocaleString()];
       datosTabla.push(temp);
     }
-    autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
+
+    autotable(pdf, {
+      columns: columns,
+      body: datosTabla,
+      headStyles: {
+        fillColor: '#419f3e',
+        textColor: "#FFFFFF",
+        font: 'helvetica',
+        fontSize: 12,
+        fontStyle: 'bold'
+      },
+      bodyStyles: {
+        fillColor: "#FFFFFF",
+        textColor: 0,
+        fontSize: 10,
+        font: 'helvetica',
+        cellPadding: 2,
+        cellWidth: 'auto'
+      },
+      didDrawCell: (datosTabla) =>{
+        margin:{100}
+      },
+      startY: 150,
+    });
+
+    //autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
  
-    
     var data = document.getElementById('grafico-movimientosmensual');
     html2canvas(data).then(canvas => {
-      var imgWidth = 200;
+      var imgWidth = 190;
       var pageHeight = 190;
       var imgHeight = canvas.height * imgWidth / canvas.width;
       var heightLeft = imgHeight;
       const contentDataURL = canvas.toDataURL('image/png', 10)
       var options = {
-      size: '70px',
-      background: '#fff',
-      pagesplit: true,
-    };
-    var position = 17;
-    var width = pdf.internal.pageSize.width;
-    var height = pdf.internal.pageSize.height;
-    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight)
-    pdf.addImage(contentDataURL, 'PNG', 5,  position, imgWidth, imgHeight);
-    /*pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight, options)
-    pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight, options);*/
-    heightLeft -= pageHeight;
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)//, options);
+        size: '70px',
+        background: '#fff',
+        pagesplit: true,
+      };
+      var position = 47;
+      var width = pdf.internal.pageSize.width;
+      var height = pdf.internal.pageSize.height;
+      pdf.addImage(contentDataURL, 'PNG', 10,  position, imgWidth, imgHeight)
+      //pdf.addImage(contentDataURL, 'PNG', 10,  position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
-    }
-    pdf.save('Movimientos Mensuales.pdf'); // Generated PDF
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(contentDataURL, 'PNG', 5, position, imgWidth, imgHeight)
+        heightLeft -= pageHeight;
+      }
+    const formattedDate2 = `${date.getDate().toString().padStart(2, '0')}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getFullYear().toString()}`;
+    pdf.save('FinPerApp_InformeMensualMovimientos_'+formattedDate2+'.pdf');
     });
 
 

@@ -79,7 +79,7 @@ export class PrincipalComponent implements OnInit {
     Balance:0,
   };
 
-  metasPendientes: number;
+  montosDeAhorro:any[] = [];
 
   constructor(
     private movimientoService: MovimientosService,
@@ -91,7 +91,7 @@ export class PrincipalComponent implements OnInit {
   {
     this.calcula();
     this.traeSumaAhorros();
-    this.traeCantidadMetasPend();
+    this.traeAhorros();
   }
 
   ngOnInit(): void {
@@ -167,7 +167,7 @@ export class PrincipalComponent implements OnInit {
     })
   }
 
-  calculaPorcentajes(): void{
+  async calculaPorcentajes() {
     let total = this.ingreso + this.egreso + Number(this.sumaMontos);
     console.log('Ingresos: ', this.ingreso);
     console.log('Gastos: ', this.egreso);
@@ -178,7 +178,7 @@ export class PrincipalComponent implements OnInit {
     this.porcentajeEgreso = (this.egreso/total)*100;
     this.porcentajeAhorro = (this.sumaMontos/total)*100;
 
-    this.creaGrafico();
+    await this.creaGrafico();
   }
 
   seleccionaTipoMovimiento(tipoMovimiento: number) {
@@ -412,11 +412,11 @@ export class PrincipalComponent implements OnInit {
     });
   }
 
-  traeCantidadMetasPend(){
+  traeAhorros(){
     let idUsuario = localStorage.getItem('id');
-    this.metasService.traeCantMetasPend(idUsuario, this.mesActual, this.anioActual).subscribe((respuesta => {
-      this.metasPendientes = respuesta[0]['COUNT(met_id)'];
-      console.log("cantidad de metas: ", this.metasPendientes);
+    this.metasService.traeMontosDeAhorro(idUsuario, this.mesActual, this.anioActual).subscribe((respuesta => {
+      this.montosDeAhorro =  respuesta;
+      console.log("cantidad de metas: ", this.montosDeAhorro);
     }));
   }
 
@@ -424,6 +424,7 @@ export class PrincipalComponent implements OnInit {
   creaGrafico(): void {
     if (this.myChart) {
       this.myChart.destroy();
+      //this.myChart.update();
     }
 
     Chart.register(...registerables);
@@ -454,6 +455,7 @@ export class PrincipalComponent implements OnInit {
     const chartItem: ChartItem = document.getElementById('grafico-miscuentas') as ChartItem;
 
     this.myChart = new Chart(chartItem, config);
+    //new Chart(chartItem, config);
   }
 
   divisorCategoria(){

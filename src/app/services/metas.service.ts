@@ -93,13 +93,13 @@ export class MetasService {
     return this.http.post<any>(this.urlMontos + 'traemontosporanio', data);
   }
 
-  traeCantMetasPend(usuario, mes, anio){
+  traeMontosDeAhorro(usuario, mes, anio){
     let data = {
       'id_usuario': usuario,
-      'mes': mes,
+      'mes': mes+1,
       'anio': anio
     }
     console.log("data en el servicio: ", data);
-    return this.http.post<any>(this.urlv4 + '/traeCantidadMetasPend', data);
+    return this.http.post<any>(this.urlv4 + '/traeMetasPendientes', data);
   }
 }

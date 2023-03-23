@@ -14,7 +14,7 @@
 
     <div class="text-center pt-4 pb-1">
       <span class="balance-titulo">Balance Mes: </span>
-      <span class="balance-cantidad"> ARS {{ balance - sumaMontos | number: '1.2-2' }} </span>
+      <span class="balance-cantidad"> ARS {{ this.balance - sumaMontos | number: '1.2-2' }} </span>
     </div>
     <div class="text-center pb-3">
       <span class="subbalance-titulo">Balance Total: </span>
@@ -44,12 +44,9 @@
   
         <div class="containercard-item2">
           <div class="card text-center">
-            <div class="card-titulo ahorro">Metas de Ahorro</div>
-            <div class="card-cantidad ahorro">ARS {{ sumaMontos | number: '1.2-2' }}</div>
-            <div class="cardahorro-mensaje text">
-              <p style="margin: 0">Tienes 5 metas de ahorros pendientes.</p>
-            </div>
-            <button class="btn btn-outline-primary btn-irahorro" routerLink="/metas">
+            <div class="card-titulo ahorro mb-4">Metas de Ahorro</div>
+            <div class="card-cantidad ahorro mt-2 mb-4" *ngFor="let montoAhorro of montosDeAhorro">{{montoAhorro.moneda}} {{ montoAhorro.monto | number: '1.2-2' }}</div>
+            <button class="btn btn-outline-primary btn-irahorro mt-2" routerLink="/metas">
               Ir a metas de ahorro
             </button>
           </div>

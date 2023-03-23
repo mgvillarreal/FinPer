@@ -240,8 +240,6 @@ export class GraficoscategoriasComponent implements OnInit {
 
   descargaCategoria(){
     let pdf = new jsPDF();
-    // pdf.text('Informe Mensual Categorías '+this.arrMeses[this.mesActual]+' '+this.anioActual.toString(),50,10);
-    // pdf.addImage('./assets/img/icons/FinPerLogo.png','png', 15, 1, 10, 10);
 
     pdf.addImage('./assets/img/icons/FinPerLogo.png','png', 10, 7, 13, 13);
     pdf.setFont('helvetica', 'bold'); pdf.setFontSize(25); pdf.setTextColor(65,159,62);
@@ -273,7 +271,7 @@ export class GraficoscategoriasComponent implements OnInit {
       var temp = [this.categoriasIngreso[key], this.ingresosMes[key].toLocaleString(), this.porcentajesIngresos[key].toLocaleString()];
       datosTabla.push(temp);
     }
-    //autotable(pdf,{columns: columns,body: datosTabla, didDrawCell: (datosTabla)=>{ margin:{100}},startY: 150,});
+    
     autotable(pdf, {
       columns: columns,
       body: datosTabla,
@@ -307,7 +305,6 @@ export class GraficoscategoriasComponent implements OnInit {
       datosTabla2.push(temp2);
     }
 
-    //autotable(pdf,{columns: columns2,body: datosTabla2, didDrawCell: (datosTabla2)=>{ margin:{100}},startY: finalY + 15,});
     autotable(pdf, {
       columns: columns2,
       body: datosTabla2,
