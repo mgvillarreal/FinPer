@@ -322,7 +322,7 @@
         <button class="btn-close mb-4" (click)="volveraMetas()"> </button> <br>
         <div class="card-titulo mb-4"> {{metaSeleccionada.met_nombre}} </div>
 
-        <div class="card-titulo mt-4">ARS {{metaSeleccionada.met_monto | number: '3.2-2' }}</div>
+        <div class="card-titulo mt-4">ARS {{metaSeleccionada.met_monto | number: '1.2-2' }}</div>
         <div class="txt-green mb-4">Ahorros de Meta</div>
 
         <div class="mb-4" *ngIf="tieneMontosFlag==0">
@@ -340,7 +340,7 @@
                         <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
                     </svg>
                 </td>
-                <td>{{monto.mon_simbolo}} {{monto.mmet_monto | number: '3.2-2' }} </td>
+                <td>{{monto.mon_simbolo}} {{monto.mmet_monto | number: '1.2-2' }} </td>
                 <td>{{monto.mmet_fcreacion | date: 'dd/MM/YYYY'}}</td>
               </tr>
           </table>
@@ -396,7 +396,7 @@
 	</div>
 </ng-template>
 
-<ng-template class="limiter" [ngIf]="muestraMensajeMontoFlag==1">
+<ng-template class="limiter" [ngIf]="muestraMensajeMontoFlag==1 && muestraMsjMetaAlcanzadaFlag==0">
 	<div class="container-login100">
 		<div class="wrap-login100 text-center">
             <div class="titulo-nuevameta mb-4"> </div>
@@ -588,6 +588,37 @@
                         </div>
                         <div class="mb-4">
                             <p class="texto-mensaje mt-2">Has retirado correctamente un monto de tu meta de ahorro.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 mb-2">
+                        <button class="btn btn-light btn-lg action-button btn-msjlight" (click)="volveraMetas()">
+                            Volver a mis metas
+                        </button>
+                    </div>
+
+				</div>
+
+			</form>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template class="limiter" [ngIf]="muestraMsjMetaAlcanzadaFlag==1">
+	<div class="container-login100">
+		<div class="wrap-login100 text-center">
+            <div class="titulo-nuevameta mb-4"> </div>
+			<form>
+				<div class="login100-form validate-form text-center mt-3">
+					<div class="wrap-input100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="68" height="68" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M9 12l2 2l4 -4" />
+                            </svg>
+                        </div>
+                        <div class="mb-4">
+                            <p class="texto-mensaje mt-2">¡Felicidades!<br> Has alcanzado tu meta.</p>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
