@@ -302,8 +302,9 @@ export class PrincipalComponent implements OnInit {
       this.muestraPrincipalFlag = 0;
       this.detalleIngFlag = 0;
     }
-
+    console.log("movimiento seleccionado: ", this.movimiento);
     this.movimientoSeleccionado = movimiento;
+    
   }
 
   editarEgreso(movimiento) {
@@ -385,13 +386,17 @@ export class PrincipalComponent implements OnInit {
   }
 
   eliminaMovimiento() {
-
-    if(this.movimientoSeleccionado.mov_idtipo==1){ //Si es un ingreso
+    console.log("movimiento seleccionado tipo: ", this.movimientoSeleccionado.mov_idtipo);
+    if(this.movimientoSeleccionado.mov_idtipo == 1){ //Si es un ingreso
       this.detalleIngFlag = 1;
+      this.detalleEgrFlag = 0;
       this.editaIngFlag = 0;
+      this.editaEgrFlag = 0;
     }else{ //Si es un egreso
       this.detalleEgrFlag = 1;
+      this.detalleIngFlag = 0;
       this.editaEgrFlag = 0;
+      this.editaIngFlag = 0;
     }
     this.preguntaEliminarFlag = 0;
 
