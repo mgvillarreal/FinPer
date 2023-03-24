@@ -89,9 +89,14 @@ export class PrincipalComponent implements OnInit {
     private router: Router
   )
   {
-    this.calcula();
+    this.datosParCrearGrafico();
+  }
+
+  datosParCrearGrafico(){
     this.traeSumaAhorros();
     this.traeAhorros();
+    this.calcula();
+    this.creaGrafico();
   }
 
   ngOnInit(): void {
@@ -114,7 +119,7 @@ export class PrincipalComponent implements OnInit {
 
     this.traeCategorias();
     this.traeBalance();
-    this.traeSumaAhorros();
+    //this.traeSumaAhorros();
   }
 
   agregaNumero(numero: number) {
@@ -272,6 +277,7 @@ export class PrincipalComponent implements OnInit {
     this.muestraEgresosFlag = 0;
 
     this.forma.reset();
+    this.datosParCrearGrafico();
   }
 
   muestraMsjAltaOk() {
@@ -319,39 +325,39 @@ export class PrincipalComponent implements OnInit {
   }
 
   actualizarMovimiento() {
-    //this.movimientoSeleccionado.mov_id;
-    // this.movimientoSeleccionado.mov_monto = this.forma2.value['monto'];
-    // this.movimientoSeleccionado.mov_idcategoria = this.forma2.value['categoria'];
-    // this.movimientoSeleccionado.mov_detalle = this.forma2.value['detalle'];
-    // this.movimientoSeleccionado.mov_fcreacion = this.forma2.value['fecha'];
+    this.movimientoSeleccionado.mov_id;
+    this.movimientoSeleccionado.mov_monto = this.forma2.value['monto'];
+    this.movimientoSeleccionado.mov_idcategoria = this.forma2.value['categoria'];
+    this.movimientoSeleccionado.mov_detalle = this.forma2.value['detalle'];
+    this.movimientoSeleccionado.mov_fcreacion = this.forma2.value['fecha'];
 
-    // let fechaEv = new Date(this.forma2.value['fecha']);
+    let fechaEv = new Date(this.forma2.value['fecha']);
 
-    // if (isNaN(fechaEv.getTime())) {
-    //   const dateString = this.forma2.value['fecha'];
-    //   const dateParts = dateString.split(' ');
+    if (isNaN(fechaEv.getTime())) {
+      const dateString = this.forma2.value['fecha'];
+      const dateParts = dateString.split(' ');
 
-    //   const dateArr = dateParts[0].split('/');
-    //   const timeArr = dateParts[1].split(':');
+      const dateArr = dateParts[0].split('/');
+      const timeArr = dateParts[1].split(':');
 
-    //   const year = +dateArr[2];
-    //   const month = +dateArr[1] - 1;
-    //   const day = +dateArr[0];
-    //   const hours = +timeArr[0];
-    //   const minutes = +timeArr[1];
+      const year = +dateArr[2];
+      const month = +dateArr[1] - 1;
+      const day = +dateArr[0];
+      const hours = +timeArr[0];
+      const minutes = +timeArr[1];
 
-    //   const newDate = new Date(year, month, day, hours, minutes);
+      const newDate = new Date(year, month, day, hours, minutes);
 
-    //   const newYear = newDate.getFullYear();
-    //   const newMonth = ('0' + (newDate.getMonth() + 1)).slice(-2);
-    //   const newDay = ('0' + newDate.getDate()).slice(-2);
-    //   const newHours = ('0' + newDate.getHours()).slice(-2);
-    //   const newMinutes = ('0' + newDate.getMinutes()).slice(-2);
+      const newYear = newDate.getFullYear();
+      const newMonth = ('0' + (newDate.getMonth() + 1)).slice(-2);
+      const newDay = ('0' + newDate.getDate()).slice(-2);
+      const newHours = ('0' + newDate.getHours()).slice(-2);
+      const newMinutes = ('0' + newDate.getMinutes()).slice(-2);
 
-    //   const formattedDate = `${newYear}-${newMonth}-${newDay}T${newHours}:${newMinutes}`;
+      const formattedDate = `${newYear}-${newMonth}-${newDay}T${newHours}:${newMinutes}`;
 
-    //   this.movimientoSeleccionado.mov_fcreacion = formattedDate;
-    // }
+      this.movimientoSeleccionado.mov_fcreacion = formattedDate;
+    }
 
     console.log("movimiento seleccionado: ", this.movimientoSeleccionado);
     this.movimientoService.editaUnMovimiento(this.movimientoSeleccionado).subscribe();
@@ -387,8 +393,8 @@ export class PrincipalComponent implements OnInit {
   }
 
   eliminaMovimiento() {
-    console.log("movimiento seleccionado tipo: ", this.movimientoSeleccionado.mov_idtipo);
-    if(this.movimientoSeleccionado.mov_idtipo == 1){ //Si es un ingreso
+    console.log("movimiento seleccionado tipo: ", this.movimientoSeleccionado);
+    if(this.movimientoSeleccionado.tmov_descripcion == 'Ingreso'){ //Si es un ingreso
       this.detalleIngFlag = 1;
       this.detalleEgrFlag = 0;
       this.editaIngFlag = 0;
@@ -431,8 +437,7 @@ export class PrincipalComponent implements OnInit {
   changeMes(){
     this.mesActual = Number(this.mesActual);
     this.anioActual = Number(this.anioActual);
-    this.calcula();
-    this.creaGrafico();
+    this.datosParCrearGrafico();
   }
 
   seleccionaUltMovimientos(mes, anio){
@@ -462,7 +467,6 @@ export class PrincipalComponent implements OnInit {
   creaGrafico(): void {
     if (this.myChart) {
       this.myChart.destroy();
-      //this.myChart.update();
     }
 
     Chart.register(...registerables);
@@ -492,8 +496,7 @@ export class PrincipalComponent implements OnInit {
 
     const chartItem: ChartItem = document.getElementById('grafico-miscuentas') as ChartItem;
 
-    //this.myChart = new Chart(chartItem, config);
-    new Chart(chartItem, config);
+    this.myChart = new Chart(chartItem, config);
   }
 
   divisorCategoria(){
