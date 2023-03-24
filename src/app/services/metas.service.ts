@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class MetasService {
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.apiUrl;  
 
   urlv4 = `${this.apiUrl}/v5/metas`
   urlMontos = `${this.apiUrl}/v5/montos/`

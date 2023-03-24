@@ -89,8 +89,8 @@ export class PrincipalComponent implements OnInit {
     private router: Router
   )
   {
-    this.calcula();
     this.traeSumaAhorros();
+    this.calcula();
     this.traeAhorros();
   }
 
@@ -447,6 +447,7 @@ export class PrincipalComponent implements OnInit {
   traeSumaAhorros(){
     let idUsuario = localStorage.getItem('id');
     this.metasService.traeSumaMontos(idUsuario, this.mesActual+1, this.anioActual).subscribe((respuesta) => {
+      console.log('Respuesta:', respuesta[0]['SUM(monto)'])
       this.sumaMontos = respuesta[0]['SUM(monto)'];
     });
   }
