@@ -321,23 +321,24 @@ export class MetasComponent implements OnInit {
     this.monto.monto = this.formaMonto.value['montoMonto'];
     this.monto.fecha = this.formaMonto.value['fechaMonto'];
 
-    if(this.montoPorAlcanzar = this.monto.monto){
-      await this.metaServicio.alcanzarMeta(this.monto.meta).toPromise();
-      await this.traeMetaPorEstado(this.estadoMeta);
-      this.muestraMensajeMetaAlcanzada();
+    if(this.montoPorAlcanzar <= this.monto.monto){ //100 >= 101
+      if(this.montoPorAlcanzar == this.monto.monto){
+        await this.metaServicio.alcanzarMeta(this.monto.meta).toPromise();
+        await this.traeMetaPorEstado(this.estadoMeta);
+        this.muestraMensajeMetaAlcanzada();
+      }
+      else{
+        this.mensajeValidaMonto = "El monto a ingresar no puede ser superior al monto por alcanzar de la meta.";
+      }
     }
-
-    if(this.montoPorAlcanzar >> this.monto.monto){
+    else{
       await this.metaServicio.agregaMonto(this.monto).toPromise();
       await this.traeMetaPorEstado(this.estadoMeta);
 
       this.monto = new Monto();
       this.muestraMensajeOkMonto();
     }
-    else{
-      this.mensajeValidaMonto = "El monto a ingresar no puede ser superior al monto por alcanzar de la meta.";
-    }
-
+    
   }
 
   muestraMensajeOkMonto() {
