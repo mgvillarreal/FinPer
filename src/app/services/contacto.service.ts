@@ -4,12 +4,15 @@ import { ContactoI } from '../interfaces/contacto';
 import { ResponseI } from '../interfaces/response';
 import { Mensaje } from '../models/mensaje.model';
 import {Observable} from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ContactoService{
-    url = 'https://hostinjor.com/apifinper/v5/contacto';
+    apiUrl = environment.apiUrl;
+
+    url = `${this.apiUrl}/v5/contacto`;
 
     constructor(public http: HttpClient){ }
 

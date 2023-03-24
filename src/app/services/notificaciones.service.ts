@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NotificacionI } from '../interfaces/notificacion';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificacionesService {
+  apiUrl = environment.apiUrl;
 
   notificacionesAct = false;
-  urlv5 = 'https://hostinjor.com/apifinper/v5/notificaciones/'
+  urlv5 = `${this.apiUrl}/v5/notificaciones/`
 
   constructor(
     public http: HttpClient

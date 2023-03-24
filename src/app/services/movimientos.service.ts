@@ -8,13 +8,14 @@ import { Movimiento } from '../models/movimiento.model';
   providedIn: 'root'
 })
 export class MovimientosService {
+  apiUrl = environment.apiUrl;
 
   // movimiento: Movimiento = new Movimiento
 
   url = 'https://hostinjor.com/finperapi/api/movimientos/'
-  urlv1 = 'https://hostinjor.com/apifinper/v2/movimientos/'
-  urlv4 = 'https://hostinjor.com/apifinper/v4/movimientos/'
-  urlv5 = 'https://hostinjor.com/apifinper/v5/movimientos/'
+  urlv1 = `${this.apiUrl}/v2/movimientos/`
+  urlv4 = `${this.apiUrl}/v4/movimientos/`
+  urlv5 = `${this.apiUrl}/v5/movimientos/`
 
   anioUltMov:any;
   mesUltMov:any;

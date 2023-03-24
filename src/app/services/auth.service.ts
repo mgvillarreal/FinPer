@@ -5,14 +5,16 @@ import { JwtResponseI } from '../interfaces/jwt-response';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  apiUrl = environment.apiUrl;
 
-  auth_url: string = 'https://hostinjor.com/apifinper/v1/usuarios/'
-  auth_url2: string = 'https://finper.com.ar/apifinper/v5/usuarios/'
+  auth_url: string = `${this.apiUrl}/v1/usuarios/`
+  auth_url2: string = `${this.apiUrl}/v5/usuarios/`
 
   authSubject = new BehaviorSubject(false)
   private token: string;

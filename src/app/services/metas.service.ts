@@ -4,14 +4,17 @@ import { ResponseI } from '../interfaces/response';
 import { HttpClient } from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
 import { Meta } from '../models/meta.model';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class MetasService {
-  urlv4 = 'https://hostinjor.com/apifinper/v5/metas'
-  urlMontos = 'https://hostinjor.com/apifinper/v5/montos/'
+  apiUrl = environment.apiUrl;
+
+  urlv4 = `${this.apiUrl}/v5/metas`
+  urlMontos = `${this.apiUrl}/v5/montos/`
 
   constructor(public http: HttpClient) { }
 

@@ -9,14 +9,16 @@ import { ProfesionI } from '../interfaces/profesion';
 import { UsuarioI } from '../interfaces/usuario';
 import { Usuario } from '../models/usuario.model';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
+  apiUrl = environment.apiUrl;
 
   usuario: Usuario
-  url = 'https://hostinjor.com/apifinper/v5/usuarios/';
+  url = `${this.apiUrl}/v5/usuarios/`;
 
   constructor(public http: HttpClient, public auth: AuthService) {}
 
