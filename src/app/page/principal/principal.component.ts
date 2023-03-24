@@ -114,6 +114,7 @@ export class PrincipalComponent implements OnInit {
 
     this.traeCategorias();
     this.traeBalance();
+    this.traeSumaAhorros();
   }
 
   agregaNumero(numero: number) {
@@ -445,9 +446,8 @@ export class PrincipalComponent implements OnInit {
   /* CARD AHORROS */
   traeSumaAhorros(){
     let idUsuario = localStorage.getItem('id');
-    this.metasService.traeSumaMontos(idUsuario).subscribe((respuesta) => {
-      this.sumaMontos = respuesta[0]['SUM(mmet_monto)'];
-      console.log("Suma Montos: ", this.sumaMontos);
+    this.metasService.traeSumaMontos(idUsuario, this.mesActual+1, this.anioActual).subscribe((respuesta) => {
+      this.sumaMontos = respuesta[0]['SUM(monto)'];
     });
   }
 
@@ -455,7 +455,6 @@ export class PrincipalComponent implements OnInit {
     let idUsuario = localStorage.getItem('id');
     this.metasService.traeMontosDeAhorro(idUsuario, this.mesActual, this.anioActual).subscribe((respuesta => {
       this.montosDeAhorro =  respuesta;
-      console.log("cantidad de metas: ", this.montosDeAhorro);
     }));
   }
 
@@ -493,8 +492,8 @@ export class PrincipalComponent implements OnInit {
 
     const chartItem: ChartItem = document.getElementById('grafico-miscuentas') as ChartItem;
 
-    this.myChart = new Chart(chartItem, config);
-    //new Chart(chartItem, config);
+    //this.myChart = new Chart(chartItem, config);
+    new Chart(chartItem, config);
   }
 
   divisorCategoria(){

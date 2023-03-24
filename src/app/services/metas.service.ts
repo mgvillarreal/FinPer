@@ -68,9 +68,14 @@ export class MetasService {
     return this.http.post<any>(this.urlMontos + "crear", monto)
   }
 
-  traeSumaMontos(idUsuario)
+  traeSumaMontos(idUsuario, mes, anio)
   {
-    return this.http.get<any>(this.urlMontos + "traeSuma/" + idUsuario);
+    let data = {
+      'id': idUsuario,
+      'mes': mes,
+      'anio': anio
+    }
+    return this.http.post<any>(this.urlMontos + "traeSuma", data);
   }
 
   modificaMonto(monto:any):Observable<ResponseI> {
