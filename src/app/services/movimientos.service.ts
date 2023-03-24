@@ -54,7 +54,8 @@ export class MovimientosService {
   }
 
   borraUnMovimiento(id){
-    return this.http.put<any>(this.urlv4 + 'borramovimiento', id);
+    console.log("id en service", id);
+    return this.http.put<any>(this.urlv5 + 'borramovimiento', id);
   }
 
   editaUnMovimiento(movimiento)

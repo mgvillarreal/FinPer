@@ -480,6 +480,7 @@
 
         <div class="wrap-input100 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
+            <option value="" disabled>Categoría del gasto</option>
             <option
             *ngFor="let categoria of categoriasEgreso" value="{{categoria.cmov_id}}"
             [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
