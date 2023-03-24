@@ -317,7 +317,42 @@ export class PrincipalComponent implements OnInit {
   }
 
   actualizarMovimiento() {
-    this.movimientoService.editaUnMovimiento(this.movimientoSeleccionado).subscribe()
+    //this.movimientoSeleccionado.mov_id;
+    // this.movimientoSeleccionado.mov_monto = this.forma2.value['monto'];
+    // this.movimientoSeleccionado.mov_idcategoria = this.forma2.value['categoria'];
+    // this.movimientoSeleccionado.mov_detalle = this.forma2.value['detalle'];
+    // this.movimientoSeleccionado.mov_fcreacion = this.forma2.value['fecha'];
+
+    // let fechaEv = new Date(this.forma2.value['fecha']);
+
+    // if (isNaN(fechaEv.getTime())) {
+    //   const dateString = this.forma2.value['fecha'];
+    //   const dateParts = dateString.split(' ');
+
+    //   const dateArr = dateParts[0].split('/');
+    //   const timeArr = dateParts[1].split(':');
+
+    //   const year = +dateArr[2];
+    //   const month = +dateArr[1] - 1;
+    //   const day = +dateArr[0];
+    //   const hours = +timeArr[0];
+    //   const minutes = +timeArr[1];
+
+    //   const newDate = new Date(year, month, day, hours, minutes);
+
+    //   const newYear = newDate.getFullYear();
+    //   const newMonth = ('0' + (newDate.getMonth() + 1)).slice(-2);
+    //   const newDay = ('0' + newDate.getDate()).slice(-2);
+    //   const newHours = ('0' + newDate.getHours()).slice(-2);
+    //   const newMinutes = ('0' + newDate.getMinutes()).slice(-2);
+
+    //   const formattedDate = `${newYear}-${newMonth}-${newDay}T${newHours}:${newMinutes}`;
+
+    //   this.movimientoSeleccionado.mov_fcreacion = formattedDate;
+    // }
+
+    console.log("movimiento seleccionado: ", this.movimientoSeleccionado);
+    this.movimientoService.editaUnMovimiento(this.movimientoSeleccionado).subscribe();
     this.muestraMensajeActOk();
   }
 
