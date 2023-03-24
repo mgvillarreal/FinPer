@@ -32,6 +32,7 @@ export class MetasComponent implements OnInit {
   muestraMensajeMontoRetFlag: number = 0;
   tieneMetasFlag: number = 0;
   tieneMontosFlag: number = 0;
+  muestraMsjMetaAlcanzadaFlag: number = 0;
 
   monedas = [ {mon_id: "2", mon_simbolo: "USD", mon_descripcion: "Dolares Americanos"},
               {mon_id: "1",mon_simbolo: "ARS", mon_descripcion: "Pesos Argentinos"}
@@ -134,6 +135,7 @@ export class MetasComponent implements OnInit {
     this.editaMontoFlag = 0;
     this.muestraMensajeMontoRetFlag = 0;
     this.muestraMensajeActMontoFlag = 0;
+    this.muestraMsjMetaAlcanzadaFlag = 0;
 
     this.forma.reset();
   }
@@ -319,8 +321,14 @@ export class MetasComponent implements OnInit {
     this.monto.monto = this.formaMonto.value['montoMonto'];
     this.monto.fecha = this.formaMonto.value['fechaMonto'];
 
-    if(this.montoPorAlcanzar > this.monto.monto){
-      await this.metaServicio.agregaMonto(this.monto).toPromise()
+    if(this.montoPorAlcanzar = this.monto.monto){
+      await this.metaServicio.alcanzarMeta(this.monto.meta).toPromise();
+      await this.traeMetaPorEstado(this.estadoMeta);
+      this.muestraMensajeMetaAlcanzada();
+    }
+
+    if(this.montoPorAlcanzar >> this.monto.monto){
+      await this.metaServicio.agregaMonto(this.monto).toPromise();
       await this.traeMetaPorEstado(this.estadoMeta);
 
       this.monto = new Monto();
@@ -329,6 +337,7 @@ export class MetasComponent implements OnInit {
     else{
       this.mensajeValidaMonto = "El monto a ingresar no puede ser superior al monto por alcanzar de la meta.";
     }
+
   }
 
   muestraMensajeOkMonto() {
@@ -336,6 +345,13 @@ export class MetasComponent implements OnInit {
       this.muestraMensajeMontoFlag = 1;
       this.agregaMontoFlag = 0;
     }
+  }
+
+  muestraMensajeMetaAlcanzada() {
+      this.muestraMensajeMontoFlag = 0;
+      this.agregaMontoFlag = 0;
+      this.muestraMsjMetaAlcanzadaFlag = 1;
+      this.forma.reset();
   }
 
   editarMonto(monto){
@@ -404,6 +420,7 @@ export class MetasComponent implements OnInit {
     this.muestraMontosFlag = 0;
     this.editaMontoFlag = 1;
     this.preguntaEliminarMontoFlag = 0;
+    this.forma.reset();
   }
 
   muestraMensajeActMontoOk() {
@@ -475,7 +492,6 @@ export class MetasComponent implements OnInit {
       await this.metaServicio.agregaMonto(this.monto).toPromise()
       await this.traeMetaPorEstado(this.estadoMeta);
       this.monto = new Monto();
-      this.muestraMensajeOkMonto();
     }
     else{
       this.mensajeValidaMonto = "El monto a ingresar no puede ser superior al monto por alcanzar de la meta.";

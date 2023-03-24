@@ -49,8 +49,16 @@ export class MetasService {
     let meta = {
       'id': idMeta
     }
-    console.log("ID Meta en Service: ", meta);
+    
     return this.http.put<any>(this.urlv4 + '/eliminameta', meta);
+  }
+
+  alcanzarMeta(idMeta:any){
+    let meta = {
+      'id': idMeta
+    }
+    
+    return this.http.put<any>(this.urlv4 + '/alcanzameta', meta);
   }
 
   /*traeUnMetas(id: string){
@@ -71,9 +79,14 @@ export class MetasService {
     return this.http.post<any>(this.urlMontos + "crear", monto)
   }
 
-  traeSumaMontos(idUsuario)
+  traeSumaMontos(idUsuario, mes, anio)
   {
-    return this.http.get<any>(this.urlMontos + "traeSuma/" + idUsuario);
+    let data = {
+      'id': idUsuario,
+      'mes': mes,
+      'anio': anio
+    }
+    return this.http.post<any>(this.urlMontos + "traeSuma", data);
   }
 
   modificaMonto(monto:any):Observable<ResponseI> {

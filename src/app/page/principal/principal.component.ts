@@ -114,7 +114,7 @@ export class PrincipalComponent implements OnInit {
 
     this.traeCategorias();
     this.traeBalance();
-    
+    this.traeSumaAhorros();
   }
 
   agregaNumero(numero: number) {
@@ -303,8 +303,9 @@ export class PrincipalComponent implements OnInit {
       this.muestraPrincipalFlag = 0;
       this.detalleIngFlag = 0;
     }
-
+    console.log("movimiento seleccionado: ", this.movimiento);
     this.movimientoSeleccionado = movimiento;
+    
   }
 
   editarEgreso(movimiento) {
@@ -318,7 +319,42 @@ export class PrincipalComponent implements OnInit {
   }
 
   actualizarMovimiento() {
-    this.movimientoService.editaUnMovimiento(this.movimientoSeleccionado).subscribe()
+    //this.movimientoSeleccionado.mov_id;
+    // this.movimientoSeleccionado.mov_monto = this.forma2.value['monto'];
+    // this.movimientoSeleccionado.mov_idcategoria = this.forma2.value['categoria'];
+    // this.movimientoSeleccionado.mov_detalle = this.forma2.value['detalle'];
+    // this.movimientoSeleccionado.mov_fcreacion = this.forma2.value['fecha'];
+
+    // let fechaEv = new Date(this.forma2.value['fecha']);
+
+    // if (isNaN(fechaEv.getTime())) {
+    //   const dateString = this.forma2.value['fecha'];
+    //   const dateParts = dateString.split(' ');
+
+    //   const dateArr = dateParts[0].split('/');
+    //   const timeArr = dateParts[1].split(':');
+
+    //   const year = +dateArr[2];
+    //   const month = +dateArr[1] - 1;
+    //   const day = +dateArr[0];
+    //   const hours = +timeArr[0];
+    //   const minutes = +timeArr[1];
+
+    //   const newDate = new Date(year, month, day, hours, minutes);
+
+    //   const newYear = newDate.getFullYear();
+    //   const newMonth = ('0' + (newDate.getMonth() + 1)).slice(-2);
+    //   const newDay = ('0' + newDate.getDate()).slice(-2);
+    //   const newHours = ('0' + newDate.getHours()).slice(-2);
+    //   const newMinutes = ('0' + newDate.getMinutes()).slice(-2);
+
+    //   const formattedDate = `${newYear}-${newMonth}-${newDay}T${newHours}:${newMinutes}`;
+
+    //   this.movimientoSeleccionado.mov_fcreacion = formattedDate;
+    // }
+
+    console.log("movimiento seleccionado: ", this.movimientoSeleccionado);
+    this.movimientoService.editaUnMovimiento(this.movimientoSeleccionado).subscribe();
     this.muestraMensajeActOk();
   }
 
@@ -351,13 +387,17 @@ export class PrincipalComponent implements OnInit {
   }
 
   eliminaMovimiento() {
-
-    if(this.movimientoSeleccionado.mov_idtipo==1){ //Si es un ingreso
+    console.log("movimiento seleccionado tipo: ", this.movimientoSeleccionado.mov_idtipo);
+    if(this.movimientoSeleccionado.mov_idtipo == 1){ //Si es un ingreso
       this.detalleIngFlag = 1;
+      this.detalleEgrFlag = 0;
       this.editaIngFlag = 0;
+      this.editaEgrFlag = 0;
     }else{ //Si es un egreso
       this.detalleEgrFlag = 1;
+      this.detalleIngFlag = 0;
       this.editaEgrFlag = 0;
+      this.editaIngFlag = 0;
     }
     this.preguntaEliminarFlag = 0;
 
@@ -406,9 +446,8 @@ export class PrincipalComponent implements OnInit {
   /* CARD AHORROS */
   traeSumaAhorros(){
     let idUsuario = localStorage.getItem('id');
-    this.metasService.traeSumaMontos(idUsuario).subscribe((respuesta) => {
-      this.sumaMontos = respuesta[0]['SUM(mmet_monto)'];
-      console.log("Suma Montos: ", this.sumaMontos);
+    this.metasService.traeSumaMontos(idUsuario, this.mesActual+1, this.anioActual).subscribe((respuesta) => {
+      this.sumaMontos = respuesta[0]['SUM(monto)'];
     });
   }
 
@@ -416,7 +455,6 @@ export class PrincipalComponent implements OnInit {
     let idUsuario = localStorage.getItem('id');
     this.metasService.traeMontosDeAhorro(idUsuario, this.mesActual, this.anioActual).subscribe((respuesta => {
       this.montosDeAhorro =  respuesta;
-      console.log("cantidad de metas: ", this.montosDeAhorro);
     }));
   }
 
@@ -454,8 +492,8 @@ export class PrincipalComponent implements OnInit {
 
     const chartItem: ChartItem = document.getElementById('grafico-miscuentas') as ChartItem;
 
-    this.myChart = new Chart(chartItem, config);
-    //new Chart(chartItem, config);
+    //this.myChart = new Chart(chartItem, config);
+    new Chart(chartItem, config);
   }
 
   divisorCategoria(){

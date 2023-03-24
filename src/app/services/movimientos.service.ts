@@ -59,6 +59,7 @@ export class MovimientosService {
 
   editaUnMovimiento(movimiento)
   {
+    console.log("movimiento modificado en service: ", movimiento);
     return this.http.put<any>(this.urlv5 + 'modificamovimiento', movimiento);
   }
 

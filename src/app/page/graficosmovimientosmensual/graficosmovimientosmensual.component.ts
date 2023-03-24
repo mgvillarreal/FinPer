@@ -197,8 +197,16 @@ export class GraficosmovimientosmensualComponent implements OnInit {
     
     var columns = ['Categoría', 'Importe (ARS)'];
     var datosTabla = [];
+    var ingresos = this.countIngresos;
+    var temp;
     for (var key in this.categorias){
-      var temp = [this.categorias[key], Number(this.montos[key]).toLocaleString()];
+      if (ingresos >= 0){
+      temp = [this.categorias[key], Number(this.montos[key]).toLocaleString()];
+      } else{
+        temp = [this.categorias[key], Number(this.montos[key]*-1).toLocaleString()];
+
+      }
+      ingresos--;
       datosTabla.push(temp);
     }
 

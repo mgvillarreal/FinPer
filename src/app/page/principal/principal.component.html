@@ -412,8 +412,7 @@
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
-            <option
-            *ngFor="let categoria of categoriasIngreso"
+            <option *ngFor="let categoria of categoriasIngreso" value="{{categoria.cmov_id}}"
             [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
               {{categoria.cmov_descripcion}}
             </option>
@@ -435,7 +434,7 @@
             placeholder="Fecha del ingreso"
             onfocus="(this.type='datetime-local')"
             formControlName="fecha"
-            [(ngModel)]="movimientoSeleccionado.mov_fcreacion"
+            [ngModel]="movimientoSeleccionado.mov_fcreacion | date:'dd/MM/yyyy HH:mm:ss'"
           />
         </div>
         <small  class="texto-validacion text-center"
@@ -482,7 +481,7 @@
         <div class="wrap-input100 my-2 select-finper-default">
           <select class="form" name="categoria" formControlName="categoria">
             <option
-            *ngFor="let categoria of categoriasEgreso"
+            *ngFor="let categoria of categoriasEgreso" value="{{categoria.cmov_id}}"
             [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
               {{categoria.cmov_descripcion}}
             </option>
@@ -502,7 +501,7 @@
         </small>
 
         <div class="wrap-input100 modal-celda4 my-2">
-          <input type="text" name="fechaLimite" placeholder="Fecha del gasto" onfocus="(this.type='datetime-local')" formControlName="fecha" [(ngModel)]="movimientoSeleccionado.mov_fcreacion" />
+          <input type="text" name="fechaLimite" placeholder="Fecha del gasto" onfocus="(this.type='datetime-local')" formControlName="fecha" [ngModel]="movimientoSeleccionado.mov_fcreacion | date:'dd/MM/yyyy HH:mm:ss'" />
         </div>
         <small  class="texto-validacion text-center"
         *ngIf="forma2.controls['fecha'].errors?.['required'] && forma2.controls['fecha'].touched">

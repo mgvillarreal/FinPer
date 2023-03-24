@@ -2,7 +2,7 @@ import { Movimiento } from "../models/movimiento.model"
 
 export interface MovimientoI {
     mov_estado: number
-    mov_fcreacion: Date
+    mov_fcreacion: any
     mov_id: number
     mov_idcategoria: number
     mov_idmoneda: number
