@@ -208,15 +208,15 @@
                     </div> -->
 
                     <div class="wrap-input100 modal-celda2 my-2">
-                        <input type="number" name="monto" placeholder="Monto de la meta" formControlName="montoEdit" [(ngModel)]="metaSeleccionada.met_monto" value="{{metaSeleccionada.met_monto}}">
+                        <input type="number" name="monto" placeholder="Monto de la meta" formControlName="montoEdit" [(ngModel)]="metaSeleccionada.met_monto">
                     </div>
 
                     <div class="wrap-input100 modal-celda3 my-2">
-                        <input type="text" name="detalleMeta" placeholder="Detalle de la meta" formControlName="detalleEdit" [(ngModel)]="metaSeleccionada.met_nombre" value="{{metaSeleccionada.met_nombre}}">
+                        <input type="text" name="detalleMeta" placeholder="Detalle de la meta" formControlName="detalleEdit" [(ngModel)]="metaSeleccionada.met_nombre">
                     </div>
 
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="date" name="fechaLimite" placeholder="Fecha límite de la meta"  value="{{metaSeleccionada.met_flimite}}" onfocus="(this.type='date')" [(ngModel)]="modificarFecha">
+                        <input type="date" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" [(ngModel)]="modificarFecha">
                     </div>
                     <small  class="texto-validacion text-center"
                     *ngIf="forma2.controls['fechaLimiteEdit'].errors?.['required'] && forma2.controls['fechaLimiteEdit'].touched">
