@@ -146,7 +146,7 @@ export class MetasComponent implements OnInit {
   }
 
   editarMeta(meta: any) {
-    console.log(meta)
+    // console.log(meta)
     //this.obtieneMonedas();
     this.metaSeleccionada = meta;
     console.log(this.metaSeleccionada)
@@ -197,8 +197,8 @@ export class MetasComponent implements OnInit {
 
     this.forma2 = this.fb.group({
       monedaEdit: ['', [Validators.required]],
-      monto: ['', [Validators.required, Validators.min(1)]],
-      detalle: ['', [Validators.required]],
+      montoEdit: ['', [Validators.required, Validators.min(1)]],
+      detalleEdit: ['', [Validators.required]],
       fechaLimite: ['', [Validators.required, Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-([0-2][1-9]|3[0-1])$/), this.fechaValidaValidator() ]]
     });
 
@@ -273,16 +273,18 @@ export class MetasComponent implements OnInit {
   }
 
   async modificaMeta() {
-    this.meta.met_id=this.modificarId;
-    this.meta.met_monto = this.modificarMonto;
-    this.meta.met_nombre = this.modificarDetalle;
-    this.meta.met_flimite = this.modificarFecha;
-    this.meta.met_idmoneda = this.modificarMoneda;
+
+    console.log(this.metaSeleccionada)
+    // this.meta.met_id=this.modificarId;
+    // this.meta.met_monto = this.modificarMonto;
+    // this.meta.met_nombre = this.modificarDetalle;
+    // this.meta.met_flimite = this.modificarFecha;
+    // this.meta.met_idmoneda = this.modificarMoneda;
     this.muestraMensajeOk();
 
-    console.log("Meta a modificar: ", this.meta);
+    // console.log("Meta a modificar: ", this.meta);
     
-    await this.metaServicio.cambiaMetas(this.meta).toPromise();
+    await this.metaServicio.cambiaMetas(this.metaSeleccionada).toPromise();
     this.traeMetaPorEstado(this.estadoMeta);
   }
 
