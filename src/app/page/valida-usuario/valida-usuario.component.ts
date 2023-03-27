@@ -33,7 +33,6 @@ export class ValidaUsuarioComponent implements OnInit {
   ngOnInit(): void {
 
     this.forma = this.fb.group({
-      'id': [this.route.snapshot.paramMap.get('id'), [Validators.required]],
       'token': ['', [Validators.required]]
     });
 

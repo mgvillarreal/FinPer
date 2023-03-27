@@ -76,7 +76,19 @@ export class UsuariosService {
 
   validaMail(mail: string)
   {
-    return this.http.get<boolean>(this.url + 'validaMail/' + mail);
+    let data = {
+      'email': mail
+    }
+    console.log(data)
+    return this.http.post<any>(this.url + 'validaMail', data);
+  }
+
+  enviaMailReset(mail: string)
+  {
+    let data = {
+      'email': mail
+    }
+    return this.http.post<any>(this.url + 'resetMail', data);
   }
 
 }

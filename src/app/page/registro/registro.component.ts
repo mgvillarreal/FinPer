@@ -42,8 +42,8 @@ export class RegistroComponent implements OnInit {
     let correoValido: boolean;
 
     this.usuarioService.validaMail(this.usuario.mail).subscribe(result => {
-      correoValido = !result; // El correo electrónico es válido si el resultado es falso (es decir, no existe en la base de datos)
-      if (!correoValido) {
+      correoValido = result['status']; // El correo electrónico es válido si el resultado es falso (es decir, no existe en la base de datos)
+      if (correoValido) {
         this.mensajeSolicitaValidacion = 0;
         this.textoValidacion = 'El correo electrónico ya existe. Intente iniciar sesión.';
       }
@@ -141,7 +141,7 @@ export class RegistroComponent implements OnInit {
   }
 
   volveraRegistro(){
-    this.router.navigate(['inicio']);
+    this.router.navigate(['validausuario']);
   }
 
 }
