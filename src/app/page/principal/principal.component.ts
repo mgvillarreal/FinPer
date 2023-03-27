@@ -96,7 +96,6 @@ export class PrincipalComponent implements OnInit {
     this.traeSumaAhorros();
     this.calcula();
     this.traeAhorros();
-    this.calcula();
     this.creaGrafico();
   }
 
