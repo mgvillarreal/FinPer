@@ -1,10 +1,22 @@
 <div class="container">
 
     <div class="titulo text-center">Mis Informes</div>
+
+    <div class="mt-4 mb-4">
+        <div class="text-center mt-4">
+          <select (change)="cambiaMes()" class="select-finper-default select-s" name="" id="" [(ngModel)]="mesActual">
+            <option *ngFor="let mes of arrMeses; let i = index" value="{{i}}" [selected]="i == mesActual" >{{mes}}</option>
+         </select>
+    
+          <select (change)="cambiaMes()" class="select-finper-default select-xs" name="" id="" [(ngModel)]="anioActual">
+            <option *ngFor="let anio of arrAnios" value="{{anio}}" [selected]="anio == anioActual">{{anio}}</option>
+          </select>
+        </div>
+      </div>
     
     <div class="grid-container">
 
-        <div class="card text-center" routerLink="/graficoscategoriasmensual">
+        <div class="card text-center" (click)="manejoBotonInformeCategorias()" [ngClass]="{'small-screen': esResolucionChica(), 'large-screen': !esResolucionChica()}">
             <p>Informe Mensual por Categorías</p>
         </div>
 
@@ -18,4 +30,22 @@
 
     </div>
 
+</div>
+
+<div *ngIf="muestraGrafico==1">
+    <div class="card">
+        <div class="position-grafico">
+          <div class="chart-container" style="width: 350px; height: 350px;">
+            <canvas class="text-center" id="grafico-ingresosmensual"> </canvas>
+          </div>
+        </div>
+      </div>
+    
+      <div class="card">
+          <div class="position-grafico">
+            <div class="chart-container" style="width: 350px; height: 350px;">
+              <canvas class="text-center" id="grafico-gastosmensual"> </canvas>
+            </div>
+          </div>
+      </div>
 </div>

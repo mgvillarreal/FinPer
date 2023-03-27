@@ -85,6 +85,7 @@ registerLocaleData(localeEs, 'es'); //Esto no es un import, pero va justo despue
   ],
   providers: [
     ModalService,
+    GraficoscategoriasComponent,
     { provide: LOCALE_ID, useValue: 'es' }
   ],
   bootstrap: [AppComponent],
