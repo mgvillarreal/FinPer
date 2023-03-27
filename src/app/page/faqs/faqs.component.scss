@@ -27,6 +27,12 @@ li{
   }
 }
 
+@media (min-width: 480px) and (max-width: 768px){
+  .titulo{
+    line-height: 1;
+  }
+}
+
 #faq-section .col {
   flex: 1;
   padding: 0;
@@ -103,7 +109,6 @@ input {
 }
 
 #faq-section .tab-content {
-  // max-height: 0;
   padding: 32px;
   color: #182848;
   background: #fafafa;
@@ -124,15 +129,15 @@ body {
 }
 
 .accordion {
-    width: 100%;
-    margin: 10px auto 30px auto;
+  width: 100%;
+  margin: 10px auto 30px auto;
 }
 
 .accordion label {
   display: flex;
   justify-content: space-between;
   padding: 16px 16px 16px 56px;
-  background: #419f3e; //#419f3e; #79BA96;
+  background: #419f3e;
   font-weight: bold;
   cursor: pointer;
   margin: 0;
@@ -143,53 +148,41 @@ body {
 }
 
 .accordion label:hover {
-    box-shadow: 0 0 15px 4px rgba(0, 0, 0, .3);
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, .3);
 }
 
 .accordion input:checked + label,
 .accordion input:checked + label:hover {
-    color: white;
-    font-size: large;
-    margin-bottom: 0;
+  color: white;
+  font-size: large;
+  margin-bottom: 0;
 }
 
-// .accordion label:after,
-// .accordion input:checked + label:after {
-//     content: '+';
-//     position: absolute;
-//     right: 20px;
-//     top: 7px;
-// }
-
-// .accordion input:checked + label:after {
-//     content: '-';
-// }
-
 .accordion input {
-    display: none;
+  display: none;
 }
 
 .accordion article {
-    border-top: 0;
-    margin-top: -1px;
-    display: none;
-    position: relative;
-    z-index: 10;
-    margin-bottom: 10px;
-    background-color: #fff;
+  border-top: 0;
+  margin-top: -1px;
+  display: none;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 10px;
+  background-color: #fff;
 }
 
 .accordion article p {
-    color: #000;
-    line-height: 22px;
-    font-size: 14px;
-    padding: 20px;
-    margin: 0;
-    border-radius: 20px;
+  color: #000;
+  line-height: 22px;
+  font-size: 14px;
+  padding: 20px;
+  margin: 0;
+  border-radius: 20px;
 }
 
 .accordion input:checked ~ article {
-    display: block;
+  display: block;
 }
 
 .collapse-ind{
@@ -207,7 +200,6 @@ body {
 }
 
 .item-faqs{
-  // border-bottom: 1px solid #378534;
   position: relative;
   color: white;
   margin-bottom: 2px;

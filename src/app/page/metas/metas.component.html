@@ -361,7 +361,7 @@
 <ng-template class="limiter" [ngIf]="agregaMontoFlag==1 && muestraMensajeFlag==0">
 	<div class="container-login100">
 		<div class="wrap-login100 text-center">
-            <button class="btn-close mb-4" (click)="mostrarMontos(monto.mmet_idmeta)"> </button> <br><br>
+            <button class="btn-close mb-4" (click)="volverAMontos()"> </button> <br><br>
             <div class="titulo-nuevameta mb-4">Nuevo Monto</div>
 			<form [formGroup]="formaMonto" (ngSubmit)="crearMonto()">
 				<div class="login100-form validate-form text-center mt-3">
@@ -430,7 +430,7 @@
 <ng-template class="limiter" [ngIf]="editaMontoFlag==1 && muestraMetas==0">
 	<div class="container-login100">
 		<div class="wrap-login100 text-center">
-            <button class="btn-close mb-4" (click)="volveraMetas()"> </button> <br><br>
+            <button class="btn-close mb-4" (click)="volverAMontos()"> </button> <br><br>
             <div class="titulo-nuevameta mb-4">Editar Monto</div>
 			<form [formGroup]="formaMonto" (ngSubmit)="actualizarMonto()">
 				<div class="login100-form validate-form text-center mt-3">
@@ -540,7 +540,7 @@
 <ng-template class="limiter" [ngIf]="retiraMontoFlag==1 && muestraMensajeFlag==0">
 	<div class="container-login100">
 		<div class="wrap-login100 text-center">
-            <button class="btn-close mb-4" (click)="mostrarMontos(monto.mmet_idmeta)"> </button> <br><br>
+            <button class="btn-close mb-4" (click)="volverAMontos()"> </button> <br><br>
             <div class="titulo-nuevameta txt-rojo mb-4">Retirar Monto</div>
 			<form [formGroup]="formaMontoRet" (ngSubmit)="retirarMonto()">
 				<div class="login100-form validate-form text-center mt-3">
