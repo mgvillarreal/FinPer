@@ -300,6 +300,16 @@ export class MetasComponent implements OnInit {
     await this.traerMontos(this.metaSeleccionada.met_id);    
   }
 
+  volverAMontos(){
+    this.muestraMontosFlag = 1;
+    this.muestraMetas = 0;
+    this.agregaMontoFlag = 0;
+    this.retiraMontoFlag = 0;
+    this.editaMontoFlag = 0;
+    this.formaMonto.reset();
+    this.formaMontoRet.reset();
+  }
+
   selMeta(meta){
     return this.metaSeleccionada = meta;
   }
