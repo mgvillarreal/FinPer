@@ -64,3 +64,10 @@ a{
     font-size: 14px;
 }
 
+@media (min-width: 480px) and (max-width: 768px){
+    .titulo{
+      line-height: 1;
+    }
+}
+  
+
