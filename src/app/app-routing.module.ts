@@ -40,7 +40,7 @@ const routes: Routes = [
   { path: 'soporte', component: SoporteComponent, canActivate: [AuthGuard]},
   { path: 'categoria', component: CategoriaComponent, canActivate: [AuthGuard]},
   { path: 'modal', component: ModalComponent, canActivate: [AuthGuard] },
-  { path: 'validausuario/:id', component: ValidaUsuarioComponent, canActivate: [AuthGuard]},
+  { path: 'validausuario', component: ValidaUsuarioComponent},
   { path: 'validausuario/:id/:token', component: ValidaUsuarioComponent, canActivate: [AuthGuard]},
   { path: 'ultimosmovimientos', component: UltimosMovimientosComponent, canActivate: [AuthGuard]},
   { path: 'misdatos', component: DatosComponent, canActivate: [AuthGuard]},

@@ -29,10 +29,17 @@ export class IngresoComponent implements OnInit {
   
     this.authService.login(this.forma.value).subscribe(
       res => {
+        console.log(res);
+
         this.route.navigate(['/miscuentas']);
       },
       err => {
-        this.textoValidacion = 'El correo electrónico y/o contraseña ingresados son incorrectos. Intente nuevamente.';
+        console.log(err['error']['code']);
+        if(err['error']['code'] === 401){
+          this.route.navigate(['/validausuario']);
+        }else{
+          this.textoValidacion = 'El correo electrónico y/o contraseña ingresados son incorrectos. Intente nuevamente.';
+        }
       }
     );
   }
@@ -48,17 +55,22 @@ export class IngresoComponent implements OnInit {
   validarMail(){    
     let correoValido: boolean;
     this.usuariosService.validaMail(this.forma2.value['correoe']).subscribe(result => {
-      correoValido = !result; 
-      if (!correoValido) {
-        this.muestraIngresoFlag = 0;
-        this.recuperaContrasenaFlag = 0;
-        this.msjRecuperaContrasenaFlag = 1;
+      correoValido = result['status']; 
+      if (correoValido) {
+        this.enviaMailReset(this.forma2.value['correoe']);
+        // this.muestraIngresoFlag = 0;
+        // this.recuperaContrasenaFlag = 0;
+        // this.msjRecuperaContrasenaFlag = 1;
       }
       else{
         this.textoValidacion = 'El correo electrónico no existe. Intente nuevamente.';
       }
     });
-    this.forma2.reset();
+    // this.forma2.reset();
+  }
+
+  async enviaMailReset(mail: string){
+    await this.usuariosService.enviaMailReset(mail).toPromise();
   }
 
   volveraIngreso(){
