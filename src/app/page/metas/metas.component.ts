@@ -211,7 +211,7 @@ export class MetasComponent implements OnInit {
   }
 
   async eliminaMeta() {
-    await this.metaServicio.eliminarMeta(this.metaSeleccionada).toPromise();;
+    await this.metaServicio.eliminarMeta(this.metaSeleccionada.met_id).toPromise();;
     this.traeMetaPorEstado(this.estadoMeta);
     this.muestraMetas = 1;
     this.editaMetaFlag = 0;
