@@ -260,6 +260,8 @@ export class GraficosmovimientosanualComponent implements OnInit {
       type: 'line',
       data: data,
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           yAxes: {
             ticks: {

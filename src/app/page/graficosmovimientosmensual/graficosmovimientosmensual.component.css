@@ -11,7 +11,6 @@
     justify-content: space-between;
     margin-bottom: 25px;
     width: 80vw;
-    /*height: 500px;*/
 }
 
 .position-grafico{
@@ -22,7 +21,7 @@
     position: relative;
     margin: auto;
     width: 70vw;
-    height: 300px;
+    height: 450px;
 }
 
 .container{
