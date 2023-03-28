@@ -94,7 +94,6 @@ export class MetasService {
   }
 
   eliminarMonto(idMonto:any){
-    console.log('Elimina monto en Service: ', idMonto);
     let monto = {
       'id': idMonto
     }

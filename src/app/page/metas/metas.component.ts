@@ -199,7 +199,7 @@ export class MetasComponent implements OnInit {
       monedaEdit: ['', [Validators.required]],
       montoEdit: ['', [Validators.required, Validators.min(1)]],
       detalleEdit: ['', [Validators.required]],
-      fechaLimite: ['', [Validators.required, Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-([0-2][1-9]|3[0-1])$/), this.fechaValidaValidator() ]]
+      fechaLimiteEdit: ['', [Validators.required, Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-([0-2][1-9]|3[0-1])$/), this.fechaValidaValidator() ]]
     });
 
     this.formaMonto = this.fb.group({
@@ -310,11 +310,20 @@ export class MetasComponent implements OnInit {
     this.formaMontoRet.reset();
   }
 
+  volverAMontosDesdeEditar(){
+    this.muestraMontosFlag = 1;
+    this.muestraMetas = 0;
+    this.agregaMontoFlag = 0;
+    this.retiraMontoFlag = 0;
+    this.editaMontoFlag = 0;
+  }
+
   selMeta(meta){
     return this.metaSeleccionada = meta;
   }
 
   cambiaAgregaMontoFlag(){
+    this.formaMonto.reset();
     if (this.agregaMontoFlag == 0) {
       this.agregaMontoFlag = 1;
       this.muestraMetas = 0;
@@ -374,8 +383,8 @@ export class MetasComponent implements OnInit {
       this.muestraMontosFlag = 0;
     }
 
-    this.mostrarDatosEditarMonto(monto);
     this.montoSeleccionado = monto.mmet_id;
+    this.mostrarDatosEditarMonto(monto);
   }
 
   mostrarDatosEditarMonto(monto) {
@@ -388,16 +397,16 @@ export class MetasComponent implements OnInit {
 
   async actualizarMonto(){
     this.monto.mmet_id = this.modificarIdMonto;
-    this.monto.mmet_monto = this.modificarMontoMonto;
-    this.monto.mmet_fcreacion = this.modificarFechaMonto;
-    
-
+    this.monto.mmet_monto = this.formaMonto.value['montoMonto'];
+    this.monto.mmet_fcreacion = this.formaMonto.value['fechaMonto'];
+     
     this.muestraMensajeActMontoOk();
     
+    console.log("monto modificado: ", this.monto);
     await this.metaServicio.modificaMonto(this.monto).toPromise();
 
     this.traeMetaPorEstado(this.estadoMeta);
-
+    this.formaMonto.reset();
   }
 
   preguntaEliminarMonto(){
@@ -411,7 +420,6 @@ export class MetasComponent implements OnInit {
   }
 
   async eliminaMonto(){
-    console.log('Estado meta: ', this.estadoMeta);
     await this.metaServicio.eliminarMonto(this.montoSeleccionado).toPromise();
     let metid = this.metaSeleccionada.met_id
     this.traerMontos(metid);
@@ -420,8 +428,6 @@ export class MetasComponent implements OnInit {
     this.editaMontoFlag = 0;
     this.preguntaEliminarMontoFlag = 0;
 
-    console.log(this.metaSeleccionada.met_id)
-    //this.mostrarDatosEditar(metid)
     this.traeMetaPorEstado(this.estadoMeta);
   }
 

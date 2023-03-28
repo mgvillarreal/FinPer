@@ -3,7 +3,7 @@ export class Monto{
     mmet_idmeta:Number;
     mmet_monto:number;
     mmet_estado:number;
-    mmet_fcreacion:Date;
+    mmet_fcreacion:any;
 
     monto: number;
     meta: number;
