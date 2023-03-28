@@ -34,8 +34,8 @@ export class MetasComponent implements OnInit {
   tieneMontosFlag: number = 0;
   muestraMsjMetaAlcanzadaFlag: number = 0;
 
-  monedas = [ {mon_id: "2", mon_simbolo: "USD", mon_descripcion: "Dolares Americanos"},
-              {mon_id: "1",mon_simbolo: "ARS", mon_descripcion: "Pesos Argentinos"}
+  monedas = [ {mon_id: 2, mon_simbolo: "USD", mon_descripcion: "Dolares Americanos"},
+              {mon_id: 1,mon_simbolo: "ARS", mon_descripcion: "Pesos Argentinos"}
             ];
 
   estado = 1;
@@ -90,6 +90,11 @@ export class MetasComponent implements OnInit {
   /*Paginador*/
   paginaActual = 1;
   metasPorPagina = 5;
+  modificarIdMeta: number;
+  modificarMonedaMeta: number;
+  modificarFechaMoneda: any;
+  modificarMontoMeta: any;
+  modificarDetalleNombre: string;
   
 
   constructor(
@@ -99,13 +104,6 @@ export class MetasComponent implements OnInit {
   ) {
     this.traeMetaPorEstado(this.estadoMeta);
   }
-
-  // obtieneMonedas(){
-  //   this.usuarioService.traeMonedas().subscribe(res => {
-  //     this.monedas = res;
-  //   });
-  //   console.log("Monedas: ", this.monedas);
-  // }
 
   cambiaAgregaMetaFlag() {
     if (this.agregaMetaFlag == 0) {
@@ -146,14 +144,24 @@ export class MetasComponent implements OnInit {
   }
 
   editarMeta(meta: any) {
-    // console.log(meta)
-    //this.obtieneMonedas();
     this.metaSeleccionada = meta;
     console.log(this.metaSeleccionada)
     if (this.editaMetaFlag == 0) {
       this.editaMetaFlag = 1;
       this.muestraMetas = 0;
     }
+
+    this.mostrarDatosEditarMeta(meta);
+  }
+
+  mostrarDatosEditarMeta(meta) {
+    this.metaAModificar = meta;
+
+    this.modificarIdMeta = this.metaAModificar.met_id;
+    this.modificarMonedaMeta = this.metaAModificar.met_idmoneda;
+    this.modificarMontoMeta = this.metaAModificar.met_monto;
+    this.modificarDetalleNombre = this.metaAModificar.met_nombre;
+    this.modificarFechaMoneda = this.metaAModificar.met_flimite;
   }
 
   muestraMensajeActOk() {
@@ -163,6 +171,32 @@ export class MetasComponent implements OnInit {
     this.editaMetaFlag = 0;
 
     this.modificaMeta();
+  }
+
+  muestraMensajeActOkMontos() {
+    this.muestraMensajeFlag = 0;
+    this.muestraMensajeActFlag = 1;
+    this.muestraMetas = 0;
+    this.editaMetaFlag = 0;
+  }
+
+  cambiarMonedaMeta(){
+    console.log("Cambia moneda: ", this.modificarMoneda);
+  }
+
+  async modificaMeta() {
+    this.meta.met_id = this.modificarIdMeta;
+    this.meta.met_idmoneda = this.modificarMoneda;
+    this.meta.met_monto = this.forma2.value['montoEdit'];
+    this.meta.met_nombre = this.forma2.value['detalleEdit'];
+    this.meta.met_flimite = this.forma2.value['fechaLimiteEdit'];
+
+    console.log("meta a modificar: ", this.meta);
+    
+    this.muestraMensajeOk();
+    
+    await this.metaServicio.cambiaMetas(this.meta).toPromise();
+    this.traeMetaPorEstado(this.estadoMeta);
   }
 
   preguntaEliminar() {
@@ -260,27 +294,6 @@ export class MetasComponent implements OnInit {
         this.modificarMoneda=this.metaAModificar.met_idmoneda;
       }
     });
-  }
-
-  cambiarMonedaMeta(){
-    this.modificarMoneda = this.modificarMoneda;
-    console.log("Cambia moneda: ", this.modificarMoneda);
-  }
-
-  async modificaMeta() {
-
-    console.log(this.metaSeleccionada)
-    // this.meta.met_id=this.modificarId;
-    // this.meta.met_monto = this.modificarMonto;
-    // this.meta.met_nombre = this.modificarDetalle;
-    // this.meta.met_flimite = this.modificarFecha;
-    // this.meta.met_idmoneda = this.modificarMoneda;
-    this.muestraMensajeOk();
-
-    // console.log("Meta a modificar: ", this.meta);
-    
-    await this.metaServicio.cambiaMetas(this.metaSeleccionada).toPromise();
-    this.traeMetaPorEstado(this.estadoMeta);
   }
 
   /*MONTOS DE LAS METAS*/

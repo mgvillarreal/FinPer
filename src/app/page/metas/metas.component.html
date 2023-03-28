@@ -193,39 +193,35 @@
             <div class="titulo-nuevameta mb-4">Editar Meta</div>
 			<form [formGroup]="forma2" (ngSubmit)="muestraMensajeActOk()">
 				<div class="login100-form validate-form text-center mt-3">
-					<!-- <div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        
-                        <select (change)="cambiarMonedaMeta()" name="moneda" *ngIf="this.metaAModificar.met_idmoneda==1" class="black-text" >
-                            <option value="" disabled>Moneda de la meta </option>
-                            <option value="1" selected>ARS</option>
-                            <option value="2">USD</option>
+
+                    <div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
+                        <select class="wrap-input100" name="moneda" formControlName="monedaEdit" (ngModelChange)="cambiarMonedaMeta()">
+                            <option value="" disabled>Moneda de la meta</option>
+                            <option value={{this.metaAModificar.met_idmoneda}} *ngFor="let moneda of monedas" [selected]="moneda.mon_id == this.modificarMonedaMeta" >
+                                {{moneda.mon_simbolo}}
+                              </option>
                         </select>
-                        <select (change)="cambiarMonedaMeta()" name="moneda" *ngIf="this.metaAModificar.met_idmoneda==2" class="black-text">
-                            <option value="" disabled>Moneda de la meta </option>
-                            <option value="1">ARS</option>
-                            <option value="2" selected>USD</option>
-                        </select>
-                    </div> -->
+                    </div>
 
                     <div class="wrap-input100 modal-celda2 my-2">
-                        <input type="number" name="monto" placeholder="Monto de la meta" formControlName="montoEdit" [(ngModel)]="metaSeleccionada.met_monto">
+                        <input type="number" name="monto" placeholder="Monto de la meta" formControlName="montoEdit" [(ngModel)]="this.metaAModificar.met_monto">
                     </div>
 
                     <div class="wrap-input100 modal-celda3 my-2">
-                        <input type="text" name="detalleMeta" placeholder="Detalle de la meta" formControlName="detalleEdit" [(ngModel)]="metaSeleccionada.met_nombre">
+                        <input type="text" name="detalleMeta" placeholder="Detalle de la meta" formControlName="detalleEdit" [(ngModel)]="this.metaAModificar.met_nombre">
                     </div>
 
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="date" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" formControlName="fechaLimiteEdit" [ngModel]="metaSeleccionada.met_flimite | date:'dd/MM/yyyy'">
+                        <input type="date" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" formControlName="fechaLimiteEdit" [ngModel]="this.metaAModificar.met_flimite | date:'dd/MM/yyyy'">
                     </div>
                     <small  class="texto-validacion text-center"
                     *ngIf="forma2.controls['fechaLimiteEdit'].errors?.['required'] && forma2.controls['fechaLimiteEdit'].touched">
                         La fecha límite es requerida.
                     </small>
-                    <!-- <small  class="texto-validacion text-center"
+                    <small  class="texto-validacion text-center"
                     *ngIf="forma2.controls['fechaLimiteEdit'].errors?.['fechaInvalida']">
                         La fecha debe ser mayor a la fecha de hoy.
-                    </small> -->
+                    </small>
                     
 				</div>
 
@@ -458,7 +454,7 @@
 				</div>
 
                 <div class="container-login100-form-btn">
-                    <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" (click)="muestraMensajeActOk()" [disabled]="formaMonto.invalid">
+                    <button class="btn btn-light btn-lg action-button btngreen btn-msjdark btn-act" (click)="muestraMensajeActOkMontos()" [disabled]="formaMonto.invalid">
                         Actualizar
                     </button>
                 </div>
