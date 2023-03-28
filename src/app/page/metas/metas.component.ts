@@ -206,11 +206,6 @@ export class MetasComponent implements OnInit {
       montoMonto: ['', [Validators.required]],
       fechaMonto: ['', [Validators.required]],
     });
-
-    this.formaMontoRet = this.fb.group({
-      montoRet: ['', [Validators.required]],
-      fechaRet: ['', [Validators.required]],
-    });
   }
 
   fechaValidaValidator(): ValidatorFn {
@@ -342,7 +337,7 @@ export class MetasComponent implements OnInit {
     this.monto.monto = this.formaMonto.value['montoMonto'];
     this.monto.fecha = this.formaMonto.value['fechaMonto'];
 
-    if(this.montoPorAlcanzar <= this.monto.monto){ //100 >= 101
+    if(this.montoPorAlcanzar <= this.monto.monto){ 
       if(this.montoPorAlcanzar == this.monto.monto){
         await this.metaServicio.alcanzarMeta(this.monto.meta).toPromise();
         await this.traeMetaPorEstado(this.estadoMeta);
@@ -493,19 +488,19 @@ export class MetasComponent implements OnInit {
   /* RETIRO MONTOS */
 
   haceRetiroFlag(){
+    this.formaMonto.reset();
     if(this.retiraMontoFlag==0){
       this.retiraMontoFlag = 1;
       this.muestraMontosFlag = 0;
     }
   }
 
-  async retirarMonto(){
-    this.forma.reset();
-    
+  async retirarMonto(){    
     this.monto.meta = this.metaSeleccionada.met_id;
-    this.monto.monto = this.formaMontoRet.value['montoRet'] * -1;
-    this.monto.fecha = this.formaMontoRet.value['fechaRet'];
-    console.log(this.monto);
+    this.monto.monto = this.formaMonto.value['montoMonto'] * -1;
+    this.monto.fecha = this.formaMonto.value['fechaMonto'];
+
+    console.log("monto a retiar", this.monto);
 
     if(this.montoPorAlcanzar > this.monto.monto){
       await this.metaServicio.agregaMonto(this.monto).toPromise()

@@ -542,28 +542,28 @@
 		<div class="wrap-login100 text-center">
             <button class="btn-close mb-4" (click)="volverAMontos()"> </button> <br><br>
             <div class="titulo-nuevameta txt-rojo mb-4">Retirar Monto</div>
-			<form [formGroup]="formaMontoRet" (ngSubmit)="retirarMonto()">
+			<form [formGroup]="formaMonto" (ngSubmit)="retirarMonto()">
 				<div class="login100-form validate-form text-center mt-3">
 
                     <div class="wrap-input100 modal-celda2 my-2">
-                        <input type="number" name="montoRet" placeholder="Monto a retirar" formControlName="montoRet" >
+                        <input type="number" name="montoRet" placeholder="Monto a retirar" formControlName="montoMonto" >
                     </div>
                     <small  class="texto-validacion text-center"
-                    *ngIf="formaMonto.controls['montoRet'].errors?.['required'] && formaMonto.controls['montoRet'].touched">
+                    *ngIf="formaMonto.controls['montoMonto'].errors?.['required'] && formaMonto.controls['montoMonto'].touched">
                         El monto es requerido.
                     </small>
 
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="text" name="fechaRet" placeholder="Fecha del retiro" onfocus="(this.type='date')" formControlName="fechaRet">
+                        <input type="text" name="fechaMonto" placeholder="Fecha del retiro" onfocus="(this.type='date')" formControlName="fechaMonto">
                     </div>
                     <small  class="texto-validacion text-center"
-                    *ngIf="formaMonto.controls['fechaRet'].errors?.['required'] && formaMonto.controls['fechaRet'].touched">
+                    *ngIf="formaMonto.controls['fechaMonto'].errors?.['required'] && formaMonto.controls['fechaMonto'].touched">
                         La fecha del monto es requerida.
                     </small>
 				</div>
 
                 <div class="container-login100-form-btn">
-                    <button class="btn btn-light btn-lg action-button btn-retirar-listo" [disabled]="formaMontoRet.invalid">
+                    <button class="btn btn-light btn-lg action-button btn-retirar-listo" [disabled]="formaMonto.invalid">
                         Aceptar
                     </button>
                 </div>
