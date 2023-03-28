@@ -10,15 +10,15 @@
                         <span class="login100-form-title mt-2"> Registro </span>
 
                         <div class="wrap-input100">
-                            <input class="input100 input-margin" type="email" name="email" placeholder="Email" formControlName="email" (click)="limpiarMensaje()">
+                            <input class="input100 input-margin" type="email" name="email" placeholder="Correo electrónico" formControlName="email" (click)="limpiarMensaje()">
                         </div>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['email'].errors?.['required'] && forma.controls['email'].touched">
-                            El email es requerido.<br>
+                            El correo electrónico es requerido.<br>
                         </small>
                         <small  class="texto-validacion text-center" 
                         *ngIf="forma.controls['email'].errors?.['email'] || forma.controls['email'].errors?.['pattern']">
-                            El email es inválido.
+                            El correo electrónico es inválido.
                         </small>
                         <small  class="texto-validacion text-center" 
                         *ngIf="textoValidacion != ''">

@@ -79,7 +79,7 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.forma = this.fb.group({ //se toma del constructor que tiene inyectado el servicio que esta importado
+    this.forma = this.fb.group({
       'email': ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\.com$')]],
       'contrasena': ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9]).*$'), Validators.minLength(8) ]],
       'pwdConfirm': ['', Validators.required],
