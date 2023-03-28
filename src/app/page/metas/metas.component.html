@@ -195,8 +195,9 @@
 				<div class="login100-form validate-form text-center mt-3">
 
                     <div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select class="wrap-input100" name="moneda" >
-                            <option *ngFor="let moneda of monedas" value="{{moneda.mon_id}}" [selected]="moneda.mon_id == this.modificarMoneda" (click)="this.cambiarMonedaMeta()">
+                        <select class="wrap-input100" name="moneda" formControlName="monedaEdit" [(ngModel)]="this.modificarMoneda">
+                            <option value="" disabled>Moneda de la meta</option>
+                            <option *ngFor="let moneda of monedas" [ngValue]="moneda.mon_id" [selected]="moneda.mon_id == this.modificarMoneda">
                                 {{moneda.mon_simbolo}}
                             </option>
                         </select>
@@ -211,7 +212,7 @@
                     </div>
 
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="date" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" formControlName="fechaLimiteEdit" [ngModel]="this.metaAModificar.met_flimite | date:'dd/MM/yyyy'">
+                        <input type="date" name="fechaLimite" placeholder="Fecha límite de la meta" onfocus="(this.type='date')" formControlName="fechaLimiteEdit" [ngModel]="this.metaAModificar.met_flimite">
                     </div>
                     <small  class="texto-validacion text-center"
                     *ngIf="forma2.controls['fechaLimiteEdit'].errors?.['required'] && forma2.controls['fechaLimiteEdit'].touched">
@@ -221,7 +222,6 @@
                     *ngIf="forma2.controls['fechaLimiteEdit'].errors?.['fechaInvalida']">
                         La fecha debe ser mayor a la fecha de hoy.
                     </small>
-                    
 				</div>
 
                 <div class="container-login100-form-btn">
