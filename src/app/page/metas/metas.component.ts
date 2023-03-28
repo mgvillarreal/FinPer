@@ -35,7 +35,7 @@ export class MetasComponent implements OnInit {
   muestraMsjMetaAlcanzadaFlag: number = 0;
 
   monedas = [ {mon_id: 2, mon_simbolo: "USD", mon_descripcion: "Dolares Americanos"},
-              {mon_id: 1,mon_simbolo: "ARS", mon_descripcion: "Pesos Argentinos"}
+              {mon_id: 1, mon_simbolo: "ARS", mon_descripcion: "Pesos Argentinos"}
             ];
 
   estado = 1;
@@ -156,6 +156,9 @@ export class MetasComponent implements OnInit {
 
   mostrarDatosEditarMeta(meta) {
     this.metaAModificar = meta;
+    this.modificarMoneda = this.metaAModificar.met_idmoneda;
+
+    console.log(this.modificarMoneda)
 
     this.modificarIdMeta = this.metaAModificar.met_id;
     this.modificarMonedaMeta = this.metaAModificar.met_idmoneda;
@@ -230,7 +233,6 @@ export class MetasComponent implements OnInit {
     });
 
     this.forma2 = this.fb.group({
-      monedaEdit: ['', [Validators.required]],
       montoEdit: ['', [Validators.required, Validators.min(1)]],
       detalleEdit: ['', [Validators.required]],
       fechaLimiteEdit: ['', [Validators.required, Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-([0-2][1-9]|3[0-1])$/), this.fechaValidaValidator() ]]

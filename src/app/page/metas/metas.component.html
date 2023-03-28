@@ -195,11 +195,10 @@
 				<div class="login100-form validate-form text-center mt-3">
 
                     <div class="wrap-input100 modal-celda1 my-2 select-finper-default select-m">
-                        <select class="wrap-input100" name="moneda" formControlName="monedaEdit" (ngModelChange)="cambiarMonedaMeta()">
-                            <option value="" disabled>Moneda de la meta</option>
-                            <option value={{this.metaAModificar.met_idmoneda}} *ngFor="let moneda of monedas" [selected]="moneda.mon_id == this.modificarMonedaMeta" >
+                        <select class="wrap-input100" name="moneda" (ngModelChange)="cambiarMonedaMeta()">
+                            <option *ngFor="let moneda of monedas" value="{{moneda.mon_id}}" [selected]="moneda.mon_id == this.modificarMoneda">
                                 {{moneda.mon_simbolo}}
-                              </option>
+                            </option>
                         </select>
                     </div>
 
