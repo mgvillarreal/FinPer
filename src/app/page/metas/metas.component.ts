@@ -184,7 +184,7 @@ export class MetasComponent implements OnInit {
   }
 
   cambiarMonedaMeta(){
-    console.log("Cambia moneda: ", this.modificarMoneda);
+    console.log("cambia moneda", this.modificarMoneda);
   }
 
   async modificaMeta() {
@@ -233,6 +233,7 @@ export class MetasComponent implements OnInit {
     });
 
     this.forma2 = this.fb.group({
+      monedaEdit: [''],
       montoEdit: ['', [Validators.required, Validators.min(1)]],
       detalleEdit: ['', [Validators.required]],
       fechaLimiteEdit: ['', [Validators.required, Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-([0-2][1-9]|3[0-1])$/), this.fechaValidaValidator() ]]
