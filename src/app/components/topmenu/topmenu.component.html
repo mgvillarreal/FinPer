@@ -24,20 +24,20 @@
 
         <ul class="nav navbar-nav">
           <li class="nav-item" role="presentation">
-            <a class="nav-link active greentext" routerLink="contacto">Contacto</a>
+            <a class="nav-link active greentext" routerLink="contacto" (click)="cambiaEstadoMenu()">Contacto</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link active greentext" routerLink="comofunciona">¿Cómo funciona?</a>
+            <a class="nav-link active greentext" routerLink="comofunciona" (click)="cambiaEstadoMenu()">¿Cómo funciona?</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link active greentext" routerLink="faqs">FAQ</a>
+            <a class="nav-link active greentext" routerLink="faqs" (click)="cambiaEstadoMenu()">FAQ</a>
           </li>
           
           <div *ngIf="auth.auth()" class="message-box">
 
             <!--sobre de mensaje-->
             <li class="nav-item" role="presentation" *ngIf="this.notificacionesService.notificacionesAct">
-              <a role="button" routerLink="notificaciones">
+              <a role="button" routerLink="notificaciones" (click)="cambiaEstadoMenu()">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke="#419f3e" fill="#5abb57d0" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                   <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -47,7 +47,7 @@
 
             </li>
             <li class="nav-item" role="presentation" *ngIf="!this.notificacionesService.notificacionesAct">
-              <a role="button" routerLink="notificaciones">
+              <a role="button" routerLink="notificaciones" (click)="cambiaEstadoMenu()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#419f3e" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                   <rect x="3" y="5" width="18" height="14" rx="2" />
