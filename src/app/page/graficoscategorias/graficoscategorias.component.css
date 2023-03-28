@@ -11,11 +11,6 @@
     /*width: 50%;*/
 }
 
-.position-grafico{
-    /*position: relative;
-    left: 23%;*/
-}
-
 .chart-container{
     position: relative;
     margin: auto;
@@ -72,6 +67,16 @@ a{
 }
 
 @media (min-width: 480px) and (max-width: 768px){
+    .titulo{
+      line-height: 1;
+    }
+
+    .grid-container {
+        grid-template-columns: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
     .titulo{
       line-height: 1;
     }

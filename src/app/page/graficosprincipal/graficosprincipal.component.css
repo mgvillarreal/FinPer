@@ -57,6 +57,9 @@ p{
 }
 
 @media (min-width: 480px) and (max-width: 768px){
+    .titulo{
+        top: -5rem;
+    }
     .grid-container {
         grid-template-columns: 100%;
         margin-left: 2.5rem;
