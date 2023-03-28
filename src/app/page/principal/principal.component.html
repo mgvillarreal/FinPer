@@ -45,7 +45,7 @@
         <div class="containercard-item2">
           <div class="card text-center">
             <div class="card-titulo ahorro mb-4">Metas de Ahorro</div>
-            <div class="card-cantidad ahorro mt-2 mb-4" *ngFor="let montoAhorro of montosDeAhorro">{{montoAhorro.moneda}} {{ montoAhorro.monto | number: '1.2-2' }}</div>
+            <div class="card-cantidad ahorro mt-2 mb-4" *ngFor="let montoAhorro of montosDeAhorro">{{montoAhorro.moneda}} <span *ngIf="montoAhorro.monto!==null">{{ montoAhorro.monto | number: '1.2-2' }}</span> <span *ngIf="montoAhorro.monto===null"> 0,00 </span> </div>
             <button class="btn btn-outline-primary btn-irahorro mt-2" routerLink="/metas">
               Ir a metas de ahorro
             </button>
