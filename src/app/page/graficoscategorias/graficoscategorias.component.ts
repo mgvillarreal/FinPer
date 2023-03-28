@@ -131,6 +131,8 @@ export class GraficoscategoriasComponent implements OnInit {
       type: 'pie',
       data: data,
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
@@ -205,6 +207,8 @@ export class GraficoscategoriasComponent implements OnInit {
       type: 'pie',
       data: data,
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
