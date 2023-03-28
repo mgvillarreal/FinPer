@@ -234,7 +234,7 @@
 
 @media (max-width:768px) {
   .nav-item{
-    width: 170px;
+    width: 250px;
     text-align: center;
     margin: 3px auto;
   }
@@ -288,6 +288,7 @@
 
 }
 
+
 .menu-user{
   position: absolute;
   top:100%;
@@ -317,6 +318,13 @@
       border-top: 1px solid lightgray ;
     }
     margin-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .menu-user {
+    left: 0;
+    width: 100%;
   }
 }
 

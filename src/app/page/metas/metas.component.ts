@@ -188,6 +188,8 @@ export class MetasComponent implements OnInit {
   }
 
   async modificaMeta() {
+    console.log("moneda: ", this.modificarMoneda);
+
     this.meta.met_id = this.modificarIdMeta;
     this.meta.met_idmoneda = this.modificarMoneda;
     this.meta.met_monto = this.forma2.value['montoEdit'];
