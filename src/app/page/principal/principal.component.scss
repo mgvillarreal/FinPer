@@ -516,3 +516,9 @@ input{
     text-align: left !important;
   }
 }
+
+@media (min-width: 635px){
+  .bajotitulo{
+    display: none;
+  }
+}
