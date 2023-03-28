@@ -52,6 +52,7 @@ export class TopmenuComponent implements OnInit {
   }
 
   cierraMenu(){
+    this.cambiaEstadoMenu();
     this.eventoDesplegar.emit(false)
   }
 
