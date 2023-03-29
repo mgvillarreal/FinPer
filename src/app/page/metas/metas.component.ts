@@ -357,6 +357,7 @@ export class MetasComponent implements OnInit {
 
     if(this.montoPorAlcanzar <= this.monto.monto){ 
       if(this.montoPorAlcanzar == this.monto.monto){
+        await this.metaServicio.agregaMonto(this.monto).toPromise();
         await this.metaServicio.alcanzarMeta(this.monto.meta).toPromise();
         await this.traeMetaPorEstado(this.estadoMeta);
         this.muestraMensajeMetaAlcanzada();
@@ -519,8 +520,10 @@ export class MetasComponent implements OnInit {
     this.monto.meta = this.metaSeleccionada.met_id;
     this.monto.monto = this.formaMonto.value['montoMonto'] * -1;
     this.monto.fecha = this.formaMonto.value['fechaMonto'];
-  
-    if(this.monto.monto * -1 > this.montoPorAlcanzar ){
+  console.log("Sumamonto: ", this.metaSeleccionada.met_monto)
+  console.log("Montomonto: ", this.monto.monto)
+  console.log("montoPorAlcanzar: ", this.montoPorAlcanzar)
+    if(this.metaSeleccionada.met_monto - this.montoPorAlcanzar + this.monto.monto < 0){
       this.mensajeValidaMonto = "El monto a retirar no puede ser menor al monto por alcanzar de la meta.";
     }
     else{
