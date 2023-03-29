@@ -309,8 +309,8 @@ export class PrincipalComponent implements OnInit {
       this.muestraPrincipalFlag = 0;
       this.detalleIngFlag = 0;
     }
-    console.log("movimiento seleccionado: ", this.movimiento);
     this.movimientoSeleccionado = movimiento;
+    console.log("movimiento seleccionado: ", movimiento);
     
   }
 

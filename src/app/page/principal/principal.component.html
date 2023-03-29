@@ -411,7 +411,7 @@
         </small>
 
         <div class="wrap-input100 modal-celda1 my-2 select-finper-default">
-          <select class="form" name="categoria" formControlName="categoria">
+          <select class="form" name="categoria" formControlName="categoria" [(ngModel)]="movimientoSeleccionado.mov_idcategoria">
             <option *ngFor="let categoria of categoriasIngreso" value="{{categoria.cmov_id}}"
             [selected]="movimientoSeleccionado.mov_idcategoria == categoria.cmov_id" >
               {{categoria.cmov_descripcion}}
@@ -479,7 +479,7 @@
         </small>
 
         <div class="wrap-input100 my-2 select-finper-default">
-          <select class="form" name="categoria" formControlName="categoria">
+          <select class="form" name="categoria" formControlName="categoria" [(ngModel)]="movimientoSeleccionado.mov_idcategoria">
             <option value="" disabled>Categoría del gasto</option>
             <option
             *ngFor="let categoria of categoriasEgreso" value="{{categoria.cmov_id}}"
