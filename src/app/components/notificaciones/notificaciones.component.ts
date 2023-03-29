@@ -55,7 +55,6 @@ export class NotificacionesComponent implements OnInit {
 
   eliminaNotificacion(){
     this.borrarNotificacion();
-
     this.volveraNotificaciones();
   }
 
@@ -79,12 +78,10 @@ export class NotificacionesComponent implements OnInit {
     })
   }
 
-  leeNotificacion()
+  async leeNotificacion()
   {
-    this.notService.leeNotificacion(this.notificacionSeleccionada.not_id).subscribe(resp => {
-      console.log(resp)
-      this.traeNotificaciones();
-    })
+    await this.notService.leeNotificacion(this.notificacionSeleccionada.not_id).toPromise()
+    this.traeNotificaciones();
   }
 
   borrarNotificacion()

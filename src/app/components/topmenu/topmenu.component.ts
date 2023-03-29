@@ -38,6 +38,11 @@ export class TopmenuComponent implements OnInit {
     }
   }
 
+  desactivaNotificaciones(){
+    this.notificacionesService.notificacionesAct = false;
+    this.cambiaEstadoMenu();
+  }
+
   logout(){
     this.auth.logout();
   }
