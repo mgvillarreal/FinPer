@@ -88,6 +88,7 @@ export class UsuariosService {
     let data = {
       'email': mail
     }
+    
     return this.http.post<any>(this.url + 'resetMail', data);
   }
 

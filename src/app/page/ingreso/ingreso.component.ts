@@ -69,8 +69,20 @@ export class IngresoComponent implements OnInit {
     // this.forma2.reset();
   }
 
-  async enviaMailReset(mail: string){
-    await this.usuariosService.enviaMailReset(mail).toPromise();
+   enviaMailReset(mail: string){
+    this.usuariosService.enviaMailReset(mail).subscribe(
+      res => {
+        console.log('El email es valido y ya se recupero cuenta');
+
+        if(this.recuperaContrasenaFlag == 1){
+          this.recuperaContrasenaFlag = 0;
+          this.muestraIngresoFlag = 1;
+        }
+      },
+      err => {
+        console.log('El email no es valido');
+      }
+    );
   }
 
   volveraIngreso(){
