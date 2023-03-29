@@ -552,6 +552,9 @@
                     *ngIf="formaMonto.controls['montoMonto'].errors?.['required'] && formaMonto.controls['montoMonto'].touched">
                         El monto es requerido.
                     </small>
+                    <small  class="texto-validacion text-center" *ngIf="mensajeValidaMonto != ''">
+                        {{mensajeValidaMonto}}
+                    </small>
 
                     <div class="wrap-input100 modal-celda4 my-2">
                         <input type="text" name="fechaMonto" placeholder="Fecha del retiro" onfocus="(this.type='date')" formControlName="fechaMonto">

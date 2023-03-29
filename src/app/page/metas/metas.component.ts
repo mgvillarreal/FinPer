@@ -511,25 +511,25 @@ export class MetasComponent implements OnInit {
       this.retiraMontoFlag = 1;
       this.muestraMontosFlag = 0;
     }
+
+    this.montoPorAlcanzar = this.metaSeleccionada.met_monto - this.metaSeleccionada.sumaMonto;
   }
 
   async retirarMonto(){    
     this.monto.meta = this.metaSeleccionada.met_id;
     this.monto.monto = this.formaMonto.value['montoMonto'] * -1;
     this.monto.fecha = this.formaMonto.value['fechaMonto'];
-
-    console.log("monto a retiar", this.monto);
-
-    if(this.montoPorAlcanzar > this.monto.monto){
+  
+    if(this.monto.monto * -1 > this.montoPorAlcanzar ){
+      this.mensajeValidaMonto = "El monto a retirar no puede ser menor al monto por alcanzar de la meta.";
+    }
+    else{
       await this.metaServicio.agregaMonto(this.monto).toPromise()
       await this.traeMetaPorEstado(this.estadoMeta);
       this.monto = new Monto();
+      this.muestraMensajeOkMontoRet();
+      
     }
-    else{
-      this.mensajeValidaMonto = "El monto a ingresar no puede ser superior al monto por alcanzar de la meta.";
-    }
-
-    this.muestraMensajeOkMontoRet();
   }
 
   muestraMensajeOkMontoRet(){
