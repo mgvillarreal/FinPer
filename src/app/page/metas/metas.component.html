@@ -444,7 +444,7 @@
                     </small>
 
                     <div class="wrap-input100 modal-celda4 my-2">
-                        <input type="text" name="fechaMonto" placeholder="Fecha del monto ahorrado" onfocus="(this.type='date')" [ngModel]="this.montoAModificar.mmet_fcreacion | date:'dd/MM/yyyy'" formControlName="fechaMonto">
+                        <input type="date" name="fechaMonto" placeholder="Fecha del monto ahorrado" onfocus="(this.type='date')" [ngModel]="this.montoAModificar.mmet_fcreacion" formControlName="fechaMonto">
                     </div>
                     <small  class="texto-validacion text-center"
                     *ngIf="formaMonto.controls['fechaMonto'].errors?.['required'] && formaMonto.controls['fechaMonto'].touched">

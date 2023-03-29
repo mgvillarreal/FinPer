@@ -58,7 +58,7 @@
                   </div>
     
                 </div>
-                <div class="col col-2">{{ notificacion.not_fcreacion | date: 'dd/MM/YYYY H:mm' }}</div>
+                <div class="col col-2">{{ notificacion.not_creacion | date: 'dd/MM/YYYY H:mm' }}</div>
                 <div class="col col-3">{{ notificacion.not_mensaje }}</div>
     
                 <div class="col col-5 iconos" (click)="preguntaEliminarNotificacion(notificacion)">
@@ -99,7 +99,7 @@
                 </svg>
             </div>
             <div class="mb-4">
-                <p class="texto-mensaje text-green">Fecha: </p> <p class="texto-mensaje">{{notificacionSeleccionada.not_fcreacion | date: 'dd/MM/YYYY H:mm'}}</p>
+                <p class="texto-mensaje text-green">Fecha: </p> <p class="texto-mensaje">{{notificacionSeleccionada.not_creacion | date: 'dd/MM/YYYY H:mm'}}</p>
                 <p class="texto-mensaje text-green">Mensaje: </p> <p class="texto-mensaje mt-2">{{notificacionSeleccionada.not_mensaje}}</p>
             </div>
         </div>
