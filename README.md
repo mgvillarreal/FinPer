@@ -7,7 +7,7 @@
 FinPer is a web application in which users can order their income and expense movements, so that it is possible to establish savings goals and thus be able to evaluate the best financial decisions for their well-being. Also it's helpful for users because it shows all the movements with charts and informs, so the information results easy to understand.
 
 ### Tecnologías utilizadas
-1. Angular 12
+1. Angular 13
 2. TypeScript
 3. Chart.js
 4. HTML
